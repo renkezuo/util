@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ParseBookBiquge implements ParseBook{
-	public String BOOKNAME = "å¥¥æœ¯ç¥åº§";
+	public String BOOKNAME = "°ÂÊõÉñ×ù";
 	public String CATALOG_PATH = "http://m.biquge.la/booklist/197.html";
 	
 	public String SAVEPATH = "G:\\ebook\\"+BOOKNAME;
-	public String CATALOG_START = BOOKNAME+"æ— å¼¹çª—æœ€æ–°ç« èŠ‚åˆ—è¡¨";
-	public String CATALOG_END = "ä¹¦æ——å°è¯´åŒç±»æ— å¼¹çª—é˜…è¯»æ¨è";
-	public String CONTENT_START = BOOKNAME + "å…¨æ–‡é˜…è¯»";
-	public String CONTENT_END = BOOKNAME + "æ‰‹æœºé˜…è¯»";
+	public String CATALOG_START = BOOKNAME+"ÎŞµ¯´°×îĞÂÕÂ½ÚÁĞ±í";
+	public String CATALOG_END = "ÊéÆìĞ¡ËµÍ¬ÀàÎŞµ¯´°ÔÄ¶ÁÍÆ¼ö";
+	public String CONTENT_START = BOOKNAME + "È«ÎÄÔÄ¶Á";
+	public String CONTENT_END = BOOKNAME + "ÊÖ»úÔÄ¶Á";
 	@Override
 	public List<Map<String, String>> readCatalog(byte[] bytes)
 			throws IOException {

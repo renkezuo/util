@@ -49,6 +49,7 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T poll() {
 		if(size < 0) {
@@ -66,6 +67,7 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 		return t;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T peek() {
 		// 获取队列第一个
@@ -83,7 +85,7 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 		return queue.length;
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings("hiding")
 	private class ArrayIteratory<T> implements Iterator<T> {
 		int cursor = 0; // index of next element to return
 

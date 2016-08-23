@@ -119,10 +119,10 @@ public class SocketClient {
 		while(list.size()>0){
 			Map<String,String> m = list.remove(0);
 			try {
-				if(m.get("href").equals("6026759")){
+//				if(m.get("href").equals("6026759")){
 					readData(pb.getStartPath()+m.get("href"),null);
 					i = pb.writeBookByBytes(http.getBytes(), m.get("title"), pb.getIndex(m.get("href")));
-				}
+//				}
 			} catch (Exception e) {
 				try {
 					Thread.sleep(1000);
@@ -168,6 +168,9 @@ public class SocketClient {
 		String url = "http://m.biquge.la/booklist/197.html";
 		url = "http://www.shuqi6.com/2486/";
 		url = "http://www.zhihu.com/question/20598040/answer/95422757";
+
+		String searchUrl = "http://zhannei.baidu.com/cse/search?s=1243419093590560530&q=";
+		
 		String bookName = "奥术神座";
 		// url = "http://xdmadmin.alpha.joinclub.cn/xdm-admin/admin/login";
 		String msg = "";
@@ -179,10 +182,10 @@ public class SocketClient {
 			System.out.println("connect time : " + (System.currentTimeMillis() - b) + "ms");
 			//发送HTTP请求
 			b = System.currentTimeMillis();//1849917//1856892
-//			sc.readData(url, msg);
+			sc.readData(url, msg);
 			sc.showResponse(url, msg);
 			ParseHTTP.printAll(new ByteArrayInputStream(sc.getHttp().getBytes()));
-//			sc.writeControl(pb);
+			sc.writeControl(pb);
 //			ParseHTTP.sendGetMessage(sc.getSocket().getOutputStream(), sc.getHttp());
 //			//解析响应，返回结果保存到HTTP对象
 //			ParseHTTP.parseResponse(sc.getSocket().getInputStream(),  sc.getHttp());
