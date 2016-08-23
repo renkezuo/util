@@ -37,6 +37,7 @@ public class GZIPExample {
     		 }
 //    		 System.out.println(new String(buf,0,len));
     	 }
+    	 gin.close();
     }
     //1fffffff8b800000003bfffffff278ffffffd7ffffffe1ffffffc56b4e1dffffffd8fffffffb5cffffffc3233527275fffffffa13cffffffbf28274513040ffffffbf265217000
     //1fffffff8b80000000ffffffdbfffffff96fffffffe7ffffffbfdb77fffffffeffffffe3ffffffe53afffffff278ffffffd7ffffffe1431f78ffffffb932527372fffffff215ffffffdcffffffa33c30324c3f3d1c000
@@ -76,7 +77,7 @@ public class GZIPExample {
         	BufferedReader br = new BufferedReader(new FileReader(file));
             FileOutputStream fos = new FileOutputStream(gzipFile);
             GZIPOutputStream gzipOS = new GZIPOutputStream(fos);
-            byte[] buffer = new byte[1024];
+//            byte[] buffer = new byte[1024];
             String line = br.readLine();
             while(line != null){
             	gzipOS.write(line.getBytes());
@@ -84,6 +85,7 @@ public class GZIPExample {
             	if(line != null)
             		gzipOS.write("\r\n".getBytes());
             }
+            br.close();
             gzipOS.flush();
             //close resources
             gzipOS.close();

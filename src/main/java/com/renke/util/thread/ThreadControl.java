@@ -3,8 +3,6 @@ package com.renke.util.thread;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import sun.misc.Unsafe;
-
 public class ThreadControl {
 	
 	static class DefaultThreadFactory implements ThreadFactory{
@@ -83,7 +81,7 @@ public class ThreadControl {
 			}
 			Thread.sleep(1000);
 		}
-		Unsafe unsafe = Unsafe.getUnsafe();
+//		Unsafe unsafe = Unsafe.getUnsafe();
 //		unsafe.park(false, 0);
 //		unsafe.unpark(arg0);
 	}

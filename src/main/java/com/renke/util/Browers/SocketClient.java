@@ -169,7 +169,7 @@ public class SocketClient {
 		url = "http://www.shuqi6.com/2486/";
 		url = "http://www.zhihu.com/question/20598040/answer/95422757";
 
-		String searchUrl = "http://zhannei.baidu.com/cse/search?s=1243419093590560530&q=";
+//		String searchUrl = "http://zhannei.baidu.com/cse/search?s=1243419093590560530&q=";
 		
 		String bookName = "°ÂÊõÉñ×ù";
 		// url = "http://xdmadmin.alpha.joinclub.cn/xdm-admin/admin/login";

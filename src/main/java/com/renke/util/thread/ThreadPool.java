@@ -1,10 +1,6 @@
 package com.renke.util.thread;
 
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -40,15 +36,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ThreadPool {
 	private int minimum;			//最小线程数
-	private int maximum;			//最大线程数
-	private int interval;			//每次创建线程数
-	private Queue queue;			//线程队列
+//	private int maximum;			//最大线程数
+//	private int interval;			//每次创建线程数
+//	private Queue queue;			//线程队列
 	
 	public ThreadPool(){
 		minimum = 16;
-		maximum = 32;
-		interval = 16;
-		queue = new DefaultQueue<>(minimum);
+//		maximum = 32;
+//		interval = 16;
+//		queue = new DefaultQueue<>(minimum);
 	}
 	
 	
@@ -99,8 +95,8 @@ public class ThreadPool {
 		System.out.println("st3==str4:"+(str3==str4));
 		ThreadPool tp  = new ThreadPool();
 		System.out.println("tp.getMinimum()"+tp.getMinimum());
-		ThreadPoolExecutor tpe = new ThreadPoolExecutor(0, 0, 0, null, null);
-		ExecutorService e = Executors.newCachedThreadPool();
+//		ThreadPoolExecutor tpe = new ThreadPoolExecutor(0, 0, 0, null, null);
+//		ExecutorService e = Executors.newCachedThreadPool();
 //		try{
 //			Thread.currentThread().interrupt();
 //		}finally{

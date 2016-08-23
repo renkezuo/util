@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
@@ -60,7 +59,7 @@ public class CloneClient {
 	}
 	
 	public static byte[] getGZIPBytesByInputStream(InputStream is) throws IOException{
-		StringBuilder result = new StringBuilder();
+//		StringBuilder result = new StringBuilder();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String line = "";
 		boolean endHeader = false;
@@ -87,11 +86,11 @@ public class CloneClient {
 	
 	public static void main(String[] args) {
 		String url = "http://m.biquge.la/booklist/197.html";
-		String msg = "";
-		Socket socket = null;
+//		String msg = "";
+//		Socket socket = null;
 		try {
 			
-			URLConnection uc = new URL("").openConnection();
+			URLConnection uc = new URL(url).openConnection();
 			
 			
 //			HTTPHeader http = getHTTPHeader(url,msg);
@@ -150,6 +149,7 @@ public class CloneClient {
 //	        	
 //	        	System.out.println(new String(line.getBytes()));
 //	        }
+			uc.connect();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -46,6 +46,7 @@ public class MainTest {
 			GZIPOutputStream gos = new GZIPOutputStream(new FileOutputStream(new File("OUTPUTGZIP")));
 			gos.write("ÄãºÃ".getBytes());
 			gos.close();
+			fis.close();
 			
 			buf = new byte[3];
 			buf[0]=56;
@@ -55,7 +56,7 @@ public class MainTest {
 			System.out.println(str);
 			
 			System.out.println(StringHex.toInt(str, StringHex.TYPE_HEX));
-			Map<String,Object> map = new HashMap();
+			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("hello", "ÊÀ½ç");
 			test(map);
 			System.out.println(map.get("hello"));
@@ -71,7 +72,7 @@ public class MainTest {
 	}
 	
 	public static void test(Map<String,Object> map){
-		map = new HashMap();
+		map = new HashMap<String,Object>();
 		map.put("hello", "world");
 	}
 }

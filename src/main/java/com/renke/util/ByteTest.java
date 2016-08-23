@@ -3,8 +3,6 @@ package com.renke.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -13,7 +11,7 @@ public class ByteTest {
 	public static void main(String[] args) throws IOException {
 		String str = "你好";
 		System.out.println(str.getBytes().length);
-		File file = new File("GBK");
+//		File file = new File("GBK");
 		File file2 = new File("UTF-8");
 		//以GBK方式读UTF-8文件，2个中文字符串变成6个字节 1 3 
 		//以UTF-8方式读GBK文件，2个中文字符串变成3个字节
@@ -36,5 +34,6 @@ public class ByteTest {
 			System.out.println(line.getBytes("GBK").length);
 			System.out.println(line.getBytes("UTF-8").length);
 		}
+		br.close();
 	}
 }
