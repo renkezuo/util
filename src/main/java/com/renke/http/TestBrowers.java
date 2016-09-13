@@ -1,11 +1,5 @@
 package com.renke.http;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,47 +14,15 @@ public class TestBrowers{
 	final static Logger logger = LoggerFactory.getLogger(TestBrowers.class);
 //	@Test
 	public void readUrl(){
-		String url = "http://www.shuqi6.com/2486/";
+		String url = "";
+		url = "http://www.23wx.com/html/55/55035/";
+		url = "http://www.23wx.com/html/58/58901/";
 		String msg = "";
-		ParseBook pb = new ParseBookShuqi6("奥术神座", url);
 		try {
 			long b = System.currentTimeMillis();
 			Controller control = new Controller(url,msg);
 			HTTP http = control.readData(url, msg);
-			List<Map<String,String>> urlList = pb.readCatalog(http.getBytes());
-			List<Map<String,String>> errorList = new SyncArrayList<Map<String,String>>();
-			logger.info("size:{}",urlList.size());
-			for(Map<String,String> map : urlList){
-				String href = map.get(ParseBook.CHAPTER_HREF);
-				http = control.readData(pb.getCatalogPath()+href+".html",msg);
-				if(http.getBytes() == null || http.getBytes().length <=0){
-					control = new Controller(url,msg);
-					http = control.readData(url+href+".html",msg);
-					logger.error("reset {}" , href);
-				}
-				if(http.getBytes() == null || http.getBytes().length <=0){
-					errorList.add(map);
-					continue;
-				}
-				int i = pb.writeBookByBytes(http.getBytes(),map.get(ParseBook.CHAPTER_TITLE), href);
-				logger.info("{} length:{} result:{}",href,http.getBytes().length+"",i+"");
-			}
-			while(errorList.size()>0){
-				Map<String,String> map = errorList.remove(0);
-				String href = map.get(ParseBook.CHAPTER_HREF);
-				http = control.readData(url+href+".html",msg);
-				if(http.getBytes() == null || http.getBytes().length <=0){
-					control = new Controller(url,msg);
-					http = control.readData(url+href+".html",msg);
-					logger.error("reset {}" , href);
-				}
-				if(http.getBytes() == null || http.getBytes().length <=0){
-					errorList.add(map);
-					continue;
-				}
-				int i = pb.writeBookByBytes(http.getBytes(),map.get(ParseBook.CHAPTER_TITLE), href);
-				logger.info("{} length:{} result:{}",href,http.getBytes().length+"",i+"");
-			}
+			DownloadUtil.writeToFile(http.getBytes(), "F:/ebook/58901.txt");
 			control.close();
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
@@ -83,7 +45,8 @@ public class TestBrowers{
 		String url = "http://www.shuqi6.com/40070/";
 		String bookName = "贞观大闲人";
 		String msg = "";
-		ParseBook pb = new ParseBookShuqi6(bookName, url);
+//		ParseBook pb = new ParseBookShuqi6(bookName, url);
+		ParseBook pb = new ParseBook(bookName, url,"shuqi6");
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		try {
 			long b = System.currentTimeMillis();
@@ -107,28 +70,16 @@ public class TestBrowers{
 				
 			}
 			logger.info("down");
-			mergeBook(pb.getSavePath(), urlList);
+			DownloadUtil.mergeBook(pb.getSavePath(), urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void mergeBook(String filePath,List<Map<String,String>> dir) throws IOException{
-		File file = new File(filePath+".txt");
-		OutputStream os = new FileOutputStream(file);
-		byte[] buf = new byte[8096];
-		while(dir.size()>0){
-			Map<String,String> map = dir.remove(0);
-			String file_name = map.get(ParseBook.CHAPTER_HREF);
-			InputStream is = new FileInputStream(new File(filePath+"/"+file_name));
-			int len = 0;
-			while( (len = is.read(buf)) >=0){
-				os.write(buf, 0, len);
-			}
-			is.close();
-		}
-		os.flush();
-		os.close();
+	public static void main(String[] args) {
+		TestBrowers tb = new TestBrowers();
+		tb.readUrl();
 	}
+	
 }
