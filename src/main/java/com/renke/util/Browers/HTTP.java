@@ -2,13 +2,16 @@ package com.renke.util.Browers;
 import java.io.Serializable;
 import java.util.Map;
 
+import com.renke.util.http.Response;
+
 public class HTTP implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String host,uri,msg,ip;
 	private int port;
-	transient private Map<String,String> response;
-	transient private Map<String,String> request;
+	private Response response;
+	transient private Map<String,String> responseMap;
+	transient private Map<String,String> requestMap;
 	transient private byte[] bytes;
 	public String getHost() {
 		return host;
@@ -40,17 +43,23 @@ public class HTTP implements Serializable{
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public Map<String, String> getResponse() {
+	public Response getResponse() {
 		return response;
 	}
-	public void setResponse(Map<String, String> response) {
+	public void setResponse(Response response) {
 		this.response = response;
 	}
-	public Map<String, String> getRequest() {
-		return request;
+	public Map<String, String> getResponseMap() {
+		return responseMap;
 	}
-	public void setRequest(Map<String, String> request) {
-		this.request = request;
+	public void setResponseMap(Map<String, String> responseMap) {
+		this.responseMap = responseMap;
+	}
+	public Map<String, String> getRequestMap() {
+		return requestMap;
+	}
+	public void setRequestMap(Map<String, String> requestMap) {
+		this.requestMap = requestMap;
 	}
 	public byte[] getBytes() {
 		return bytes;

@@ -1,5 +1,6 @@
 package com.renke.util.thread;
 
+import java.util.Random;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -84,17 +85,25 @@ public class ThreadPool {
 	}
 	
 	public static void main(String[] args) {
-		String str = "123";
-		String str2 = "123";
-		String str3 = new String("123");
-		String str4 = new String("123");
-		System.out.println("str==str2:"+(str==str2));
-		System.out.println("str==str3:"+(str==str3));
-		System.out.println("str==str4:"+(str==str4));
-		System.out.println("str2==str3:"+(str2==str3));
-		System.out.println("st3==str4:"+(str3==str4));
-		ThreadPool tp  = new ThreadPool();
-		System.out.println("tp.getMinimum()"+tp.getMinimum());
+//		String str = "123";
+//		String str2 = "123";
+//		String str3 = new String("123");
+//		String str4 = new String("123");
+//		System.out.println("str==str2:"+(str==str2));
+//		System.out.println("str==str3:"+(str==str3));
+//		System.out.println("str==str4:"+(str==str4));
+//		System.out.println("str2==str3:"+(str2==str3));
+//		System.out.println("st3==str4:"+(str3==str4));
+//		ThreadPool tp  = new ThreadPool();
+//		System.out.println("tp.getMinimum()"+tp.getMinimum());
+		
+		Random ran = new Random();
+		System.out.println(ran.nextInt(100));
+		System.out.println(ran.nextInt(100));
+		System.out.println(ran.nextInt(100));
+		System.out.println(ran.nextInt(100));
+		System.out.println(ran.nextInt(100));
+		
 //		ThreadPoolExecutor tpe = new ThreadPoolExecutor(0, 0, 0, null, null);
 //		ExecutorService e = Executors.newCachedThreadPool();
 //		try{

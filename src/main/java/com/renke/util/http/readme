@@ -1,0 +1,14 @@
+Browser为入口，backup是第一个版本的代码
+DataParam是第一个版本时，使用的状态对象
+ParseHTTP，主要负责产生request和解析response[是否分段，是否gz压缩，编码格式]
+Request和Response分别为请求和响应的数据，封装到一个对象中
+
+流程
+Browser中输入url，执行
+首先ParseHTTP根据url产生request请求信息，返回给浏览器
+浏览器连接request中的host:port地址，发送request信息
+服务器响应信息，通过socketChannel发送给浏览器
+浏览器将sc对象交给ParseHTTP，parseHTTP通过该对象分别解析
+ResponseHeader块[包含httpStatus,charset,isChunked,isGzip,Content-Length等]
+ResponseData块[根据头信息，解读数据]
+ParseHTTP最后将数据打印到控制台[单独的方法，可重写]
