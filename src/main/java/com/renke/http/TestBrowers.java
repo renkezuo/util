@@ -1,5 +1,11 @@
 package com.renke.http;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -74,9 +80,10 @@ public class TestBrowers{
 	 */
 	@Test
 	public void readUrlByThread(){
-		String url = "http://www.shuqi6.com/2486/";
+		String url = "http://www.shuqi6.com/40070/";
+		String bookName = "贞观大闲人";
 		String msg = "";
-		ParseBook pb = new ParseBookShuqi6("奥术神座", url);
+		ParseBook pb = new ParseBookShuqi6(bookName, url);
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		try {
 			long b = System.currentTimeMillis();
@@ -92,12 +99,36 @@ public class TestBrowers{
 					limitList = new ArrayList<>();
 				}
 			}
+			Download download = new Download(pb,limitList);
+			tpe.execute(download);
+			limitList = null;
+			logger.info("running");
 			while(tpe.getActiveCount() > 0){
 				
 			}
+			logger.info("down");
+			mergeBook(pb.getSavePath(), urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void mergeBook(String filePath,List<Map<String,String>> dir) throws IOException{
+		File file = new File(filePath+".txt");
+		OutputStream os = new FileOutputStream(file);
+		byte[] buf = new byte[8096];
+		while(dir.size()>0){
+			Map<String,String> map = dir.remove(0);
+			String file_name = map.get(ParseBook.CHAPTER_HREF);
+			InputStream is = new FileInputStream(new File(filePath+"/"+file_name));
+			int len = 0;
+			while( (len = is.read(buf)) >=0){
+				os.write(buf, 0, len);
+			}
+			is.close();
+		}
+		os.flush();
+		os.close();
 	}
 }
