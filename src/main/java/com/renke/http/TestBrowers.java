@@ -5,24 +5,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestBrowers{
 	final static Logger logger = LoggerFactory.getLogger(TestBrowers.class);
-//	@Test
 	public void readUrl(){
 		String url = "";
 		url = "http://www.23wx.com/html/55/55035/";
 		url = "http://www.23wx.com/html/58/58901/";
+		url = "http://www.23wx.com/html/55/55035/22376473.html";
 		String msg = "";
 		try {
 			long b = System.currentTimeMillis();
 			Controller control = new Controller(url,msg);
 			HTTP http = control.readData(url, msg);
-			DownloadUtil.writeToFile(http.getBytes(), "F:/ebook/58901.txt");
+			DownloadUtil.writeToFile(http.getBytes(), "F:/ebook/22376473.txt");
 			control.close();
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
@@ -40,13 +38,14 @@ public class TestBrowers{
 	 * @author renke.zuo@foxmail.com
 	 * @time 2016-09-13 10:11:58
 	 */
-	@Test
 	public void readUrlByThread(){
-		String url = "http://www.shuqi6.com/40070/";
+		String url = "http://www.23wx.com/html/55/55035/";
 		String bookName = "贞观大闲人";
 		String msg = "";
-//		ParseBook pb = new ParseBookShuqi6(bookName, url);
+		url = "http://www.shuqi6.com/2486/";
+		bookName = "奥术神座";
 		ParseBook pb = new ParseBook(bookName, url,"shuqi6");
+//		pb = new ParseBook(bookName, url,"23wx");
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		try {
 			long b = System.currentTimeMillis();
@@ -69,6 +68,7 @@ public class TestBrowers{
 			while(tpe.getActiveCount() > 0){
 				
 			}
+			tpe.shutdown();
 			logger.info("down");
 			DownloadUtil.mergeBook(pb.getSavePath(), urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
@@ -79,7 +79,8 @@ public class TestBrowers{
 	
 	public static void main(String[] args) {
 		TestBrowers tb = new TestBrowers();
-		tb.readUrl();
+//		tb.readUrl();
+		tb.readUrlByThread();
 	}
 	
 }

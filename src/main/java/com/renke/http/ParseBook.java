@@ -23,6 +23,10 @@ public class ParseBook {
 	public String SAVEPATH = "F:\\ebook\\shuqi6\\";
 	public String BOOKNAME = "奥术神座";
 	public String CATALOG_PATH = "http://www.shuqi6.com/2486/";
+	public String HREF_START = "";
+	public String HREF_END = "";
+	public String TITLE_START = "";
+	public String TITLE_END = "";
 	public String CATALOG_START = "";
 	public String CATALOG_END = "";
 	public String CONTENT_START =  "";
@@ -41,8 +45,13 @@ public class ParseBook {
 	public void init23WX(String bookName,String catalog_path){
 		CATALOG_START = BOOKNAME+"作者：";
 		CATALOG_END = BOOKNAME+"更新重要通告";
-		CONTENT_START = BOOKNAME + "全文阅读";
-		CONTENT_END = BOOKNAME + "手机阅读";
+		CONTENT_START = "show_share";
+		CONTENT_END = "show_htm2";
+		HREF_START = "href";
+		HREF_END = "\"";
+		TITLE_START = ">";
+		TITLE_END = "<";
+		SAVEPATH = "F:\\ebook\\23wx\\"+BOOKNAME;
 	}
 	
 	public void initShuqi6(String bookName,String catalog_path){
@@ -50,6 +59,11 @@ public class ParseBook {
 		CATALOG_END = "书旗小说同类无弹窗阅读推荐";
 		CONTENT_START = BOOKNAME + "全文阅读";
 		CONTENT_END = BOOKNAME + "手机阅读";
+		HREF_START = "href";
+		HREF_END = "\"";
+		TITLE_START = "title=\"";
+		TITLE_END = "\"";
+		SAVEPATH = "F:\\ebook\\shuqi6\\"+BOOKNAME;
 	}
 	
 	public List<Map<String, String>> readCatalog(byte[] bytes)
@@ -81,34 +95,29 @@ public class ParseBook {
 				a = true;
 				sb.delete(0, sb.length());
 			}
-			if(a && sb.toString().endsWith(CHAPTER_HREF)){
+			if(a && sb.toString().endsWith(HREF_START)){
 				href = true;
 				sb.delete(0, sb.length());
 			}
-			if(a && href && !semicolon && sb.toString().endsWith("\"")){
+			if(a && href && !semicolon && sb.toString().endsWith(HREF_END)){
 				semicolon = true;
 				sb.delete(0, sb.length());
 			}
-			if(a && href && semicolon && sb.toString().endsWith("\"")){
+			if(a && href && semicolon && sb.toString().endsWith(HREF_END)){
 				map = new HashMap<String,String>();
-				map.put(CHAPTER_HREF, sb.toString().replaceAll("\"",""));
+				map.put(CHAPTER_HREF, sb.toString().substring(0,sb.length()-1));
 				href = false;
 				semicolon = false;
 				sb.delete(0, sb.length());
 			}
-			if(a && sb.toString().endsWith(CHAPTER_TITLE)){
+			if(a && sb.toString().endsWith(TITLE_START)){
 				title = true;
 				sb.delete(0, sb.length());
 			}
-			if(a && title && !semicolon && sb.toString().endsWith("\"")){
-				semicolon = true;
-				sb.delete(0, sb.length());
-			}
-			if(a && title && semicolon && sb.toString().endsWith("\"")){
-				map.put(CHAPTER_TITLE, sb.toString().replaceAll("\"",""));
+			if(a && title && sb.toString().endsWith(TITLE_END)){
+				map.put(CHAPTER_TITLE, sb.toString().substring(0,sb.length()-1));
 				urlList.add(map);
 				title = false;
-				semicolon = false;
 				a = false;
 				sb.delete(0, sb.length());
 			}
@@ -137,7 +146,7 @@ public class ParseBook {
 				}
 				if(start){
 					line = new String(line.getBytes(),SOURCE_ENCODING);
-					line = line.replaceAll("&nbsp;", " ").replaceAll("<.*?>","")
+					line = line.replaceAll("<br />", "\r\n").replaceAll("&nbsp;", " ").replaceAll("<.*?>","")
 							.replaceAll("&lt;.*?&gt;", "").replaceAll("\\.","");
 					if(!"".equals(line.trim())) {
 						bw.write(line);

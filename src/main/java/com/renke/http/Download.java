@@ -35,10 +35,10 @@ public class Download implements Runnable{
 	public void download(Map<String,String> map){
 		String href = map.get(ParseBook.CHAPTER_HREF);
 		try{
-			HTTP http = control.readData(pb.getCatalogPath()+href+".html","");
+			HTTP http = control.readData(pb.getCatalogPath()+href,"");
 			if(http.getBytes() == null || http.getBytes().length <=0){
 				control = new Controller(pb.getCatalogPath(),"");
-				http = control.readData(pb.getCatalogPath()+href+".html","");
+				http = control.readData(pb.getCatalogPath()+href,"");
 				logger.error("reset {}" , href);
 			}
 			if(http.getBytes() == null || http.getBytes().length <=0){
