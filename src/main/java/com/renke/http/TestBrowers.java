@@ -5,22 +5,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestBrowers{
 	final static Logger logger = LoggerFactory.getLogger(TestBrowers.class);
-	public void readUrl(){
-		String url = "";
-		url = "http://www.23wx.com/html/55/55035/";
-		url = "http://www.23wx.com/html/58/58901/";
-		url = "http://www.23wx.com/html/55/55035/22376473.html";
+	public void readUrlData(String url){
 		String msg = "";
 		try {
 			long b = System.currentTimeMillis();
 			Controller control = new Controller(url,msg);
 			HTTP http = control.readData(url, msg);
-			DownloadUtil.writeToFile(http.getBytes(), "F:/ebook/22376473.txt");
+			DownloadUtil.writeToFile(http.getBytes(), "G:/ebook/test.txt");
 			control.close();
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
@@ -28,6 +25,23 @@ public class TestBrowers{
 		}
 	}
 	
+	
+	public void readCatalogToList(String url ,String bookName,String siteName){
+		String msg = "";
+		ParseBook pb = new ParseBook(bookName, url,siteName);
+		Controller control = new Controller(url,msg);
+		List<Map<String,String>> urlList = new ArrayList<>();
+		try {
+			HTTP http = control.readData(url, msg);
+			urlList = pb.readCatalog(http.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for(Map<String,String> map : urlList){
+			logger.info("href:{}",map.get("href"));
+			logger.info("title:{}",map.get("title"));
+		}
+	}
 	
 	/**
 	 * TODO:加入合并章节的方法
@@ -38,14 +52,9 @@ public class TestBrowers{
 	 * @author renke.zuo@foxmail.com
 	 * @time 2016-09-13 10:11:58
 	 */
-	public void readUrlByThread(){
-		String url = "http://www.23wx.com/html/55/55035/";
-		String bookName = "贞观大闲人";
+	public void readUrlByThread(String url ,String bookName,String siteName){
 		String msg = "";
-		url = "http://www.shuqi6.com/2486/";
-		bookName = "奥术神座";
-		ParseBook pb = new ParseBook(bookName, url,"shuqi6");
-//		pb = new ParseBook(bookName, url,"23wx");
+		ParseBook pb = new ParseBook(bookName, url,siteName);
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		try {
 			long b = System.currentTimeMillis();
@@ -70,7 +79,7 @@ public class TestBrowers{
 			}
 			tpe.shutdown();
 			logger.info("down");
-			DownloadUtil.mergeBook(pb.getSavePath(), urlList);
+			DownloadUtil.mergeBook("G:\\ebook", urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,8 +88,9 @@ public class TestBrowers{
 	
 	public static void main(String[] args) {
 		TestBrowers tb = new TestBrowers();
-//		tb.readUrl();
-		tb.readUrlByThread();
+		tb.readUrlData("http://www.quanshu.net/book/25/25911/22258837.html");
+//		tb.readCatalogToList("http://www.quanshu.net/book/25/25911/","天择","quanshu");
+		tb.readUrlByThread("http://www.quanshu.net/book/25/25911/","天择","quanshu");
 	}
 	
 }
