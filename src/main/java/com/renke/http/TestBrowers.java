@@ -39,13 +39,13 @@ public class TestBrowers{
 	 * @time 2016-09-13 10:11:58
 	 */
 	public void readUrlByThread(){
-		String url = "http://www.23wx.com/html/55/55035/";
-		String bookName = "贞观大闲人";
+		String url = "http://www.23wx.com/html/43/43373/";
+		String bookName = "神秘之旅";
 		String msg = "";
-		url = "http://www.shuqi6.com/2486/";
-		bookName = "奥术神座";
+//		url = "http://www.shuqi6.com/2486/";
+//		bookName = "奥术神座";
 		ParseBook pb = new ParseBook(bookName, url,"shuqi6");
-//		pb = new ParseBook(bookName, url,"23wx");
+		pb = new ParseBook(bookName, url,"23wx");
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		try {
 			long b = System.currentTimeMillis();
