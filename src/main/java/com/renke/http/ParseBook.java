@@ -40,6 +40,8 @@ public class ParseBook {
 			init23WX(bookName,catalog_path);
 		else if("shuqi6".equals(siteName.toLowerCase()))
 			initShuqi6(bookName,catalog_path);
+		else if("quanshu".equals(siteName.toLowerCase()))
+			initQuanShu(bookName,catalog_path);
 	}
 	
 	public void init23WX(String bookName,String catalog_path){
@@ -51,7 +53,7 @@ public class ParseBook {
 		HREF_END = "\"";
 		TITLE_START = ">";
 		TITLE_END = "<";
-		SAVEPATH = "F:\\ebook\\23wx\\"+BOOKNAME;
+		SAVEPATH = "G:\\ebook\\23wx\\"+BOOKNAME;
 	}
 	
 	public void initShuqi6(String bookName,String catalog_path){
@@ -63,7 +65,19 @@ public class ParseBook {
 		HREF_END = "\"";
 		TITLE_START = "title=\"";
 		TITLE_END = "\"";
-		SAVEPATH = "F:\\ebook\\shuqi6\\"+BOOKNAME;
+		SAVEPATH = "G:\\ebook\\shuqi6\\"+BOOKNAME;
+	}
+	
+	public void initQuanShu(String bookName,String catalog_path){
+		CATALOG_START = BOOKNAME+"_章 节目录";
+		CATALOG_END = "阅读提示：";
+		CONTENT_START = "style4";
+		CONTENT_END = "style9";
+		HREF_START = "href";
+		HREF_END = "\"";
+		TITLE_START = ">";
+		TITLE_END = "<";
+		SAVEPATH = "G:\\ebook\\quanshu\\"+BOOKNAME;
 	}
 	
 	public List<Map<String, String>> readCatalog(byte[] bytes)
@@ -147,7 +161,8 @@ public class ParseBook {
 				if(start){
 					line = new String(line.getBytes(),SOURCE_ENCODING);
 					line = line.replaceAll("<br />", "\r\n").replaceAll("&nbsp;", " ").replaceAll("<.*?>","")
-							.replaceAll("&lt;.*?&gt;", "").replaceAll("\\.","");
+							.replaceAll("&lt;.*?&gt;", "").replaceAll("\\.","")
+							.replaceAll("style5\\(\\);","").replaceAll("style8\\(\\);","");
 					if(!"".equals(line.trim())) {
 						bw.write(line);
 						bw.newLine();
