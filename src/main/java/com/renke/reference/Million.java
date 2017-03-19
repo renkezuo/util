@@ -19,6 +19,6 @@ public class Million {
 	
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println(this + " is gc");
+		System.out.println(Thread.currentThread().getName()+"---"+this + " is gc");
 	}
 }
