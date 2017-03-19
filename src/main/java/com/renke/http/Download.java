@@ -7,8 +7,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.renke.util.thread.ThreadLocalTest;
-
 public class Download implements Runnable{
 	private final static Logger logger = LoggerFactory.getLogger(Download.class);
 	private Controller control;
@@ -18,7 +16,7 @@ public class Download implements Runnable{
 	public Download(ParseBook pb,List<Map<String,String>> urlList){
 		this.urlList = urlList;
 		this.pb = pb;
-		control = new Controller(pb.getCatalogPath(),"");
+		control = new Controller(pb.CATALOG_PATH,"");
 	}
 
 	@Override
@@ -36,10 +34,10 @@ public class Download implements Runnable{
 	public void download(Map<String,String> map){
 		String href = map.get(ParseBook.CHAPTER_HREF);
 		try{
-			HTTP http = control.readData(pb.getCatalogPath()+href,"");
+			HTTP http = control.readData(pb.CATALOG_PATH+href,"");
 			if(http.getBytes() == null || http.getBytes().length <=0){
-				control = new Controller(pb.getCatalogPath(),"");
-				http = control.readData(pb.getCatalogPath()+href,"");
+				control = new Controller(pb.CATALOG_PATH,"");
+				http = control.readData(pb.CATALOG_PATH+href,"");
 				logger.error("reset {}" , href);
 			}
 			if(http.getBytes() == null || http.getBytes().length <=0){

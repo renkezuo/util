@@ -82,7 +82,7 @@ public class TestBrowers{
 			}
 			tpe.shutdown();
 			logger.info("down");
-			DownloadUtil.mergeBook(pb.getSavePath(), urlList);
+			DownloadUtil.mergeBook(pb.SAVEPATH, urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
 			e.printStackTrace();

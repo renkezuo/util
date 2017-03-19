@@ -67,7 +67,6 @@ public class HTTP implements Serializable{
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "http://"+host+":"+port+uri+";ip="+ip+";msg="+msg;
 	}
 }

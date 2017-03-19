@@ -198,11 +198,9 @@ public class ParseBook {
 			bw.close();
 			in.close();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			return -1;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return -2;
@@ -212,50 +210,7 @@ public class ParseBook {
 
 	public int writeBookByOutputStream(OutputStream os, String title,
 			String index) throws IOException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	public String getIndex(String href) {
-		return href;
-	}
-
-	public String getStartPath() {
-		return CATALOG_PATH;
-	}
 	
-	public String getBookName() {
-		// TODO Auto-generated method stub
-		return BOOKNAME;
-	}
-
-	public String getCatalogPath() {
-		// TODO Auto-generated method stub
-		return CATALOG_PATH;
-	}
-
-	public String getSavePath() {
-		// TODO Auto-generated method stub
-		return SAVEPATH;
-	}
-
-	public String getCatalogStart() {
-		// TODO Auto-generated method stub
-		return CATALOG_START;
-	}
-
-	public String getCatalogEnd() {
-		// TODO Auto-generated method stub
-		return CATALOG_END;
-	}
-
-	public String getContentStart() {
-		// TODO Auto-generated method stub
-		return CONTENT_START;
-	}
-
-	public String getContentEnd() {
-		// TODO Auto-generated method stub
-		return CONTENT_END;
-	}
 }

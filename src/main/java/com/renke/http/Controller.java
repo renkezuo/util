@@ -21,10 +21,8 @@ public class Controller {
 			socketChannel = SocketChannel.open();
 			socketChannel.connect(new InetSocketAddress(http.getIp(),http.getPort()));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -76,10 +74,8 @@ public class Controller {
 			socketChannel = SocketChannel.open();
 			socketChannel.connect(new InetSocketAddress(http.getIp(),http.getPort()));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -101,7 +97,6 @@ public class Controller {
 			socketChannel.shutdownOutput();
 			socketChannel.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
