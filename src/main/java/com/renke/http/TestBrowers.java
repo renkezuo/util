@@ -17,7 +17,7 @@ public class TestBrowers{
 			long b = System.currentTimeMillis();
 			Controller control = new Controller(url,msg);
 			HTTP http = control.readData(url, msg);
-			DownloadUtil.writeToFile(http.getBytes(), "G:/ebook/test.txt");
+			DownloadUtil.writeToFile(http.getBytes(), ParseBook.BASE_PATH+"test.txt");
 			control.close();
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
@@ -37,10 +37,12 @@ public class TestBrowers{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("size:{}",urlList.size());
 		for(Map<String,String> map : urlList){
 			logger.info("href:{}",map.get("href"));
 			logger.info("title:{}",map.get("title"));
 		}
+//		control.close();
 	}
 	
 	/**
@@ -64,11 +66,12 @@ public class TestBrowers{
 			List<Map<String,String>> limitList = new ArrayList<>();
 			for(int i=0;i<urlList.size();i = i+1){
 				limitList.add(urlList.get(i));
-				if(i%50 == 0 ){
+				if(i%200 == 0 ){
 					Download download = new Download(pb,limitList);
 					tpe.execute(download);
 					limitList = new ArrayList<>();
 				}
+//				break;
 			}
 			Download download = new Download(pb,limitList);
 			tpe.execute(download);
@@ -79,7 +82,7 @@ public class TestBrowers{
 			}
 			tpe.shutdown();
 			logger.info("down");
-			DownloadUtil.mergeBook("G:\\ebook", urlList);
+			DownloadUtil.mergeBook(pb.getSavePath(), urlList);
 			logger.info("parse time : {}ms" , System.currentTimeMillis() - b);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,10 +90,12 @@ public class TestBrowers{
 	}
 	
 	public static void main(String[] args) {
+		String url = "http://www.qu.la/book/156/";
 		TestBrowers tb = new TestBrowers();
-		tb.readUrlData("http://www.quanshu.net/book/25/25911/22258837.html");
-//		tb.readCatalogToList("http://www.quanshu.net/book/25/25911/","ÃÏ‘Ò","quanshu");
-		tb.readUrlByThread("http://www.quanshu.net/book/25/25911/","ÃÏ‘Ò","quanshu");
+		
+//		tb.readUrlData(url);
+//		tb.readCatalogToList(url,"≤¸¿ı ¿ΩÁ","dhzw");
+		tb.readUrlByThread(url,"æ™„§¿÷‘∞","qu");
 	}
 	
 }

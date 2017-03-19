@@ -7,9 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.renke.util.thread.ThreadLocalTest;
+
 public class Download implements Runnable{
 	private final static Logger logger = LoggerFactory.getLogger(Download.class);
-	
 	private Controller control;
 	private ParseBook pb;
 	private List<Map<String,String>> urlList;
