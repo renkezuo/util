@@ -1,4 +1,4 @@
-package com.renke.jdk8;
+package com.renke.jdk8.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
