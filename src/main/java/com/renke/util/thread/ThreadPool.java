@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.renke.util.db.DBHelper;
+
 
 
 /**
@@ -40,7 +42,7 @@ public class ThreadPool {
 //	private int maximum;			//最大线程数
 //	private int interval;			//每次创建线程数
 //	private Queue queue;			//线程队列
-	
+	private static DBHelper db = new DBHelper("","","","");
 	public ThreadPool(){
 		minimum = 16;
 //		maximum = 32;
@@ -111,7 +113,10 @@ public class ThreadPool {
 //		}finally{
 //			System.out.println("I'm finally");
 //		}
-		
+		System.out.println(db);
+		ThreadLocal<DBHelper> tl = new ThreadLocal<DBHelper>();
+		tl.set(db);
+		System.out.println(tl.get());
 		
 	}
 }

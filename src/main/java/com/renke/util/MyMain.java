@@ -22,5 +22,16 @@ public class MyMain {
 		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 		System.out.println(c.getTime());
 //		System.out.println(c.get(Calendar.DAY_OF_WEEK));
+//		ConcurrentHashMap<String,String> chm = new ConcurrentHashMap<String,String>();
+//		System.out.println(chm.putIfAbsent("123", "111"));
+//		System.out.println(chm.putIfAbsent("123", "123"));
+//		System.out.println(chm.putIfAbsent("123", "333"));
+		
+		try {
+//			ClassLoader.getSystemClassLoader().loadClass("com.renke.http.Download");
+			Class.forName("com.renke.http.Download");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -20,9 +20,9 @@ public class ParseBook {
 	public static final String CHAPTER_TITLE = "title";
 	public static final String SOURCE_ENCODING = "GBK";
 	public static final String SAVE_ENCODING = "UTF-8";
-	public String SAVEPATH = "F:\\ebook\\shuqi6\\";
-	public String BOOKNAME = "°ÂÊõÉñ×ù";
-	public String CATALOG_PATH = "http://www.shuqi6.com/2486/";
+	public String SAVEPATH = "";
+	public String BOOKNAME = "";
+	public String CATALOG_PATH = "";
 	public String HREF_START = "";
 	public String HREF_END = "";
 	public String TITLE_START = "";
@@ -31,17 +31,22 @@ public class ParseBook {
 	public String CATALOG_END = "";
 	public String CONTENT_START =  "";
 	public String CONTENT_END =  "";
+	public static final String BASE_PATH = "G:\\ebook\\";
 	
 	public ParseBook(String bookName,String catalog_path,String siteName){
 		BOOKNAME = bookName;
 		CATALOG_PATH = catalog_path;
-		SAVEPATH = SAVEPATH+BOOKNAME;
+		SAVEPATH = BASE_PATH+siteName+"\\"+BOOKNAME;
 		if("23wx".equals(siteName.toLowerCase()))
 			init23WX(bookName,catalog_path);
 		else if("shuqi6".equals(siteName.toLowerCase()))
 			initShuqi6(bookName,catalog_path);
 		else if("quanshu".equals(siteName.toLowerCase()))
 			initQuanShu(bookName,catalog_path);
+		else if("qu".equals(siteName.toLowerCase()))
+			initQu(bookName,catalog_path);
+		else if("dhzw".equals(siteName.toLowerCase()))
+			initDhzw(bookName,catalog_path);
 	}
 	
 	public void init23WX(String bookName,String catalog_path){
@@ -53,7 +58,6 @@ public class ParseBook {
 		HREF_END = "\"";
 		TITLE_START = ">";
 		TITLE_END = "<";
-		SAVEPATH = "G:\\ebook\\23wx\\"+BOOKNAME;
 	}
 	
 	public void initShuqi6(String bookName,String catalog_path){
@@ -65,7 +69,6 @@ public class ParseBook {
 		HREF_END = "\"";
 		TITLE_START = "title=\"";
 		TITLE_END = "\"";
-		SAVEPATH = "G:\\ebook\\shuqi6\\"+BOOKNAME;
 	}
 	
 	public void initQuanShu(String bookName,String catalog_path){
@@ -77,7 +80,28 @@ public class ParseBook {
 		HREF_END = "\"";
 		TITLE_START = ">";
 		TITLE_END = "<";
-		SAVEPATH = "G:\\ebook\\quanshu\\"+BOOKNAME;
+	}
+	
+	public void initQu(String bookName,String catalog_path){
+		CATALOG_START = "<dl>";
+		CATALOG_END = "</dl>";
+		CONTENT_START = "read2";
+		CONTENT_END = "read3";
+		HREF_START = "href";
+		HREF_END = "\"";
+		TITLE_START = ">";
+		TITLE_END = "<";
+	}
+	
+	public void initDhzw(String bookName,String catalog_path){
+		CATALOG_START = "<dl>";
+		CATALOG_END = "</dl>";
+		CONTENT_START = "BookText";
+		CONTENT_END = "sharex";
+		HREF_START = "href";
+		HREF_END = "\"";
+		TITLE_START = "title=\"";
+		TITLE_END = "\"";
 	}
 	
 	public List<Map<String, String>> readCatalog(byte[] bytes)
@@ -161,8 +185,8 @@ public class ParseBook {
 				if(start){
 					line = new String(line.getBytes(),SOURCE_ENCODING);
 					line = line.replaceAll("<br />", "\r\n").replaceAll("&nbsp;", " ").replaceAll("<.*?>","")
-							.replaceAll("&lt;.*?&gt;", "").replaceAll("\\.","")
-							.replaceAll("style5\\(\\);","").replaceAll("style8\\(\\);","");
+							.replaceAll("&lt;.*?&gt;", "").replaceAll("\\.","");
+//							.replaceAll("style5\\(\\);","").replaceAll("style8\\(\\);","");
 					if(!"".equals(line.trim())) {
 						bw.write(line);
 						bw.newLine();
@@ -174,11 +198,9 @@ public class ParseBook {
 			bw.close();
 			in.close();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			return -1;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return -2;
@@ -188,50 +210,7 @@ public class ParseBook {
 
 	public int writeBookByOutputStream(OutputStream os, String title,
 			String index) throws IOException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	public String getIndex(String href) {
-		return href;
-	}
-
-	public String getStartPath() {
-		return CATALOG_PATH;
-	}
 	
-	public String getBookName() {
-		// TODO Auto-generated method stub
-		return BOOKNAME;
-	}
-
-	public String getCatalogPath() {
-		// TODO Auto-generated method stub
-		return CATALOG_PATH;
-	}
-
-	public String getSavePath() {
-		// TODO Auto-generated method stub
-		return SAVEPATH;
-	}
-
-	public String getCatalogStart() {
-		// TODO Auto-generated method stub
-		return CATALOG_START;
-	}
-
-	public String getCatalogEnd() {
-		// TODO Auto-generated method stub
-		return CATALOG_END;
-	}
-
-	public String getContentStart() {
-		// TODO Auto-generated method stub
-		return CONTENT_START;
-	}
-
-	public String getContentEnd() {
-		// TODO Auto-generated method stub
-		return CONTENT_END;
-	}
 }

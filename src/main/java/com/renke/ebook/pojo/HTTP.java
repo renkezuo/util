@@ -1,4 +1,4 @@
-package com.renke.http;
+package com.renke.ebook.pojo;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -7,7 +7,7 @@ public class HTTP implements Serializable{
 	
 	private String host,uri,msg,ip;
 	private int port;
-	private Response response;
+	private HTTPResponse response;
 	transient private Map<String,String> responseMap;
 	transient private Map<String,String> requestMap;
 	transient private byte[] bytes;
@@ -41,10 +41,10 @@ public class HTTP implements Serializable{
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public Response getResponse() {
+	public HTTPResponse getResponse() {
 		return response;
 	}
-	public void setResponse(Response response) {
+	public void setResponse(HTTPResponse response) {
 		this.response = response;
 	}
 	public Map<String, String> getResponseMap() {
