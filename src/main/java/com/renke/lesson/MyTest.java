@@ -7,7 +7,6 @@ import com.renke.lesson.pojo.Grade;
 public class MyTest {
 	static AtomicInteger ai = new AtomicInteger(0);
 	
-	
 	//限定老师每天极限课时数，
 	
 	public static void main(String[] args) {
