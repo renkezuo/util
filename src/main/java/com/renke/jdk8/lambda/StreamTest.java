@@ -50,10 +50,26 @@ public class StreamTest {
 		}).collect(Collectors.toList());
 		System.out.println(result.size());
 	}
+	
+	public static void changList(){
+		List<MyCard> list = new ArrayList<MyCard>();
+		for(int i = 0; i < 10; i++){
+			double d = Math.random() * 1000;
+			MyCard mycard = new MyCard(""+i,"card"+d);
+			list.add(mycard);
+		}
+		//不会修改list对象的数据，为什么？
+		list.stream().map(v -> {
+			v.cardName = "mychange";
+			return v;
+		});
+		list.forEach(System.out::println);
+	}
 
 	public static void main(String[] args) {
-		listStream();
-		sequentialSort();
-		parallelSort();
+//		listStream();
+//		sequentialSort();
+//		parallelSort();
+		changList();
 	}
 }
