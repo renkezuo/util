@@ -10,11 +10,11 @@ import java.net.Socket;
  */
 public class OioServer {
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
 
 		//创建socket服务,监听10101端口
-		ServerSocket server=new ServerSocket(10101);
+		@SuppressWarnings("resource")
+		ServerSocket server = new ServerSocket(10101);
 		System.out.println("服务器启动！");
 		while(true){
 			//获取一个套接字（阻塞）

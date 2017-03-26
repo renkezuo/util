@@ -2,6 +2,7 @@ package com.renke.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -9,7 +10,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-public class NioSocketServer {
+public class NetNioSocketServer {
 	private Selector selector;
 
 	/**
@@ -24,8 +25,10 @@ public class NioSocketServer {
 		ServerSocketChannel serverChannel = ServerSocketChannel.open();
 		// 设置通道为非阻塞
 		serverChannel.configureBlocking(false);
+		SocketAddress sa = new InetSocketAddress(port);
+		
 		// 将该通道对应的ServerSocket绑定到port端口
-		serverChannel.socket().bind(new InetSocketAddress(port));
+		serverChannel.socket().bind(sa);
 		// 获得一个通道管理器
 		this.selector = Selector.open();
 		// 将通道管理器和该通道绑定，并为该通道注册SelectionKey.OP_ACCEPT事件,注册该事件后，
@@ -101,7 +104,7 @@ public class NioSocketServer {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		NioSocketServer server = new NioSocketServer();
+		NetNioSocketServer server = new NetNioSocketServer();
 		server.initServer(8000);
 		server.listen();
 	}
