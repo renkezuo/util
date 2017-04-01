@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -122,20 +125,29 @@ public class Password {
 //		return new String(Base64.getDecoder().decode(bytes));
 //	}
 	
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException{
 		File file = new File("F:/ebook/password.txt");
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		int i = 0;
-		while((line = br.readLine()) !=null){
-			String result = md5(line);
-			if(result.equals("lueSGJZetyySpUndWjMBEg==")){
-				System.out.println(line);
-				break;
-			}
-			i++;
-		}
-		br.close();
-		System.out.println("匹配次数："+i);
+//		while((line = br.readLine()) !=null){
+//			String result = md5(line);
+//			//111111  lueSGJZetyySpUndWjMBEg== 
+//			//1234567a /gCHAPJcsolAyo7ZGyOzVA==
+//			//a1234567 VpDd36KK4IXSNRigNXBygg==
+//			//1234567 /OqSD3QStdp74M9CuMk3WQ==
+//			if(result.equals("/OqSD3QStdp74M9CuMk3WQ==")){
+//				System.out.println(line);
+//				break;
+//			}
+//			i++;
+//		}
+//		br.close();
+//		System.out.println("匹配次数："+i);
+		
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update("testappkeytestappsecret兑吧".getBytes("UTF-8"));
+		System.out.println(new BigInteger(1, md.digest()).toString(16));;
+		
 	}
 }

@@ -37,5 +37,9 @@ public class SimpleServer {
 		server.bind(new InetSocketAddress(8080));
 		//question
 		//每个连接都会开一个链接。这个跟NIO的socket一样吗？
+		//创建通道工厂时可设置工作线程的数量
+		//默认数量为内核数*2
+		
+		
 	}
 }

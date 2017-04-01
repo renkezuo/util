@@ -1,7 +1,8 @@
 package com.renke.util;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TimeZone;
+import java.util.List;
 
 public class MyMain {
 	public static void main(String[] args) {
@@ -32,6 +33,32 @@ public class MyMain {
 			Class.forName("com.renke.http.Download");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+		
+		List<String> strs = new ArrayList<String>();
+		for(int i=0;i<200;i++){
+			strs.add("index:"+i);
+		}
+		System.out.println(strs.get(9));
+		strs.subList(0, 10).forEach(System.out::println);
+		
+		
+		Hello hello = new MyMain().new Hello();
+		hello.id = "dssd";
+		hello.name = "4444";
+		System.out.println(hello);
+		System.out.println(hello.name);
+		hello.setHello(hello);
+		System.out.println(hello);
+		System.out.println(hello.name);
+	}
+	
+	class Hello{
+		String id = "123";
+		String name = "123123";
+		
+		public void setHello(Hello x){
+			x.name = "bbbb";
 		}
 	}
 }
