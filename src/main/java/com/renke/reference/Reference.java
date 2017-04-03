@@ -110,5 +110,4 @@ class MaxUseMemory implements Runnable{
 			}
 		}
 	}
-	
 }

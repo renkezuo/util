@@ -25,4 +25,28 @@ public class WebSiteFactory {
 		ws.savePath = ws.basePath + ws.siteName + File.separator + ws.bookName;
 		return ws;
 	}
+	
+	public static void setQu(Map<String,String> siteProperties){
+		siteProperties.put("siteName", "qu");
+		siteProperties.put("catalogStart", "<dl>");
+		siteProperties.put("catalogEnd", "</dl>");
+		siteProperties.put("contentStart", "read2");
+		siteProperties.put("contentEnd", "read3");
+		siteProperties.put("hrefStart", null);
+		siteProperties.put("hrefEnd", null);
+		siteProperties.put("titleStart", null);
+		siteProperties.put("titleEnd", null);
+	}
+	
+	public static void setXs222(Map<String,String> siteProperties){
+		siteProperties.put("siteName", "xs222");
+		siteProperties.put("catalogStart", "</dt>");
+		siteProperties.put("catalogEnd", "</dl>");
+		siteProperties.put("contentStart", "read2");
+		siteProperties.put("contentEnd", "read3");
+		siteProperties.put("hrefStart", null);
+		siteProperties.put("hrefEnd", null);
+		siteProperties.put("titleStart", null);
+		siteProperties.put("titleEnd", null);
+	}
 }

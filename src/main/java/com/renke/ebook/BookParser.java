@@ -60,7 +60,7 @@ public class BookParser {
 				sb.delete(0, sb.length());
 			}
 			if(a && href && semicolon && sb.toString().endsWith(ws.hrefEnd)){
-				s.setUrl(sb.toString().substring(0,sb.length()-1));
+				s.setUrl(sb.substring(sb.lastIndexOf("/")+1,sb.length()-1));
 				href = false;
 				semicolon = false;
 				sb.delete(0, sb.length());
