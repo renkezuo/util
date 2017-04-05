@@ -78,5 +78,17 @@
 			<version>3.2.10.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.textmining</groupId>
+			<artifactId>tm-extractors</artifactId>
+			<version>0.4</version>
+		</dependency>
+
 	</dependencies>
 </project>

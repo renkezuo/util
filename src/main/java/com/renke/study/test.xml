@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<ROOT>
+	<RETURN_CODE type="long">0</RETURN_CODE>
+	<RETURN_MSG type="string">成功</RETURN_MSG>
+	<DETAIL_MSG type="string">终端活动查询</DETAIL_MSG>
+	<OUT_DATA>
+		<TERMACT_LIST>
+			<TERMACT_INFO>
+				<ACT_ID type="string">201112061045317942</ACT_ID>
+				<ACT_NAME type="string">测试11</ACT_NAME>
+				<ACT_TYPE type="string">01</ACT_TYPE>
+				<ACT_TYPE_NAME type="string">主动营销</ACT_TYPE_NAME>
+				<ACT_CLASS type="string">2</ACT_CLASS>
+				<ACT_CLASS_NAME type="string">全部元素</ACT_CLASS_NAME>
+				<GROUP_ID type="string">10031</GROUP_ID>
+				<GROUP_NAME type="string">哈尔滨</GROUP_NAME>
+				<MEANS_ID type="string">201112061045317947</MEANS_ID>
+				<MEANS_NAME type="string">全部元素</MEANS_NAME>
+				<RESOURCE_BRAND type="string">摩托罗拉 </RESOURCE_BRAND>
+				<RESOURCE_MODEL type="string">V8 </RESOURCE_MODEL>
+				<RESOURCE_FEE type="string">3000.00 </RESOURCE_FEE>
+			</TERMACT_INFO>
+			<TERMACT_INFO>
+				<ACT_ID type="string">201112061045317942</ACT_ID>
+				<ACT_NAME type="string">测试11</ACT_NAME>
+				<ACT_TYPE type="string">01</ACT_TYPE>
+				<ACT_TYPE_NAME type="string">主动营销</ACT_TYPE_NAME>
+				<ACT_CLASS type="string">2</ACT_CLASS>
+				<ACT_CLASS_NAME type="string">全部元素</ACT_CLASS_NAME>
+				<GROUP_ID type="string">10031</GROUP_ID>
+				<GROUP_NAME type="string">哈尔滨</GROUP_NAME>
+				<MEANS_ID type="string">201112081045318302</MEANS_ID>
+				<MEANS_NAME type="string">终端活动</MEANS_NAME>
+				<RESOURCE_BRAND type="string">海信</RESOURCE_BRAND>
+				<RESOURCE_MODEL type="string">N52</RESOURCE_MODEL>
+				<RESOURCE_FEE type="string">500.00</RESOURCE_FEE>
+			</TERMACT_INFO>
+		</TERMACT_LIST>
+	</OUT_DATA>
+</ROOT>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  
+	dept-span[跨组织]:　1：同一ORG_ID下
+-->
+<workflow-config>
+	<project name="业务监控" type="ywjk">
+		<flow name="业务监控预警" type="ywjkyj" time-limit="144">
+			<task name="预警工单发起" flow-begin="true" flow-end="true" step="1" time-limit="36">
+				<next-task task-name="市公司业务管理员处理" require="true" />
+				<task-desc>系统监控到预警信息自动发起</task-desc>
+				<next-desc>市公司业务管理员对预警信息进行处理，可以直接归档，或者提交县公司业务管理员处理</next-desc>
+			</task>
+			<task name="市公司业务管理员处理" step="2" time-limit="36">
+				<task-role role-name="市公司业务管理员"/>
+				<next-task task-name="市公司业务管理员归档" require="false" radio="true"/>
+				<next-task task-name="县公司业务管理员处理" require="false" radio="true"/>
+				<task-desc>市公司业务管理员处理相关的预警信息</task-desc>
+				<next-desc>直接归档或者县公司管理员处理相关的预警信息</next-desc>
+			</task>
+			<task name="县公司业务管理员处理" step="3" time-limit="36">
+				<task-role role-name="营销单元业务管理员" />
+				<next-task task-name="营销单元分管经理处理" require="true" />
+				<task-desc>县公司业务管理员处理相关的预警信息</task-desc>
+				<next-desc>营销单元分管经理处理相关的预警信息</next-desc>
+			</task>
+			<task name="营销单元分管经理处理" step="4" time-limit="36">
+				<task-role role-name="营销单元分管经理" dept-span="1"/>
+				<next-task task-name="市公司业务管理员归档" require="true" />
+				<task-desc>营销单元分管经理处理相关的预警信息</task-desc>
+				<next-desc>市公司业务管理员归档</next-desc>
+			</task>
+			<task name="市公司业务管理员归档" join="true" flow-end="true" step="5" time-limit="36">
+				<task-role role-name="市公司业务管理员" require="true"/>
+				<task-desc>市公司业务管理员归档</task-desc>
+				<next-desc></next-desc>
+			</task>
+		</flow>
+	</project>
+</workflow-config>
