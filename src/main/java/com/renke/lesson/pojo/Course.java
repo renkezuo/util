@@ -1,55 +1,31 @@
 package com.renke.lesson.pojo;
 
-public class Course {
-	//教师
-	private Teacher teacher;
-	//总天数，默认无
-	private int allDays;
-	//已经排课天数
-	private int useDays;
-	//课时数
-	private int allHours;
-	//使用课时数
-	private int useHours;
-	//课程级别
-	private Level level;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/***
+ * 科目信息
+ * 老师列表
+ * @author Z.R.K
+ * @time 2017-04-07 14:29:01
+ */
+public class Course extends Base{
+	private Teacher[] teachers;
 	
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-	public int getAllDays() {
-		return allDays;
-	}
-	public void setAllDays(int allDays) {
-		this.allDays = allDays;
-	}
-	public int getUseDays() {
-		return useDays;
-	}
-	public void setUseDays(int useDays) {
-		this.useDays = useDays;
-	}
-	public int getAllHours() {
-		return allHours;
-	}
-	public void setAllHours(int allHours) {
-		this.allHours = allHours;
-	}
-	public int getUseHours() {
-		return useHours;
-	}
-	public void setUseHours(int useHours) {
-		this.useHours = useHours;
-	}
-	public Level getLevel() {
-		return level;
-	}
-	public void setLevel(Level level) {
-		this.level = level;
-	}
+	private AtomicInteger index = new AtomicInteger(0);
 	
+	public void setTeachers(Teacher[] teachers){
+		this.teachers = teachers;
+	} 
 	
+	//获取科目老师[公平分配]
+	//老师班级数为0时，不可获取
+	public Teacher getTeacher(){
+		if(teachers == null) return null;
+		Teacher teacher = teachers[index.incrementAndGet()%teachers.length];
+		if(teacher.hasClass()){
+			return teacher;
+		}else{
+			return getTeacher();
+		}
+	}
 }
