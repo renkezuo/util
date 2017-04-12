@@ -17,13 +17,13 @@ import org.slf4j.LoggerFactory;
 import com.renke.lesson.pojo.Course;
 import com.renke.lesson.pojo.Klass;
 import com.renke.lesson.pojo.Teacher;
+import com.renke.lesson.service.DayScheduleService;
+import com.renke.lesson.service.Monitor;
 import com.renke.test.TestTask;
 
 public class MyTest {
 	
 	private final static Logger logger = LoggerFactory.getLogger(MyTest.class);
-	
-	
 	public static void main(String[] args) throws Exception {
 		logger.info("start");
 		Long begin = System.currentTimeMillis();
@@ -32,33 +32,31 @@ public class MyTest {
 		//7个班，14个老师，11个科目
 		//每天8课时，每位老师最多6课时--->每周40课时
 		//语数外：6课时/每周；政史地，理化生：3课时/周；体技：2课时/每周--->合计18+18+4=40
-		
 		//每科目最少需要多少位老师？	语数外：	42课时/每周；	政史地，理化生：	21课时/周；	体技：	14课时/周
-		
 		//语数外：	42课时/每周，9课时/日；每位老师最多6课时，需要2位老师，每天工作不少于4课时，不大于6
 		//政史地，理化生：21课时/周；5课时/日；每位老师最多6课时，需要1位老师，每天工作不少于4课时，不大于6
 		//体技：14课时/周；3课时/日；每位老师最多6课时，需要1位老师，每天工作不少于3课时
 		
+		//实现方式
+		//A、计算所有班级科目的可能分布，组合，组合完毕，即课表
+		//B、每天随机获取课表，日终，判断[剩余老师科目总数<日课时上限*天数]，最后一天不需要排课
 		//每天8*7课时，56课时，组合老师--->(4|5) * 12 + 3 * 2
-		//满足soft时，如果继续获取，则查看其他科目时否soft，如果否，则取其他科目，如果是，则随机取。最高到hard
-		//控制科目均衡，不能到最后剩余科目都相同
+		//满足min时，如果继续获取，则查看其他老师是否达到min，如果否，则取其他科目，如果是，则随机取。最高到max
 		//完成每日任务4，随机抽取补充任务
-		
-		
-		
 		//两种，1：穷举，2：随机
-		
-		
 		//计算单科目可能的分布模式
 		//每天最多多少课时，间隔，天数
-		
-		
-		
-		
 		//每多一个老师，动态修改后面老师每天至少需要工作的课时数
 		//需要处理，当取到哪些老师时，哪些老师就不给获取了
 		//所以，课表应该优先获取老师课时不达标的老师
 		//每位老师至少每天需要工作多少课时？
+		
+		
+		//
+		
+		
+		
+		
 		//科目对应老师列表
 		Map<Long, Teacher[]> courseTeachers = initTeacher();
 		//班级科目列表
@@ -66,12 +64,17 @@ public class MyTest {
 		//班级列表
 		Klass[] klasses = initKlass(courses);
 		
+		Monitor monitor = new Monitor();
+		monitor.listener(courseTeachers,courses,klasses);
+		Thread thread = new Thread(monitor,"monitor");
+		thread.start();
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 		Map<String,Teacher[]> schedule = new HashMap<>();
+				
 		for(int i = 0;i<5;i++){
 			//每个线程处理一个班级
 			for(Klass klass : klasses){
-				BuilderTask task = new BuilderTask(klass);
+				DayScheduleService task = new DayScheduleService(klass);
 				task.setMainThread(Thread.currentThread());
 				tpe.execute(task);
 			}
@@ -84,9 +87,13 @@ public class MyTest {
 			cacheSchedule(klasses, schedule, i+1);
 //			printScheduleDay(schedule,klasses,i+1);
 			//初始化[老师每日课时，班级课时数]
-			logger.debug("init Teacher and class");
-			resetTeacher(courseTeachers);
+			logger.debug("reset Teacher and class");
+			resetTeacher(courseTeachers,i+2);
 			resetClass(klasses);
+			for(Klass klass : klasses){
+				printCourse(klass);
+			}
+			
 		}
 		tpe.shutdown();
 		printSchedule(schedule,klasses);
@@ -156,19 +163,31 @@ public class MyTest {
 			teacher.setId(i + 100L);
 			teacher.setCourseId(courseId);
 			teacher.setName("teacher"+(i+100));
-			teacher.setMaxClass(4);
-			teacher.setSurplusClass(4);
-			teacher.setMaxLesson(6);
-			teacher.setSurplusLesson(6);
-			Teacher[] teachers = courseTeachers.get(courseId);
-			if(teachers != null){
-				Arrays.copyOf(teachers, teachers.length+1);
-				teachers[teachers.length -1] = teacher;
+			teacher.setDay(1);
+			if(i%11 < 3){
+				teacher.setMaxClass(4);
+				teacher.setSurplusClass(4);
 			}else{
-				teachers = new Teacher[1];
-				teachers[0]=teacher;
+				teacher.setMaxClass(7);
+				teacher.setSurplusClass(7);
 			}
-			courseTeachers.put(courseId, teachers);
+			teacher.setMinLesson(4);
+			if(i%11>8){
+				teacher.setMinLesson(3);
+			}
+			teacher.setMaxLesson(6);
+			teacher.setUseLesson(0);
+			Teacher[] newTeachers = null;
+			Teacher[] oldTeachers = courseTeachers.get(courseId);
+			if(oldTeachers != null){
+				newTeachers = Arrays.copyOf(oldTeachers, oldTeachers.length+1);
+				newTeachers[newTeachers.length - 1] = teacher;
+			}else{
+				newTeachers = new Teacher[1];
+				newTeachers[0]=teacher;
+			}
+			oldTeachers = null;
+			courseTeachers.put(courseId, newTeachers);
 		}
 		return courseTeachers;
 	}
@@ -206,7 +225,7 @@ public class MyTest {
 		return true;
 	}
 	
-	public static void resetTeacher(Map<Long,Teacher[]> map) {
+	public static void resetTeacher(Map<Long,Teacher[]> map,int day) {
 		Iterator<Long> it = map.keySet().iterator();
 		while(it.hasNext()){
 			Long key = it.next();
@@ -214,12 +233,11 @@ public class MyTest {
 			if(teachers!=null && teachers.length >0){
 				for(Teacher teacher : teachers){
 					if(teacher!=null){
-						teacher.resetDay();
+						teacher.resetDay(day);
 					}
 				}
 			}
 		}
-		
 	}
 	
 	public static void resetClass(Klass[] klasses) {
@@ -253,11 +271,11 @@ public class MyTest {
 				Teacher teacher4 = schedule.get(klass.getName()+4)[i];
 				Teacher teacher5 = schedule.get(klass.getName()+5)[i];
 				System.out.println("第"+(i+1)+"节：\t"
-					+ (teacher1 != null ? teacher1.getName(): null)
-					+"\t"+(teacher2 != null ? teacher2.getName(): null)
-					+"\t"+(teacher3 != null ? teacher3.getName(): null)
-					+"\t"+(teacher4 != null ? teacher4.getName(): null)
-					+"\t"+(teacher5 != null ? teacher5.getName(): null));
+					+ (teacher1 != null ? teacher1.getName()+teacher1.getCourse().getName(): null)
+					+"\t"+(teacher2 != null ? teacher2.getName()+teacher2.getCourse().getName(): null)
+					+"\t"+(teacher3 != null ? teacher3.getName()+teacher3.getCourse().getName(): null)
+					+"\t"+(teacher4 != null ? teacher4.getName()+teacher4.getCourse().getName(): null)
+					+"\t"+(teacher5 != null ? teacher5.getName()+teacher5.getCourse().getName(): null));
 			}
 		}
 	}
@@ -277,8 +295,7 @@ public class MyTest {
 			for(int i = 0 ; i < 8 ; i++){
 				for(int k=1;k<6;k++){
 					Teacher teacher = schedule.get(klass.getName()+k)[i];
-					Long courseId = teacher.getCourseId();
-					String courseKey = klass.getName()+"-"+courseId;
+					String courseKey = klass.getName()+"-"+teacher.getCourse().getName();
 					String teacherKey = teacher.getName()+"-"+k;
 					Integer teacherCount = teacherDay.get(teacherKey);
 					Integer courseCount = classCourseWeek.get(courseKey);
@@ -298,7 +315,6 @@ public class MyTest {
 		
 //		printMap(teacherDay);
 		printMap(classCourseWeek);
-		
 	}
 	
 	
@@ -312,6 +328,26 @@ public class MyTest {
 					+ (teacher != null ? teacher.getName(): null));
 			}
 
+		}
+	}
+	
+	public static void printCourseTeacher(Map<Long,Teacher[]> courseTeachers){
+		for(long i = 1;i<12;i++){
+			Teacher[] teachers = courseTeachers.get(i);
+			for(Teacher teacher: teachers){
+				System.out.println("course:"+teacher.getCourse().getName()+",teacher:"+teacher.getName()
+				+",class:"+teacher.getSurplusClass());
+			}
+		}
+		
+	}
+	
+	public static void printCourse(Klass klass){
+		Course[] courses = klass.getCourses();
+		for(int index = 0 ; index < courses.length;index ++ ){
+			Course course = courses[index];
+			System.out.println(klass.getName()+"-->"+course.getName()+":"+klass.getCourseCounts()[index]+"["
+						+(klass.getTeachers()[index] == null ? null : klass.getTeachers()[index].getName())+"]");
 		}
 	}
 	

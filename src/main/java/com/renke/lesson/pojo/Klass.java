@@ -1,7 +1,5 @@
 package com.renke.lesson.pojo;
 
-import java.util.Random;
-
 /***
  * 班级
  * 每日课时数
@@ -13,23 +11,14 @@ import java.util.Random;
  * @time 2017-04-07 11:55:13
  */
 public class Klass extends Base{
-	private static ThreadLocal<Random> threadLocal = new ThreadLocal<Random>();
 	private int lessonCount;
 	private Course[] courses;
-	private int[] courseCounts;
 	private Teacher[] teachers;
-	private Teacher[] dayTeachers;
 	
+	//变量
 	private volatile boolean isDone;
-
-	public static int getRandomInt(int bound){
-		Random random = threadLocal.get();
-		if(random == null){
-			random = new Random();
-			threadLocal.set(random);
-		}
-		return random.nextInt(bound);
-	}
+	private Teacher[] dayTeachers;
+	private int[] courseCounts;
 	
 	public int getLessonCount() {
 		return lessonCount;

@@ -12,15 +12,19 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @time 2017-04-07 11:45:15
  */
 public class Teacher extends Base{
+	//常量
 	private int maxLesson;
-	private AtomicInteger surplusLesson;
-//	private int minLesson;
+	private int minLesson;
 	private int maxClass;
-	private AtomicInteger surplusClass;
 	private Long courseId;
 	private Course course;
 	
+	//条件变量
+	private AtomicInteger surplusClass;
+	private AtomicInteger useLesson;
+	private int day;
 	private volatile boolean hasLesson = true;
+	private volatile boolean useMinLesson = false;
 	private volatile boolean hasClass = true;
 	
 	public int getMaxLesson() {
@@ -29,11 +33,17 @@ public class Teacher extends Base{
 	public void setMaxLesson(int maxLesson) {
 		this.maxLesson = maxLesson;
 	}
-	public int getSurplusLesson() {
-		return surplusLesson.get();
+	public int getMinLesson() {
+		return minLesson;
 	}
-	public void setSurplusLesson(int surplusLesson) {
-		this.surplusLesson = new AtomicInteger(surplusLesson);
+	public void setMinLesson(int minLesson) {
+		this.minLesson = minLesson;
+	}
+	public int getUseLesson() {
+		return useLesson.get();
+	}
+	public void setUseLesson(int useLesson) {
+		this.useLesson = new AtomicInteger(useLesson);
 		this.hasLesson = true;
 	}
 	public int getMaxClass() {
@@ -60,9 +70,22 @@ public class Teacher extends Base{
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	public void resetDay(int day){
+		setUseLesson(0);
+		useMinLesson = false;
+		this.day = day;
+	}
 	
-	public void resetDay(){
-		setSurplusLesson(maxLesson);
+
+	public void resetAll(){
+		setUseLesson(0);
+		setSurplusClass(maxClass);
 	}
 	
 	public boolean hasClass(){
@@ -76,10 +99,19 @@ public class Teacher extends Base{
 
 	public boolean hasLesson(){
 		if(hasLesson){
-			if(surplusLesson.decrementAndGet() < 0){
+			if(useLesson.incrementAndGet() > maxLesson){
 				hasLesson = false;
 			}
 		}
 		return hasLesson;
+	}
+	
+	public synchronized boolean useMinLesson(){
+		if(!useMinLesson){
+			if(useLesson.get() >= minLesson){
+				useMinLesson = true;
+			}
+		}
+		return useMinLesson;
 	}
 }
