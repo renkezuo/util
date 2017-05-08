@@ -15,10 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.renke.lesson.pojo.Course;
-import com.renke.lesson.pojo.Klass;
-import com.renke.lesson.pojo.Teacher;
+import com.renke.lesson.pojo.Klass3;
+import com.renke.lesson.pojo.TeacherBak;
 import com.renke.lesson.service.DayScheduleService;
 import com.renke.lesson.service.Monitor;
+import com.renke.lesson.tools.InitData;
 import com.renke.test.TestTask;
 
 public class MyTest {
@@ -58,22 +59,22 @@ public class MyTest {
 		
 		
 		//科目对应老师列表
-		Map<Long, Teacher[]> courseTeachers = initTeacher();
+		Map<Long, TeacherBak[]> courseTeachers = InitData.teachers();
 		//班级科目列表
-		Course[] courses = initCourse(courseTeachers);
+		Course[] courses = InitData.courses(courseTeachers);
 		//班级列表
-		Klass[] klasses = initKlass(courses);
+		Klass3[] klasses = InitData.klasses(courses);
 		
 		Monitor monitor = new Monitor();
 		monitor.listener(courseTeachers,courses,klasses);
 		Thread thread = new Thread(monitor,"monitor");
 		thread.start();
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-		Map<String,Teacher[]> schedule = new HashMap<>();
+		Map<String,TeacherBak[]> schedule = new HashMap<>();
 				
 		for(int i = 0;i<5;i++){
 			//每个线程处理一个班级
-			for(Klass klass : klasses){
+			for(Klass3 klass : klasses){
 				DayScheduleService task = new DayScheduleService(klass);
 				task.setMainThread(Thread.currentThread());
 				tpe.execute(task);
@@ -90,7 +91,7 @@ public class MyTest {
 			logger.debug("reset Teacher and class");
 			resetTeacher(courseTeachers,i+2);
 			resetClass(klasses);
-			for(Klass klass : klasses){
+			for(Klass3 klass : klasses){
 				printCourse(klass);
 			}
 			
@@ -102,121 +103,7 @@ public class MyTest {
 		logger.info("end; use {}ms" ,System.currentTimeMillis() - begin);
 		
 	}
-	public static Course[] initCourse(Map<Long, Teacher[]> courseTeachers) {
-		Course[] courses = new Course[11];
-		for(int i=0;i<courses.length;i++){
-			Course course = new Course();
-			Long key = i+1L;
-			Teacher[] teachers = courseTeachers.get(key);
-			for(Teacher teacher:teachers){
-				if(teacher.getCourse() == null)
-					teacher.setCourse(course);
-			}
-			course.setId(key);
-			course.setTeachers(teachers);
-			switch (i) {
-				case 0:
-					course.setName("语文");
-					break;
-				case 1:
-					course.setName("数学");
-					break;
-				case 2:
-					course.setName("外语");
-					break;
-				case 3:
-					course.setName("物理");
-					break;
-				case 4:
-					course.setName("化学");
-					break;
-				case 5:
-					course.setName("生物");
-					break;
-				case 6:
-					course.setName("政治");
-					break;
-				case 7:
-					course.setName("历史");
-					break;
-				case 8:
-					course.setName("地理");
-					break;
-				case 9:
-					course.setName("体育");
-					break;
-				default:
-					course.setName("技术");
-					break;
-			}
-			courses[i] = course;
-		}
-		return courses;
-	}
-	public static Map<Long, Teacher[]> initTeacher() {
-		Map<Long,Teacher[]> courseTeachers = new HashMap<>();
-		//语数外老师各2位：6
-		//理化生，政史地，体技各1位：8
-		for(int i = 0 ; i< 14 ; i++){
-			Teacher teacher = new Teacher();
-			Long courseId = i%11+1L;
-			teacher.setId(i + 100L);
-			teacher.setCourseId(courseId);
-			teacher.setName("teacher"+(i+100));
-			teacher.setDay(1);
-			if(i%11 < 3){
-				teacher.setMaxClass(4);
-				teacher.setSurplusClass(4);
-			}else{
-				teacher.setMaxClass(7);
-				teacher.setSurplusClass(7);
-			}
-			teacher.setMinLesson(4);
-			if(i%11>8){
-				teacher.setMinLesson(3);
-			}
-			teacher.setMaxLesson(6);
-			teacher.setUseLesson(0);
-			Teacher[] newTeachers = null;
-			Teacher[] oldTeachers = courseTeachers.get(courseId);
-			if(oldTeachers != null){
-				newTeachers = Arrays.copyOf(oldTeachers, oldTeachers.length+1);
-				newTeachers[newTeachers.length - 1] = teacher;
-			}else{
-				newTeachers = new Teacher[1];
-				newTeachers[0]=teacher;
-			}
-			oldTeachers = null;
-			courseTeachers.put(courseId, newTeachers);
-		}
-		return courseTeachers;
-	}
-	public static Klass[] initKlass(Course[] courses) {
-		Klass[] klasses = new Klass[7];
-		for(int i=0;i<7;i++){
-			//班级科目课时数
-			int[] courseCounts = new int[11];
-			for(int c=0;c<11;c++){
-				if(c<3){
-					courseCounts[c] = 6;
-				}else if(c<9){
-					courseCounts[c] = 3;
-				}else{
-					courseCounts[c] = 2;
-				}
-			}
-			Klass klass = new Klass();
-			klasses[i] = klass;
-			klass.setCourses(courses);
-			klass.setCourseCounts(courseCounts);
-			klass.setLessonCount(8);
-			klass.setName(101+i+"");
-			klass.setId(100+i+1L);
-		}
-		return klasses;
-	}
-	
-	public static boolean isDone(Klass[] klasses) {
+	public static boolean isDone(Klass3[] klasses) {
 		for(int i=0;i<klasses.length;i++){
 			if(!klasses[i].isDone()){
 				return false;
@@ -225,13 +112,13 @@ public class MyTest {
 		return true;
 	}
 	
-	public static void resetTeacher(Map<Long,Teacher[]> map,int day) {
+	public static void resetTeacher(Map<Long,TeacherBak[]> map,int day) {
 		Iterator<Long> it = map.keySet().iterator();
 		while(it.hasNext()){
 			Long key = it.next();
-			Teacher[] teachers = map.get(key);
+			TeacherBak[] teachers = map.get(key);
 			if(teachers!=null && teachers.length >0){
-				for(Teacher teacher : teachers){
+				for(TeacherBak teacher : teachers){
 					if(teacher!=null){
 						teacher.resetDay(day);
 					}
@@ -240,16 +127,16 @@ public class MyTest {
 		}
 	}
 	
-	public static void resetClass(Klass[] klasses) {
+	public static void resetClass(Klass3[] klasses) {
 		for(int i=0;i<klasses.length;i++){
 			klasses[i].resetDay();
 		}
 	}
 	
-	public static void cacheSchedule(Klass[] klasses
-							,Map<String,Teacher[]> schedule
+	public static void cacheSchedule(Klass3[] klasses
+							,Map<String,TeacherBak[]> schedule
 							,int index) {
-		for(Klass klass : klasses){
+		for(Klass3 klass : klasses){
 			schedule.put(klass.getName()+index, klass.getDayTeachers());
 		}
 	}
@@ -260,16 +147,16 @@ public class MyTest {
 	 * @param schedule
 	 * @param klasses
 	 */
-	public static void printSchedule(Map<String,Teacher[]> schedule,Klass[] klasses){
+	public static void printSchedule(Map<String,TeacherBak[]> schedule,Klass3[] klasses){
 		System.out.println("班级\t\t星期一\t\t星期二\t\t星期三\t\t星期四\t\t星期五");
-		for(Klass klass : klasses){
+		for(Klass3 klass : klasses){
 			System.out.println("class:"+klass.getId());
 			for(int i = 0 ; i< 8 ; i++){
-				Teacher teacher1 = schedule.get(klass.getName()+1)[i];
-				Teacher teacher2 = schedule.get(klass.getName()+2)[i];
-				Teacher teacher3 = schedule.get(klass.getName()+3)[i];
-				Teacher teacher4 = schedule.get(klass.getName()+4)[i];
-				Teacher teacher5 = schedule.get(klass.getName()+5)[i];
+				TeacherBak teacher1 = schedule.get(klass.getName()+1)[i];
+				TeacherBak teacher2 = schedule.get(klass.getName()+2)[i];
+				TeacherBak teacher3 = schedule.get(klass.getName()+3)[i];
+				TeacherBak teacher4 = schedule.get(klass.getName()+4)[i];
+				TeacherBak teacher5 = schedule.get(klass.getName()+5)[i];
 				System.out.println("第"+(i+1)+"节：\t"
 					+ (teacher1 != null ? teacher1.getName()+teacher1.getCourse().getName(): null)
 					+"\t"+(teacher2 != null ? teacher2.getName()+teacher2.getCourse().getName(): null)
@@ -288,13 +175,13 @@ public class MyTest {
 	 * 班级科目总课时数
 	 * 
 	 */
-	public static void analyseSchedule(Map<String,Teacher[]> schedule,Klass[] klasses){
+	public static void analyseSchedule(Map<String,TeacherBak[]> schedule,Klass3[] klasses){
 		Map<String,Integer> teacherDay = new HashMap<>();
 		Map<String,Integer> classCourseWeek = new HashMap<>();
-		for(Klass klass : klasses){
+		for(Klass3 klass : klasses){
 			for(int i = 0 ; i < 8 ; i++){
 				for(int k=1;k<6;k++){
-					Teacher teacher = schedule.get(klass.getName()+k)[i];
+					TeacherBak teacher = schedule.get(klass.getName()+k)[i];
 					String courseKey = klass.getName()+"-"+teacher.getCourse().getName();
 					String teacherKey = teacher.getName()+"-"+k;
 					Integer teacherCount = teacherDay.get(teacherKey);
@@ -318,12 +205,12 @@ public class MyTest {
 	}
 	
 	
-	public static void printScheduleDay(Map<String,Teacher[]> schedule,Klass[] klasses,int day){
+	public static void printScheduleDay(Map<String,TeacherBak[]> schedule,Klass3[] klasses,int day){
 		System.out.println("班级\t\t");
-		for(Klass klass : klasses){
+		for(Klass3 klass : klasses){
 			System.out.println("class:"+klass.getId());
 			for(int i = 0 ; i< 8 ; i++){
-				Teacher teacher = schedule.get(klass.getName()+day)[i];
+				TeacherBak teacher = schedule.get(klass.getName()+day)[i];
 				System.out.println("第"+(i+1)+"节：\t"
 					+ (teacher != null ? teacher.getName(): null));
 			}
@@ -331,10 +218,10 @@ public class MyTest {
 		}
 	}
 	
-	public static void printCourseTeacher(Map<Long,Teacher[]> courseTeachers){
+	public static void printCourseTeacher(Map<Long,TeacherBak[]> courseTeachers){
 		for(long i = 1;i<12;i++){
-			Teacher[] teachers = courseTeachers.get(i);
-			for(Teacher teacher: teachers){
+			TeacherBak[] teachers = courseTeachers.get(i);
+			for(TeacherBak teacher: teachers){
 				System.out.println("course:"+teacher.getCourse().getName()+",teacher:"+teacher.getName()
 				+",class:"+teacher.getSurplusClass());
 			}
@@ -342,11 +229,11 @@ public class MyTest {
 		
 	}
 	
-	public static void printCourse(Klass klass){
+	public static void printCourse(Klass3 klass){
 		Course[] courses = klass.getCourses();
 		for(int index = 0 ; index < courses.length;index ++ ){
 			Course course = courses[index];
-			System.out.println(klass.getName()+"-->"+course.getName()+":"+klass.getCourseCounts()[index]+"["
+			System.out.println(klass.getName()+"-->"+course.getName()+":"+klass.getCourseSurplusCounts()[index]+"["
 						+(klass.getTeachers()[index] == null ? null : klass.getTeachers()[index].getName())+"]");
 		}
 	}

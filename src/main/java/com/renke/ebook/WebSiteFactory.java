@@ -31,7 +31,7 @@ public class WebSiteFactory {
 		siteProperties.put("catalogStart", "<dl>");
 		siteProperties.put("catalogEnd", "</dl>");
 		siteProperties.put("contentStart", "read2");
-		siteProperties.put("contentEnd", "read3");
+		siteProperties.put("contentEnd", "chaptererror");
 		siteProperties.put("hrefStart", null);
 		siteProperties.put("hrefEnd", null);
 		siteProperties.put("titleStart", null);

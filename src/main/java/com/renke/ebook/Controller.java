@@ -176,16 +176,17 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		String url = "http://www.xs222.com/html/1/1674/";
+		String url = "http://www.qu.la/book/3730/";
 		Map<String,String> siteProperties = new HashMap<String,String>();
 		siteProperties.put("bookName", "ÎÒÒª×ö»ÊµÛ");
 		siteProperties.put("catalogUrl", url);
 		siteProperties.put("basePath", "F:/ebook/");
-//		WebSiteFactory.setQu(siteProperties);
-		WebSiteFactory.setXs222(siteProperties);
+		WebSiteFactory.setQu(siteProperties);
+//		WebSiteFactory.setXs222(siteProperties);
 		WebSite ws = WebSiteFactory.getWebSite(siteProperties);
 		Controller.grabEbookByThread(ws);
-		readCatalogToList(ws);
-//		readUrlData(url,"G:\\ebook\\test.txt");
+//		readCatalogToList(ws);
+//		url = "http://www.qu.la:80/book/3730/";
+//		readUrlData(url,"F:\\ebook\\test.txt");
 	}
 }

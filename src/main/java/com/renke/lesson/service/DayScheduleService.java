@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.renke.lesson.MyTest;
 import com.renke.lesson.pojo.Course;
-import com.renke.lesson.pojo.Klass;
-import com.renke.lesson.pojo.Teacher;
+import com.renke.lesson.pojo.Klass3;
+import com.renke.lesson.pojo.TeacherBak;
 import com.renke.lesson.tools.RandomTool;
 
 /***
@@ -24,11 +24,11 @@ public class DayScheduleService implements Runnable{
 	private static AtomicInteger count = new AtomicInteger(0);
 	
 	//操作对象
-	private Klass klass ;
+	private Klass3 klass ;
 	//主线程
 	private Thread mainThread;
 
-	public DayScheduleService(Klass klass){
+	public DayScheduleService(Klass3 klass){
 		this.klass = klass;
 	}
 	
@@ -46,20 +46,15 @@ public class DayScheduleService implements Runnable{
 			//取得科目为止
 			while(true){
 				int courseIndex = courseRandom.nextIndex();
-				Course course = courses[courseIndex];
-				Teacher teacher = klass.getTeachers()[courseIndex];
-				if(teacher == null){
-					teacher = course.getTeacher();
-					klass.getTeachers()[courseIndex] = teacher;
-				}
+				TeacherBak teacher = klass.getTeachers()[courseIndex];
 				//判断是否到达当日老师上限，到了就break，重新取科目
 				//计算完毕后，在任务调度处，计算是否符合当日数据[剩余科目老师课时总数<科目老师*6*天数，全部通过，即可，第五天则不用计算]
 				
 				if(!teacher.useMinLesson()){
-					int courseCount = klass.getCourseCounts()[courseIndex];
-					if(courseCount > 0){
+					int courseSurplusCount = klass.getCourseSurplusCounts()[courseIndex];
+					if(courseSurplusCount > 0){
 						if(teacher.hasLesson()){
-							klass.getCourseCounts()[courseIndex] = courseCount - 1;
+							klass.getCourseSurplusCounts()[courseIndex] = courseSurplusCount - 1;
 							klass.setDayTeachers(i, teacher);
 							break;
 						}
@@ -67,10 +62,10 @@ public class DayScheduleService implements Runnable{
 				}else{
 					//判断其他老师是否已经平衡，否则继续
 					if(checkTeacher(courses)){
-						int courseCount = klass.getCourseCounts()[courseIndex];
-						if(courseCount > 0){
+						int courseSurplusCount = klass.getCourseSurplusCounts()[courseIndex];
+						if(courseSurplusCount > 0){
 							if(teacher.hasLesson()){
-								klass.getCourseCounts()[courseIndex] = courseCount - 1;
+								klass.getCourseSurplusCounts()[courseIndex] = courseSurplusCount - 1;
 								klass.setDayTeachers(i, teacher);
 								break;
 							}
@@ -88,28 +83,10 @@ public class DayScheduleService implements Runnable{
 		LockSupport.unpark(mainThread);
 	}
 	
-	/**
-	 * 获取index的方式
-	 * 根据权重随机
-	 * 
-	 * 
-	 * @param courses
-	 * @return
-	 */
-	private int getCourseIndex(Course[] courses,int courseIndex){
-		if(courseIndex > 0){
-			courseIndex --;
-		}else{
-			courseIndex = courses.length - 1;
-		}
-		return courseIndex;
-	}
-
-	
 	private boolean checkTeacher(Course[] courses){
 		for(Course course  : courses ){
-			Teacher[] teachers = course.getTeachers();
-			for(Teacher teacher: teachers){
+			TeacherBak[] teachers = course.getTeachers();
+			for(TeacherBak teacher: teachers){
 				if(!teacher.useMinLesson()){
 					return false;
 				}
@@ -120,8 +97,8 @@ public class DayScheduleService implements Runnable{
 	
 	private String getDayTeacher(){
 		String result = "";
-		Teacher[] teachers = klass.getDayTeachers();
-		for(Teacher  teacher : teachers){
+		TeacherBak[] teachers = klass.getDayTeachers();
+		for(TeacherBak  teacher : teachers){
 			result += teacher.getName() + "["+teacher.getCourse().getName() +"]\t";
 		}
 		return result;

@@ -1,6 +1,25 @@
 package com.renke.lesson.pojo;
 
-public enum Subject {
-	//语文，数学，英语，政治，历史，地理，物理，化学，生物，技术，体育
-	CHINESE,MATH,ENGLISH,POLITICS,HISTORY,GEOGRAPHY,PHYSICS,CHYMIST,BIOLOGY,TECHNIQUE,SPORT
+public class Subject {
+	public Long subjectId;
+	
+	public String subjectName;
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	
 }
+

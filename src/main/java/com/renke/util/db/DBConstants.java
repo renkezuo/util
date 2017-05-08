@@ -6,6 +6,7 @@ public enum DBConstants {
 	SET_STREAM,
 	SET_DATE,
 	SET_DOUBLE,
+	SET_INT,
 	SET_LONG,
 	SET_OBJECT,
 	SET_TIMESTAMP

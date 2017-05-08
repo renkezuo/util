@@ -130,20 +130,22 @@ public class Password {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		int i = 0;
-//		while((line = br.readLine()) !=null){
-//			String result = md5(line);
-//			//111111  lueSGJZetyySpUndWjMBEg== 
-//			//1234567a /gCHAPJcsolAyo7ZGyOzVA==
-//			//a1234567 VpDd36KK4IXSNRigNXBygg==
-//			//1234567 /OqSD3QStdp74M9CuMk3WQ==
-//			if(result.equals("/OqSD3QStdp74M9CuMk3WQ==")){
-//				System.out.println(line);
-//				break;
-//			}
-//			i++;
-//		}
-//		br.close();
-//		System.out.println("匹配次数："+i);
+		System.out.println(md5("c6z23oj2"));
+		while((line = br.readLine()) !=null){
+			String result = md5(line);
+			
+			//111111  lueSGJZetyySpUndWjMBEg== 
+			//1234567a /gCHAPJcsolAyo7ZGyOzVA==
+			//a1234567 VpDd36KK4IXSNRigNXBygg==
+			//1234567 /OqSD3QStdp74M9CuMk3WQ==
+			if(result.equals("f/S91PQNDdPsKiTapGg0eQ==")){
+				System.out.println(line);
+				break;
+			}
+			i++;
+		}
+		br.close();
+		System.out.println("匹配次数："+i);
 		
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update("testappkeytestappsecret兑吧".getBytes("UTF-8"));

@@ -128,7 +128,6 @@ public class DBHelper {
 			setParams(ps,types,objs);
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			try {
@@ -136,7 +135,6 @@ public class DBHelper {
 				if(ps!=null) ps.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -156,7 +154,6 @@ public class DBHelper {
 				list.add(getValues(rs));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			try {
@@ -164,7 +161,6 @@ public class DBHelper {
 				if(ps != null) ps.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

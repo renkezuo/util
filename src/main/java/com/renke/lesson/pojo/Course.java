@@ -1,38 +1,40 @@
 package com.renke.lesson.pojo;
 
-import com.renke.lesson.tools.RandomTool;
-
 /***
  * 科目信息
  * 老师列表
+ * 优先级
  * @author Z.R.K
  * @time 2017-04-07 14:29:01
  */
 public class Course extends Base{
-	private Teacher[] teachers;
+	private TeacherBak[] teachers;
+	private int level;
+	private int index = 0;
 	
-//	private AtomicInteger index = new AtomicInteger(0);
-	
-	public void setTeachers(Teacher[] teachers){
+	public void setTeachers(TeacherBak[] teachers){
 		this.teachers = teachers;
 	}
-	public Teacher[] getTeachers(){
+	public TeacherBak[] getTeachers(){
 		return this.teachers;
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	//获取科目老师[公平分配]
-	//老师班级数为0时，不可获取
-	//锁
-	public Teacher getTeacher(){
-		RandomTool teacherRandom = new RandomTool(new int[teachers.length]);
-		if(teachers == null) return null;
-		while(true){
-			Teacher teacher = teachers[teacherRandom.nextIndex()];
-			if(teacher.hasClass()){
-				teacherRandom = null;
-				return teacher;
+	public TeacherBak getTeacher(){
+		if(teachers != null)
+			for(int i=0;i<teachers.length;i++){
+				index ++;
+				TeacherBak teacher = teachers[index%teachers.length];
+				if(teacher.hasClass()){
+					return teacher;
+				}
 			}
-		}
-		
+		return null;
 	}
 }

@@ -1,70 +1,81 @@
 package com.renke.lesson.pojo;
 
-/***
- * 班级
- * 每日课时数
- * 科目列表
- * 科目课时数
- * 老师列表
- * 当日上课老师列表
- * @author Z.R.K
- * @time 2017-04-07 11:55:13
- */
-public class Klass extends Base{
-	private int lessonCount;
-	private Course[] courses;
-	private Teacher[] teachers;
+public class Klass {
+	// 班级ID
+	private Long classId;
+	// 班级名称
+	private String className;
+	// 班级类型
+	private Integer type;
+	// 关联ID
+	private Long relationId;
+	// 年级ID
+	private Long gradeId;
+	// 年级名称
+	private String gradeName;
+	// 学段ID
+	private Long schoolStageId;
+	// 学校ID
+	private Long schoolId;
+	// 班级人数
+	private Integer headCount;
 	
-	//变量
-	private volatile boolean isDone;
-	private Teacher[] dayTeachers;
-	private int[] courseCounts;
-	
-	public int getLessonCount() {
-		return lessonCount;
+	public Long getClassId() {
+		return classId;
 	}
-	public void setLessonCount(int lessonCount) {
-		this.lessonCount = lessonCount;
-		this.dayTeachers = new Teacher[lessonCount];
+	public void setClassId(Long classId) {
+		this.classId = classId;
 	}
-	public Course[] getCourses() {
-		return courses;
+	public String getClassName() {
+		return className;
 	}
-	public void setCourses(Course[] courses) {
-		this.courses = courses;
-		this.teachers = new Teacher[courses.length];
+	public void setClassName(String className) {
+		this.className = className;
 	}
-	public int[] getCourseCounts() {
-		return courseCounts;
+	public Integer getType() {
+		return type;
 	}
-	public void setCourseCounts(int[] courseCounts) {
-		this.courseCounts = courseCounts;
+	public void setType(Integer type) {
+		this.type = type;
 	}
-	public Teacher[] getTeachers() {
-		return teachers;
+	public Long getRelationId() {
+		return relationId;
 	}
-	public void setTeachers(Teacher[] teachers) {
-		this.teachers = teachers;
+	public void setRelationId(Long relationId) {
+		this.relationId = relationId;
 	}
-
-	public Teacher[] getDayTeachers() {
-		return dayTeachers;
+	public Long getGradeId() {
+		return gradeId;
 	}
-
-	public void setDayTeachers(int index , Teacher teacher) {
-		this.dayTeachers[index] = teacher;
+	public void setGradeId(Long gradeId) {
+		this.gradeId = gradeId;
 	}
-
-	public boolean isDone() {
-		return isDone;
+	public String getGradeName() {
+		return gradeName;
 	}
-
-	public void setDone(boolean isDone) {
-		this.isDone = isDone;
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
 	}
-	
-	public void resetDay(){
-		setLessonCount(8);
-		setDone(false);
+	public Long getSchoolStageId() {
+		return schoolStageId;
+	}
+	public void setSchoolStageId(Long schoolStageId) {
+		this.schoolStageId = schoolStageId;
+	}
+	public Long getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(Long schoolId) {
+		this.schoolId = schoolId;
+	}
+	public Integer getHeadCount() {
+		return headCount;
+	}
+	public void setHeadCount(Integer headCount) {
+		this.headCount = headCount;
+	}
+	@Override
+	public String toString() {
+		return "Klass [className=" + className + "]";
 	}
 }

@@ -10,7 +10,7 @@ public class Lesson extends Base{
 	private int dayIndex;
 	private int partIndex;
 	private CourseBak course;
-	private Teacher teacher;
-	private Klass klass;
+	private TeacherBak teacher;
+	private Klass3 klass;
 	
 }

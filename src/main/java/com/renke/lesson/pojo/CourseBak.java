@@ -2,7 +2,7 @@ package com.renke.lesson.pojo;
 
 public class CourseBak {
 	//教师
-	private Teacher teacher;
+	private TeacherBak teacher;
 	//总天数，默认无
 	private int allDays;
 	//已经排课天数
@@ -14,10 +14,10 @@ public class CourseBak {
 	//课程级别
 	private Level level;
 	
-	public Teacher getTeacher() {
+	public TeacherBak getTeacher() {
 		return teacher;
 	}
-	public void setTeacher(Teacher teacher) {
+	public void setTeacher(TeacherBak teacher) {
 		this.teacher = teacher;
 	}
 	public int getAllDays() {

@@ -109,8 +109,7 @@ public class BookParser {
 					break;
 				}
 				if(start){
-					line = new String(line.getBytes(),ws.sourceEncoding);
-					line = line.replaceAll("<br />", "\r\n").replaceAll("&nbsp;", " ")
+					line = line.replaceAll("<br />", "\r\n").replaceAll("&nbsp;", " ").replaceAll("    ","\r\n")
 							.replaceAll("<.*?>","").replaceAll("&lt;.*?&gt;", "")
 							.replaceAll("\\.","").replaceAll("readx\\(\\);","");
 //							.replaceAll("style5\\(\\);","").replaceAll("style8\\(\\);","");
