@@ -44,6 +44,14 @@ public class ParseHTTPChannel {
 		socketChannel.write(ByteBuffer.wrap(bb.array(),0,bb.position()));
 	}
 	
+	public static void sendGetMessage(SocketChannel socketChannel,String msg) throws IOException{
+		ByteBuffer bb = ByteBuffer.allocate(1024);
+		bb.put(msg.getBytes());
+		bb.put("\r\n".getBytes());
+		logger.debug(new String(bb.array(),0,bb.position()));
+		socketChannel.write(ByteBuffer.wrap(bb.array(),0,bb.position()));
+	}
+	
 	public static void parseResponse(SocketChannel socketChannel,final HTTP http) throws Exception{
 		ByteBuffer responseBuf = ByteBuffer.allocate(4096);
 		final Response response = new Response();
@@ -70,6 +78,7 @@ public class ParseHTTPChannel {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		//将所有数据装入到ByteBuffer中
 		while((len = socketChannel.read(responseBuf)) > 0){
+			System.out.println(new String(responseBuf.array(),0,len));
 			responseBuf.clear();
 			System.arraycopy(responseBuf.array(),0, tmp,beginIndex,len);
 			//剩余总长度

@@ -63,15 +63,17 @@ public class RandomData {
 	}
 
 	//初始化学生
-	public static List<User> getRandomUser(int count){
+	public static List<User> getRandomUser(int count,String userName){
 		//4QrcOUm6Wau+VuBX8g+IPg==
-		String sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,password,isDeleted) values ";
+		String sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,"
+				+ "isEmailEnabled, isEnabled, isFrozen,password,isDeleted) values ";
 		List<User> list = new ArrayList<>();
 		for(int i=0;i<count;i++){
 			User user = new User();
 			user.setUserId(i+1L);
-			user.setUserName("学生"+(i+1));
-			sql += "('"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','4QrcOUm6Wau+VuBX8g+IPg==',5),";
+			user.setUserName(userName+(i+1));
+			sql += "('"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()
+				+ "',0,1,0,'4QrcOUm6Wau+VuBX8g+IPg==',0),";
 			list.add(user);
 		}
 		sql = sql.substring(0, sql.length() -1);
@@ -84,15 +86,15 @@ public class RandomData {
 	}
 	
 	//初始化老师[每科目4老师]
-	public static List<User> getRandomTeacher(){
+	public static List<User> getRandomTeacher(String teacherName){
 		//4QrcOUm6Wau+VuBX8g+IPg==
-		String teacher_sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,password,isDeleted) values ";
+		String teacher_sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,isEmailEnabled, isEnabled, isFrozen,password,isDeleted) values ";
 		List<User> list = new ArrayList<>();
 		for(int i=0;i<subs.length;i++){
-			for(int t=1;t<5;t++){
+			for(int t=0;t<7;t++){
 				User user = new User();
-				user.setUserName(getSubName(subs[i])+"老师"+t);
-				teacher_sql += "('"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','4QrcOUm6Wau+VuBX8g+IPg==',5),";
+				user.setUserName(getSubName(subs[i])+teacherName+t);
+				teacher_sql += "('"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"','"+user.getUserName()+"',0,1,0,'4QrcOUm6Wau+VuBX8g+IPg==',0),";
 				list.add(user);
 			}
 		}
@@ -105,8 +107,10 @@ public class RandomData {
 	}
 	
 	//获取初始化学生
-	public static List<User> getUser(){
-		String sql = "select userId,userName from tutor_user where isDeleted=5 and userName like '%学生%'";
+	public static List<User> getUser(String userName,Long minUserId,Long maxUserId){
+		String sql = "select userId,userName from tutor_user where isDeleted=0 and userName like '%"+userName
+					+ "%' and userId >= "+minUserId + " and userId <=" + maxUserId;
+//					+ " and birthday='2017-05-03 17:12:31' ";
 		List<Map<String,Object>> list = tutorDB.select(sql, null, null);
 		List<User> users = new ArrayList<>();
 		for(Map<String,Object> map : list){
@@ -119,8 +123,9 @@ public class RandomData {
 	}
 	
 	//获取初始化老师
-	public static List<User> getTeacher(){
-		String sql = "select userId,userName from tutor_user where isDeleted=5 and userName like '%老师%'";
+	public static List<User> getTeacher(String teacherName,Long minUserId){
+		String sql = "select userId,userName from tutor_user where isDeleted=0 and userName like '%"+
+				teacherName+"%'  and userId > "+minUserId;
 		List<Map<String,Object>> list = tutorDB.select(sql, null, null);
 		List<User> users = new ArrayList<>();
 		for(Map<String,Object> map : list){
@@ -132,12 +137,23 @@ public class RandomData {
 		return users;
 	}
 	
+	public static Map<Long,Long> getKlassKeyMap(Long minRelationId,Long maxRelationId){
+		String sql = "select classId , relationId from ls_klass where relationId>="+minRelationId+" and relationId<="+maxRelationId;
+		List<Map<String,Object>> list = lessonDB.select(sql, null, null);
+		Map<Long,Long> result = new HashMap<>();
+		for(Map<String,Object> map : list){
+		result.put(Long.parseLong(map.get("RELATIONID")==null?"0":map.get("RELATIONID").toString())
+					, Long.parseLong(map.get("CLASSID")==null?"0":map.get("CLASSID").toString()));
+		}
+		return result;
+	}
+	
 	/**
 	 * 获取行政班
 	 * @return
 	 */
-	public static List<Klass> getNomalKlass(){
-		String sql = "select classId,className from ls_klass where relationId>4253 and relationId<4264";
+	public static List<Klass> getNomalKlass(Long minRelationId , Long maxRelationId){
+		String sql = "select classId,className from ls_klass where relationId>="+minRelationId+" and relationId<="+maxRelationId;
 		List<Map<String,Object>> list = lessonDB.select(sql, null, null);
 		List<Klass> klasses = new ArrayList<>();
 		for(Map<String,Object> map : list){
@@ -152,9 +168,9 @@ public class RandomData {
 	//产生10个行政班[struct] 手动在页面添加
 	//将学生加入10个行政班中[user_struct] 
 	//设置学生的权限
-	public static void setUserStructAndRole(List<User> users,Long roleId){
-		String struct_sql = "insert into tutor_user_struct (userId,depId,isDeleted,roleId,userName) values(?,?,5,"+roleId+",?)";
-		String role_sql = "insert into tutor_user_role_school(userId,roleId,schoolId,isDeleted) values(?,"+roleId+",476,5)";
+	public static void setUserStructAndRole(List<User> users,Long roleId,Long schoolId, Long depId){
+		String struct_sql = "insert into tutor_user_struct (userId,depId,isDeleted,roleId,userName) values(?,?,0,"+roleId+",?)";
+		String role_sql = "insert into tutor_user_role_school(userId,roleId,schoolId,isDeleted) values(?,"+roleId+","+schoolId+",0)";
 		DBConstants[] studentTypes = new DBConstants[3];
 		Object[][] students = new Object[users.size()][3];
 		DBConstants[] roleTypes = new DBConstants[1];
@@ -163,7 +179,6 @@ public class RandomData {
 		studentTypes[1] = DBConstants.SET_LONG;
 		studentTypes[2] = DBConstants.SET_STRING;
 		roleTypes[0] = DBConstants.SET_LONG;
-		Long depId = 4254L;
 		for(int index = 0;index< users.size();index++){
 			if(index!=0 && index % 50 == 0){
 				depId++;
@@ -173,8 +188,8 @@ public class RandomData {
 			students[index][1] = depId;
 			roles[index][0] = users.get(index).getUserId();
 		}
-		tutorDB.update("delete from tutor_user_struct where roleId="+roleId+" and isDeleted=5",null,null);
-		tutorDB.update("delete from tutor_user_role_school where roleId="+roleId+" and isDeleted=5",null,null);
+//		tutorDB.update("delete from tutor_user_struct where roleId="+roleId+" and isDeleted=5",null,null);
+//		tutorDB.update("delete from tutor_user_role_school where roleId="+roleId+" and isDeleted=5",null,null);
 		tutorDB.updateBatch(struct_sql, studentTypes, students);
 		tutorDB.updateBatch(role_sql, roleTypes, roles);
 	}
@@ -191,7 +206,7 @@ public class RandomData {
 //			Object[] objs = new Object[2];
 //			DBConstants[] types = new DBConstants[2];
 		for(int i=0;i<klasses.size();i++){
-			sql += "(?,3,11,'高二',62,476,0,5,'888','"+now+"','888','"+now+"'),";
+			sql += "(?,3,11,'高二',62,476,0,0,'888','"+now+"','888','"+now+"'),";
 			//产生班级
 			KlassExt ext = klasses.get(i);
 			objs[i] = ext.getKlass().getClassName();
@@ -224,14 +239,20 @@ public class RandomData {
 	
 
 	//获取分层班
-	public static List<Klass> getSplitKlass(){
-		String sql = "select classId,className from ls_klass where isDeleted=5";
+	public static List<Klass> getSplitKlass(Long schoolId,Long taskId){
+		String sql = "select a.classId,className,b.teamId,c.subjectId,c.subjectName "
+					+ " from ls_klass a ,ls_choice_exam_klass b,ls_klass_subject c"
+					+ " where a.classId=b.classId and a.classId = c.classId and a.isDeleted=0 and a.schoolId="+schoolId
+					+ " and a.type=3 and a.gradeId=11 and b.taskId = "+taskId+" order by b.teamId";
 		List<Map<String,Object>> list = lessonDB.select(sql, null, null);
 		List<Klass> klasses = new ArrayList<>();
 		for(Map<String,Object> map : list){
 			Klass klass = new Klass();
 			klass.setClassId(Long.parseLong(map.get("CLASSID")==null?"0":map.get("CLASSID").toString()));
 			klass.setClassName(map.get("CLASSNAME")==null?"null":map.get("CLASSNAME").toString());
+			klass.setTeamId(map.get("TEAMID")==null?0:Integer.parseInt(map.get("TEAMID").toString()));
+			klass.setSubId(map.get("SUBJECTID")==null?0L:Long.parseLong(map.get("SUBJECTID").toString()));
+			klass.setSubName(map.get("SUBJECTNAME")==null?"null":map.get("SUBJECTNAME").toString());
 			klasses.add(klass);
 		}
 		return klasses;
@@ -244,7 +265,7 @@ public class RandomData {
 		DBConstants[] types = new DBConstants[9];
 		
 		String sql = "insert into ls_choice_exam_task_student(taskId,userId,score1,score2,score3,score4,score5,score6,score7,status,choiceSubs,isDeleted)"
-					+" values ('"+taskId+"',?,?,?,?,?,?,?,?,2,?,5)";
+					+" values ('"+taskId+"',?,?,?,?,?,?,?,?,2,?,0)";
 		
 		types[0] = DBConstants.SET_LONG;
 		types[1] = DBConstants.SET_DOUBLE;
@@ -257,6 +278,8 @@ public class RandomData {
 		types[8] = DBConstants.SET_STRING;
 		
 		for(int i =0;i<users.size();i++){
+//			if(users.size() / 2 - 1 == i) break;
+//			if(i%2==0){
 			User user = users.get(i);
 			setUserSub(user);
 			setUserScore(user);
@@ -273,13 +296,14 @@ public class RandomData {
 				subs += subId +",";
 			}
 			objs[i][8] = subs;
+//			}
 		}
 		lessonDB.updateBatch(sql, types, objs);
 	}
 	
 	//设置行政班学生
-	public static void setUserClass(List<User> users){
-		String user_sql = "insert into ls_klass_student (classId,userId,userName,schoolId,isDeleted) values(?,?,?,476,5)";
+	public static void setUserClass(List<User> users,Long schoolId,Long minRelationId,Long maxRelationId){
+		String user_sql = "insert into ls_klass_student (classId,userId,userName,schoolId,isDeleted) values(?,?,?,"+schoolId+",0)";
 		String class_sql = "update ls_klass a set headCount=(select count(1) from ls_klass_student b where a.classId = b.classId) where classId =?";
 		DBConstants[] studentTypes = new DBConstants[3];
 		Object[][] students = new Object[users.size()][3];
@@ -291,19 +315,21 @@ public class RandomData {
 		studentTypes[1] = DBConstants.SET_LONG;
 		studentTypes[2] = DBConstants.SET_STRING;
 		types[0] = DBConstants.SET_LONG;
-		Long relationId = 4254L;
-		Long classId = getClassId(relationId);
+		Map<Long,Long> map = getKlassKeyMap(minRelationId,maxRelationId);
+		Long relationId = minRelationId;
+		Long classId = map.get(relationId);
 		for(int index = 0;index < users.size();index++){
 			if(index != 0 && index % 50 == 0){
 				relationId++;
-				classId = getClassId(relationId);
+				classId = map.get(relationId);
 			}
 			students[index][0] = classId;
 			students[index][1] = users.get(index).getUserId();
 			students[index][2] = users.get(index).getUserName();
 			objs[index][0] = classId;
 		}
-		lessonDB.updateBatch("delete from ls_klass_student where classId=? and isDeleted=5 and schoolId=476", types, objs);
+		System.out.println(relationId);
+//		lessonDB.updateBatch("delete from ls_klass_student where classId=? and isDeleted=5 and schoolId=489", types, objs);
 		lessonDB.updateBatch(user_sql, studentTypes, students);
 		lessonDB.updateBatch(class_sql, types, objs);
 	}
@@ -311,46 +337,52 @@ public class RandomData {
 
 	
 	//更新班级对应科目
-	public static void updateClassSub(){
-		List<Klass> klasses = getNomalKlass();
+	public static void updateClassSub(Long minRelationId,Long maxRelationId,Long schoolId){
+		List<Klass> klasses = getNomalKlass(minRelationId,maxRelationId);
 		
 		//插入班级科目信息
 		String add_sql = "insert into ls_klass_subject(classId,subjectId,subjectName,total,plan,finish,schoolId,isDeleted)"
-					+" values(?,1,'语文',0,0,0,476,5)";
-		String del_sql = "delete from ls_klass_subject where isDeleted=5";
+					+" values(?,1,'语文',0,0,0,"+schoolId+",0)";
+//		String del_sql = "delete from ls_klass_subject where isDeleted=5";
 		DBConstants[] types = new DBConstants[1];
 		types[0] = DBConstants.SET_LONG;
 		Object[][] objs = new Object[klasses.size()][1];
 		for(int i =0;i<klasses.size() ;i++){
 			objs[i][0] = klasses.get(i).getClassId();
 		}
-		lessonDB.update(del_sql, null, null);
+//		lessonDB.update(del_sql, null, null);
 		lessonDB.updateBatch(add_sql, types, objs);
 		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","2,'数学'"), types, objs);
 		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","3,'外语'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","4,'物理'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","5,'化学'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","6,'生物'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","7,'政治'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","8,'历史'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","9,'地理'"), types, objs);
 		lessonDB.updateBatch(add_sql.replaceAll("1,'语文'","29,'体育'"), types, objs);
 		
-		klasses = getSplitKlass();
-		add_sql = "insert into ls_klass_subject(classId,subjectId,subjectName,total,plan,finish,schoolId,isDeleted)"
-				+" values(?,?,?,0,0,0,476,5)";
-		types = new DBConstants[3];
-		types[0] = DBConstants.SET_LONG;
-		types[1] = DBConstants.SET_LONG;
-		types[2] = DBConstants.SET_STRING;
-		objs = new Object[klasses.size()][3];
-		for(int i =0;i<klasses.size() ;i++){
-			objs[i][0] = klasses.get(i).getClassId();
-			objs[i][1] = getSubNo(klasses.get(i).getClassName());
-			objs[i][2] = getSubName((Long)objs[i][1]);
-		}
-		lessonDB.updateBatch(add_sql, types, objs);
+//		klasses = getSplitKlass();
+//		add_sql = "insert into ls_klass_subject(classId,subjectId,subjectName,total,plan,finish,schoolId,isDeleted)"
+//				+" values(?,?,?,0,0,0,"+schoolId+",0)";
+//		types = new DBConstants[3];
+//		types[0] = DBConstants.SET_LONG;
+//		types[1] = DBConstants.SET_LONG;
+//		types[2] = DBConstants.SET_STRING;
+//		objs = new Object[klasses.size()][3];
+//		for(int i =0;i<klasses.size() ;i++){
+//			objs[i][0] = klasses.get(i).getClassId();
+//			objs[i][1] = getSubNo(klasses.get(i).getClassName());
+//			objs[i][2] = getSubName((Long)objs[i][1]);
+//		}
+//		lessonDB.updateBatch(add_sql, types, objs);
 	}
 	
 	//设置老师科目
-	public static void setTeacherSub(List<User> teachers){
+	public static void setTeacherSub(List<User> teachers, Long schoolId){
 		//4QrcOUm6Wau+VuBX8g+IPg==
 		String sql = "insert into tutor_user_teacher_subject_grade(teacherId,gradeId,subjectId,roleId,schoolId,schoolStageId,isDeleted)"
-				+ " values(?,11,?,101,476,62,5) ";
+				+ " values(?,11,?,101,"+schoolId+",62,0) ";
 		DBConstants[] subTypes = new DBConstants[2];
 		Object[][] subjects = new Object[teachers.size()][2];
 		subTypes[0] = DBConstants.SET_LONG;
@@ -362,27 +394,104 @@ public class RandomData {
 		tutorDB.updateBatch(sql, subTypes, subjects);
 	}
 	//教学场地
-	public static void initArea(){
+	public static void initArea( Long schoolId){
 		String sql = "insert into ls_teach_area(areaName,building,stuCnt,classCnt,schoolId,isDeleted)"
-				+" values(?,?,50,1,476,5)";
+				+" values(?,?,50,1,"+schoolId+",0)";
 		DBConstants[] types = new DBConstants[2];
 		types[0] = DBConstants.SET_STRING;
 		types[1] = DBConstants.SET_STRING;
-		Object[][] objs = new Object[12][2];
-		for(int i=1 ;i < 13 ; i++){
-			objs[i-1][0] = 200+i + "";
+		Object[][] objs = new Object[20][2];
+		for(int i=1 ;i <= 20 ; i++){
+			objs[i-1][0] = 200+ i + "室";
 			objs[i-1][1] = "1号楼";
 		}
 		lessonDB.updateBatch(sql, types, objs);
 	}
+	
+	//设置分班条件
+	public static void initLimitCondition(Long taskId){
+		String sql = "INSERT INTO ls_limit_condition "
+				+ "(taskId, subId, subName, personCnt, isSplit, splitCnt , level1, level2, level3, level4, isDeleted)"
+				+ " VALUES ("+taskId+", ?, ?, ?, ?, ?,?, ?, ?, ?, 0)";
+		
+		DBConstants[] types = new DBConstants[9];
+		types[0] = DBConstants.SET_LONG;
+		types[1] = DBConstants.SET_STRING;
+		types[2] = DBConstants.SET_INT;
+		types[3] = DBConstants.SET_INT;
+		types[4] = DBConstants.SET_INT;
+		types[5] = DBConstants.SET_INT;
+		types[6] = DBConstants.SET_INT;
+		types[7] = DBConstants.SET_INT;
+		types[8] = DBConstants.SET_INT;
+		Object[][] objs = new Object[7][9];
+		for(int t=0;t<7;t++){
+			if(t == 0){
+				objs[t][0] = 4L;
+				objs[t][1] = "物理";
+				objs[t][2] = 55;
+				objs[t][3] = 0;
+				objs[t][4] = 0;
+				objs[t][5] = 0;
+				objs[t][6] = 0;
+				objs[t][7] = 0;
+				objs[t][8] = 0;
+			}else if(t==1){
+				objs[t][0] = 5L;
+				objs[t][1] = "化学";
+				objs[t][2] = 55;
+				objs[t][3] = 0;
+				objs[t][4] = 0;
+				objs[t][5] = 0;
+				objs[t][6] = 0;
+				objs[t][7] = 0;
+				objs[t][8] = 0;
+			}else if(t==5){
+				objs[t][0] = 9L;
+				objs[t][1] = "地理";
+				objs[t][2] = 55;
+				objs[t][3] = 3;
+				objs[t][4] = 30;
+				objs[t][5] = 100;
+				objs[t][6] = 71;
+				objs[t][7] = 0;
+				objs[t][8] = 0;
+			}else if(t==6){
+				objs[t][0] = 19L;
+				objs[t][1] = "技术";
+				objs[t][2] = 55;
+				objs[t][3] = 0;
+				objs[t][4] = 0;
+				objs[t][5] = 0;
+				objs[t][6] = 0;
+				objs[t][7] = 0;
+				objs[t][8] = 0;
+			}else{
+				objs[t][0] = t+4L;
+				objs[t][1] = getSubName(t+4L);
+				objs[t][2] = 55;
+				objs[t][3] = 0;
+				objs[t][4] = 0;
+				objs[t][5] = 0;
+				objs[t][6] = 0;
+				objs[t][7] = 0;
+				objs[t][8] = 0;
+			}
+			//cast
+		}
+		lessonDB.updateBatch(sql, types, objs);
+	}
+	
 	//授课计划
 	//语数外---5课时
 	//理化生，政史地，技，选考4，学考2
 	//1体，3其他
-	public static void initTeachPlanAndArea(){
-		String planSql = "insert into ls_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,areaId,areaName,weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt)"
-						+" values(999,11,'高二',?,?,?,?,1,?,?,?,?,?,?)";
-		String areaSql = "insert into ls_paike_task_area select 999,areaId from ls_teach_area where isDeleted=5";
+	public static void initTeachPlanAndArea(Long paikeTaskId,Long schoolId,Long minRelationId, Long maxRelationId){
+		String planSql = "insert into ls_paike_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,classType"
+				+ ",areaId,areaName,weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt,isDeleted)"
+				+" values("+paikeTaskId+",11,'高二',?,?,1,?,?,1,?,?,?,?,?,?,0)";
+		String areaSql = "insert into ls_paike_task_area(paikeTaskId,areaId,isDeleted)"
+				+ " select "+paikeTaskId+",areaId,0 from ls_teach_area where isDeleted=0 and schoolId="+schoolId;
 		
 		DBConstants[] types = new DBConstants[10];
 		types[0] = DBConstants.SET_LONG;
@@ -397,13 +506,13 @@ public class RandomData {
 		types[9] = DBConstants.SET_INT;
 		
 		//获取班级
-		List<Klass> nomalKlasses = getNomalKlass();
+		List<Klass> nomalKlasses = getNomalKlass(minRelationId,maxRelationId);
 		//获取科目
 		List<Subject> subjects = getSubjects();
 		//获取老师
-		Map<Long,List<Teacher>> subTeachers = getSubTeachers();
+		Map<Long,List<Teacher>> subTeachers = getSubTeachers(schoolId);
 		//获取场地
-		List<Area> areas = getAreas();
+		List<Area> areas = getAreas(schoolId);
 		List<TeachPlan> teachPlans = new ArrayList<>();
 		//行政班 -- 科目-- 教室[固定] -- 老师-- 课时-- 连堂
 		//获取行政班，获取科目，获取科目对应老师，分配老师，场地
@@ -411,6 +520,7 @@ public class RandomData {
 			Klass klass = nomalKlasses.get(k);
 			Area area = areas.get(k);
 			for(Subject subject : subjects){
+				if(subject.getSubjectId() > 3) continue;
 				TeachPlan tp = new TeachPlan();
 				tp.setAreaId(area.getAreaId());
 				tp.setAreaName(area.getAreaName());
@@ -423,39 +533,22 @@ public class RandomData {
 					tp.setTeacherId(teacher.getTeacherId());
 					tp.setTeacherName(teacher.getTeacherName());
 				}
+				//体育
 				if(subject.getSubjectId() == 29L){
 					tp.setWeekCnt(1);
 					tp.setSeriesCnt(0);
-				}else{
+				}else if(subject.getSubjectId() == 1L || subject.getSubjectId() == 2L || subject.getSubjectId() == 3L){
 					tp.setWeekCnt(5);
 					tp.setSeriesCnt(1);
+				}else if(subject.getSubjectId() == 6L || subject.getSubjectId() == 7L){
+					tp.setWeekCnt(2);
+					tp.setSeriesCnt(0);
+				}else{
+					tp.setWeekCnt(3);
+					tp.setSeriesCnt(0);
 				}
 				teachPlans.add(tp);
 			}
-		}
-		//分层班
-		//遍历班级
-		//设置科目老师，设置课时，设置连堂
-		List<Klass> splitKlasses = getSplitKlass();
-		for(Klass klass : splitKlasses){
-			TeachPlan tp = new TeachPlan();
-			//cast
-			tp.setClassId(klass.getClassId());
-			tp.setClassName(klass.getClassName());
-			tp.setSubId(getSubNo(klass.getClassName()));
-			tp.setSubName(getSubName(getSubNo(klass.getClassName())));
-			Teacher teacher = getTeacherBySub(subTeachers, tp.getSubId());
-			if(teacher != null){
-				tp.setTeacherId(teacher.getTeacherId());
-				tp.setTeacherName(teacher.getTeacherName());
-			}
-			if(klass.getClassName().indexOf("选考")!=-1){
-				tp.setWeekCnt(4);
-			}else{
-				tp.setWeekCnt(2);
-			}
-			tp.setSeriesCnt(0);
-			teachPlans.add(tp);
 		}
 		Object[][] objs = new Object[teachPlans.size()][10];
 		for(int t=0;t<teachPlans.size();t++){
@@ -472,9 +565,77 @@ public class RandomData {
 			objs[t][8] = tp.getWeekCnt();
 			objs[t][9] = tp.getSeriesCnt();
 		}
-		lessonDB.update("delete from ls_paike_task_area where paikeTaskId=999", null, null);
-		lessonDB.update("delete from ls_teach_plan where paikeTaskId=999", null, null);
+//		lessonDB.update("delete from ls_paike_task_area where paikeTaskId=1000", null, null);
+//		lessonDB.update("delete from ls_paike_teach_plan where paikeTaskId=1000", null, null);
 		lessonDB.update(areaSql, null, null);
+		lessonDB.updateBatch(planSql, types, objs);
+	}
+	
+	public static void initSplitTeachPlan(Long paikeTaskId,Long schoolId,Long taskId){
+		String planSql = "insert into ls_paike_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,classType,teamId"
+				+ ",weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt,isDeleted)"
+				+ " values("+paikeTaskId+",11,'高二',?,?,3,?,1,?,?,?,?,?,?,0)";
+
+		DBConstants[] types = new DBConstants[9];
+		types[0] = DBConstants.SET_LONG;
+		types[1] = DBConstants.SET_STRING;
+		types[2] = DBConstants.SET_INT;
+		types[3] = DBConstants.SET_LONG;
+		types[4] = DBConstants.SET_STRING;
+		types[5] = DBConstants.SET_LONG;
+		types[6] = DBConstants.SET_STRING;
+		types[7] = DBConstants.SET_INT;
+		types[8] = DBConstants.SET_INT;
+
+		// 获取班级
+		List<Klass> splitKlasses = getSplitKlass(schoolId,taskId);
+		// 获取老师
+		Map<Long, List<Teacher>> subTeachers = getSubTeachers(schoolId);
+		// 获取场地
+//		List<Area> areas = getAreas();
+		List<TeachPlan> teachPlans = new ArrayList<>();
+		// 行政班 -- 科目-- 教室[固定] -- 老师-- 课时-- 连堂
+		// 获取行政班，获取科目，获取科目对应老师，分配老师，场地
+		int teamId = 1;
+		for (int k = 0; k < splitKlasses.size(); k++) {
+			Klass klass = splitKlasses.get(k);
+			if(klass.getSubId() <= 3) continue;
+			TeachPlan tp = new TeachPlan();
+			tp.setClassId(klass.getClassId());
+			tp.setClassName(klass.getClassName());
+			tp.setSubId(klass.getSubId());
+			tp.setSubName(klass.getSubName());
+			tp.setTeamId(klass.getTeamId());
+			if(klass.getTeamId() != teamId ){
+				subTeachers = getSubTeachers(schoolId);
+				teamId = klass.getTeamId();
+			}
+			Teacher teacher = getTeacherBySub(subTeachers, klass.getSubId());
+			if (teacher != null) {
+				tp.setTeacherId(teacher.getTeacherId());
+				tp.setTeacherName(teacher.getTeacherName());
+			}
+			tp.setWeekCnt(3);
+			teachPlans.add(tp);
+		}
+		Object[][] objs = new Object[teachPlans.size()][9];
+		for (int t = 0; t < teachPlans.size(); t++) {
+			TeachPlan tp = teachPlans.get(t);
+			// cast
+			objs[t][0] = tp.getClassId();
+			objs[t][1] = tp.getClassName();
+			objs[t][2] = tp.getTeamId();
+			objs[t][3] = tp.getSubId();
+			objs[t][4] = tp.getSubName();
+			objs[t][5] = tp.getTeacherId();
+			objs[t][6] = tp.getTeacherName();
+			objs[t][7] = tp.getWeekCnt();
+			objs[t][8] = tp.getSeriesCnt();
+		}
+		// lessonDB.update("delete from ls_paike_task_area where
+		// paikeTaskId=1000", null, null);
+		// lessonDB.update("delete from ls_paike_teach_plan where
+		// paikeTaskId=1000", null, null);
 		lessonDB.updateBatch(planSql, types, objs);
 	}
 	
@@ -515,7 +676,7 @@ public class RandomData {
 		
 		for(Long subId : subIds){
 			//FIXME 使用获取的科目对应分班规则分班，此处测试，使用level1 = 50 level2 = 100 level3 = last level4表示学考
-			
+			//分班前，统计全部分层班中，学生小团体
 			//获取选中该科目的用户列表
 			List<User> checkedUser = new ArrayList<>();
 			List<User> uncheckedUser = new ArrayList<>();
@@ -535,11 +696,12 @@ public class RandomData {
 			
 			//产生分班数据
 			int userCnt = checkedUser.size();
-			int personCnt = 50;
-			int level1 = 50;
-			int level2 = 100;
+			int personCnt = 50;//班级人数
+			int level1 = 50;  //
+			int level2 = 100; //
 			int level3 = userCnt - level2 - level1;
 			int level4 = users.size() - checkedUser.size();
+//			int level5 = 0;
 			String baseName = "高二选考"+getSubName(subId)+"levelindex班";
 			String otherName = "高二学考"+getSubName(subId)+"levelindex班";
 
@@ -558,10 +720,17 @@ public class RandomData {
 
 	public static void split(List<KlassExt> klasses, List<User> users,String baseName
 				, Long subId, int personCnt, int count,int begin,int level) {
+		//可分班级数 63  50  2
 		int classCnt = (count % personCnt>0? 1:0) + count / personCnt;
+		//分班
 		List<KlassExt> splitClass = splitClass(subId,classCnt, level, baseName);
+		//班级人数  63 / 2 31 1
+		//32
 		personCnt = count % classCnt > 0 ? 1 : 0+ count/classCnt ;
+		
 		setSplitKlassUser(users, splitClass, personCnt, count, classCnt,begin);
+		
+		
 		klasses.addAll(splitClass);
 	}
 
@@ -572,14 +741,42 @@ public class RandomData {
 		for(int i=0;i<classCnt;i++){
 			//班级学生
 			List<User> klassUsers = new ArrayList<>();
-			//最后一个班级人数
-			if(i+1 == classCnt){
-				personCnt = count - (personCnt * i);
-			}
+//			//最后一个班级人数
+//			if(i+1 == classCnt){
+//				personCnt = count - (personCnt * i);
+//			}
 			klassUsers = subList(users, begin, personCnt);
+			
 			splitClass.get(i).setUsers(klassUsers);
+			
 			begin = begin+personCnt;
 		}
+	}
+	
+	public static void splitClass(int classCnt, int subCnt){
+		//根据选考人数最多的两个科目成绩排序分班，分班人数参考设定人数
+		int[] num = new int[subCnt];
+		int avg = classCnt / subCnt ;
+		int remainder = classCnt % subCnt;
+		for(int i=0;i<subCnt;i++,remainder--){
+			num[i] = avg;
+			if(remainder > 0){
+				num[i] += 1;
+			}
+		}
+		int c = 0;
+		for(int i=0;i<num.length;i++){
+			int n = num[i];
+			System.out.print(i+1+": ");
+			for(int x=n;x>0;x--){
+				c++;
+				System.out.print(x==1 ? c : (c+","));
+			}
+			System.out.println("");
+		}
+		//设定同时上课列表
+		
+		
 	}
 	
 	public static List<KlassExt> splitClass(Long subId,int classCnt,int level,String baseName){
@@ -628,9 +825,10 @@ public class RandomData {
 		}
 	}
 	
-	public static Map<Long,List<Teacher>> getSubTeachers(){
+	public static Map<Long,List<Teacher>> getSubTeachers(Long schoolId){
 		Map<Long,List<Teacher>> subTeachers = new HashMap<>();
-		String sql = "select teacherId,userName,subjectId from tutor.tutor_user_teacher_subject_grade a left join tutor.tutor_user b on a.teacherId=b.userId where a.gradeId=11 and a.isDeleted=5 order by subjectId,teacherId";
+		String sql = "select teacherId,userName,subjectId from tutor.tutor_user_teacher_subject_grade a left join tutor.tutor_user b on a.teacherId=b.userId"
+						+ " where a.gradeId=11 and a.isDeleted=0 and a.schoolId="+schoolId+" and a.teacherId like '37%' order by subjectId,teacherId";
 		List<Map<String,Object>> teachers = tutorDB.select(sql, null, null);
 		for(Map<String,Object> map : teachers){
 			Teacher teacher = new Teacher();
@@ -754,9 +952,10 @@ public class RandomData {
 	 * 获取场地列表
 	 * @return
 	 */
-	public static List<Area> getAreas(){
+	public static List<Area> getAreas(Long schoolId){
 		List<Area> areas = new ArrayList<Area>();
-		String sql = "select areaId,areaName,building from ls_teach_area where isDeleted=5 order by areaId";
+		String sql = "select areaId,areaName,building from ls_teach_area where isDeleted=0 and schoolId="
+				+schoolId+" order by areaId";
 		List<Map<String,Object>> result = lessonDB.select(sql, null, null);
 		for(Map<String,Object> map : result){
 			Area area = new Area();
@@ -774,7 +973,7 @@ public class RandomData {
 	 */
 	public static List<Klass> getTeachPlanClass(){
 		List<Klass> klasses = new ArrayList<>();
-		String sql = "select a.classId,a.className,a.gradeId,a.gradeName from ls_klass a ,ls_teach_plan b"
+		String sql = "select a.classId,a.className,a.gradeId,a.gradeName from ls_klass a ,ls_paike_teach_plan b"
 				+ " where a.classId=b.classId and b.paikeTaskId=999 and a.`type`=3 and b.subId<>-1 order by classId";
 		List<Map<String,Object>> result = lessonDB.select(sql, null, null);
 		for(Map<String,Object> map : result){
@@ -841,6 +1040,30 @@ public class RandomData {
 		subject.setSubjectId(29L);
 		subject.setSubjectName("体育");
 		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(4L);
+		subject.setSubjectName("物理");
+		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(5L);
+		subject.setSubjectName("化学");
+		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(6L);
+		subject.setSubjectName("生物");
+		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(7L);
+		subject.setSubjectName("政治");
+		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(8L);
+		subject.setSubjectName("历史");
+		subjects.add(subject);
+		subject = new Subject();
+		subject.setSubjectId(9L);
+		subject.setSubjectName("地理");
+		subjects.add(subject);
 		return subjects;
 	}
 	
@@ -900,32 +1123,6 @@ public class RandomData {
 		}
 	}
 	
-	public static Long getClassId(Long relationId){
-		if(relationId == 4256){
-			return 3735L;
-		}else if(relationId == 4254){
-			return 3736L;
-		}else if(relationId == 4258){
-			return 3737L;
-		}else if(relationId == 4260){
-			return 3738L;
-		}else if(relationId == 4262){
-			return 3739L;
-		}else if(relationId == 4255){
-			return 3740L;
-		}else if(relationId == 4259){
-			return 3741L;
-		}else if(relationId == 4257){
-			return 3742L;
-		}else if(relationId == 4263){
-			return 3743L;
-		}else if(relationId == 4261){
-			return 3744L;
-		}else{
-			return -1L;
-		}
-	}
-	
 	public static double getRandomScore(double score){
 		Random random = new Random();
 		if(score <= 60){
@@ -940,6 +1137,7 @@ public class RandomData {
 	public static <T> List<T> subList(List<T> list , int offset , int size){
 		List<T> result = new ArrayList<>();
 		for(int i=0;i<size;i++){
+			if(i+offset >= list.size()) break;
 			result.add(list.get(i+offset));
 		}
 		return result;
@@ -973,50 +1171,76 @@ public class RandomData {
 //		tutorDB.update(sql, null, null);
 	}
 	
+	public static void group(List<Integer> list,List<List<Integer>> group){
+		int result = 0;
+		for(Integer i : list){
+			result += i;
+		}
+		if(result==6) group.add(list);
+		else if(list.size() == 6){
+			return ;
+		}else{
+			group(list,group);
+		}
+	}
+	
 	//FIXME
 	public static void main(String[] args) {
-//		reset();
+		//获取分组
 		//更新user表
-//		List<User> users = getRandomUser(487);
-//		List<User> teachers = getRandomTeacher();
+//		List<User> users = getRandomUser(489,"学生f");
+//		List<User> teachers = getRandomTeacher("老师xy");
 		
-//		List<User> users = getUser();
-//		List<User> teachers = getTeacher();
-		
+//		List<User> users = getUser("学生",36921L,37407L);
+//		List<User> teachers = getTeacher("老师z",42142L);
+//		System.out.println(getKlassKeyMap().get(4492L));
 		//更新struct和role_school
-//		setUserStructAndRole(users,100L);
-//		setUserStructAndRole(teachers,101L);
-//		setUserClass(users);
+//		setUserStructAndRole(users,100L,492L,4562L);
+//		setUserStructAndRole(teachers,101L,492L,4562L);
+//		setUserClass(users,492L,4562L,4571L);
 		
 		//设置tutor_user_teacher_subject_grade
-//		setTeacherSub(getTeacher());
+//		setTeacherSub(teachers, 492L);
 		//更新ls_choice_exam_task_student表
-//		setRandomSubInfo(users, 999L);
+//		setRandomSubInfo(users, 1012L);
 		//初始化场地
-//		initArea();
+//		initArea(492L);
 		
 		//设置班级
 //		List<KlassExt> klasses = assemble(users, subIds);
 //		splitClass(users,klasses);
-//		updateClassSub();
+//		updateClassSub(4530L,4538L,492L);
 		
-
-//		initTeachPlanAndArea();
+		//设置分班条件[需要手动调整]
+//		initLimitCondition(1012L);
+		//分班
+//		auth/provost/paike/choiceExam/savePrepareClass.htm?taskId=150
+		
+//		initTeachPlanAndArea(1038L, 492L, 4530L, 4538L);
+		
+//		initSplitTeachPlan(1066L,476L,1012L);
+		
+		//设置分层班排课
+		
+		
 		
 		//设置预排课，禁排课，设置合班
 //		setRule();
 		
-		long begin = System.currentTimeMillis();
-		List<Klass> klasses = getTeachPlanClass();
-		List<Long> classIds = new ArrayList<>();
-		for(Klass klass : klasses){
-			classIds.add(klass.getClassId());
-		}
-		Map<Long,List<Long>> exceptClass = getUsersByClasses(classIds);
-		//419ms
-		System.out.println(System.currentTimeMillis() - begin + "ms");
-		Print.printMapList(exceptClass);
-		
+//		long begin = System.currentTimeMillis();
+//		List<Klass> klasses = getTeachPlanClass();
+//		List<Long> classIds = new ArrayList<>();
+//		for(Klass klass : klasses){
+//			classIds.add(klass.getClassId());
+//		}
+//		Map<Long,List<Long>> exceptClass = getUsersByClasses(classIds);
+//		//419ms
+//		System.out.println(System.currentTimeMillis() - begin + "ms");
+//		Print.printMapList(exceptClass);
+//		System.out.println(exceptClass.size());
+//		
+//		
+//		System.out.println("1234567".indexOf("123"));
 //		users.forEach(System.out::println);
 //		for(int i = 0 ; i< 7 ; i++){
 //			System.out.println("-----------------------------------------------"+i);
@@ -1025,6 +1249,7 @@ public class RandomData {
 //			System.out.println("subcheck [sub:"+getSubName(i+1L)+", cnt:"+subList.get(i).size()+"]");
 //			printClass(assemble("高二",i+1L,getSubName(i+1L),users.size(),subList.get(i).size()));
 //		}
+//		splitClass(11, 3);
 	}
 	
 	static class SortUser implements Comparator<User>{

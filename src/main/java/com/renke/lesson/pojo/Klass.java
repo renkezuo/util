@@ -20,6 +20,30 @@ public class Klass {
 	// °à¼¶ÈËÊý
 	private Integer headCount;
 	
+	private Integer teamId;
+	
+	private Long subId;
+	
+	private String subName;
+	
+	public Long getSubId() {
+		return subId;
+	}
+	public void setSubId(Long subId) {
+		this.subId = subId;
+	}
+	public String getSubName() {
+		return subName;
+	}
+	public void setSubName(String subName) {
+		this.subName = subName;
+	}
+	public Integer getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(Integer teamId) {
+		this.teamId = teamId;
+	}
 	public Long getClassId() {
 		return classId;
 	}

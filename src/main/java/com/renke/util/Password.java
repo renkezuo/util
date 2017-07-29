@@ -130,7 +130,7 @@ public class Password {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		int i = 0;
-		System.out.println(md5("c6z23oj2"));
+//		System.out.println(md5("c6z23oj2"));
 		while((line = br.readLine()) !=null){
 			String result = md5(line);
 			
@@ -138,7 +138,8 @@ public class Password {
 			//1234567a /gCHAPJcsolAyo7ZGyOzVA==
 			//a1234567 VpDd36KK4IXSNRigNXBygg==
 			//1234567 /OqSD3QStdp74M9CuMk3WQ==
-			if(result.equals("f/S91PQNDdPsKiTapGg0eQ==")){
+			//7uDzwxnHva9jEVWe7FBY4Q==
+			if(result.equals("7uDzwxnHva9jEVWe7FBY4Q==")){
 				System.out.println(line);
 				break;
 			}
@@ -146,10 +147,9 @@ public class Password {
 		}
 		br.close();
 		System.out.println("Æ¥Åä´ÎÊý£º"+i);
-		
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update("testappkeytestappsecret¶Ò°É".getBytes("UTF-8"));
-		System.out.println(new BigInteger(1, md.digest()).toString(16));;
+//		MessageDigest md = MessageDigest.getInstance("MD5");
+//		md.update("testappkeytestappsecret¶Ò°É".getBytes("UTF-8"));
+//		System.out.println(new BigInteger(1, md.digest()).toString(16));;
 		
 	}
 }

@@ -1,6 +1,9 @@
 package com.renke.http;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -99,5 +102,33 @@ public class Controller {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//测试文件上传和下载，在断开servlet的情况下，会出现什么问题。
+	public static void main(String[] args) throws Exception {
+		String request = "GET /mytest/myTest.htm HTTP/1.1\r\n"
+				+ "Host: 127.0.0.1:9090\r\n"
+//				+ "Connection: keep-alive\r\n"
+				+ "Connection: close\r\n"
+				+ "Cache-Control: max-age=0\r\n"
+				+ "Upgrade-Insecure-Requests: 1\r\n"
+				+ "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\r\n"
+				+ "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"
+				+ "Accept-Encoding: gzip, deflate, sdch\r\n"
+				+ "Accept-Language: zh-CN,zh;q=0.8\r\n";
+		Controller controller = new Controller("http://127.0.0.1:9090/mytest/mytest.htm",null);
+		ParseHTTPChannel.sendGetMessage(controller.socketChannel, request);
+		HTTP http = controller.getHTTP("127.0.0.1:9090",null);
+		System.out.println(http);
+//		ParseHTTPChannel.parseResponse(controller.socketChannel, http);
+//		BufferedReader in = new BufferedReader(new InputStreamReader(
+//		new ByteArrayInputStream(http.getBytes()),"UTF-8"));
+//		String line = "";
+//		while( (line = in.readLine()) !=null){
+//			System.out.println(line);
+//		}
+		controller.socketChannel.socket().getInputStream().close();
+//		controller.socketChannel.socket().getOutputStream().close();
+		controller.socketChannel.socket().close();
 	}
 }

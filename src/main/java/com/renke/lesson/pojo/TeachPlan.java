@@ -27,6 +27,14 @@ public class TeachPlan {
 	//用户列表
 	private List<User> user;
 	
+	private int teamId;
+	
+	public int getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
 	public Long getGradeId() {
 		return gradeId;
 	}

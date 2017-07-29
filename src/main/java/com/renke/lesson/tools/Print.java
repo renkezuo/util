@@ -50,7 +50,7 @@ public class Print {
 				result += ","+t;
 			}
 			if(result.length() == 0) result =",";
-			logger.info("key:{},value:{}",key,"["+result.substring(1)+"]");
+			logger.info("key:{},size{},value:{}",key,list.size(),"["+result.substring(1)+"]");
 		}
 	}
 	

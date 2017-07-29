@@ -12,8 +12,8 @@ public interface FunInterface {
 	public void world(); //delete this method err : FunInterface is not FunctionalInterface
 //	public void zeze(); //err: FunInterface is not FunctionalInterface
 	//也有interface enhance的新特性
-	default void test(){}
-	default void test2(){}
+	default void test(){System.out.println("test1");}
+	default void test2(){System.out.println("test2");}
 //	public static void xixi();//err :This method requires a body instead of a semicolon
 	public static void hello(){
 		System.out.println("hello world!");

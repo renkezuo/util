@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 public class PICHelper {
-    //别人给的流，只操作，不管理
+    // 别人给的流，只操作，不管理
 	// 打开流和关闭流，请调用方处理，方法不处理
 	public static void resizeImage(InputStream is, OutputStream os, double percent, String format) throws IOException {
 		BufferedImage prevImage = ImageIO.read(is);
@@ -38,9 +38,9 @@ public class PICHelper {
 		ImageIO.write(image, format, os);
 	}
     public static void main(String[] args) throws Exception {
-		FileInputStream is = new FileInputStream(new File("C:/Users/Administrator/Desktop/九宫格/大图/jb1.jpg"));
-		FileOutputStream os = new FileOutputStream(new File("C:/Users/Administrator/Desktop/九宫格/大图/jb1.small.jpg"));
-		resizeImage(is,os,1080,1920,"jpg");
+		FileInputStream is = new FileInputStream(new File("C:/Users/Administrator/Desktop/model.jpg"));
+		FileOutputStream os = new FileOutputStream(new File("C:/Users/Administrator/Desktop/test.jpg"));
+		resizeImage(is,os,100,100,"jpg");
 		is.close();
 		os.close();
 	}

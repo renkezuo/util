@@ -51,6 +51,24 @@ public class MyMain {
 		hello.setHello(hello);
 		System.out.println(hello);
 		System.out.println(hello.name);
+		
+		List<Integer> list = new ArrayList<>(2);
+		
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		
+		int i = Integer.MAX_VALUE;
+		System.out.println(i+1 < i);
+		
+		String str = "hello";
+		String str2 = "he" + new String("llo");
+		System.out.println(str == str2);
+//		for(int i=0;i<10;i++){
+//			list.add(i);
+//		}
+//		List<Integer> list2 = new ArrayList<>(list.subList(0, 6));
+//		list2.forEach(System.out::println);
 	}
 	
 	class Hello{

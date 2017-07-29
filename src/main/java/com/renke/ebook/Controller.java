@@ -176,9 +176,9 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		String url = "http://www.qu.la/book/3730/";
+		String url = "http://www.xs.la/32_32229/";
 		Map<String,String> siteProperties = new HashMap<String,String>();
-		siteProperties.put("bookName", "ÎÒÒª×ö»ÊµÛ");
+		siteProperties.put("bookName", "··×ï");
 		siteProperties.put("catalogUrl", url);
 		siteProperties.put("basePath", "F:/ebook/");
 		WebSiteFactory.setQu(siteProperties);
