@@ -8,14 +8,14 @@ import java.security.SecureRandom;
 
 /**
  *
- * ÃèÊö:Ö§³ÖSHA-1/MD5ÏûÏ¢ÕªÒªµÄ¹¤¾ßÀà.
+ * æè¿°:æ”¯æŒSHA-1/MD5æ¶ˆæ¯æ‘˜è¦çš„å·¥å…·ç±».
  * 
- * ·µ»ØByteSource£¬¿É½øÒ»²½±»±àÂëÎªHex, Base64»òUrlSafeBase64
+ * è¿”å›ByteSourceï¼Œå¯è¿›ä¸€æ­¥è¢«ç¼–ç ä¸ºHex, Base64æˆ–UrlSafeBase64
  * 
  * Base64.encodeToString(Digests.sha1("123456".getBytes("UTF-8")))
  *
  * @author  WQB
- * @created 2014-4-4 ÏÂÎç2:57:56
+ * @created 2014-4-4 ä¸‹åˆ2:57:56
  * @since   v1.0.0
  */
 public class Digests {
@@ -26,7 +26,7 @@ public class Digests {
 	private static SecureRandom random = new SecureRandom();
 
 	/**
-	 * ¶ÔÊäÈë×Ö·û´®½øĞĞsha1É¢ÁĞ.
+	 * å¯¹è¾“å…¥å­—ç¬¦ä¸²è¿›è¡Œsha1æ•£åˆ—.
 	 */
 	public static byte[] sha1(byte[] input) {
 		return digest(input, SHA1, null, 1);
@@ -53,7 +53,7 @@ public class Digests {
 	}
 	
 	/**
-	 * ¶ÔÊäÈë×Ö·û´®½øĞĞmd5.
+	 * å¯¹è¾“å…¥å­—ç¬¦ä¸²è¿›è¡Œmd5.
 	 */
 	public static byte[] md5(String input){
 		return digest(input.getBytes(), MD5, null, 0);
@@ -65,7 +65,7 @@ public class Digests {
 	
 	
 	/**
-	 * ¶Ô×Ö·û´®½øĞĞÉ¢ÁĞ, Ö§³Ömd5Óësha1Ëã·¨.
+	 * å¯¹å­—ç¬¦ä¸²è¿›è¡Œæ•£åˆ—, æ”¯æŒmd5ä¸sha1ç®—æ³•.
 	 */
 	private static byte[] digest(byte[] input, String algorithm, byte[] salt, int iterations) {
 		try {
@@ -88,9 +88,9 @@ public class Digests {
 	}
 
 	/**
-	 * Éú³ÉËæ»úµÄByte[]×÷Îªsalt.
+	 * ç”Ÿæˆéšæœºçš„Byte[]ä½œä¸ºsalt.
 	 * 
-	 * @param numBytes byteÊı×éµÄ´óĞ¡
+	 * @param numBytes byteæ•°ç»„çš„å¤§å°
 	 */
 	public static byte[] generateSalt(int numBytes) {
 		if (numBytes <= 0) {
@@ -102,14 +102,14 @@ public class Digests {
 	}
 
 	/**
-	 * ¶ÔÎÄ¼ş½øĞĞmd5É¢ÁĞ.
+	 * å¯¹æ–‡ä»¶è¿›è¡Œmd5æ•£åˆ—.
 	 */
 	public static byte[] md5(InputStream input) throws IOException {
 		return digest(input, MD5);
 	}
 
 	/**
-	 * ¶ÔÎÄ¼ş½øĞĞsha1É¢ÁĞ.
+	 * å¯¹æ–‡ä»¶è¿›è¡Œsha1æ•£åˆ—.
 	 */
 	public static byte[] sha1(InputStream input) throws IOException {
 		return digest(input, SHA1);

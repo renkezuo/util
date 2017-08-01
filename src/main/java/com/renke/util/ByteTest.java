@@ -9,16 +9,16 @@ import java.io.InputStreamReader;
 public class ByteTest {
 	
 	public static void main(String[] args) throws IOException {
-		String str = "ÄãºÃ";
+		String str = "ä½ å¥½";
 		System.out.println(str.getBytes().length);
 //		File file = new File("GBK");
 		File file2 = new File("UTF-8");
-		//ÒÔGBK·½Ê½¶ÁUTF-8ÎÄ¼ş£¬2¸öÖĞÎÄ×Ö·û´®±ä³É6¸ö×Ö½Ú 1 3 
-		//ÒÔUTF-8·½Ê½¶ÁGBKÎÄ¼ş£¬2¸öÖĞÎÄ×Ö·û´®±ä³É3¸ö×Ö½Ú
-		//GBK¶ÁGBKºÍUTF-8¶ÁUTF-8Îª4¸ö×Ö½Ú
-		//ÉèGBKÒ»¸öÖĞÎÄµÄÎ»ÊıX£¬UTF-8µÄÒ»¸öÖĞÎÄÎ»ÊıÎªY
-		//UTF-8Îª6×Ö½Ú
-		//GBKÎª4×Ö½Ú
+		//ä»¥GBKæ–¹å¼è¯»UTF-8æ–‡ä»¶ï¼Œ2ä¸ªä¸­æ–‡å­—ç¬¦ä¸²å˜æˆ6ä¸ªå­—èŠ‚ 1 3 
+		//ä»¥UTF-8æ–¹å¼è¯»GBKæ–‡ä»¶ï¼Œ2ä¸ªä¸­æ–‡å­—ç¬¦ä¸²å˜æˆ3ä¸ªå­—èŠ‚
+		//GBKè¯»GBKå’ŒUTF-8è¯»UTF-8ä¸º4ä¸ªå­—èŠ‚
+		//è®¾GBKä¸€ä¸ªä¸­æ–‡çš„ä½æ•°Xï¼ŒUTF-8çš„ä¸€ä¸ªä¸­æ–‡ä½æ•°ä¸ºY
+		//UTF-8ä¸º6å­—èŠ‚
+		//GBKä¸º4å­—èŠ‚
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file2),"UTF-8"));
 		String line;
 		while((line = br.readLine())!=null){

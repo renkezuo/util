@@ -16,18 +16,18 @@ public class TeachPlanInsert {
 			,"exschool2012");
 	
 	public static void main(String[] args) {
-		//»ñÈ¡name like '%ÀÏÊ¦xy%' µÄÀÏÊ¦
-//		List<Teacher> teachers = getTeachers("ÀÏÊ¦xy",43183L);
-		//¸øÀÏÊ¦ÉèÖÃ¿ÆÄ¿
+		//è·å–name like '%è€å¸ˆxy%' çš„è€å¸ˆ
+//		List<Teacher> teachers = getTeachers("è€å¸ˆxy",43183L);
+		//ç»™è€å¸ˆè®¾ç½®ç§‘ç›®
 //		setTeacherSub(teachers, 494L);
-		//ÅÅ¿ÎÈÎÎñID£¬Ñ§Ğ£ID£¬·Ö°àÈÎÎñID
+		//æ’è¯¾ä»»åŠ¡IDï¼Œå­¦æ ¡IDï¼Œåˆ†ç­ä»»åŠ¡ID
 		initSplitTeachPlan(1068L,494L,1012L);
 	}
 	
 	public static void initSplitTeachPlan(Long paikeTaskId, Long schoolId, Long taskId) {
 		String planSql = "insert into ls_paike_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,classType,teamId"
 				+ ",weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt,isDeleted)" + " values("
-				+ paikeTaskId + ",11,'¸ß¶ş',?,?,3,?,1,?,?,?,?,?,?,0)";
+				+ paikeTaskId + ",11,'é«˜äºŒ',?,?,3,?,1,?,?,?,?,?,?,0)";
 		DBConstants[] types = new DBConstants[9];
 		types[0] = DBConstants.SET_LONG;
 		types[1] = DBConstants.SET_STRING;
@@ -39,15 +39,15 @@ public class TeachPlanInsert {
 		types[7] = DBConstants.SET_INT;
 		types[8] = DBConstants.SET_INT;
 
-		// »ñÈ¡°à¼¶
+		// è·å–ç­çº§
 		List<Klass> splitKlasses = getSplitKlass(schoolId, taskId);
-		// »ñÈ¡ÀÏÊ¦
+		// è·å–è€å¸ˆ
 		Map<Long, List<Teacher>> subTeachers = getSubTeachers(schoolId);
-		// »ñÈ¡³¡µØ
+		// è·å–åœºåœ°
 		// List<Area> areas = getAreas();
 		List<TeachPlan> teachPlans = new ArrayList<>();
-		// ĞĞÕş°à -- ¿ÆÄ¿-- ½ÌÊÒ[¹Ì¶¨] -- ÀÏÊ¦-- ¿ÎÊ±-- Á¬ÌÃ
-		// »ñÈ¡ĞĞÕş°à£¬»ñÈ¡¿ÆÄ¿£¬»ñÈ¡¿ÆÄ¿¶ÔÓ¦ÀÏÊ¦£¬·ÖÅäÀÏÊ¦£¬³¡µØ
+		// è¡Œæ”¿ç­ -- ç§‘ç›®-- æ•™å®¤[å›ºå®š] -- è€å¸ˆ-- è¯¾æ—¶-- è¿å ‚
+		// è·å–è¡Œæ”¿ç­ï¼Œè·å–ç§‘ç›®ï¼Œè·å–ç§‘ç›®å¯¹åº”è€å¸ˆï¼Œåˆ†é…è€å¸ˆï¼Œåœºåœ°
 		int teamId = 1;
 		for (int k = 0; k < splitKlasses.size(); k++) {
 			Klass klass = splitKlasses.get(k);
@@ -68,7 +68,7 @@ public class TeachPlanInsert {
 				tp.setTeacherId(teacher.getTeacherId());
 				tp.setTeacherName(teacher.getTeacherName());
 			}
-			//ĞŞ¸ÄÊÚ¿Î¼Æ»®¿ÎÊ±Êı
+			//ä¿®æ”¹æˆè¯¾è®¡åˆ’è¯¾æ—¶æ•°
 			tp.setWeekCnt(3);
 			
 			
@@ -91,7 +91,7 @@ public class TeachPlanInsert {
 		lessonDB.updateBatch(planSql, types, objs);
 	}
 
-	// »ñÈ¡·Ö²ã°à
+	// è·å–åˆ†å±‚ç­
 	public static List<Klass> getSplitKlass(Long schoolId, Long taskId) {
 		String sql = "select a.classId,className,b.teamId,c.subjectId,c.subjectName "
 				+ " from ls_klass a ,ls_choice_exam_klass b,ls_klass_subject c"
@@ -164,27 +164,27 @@ public class TeachPlanInsert {
 	}
 	
 	public static Long getSubNo(String name){
-		if(name.indexOf("ÓïÎÄ") > -1){
+		if(name.indexOf("è¯­æ–‡") > -1){
 			return 1L;
-		}else if(name.indexOf("ÊıÑ§") > -1){
+		}else if(name.indexOf("æ•°å­¦") > -1){
 			return 2L;
-		}else if(name.indexOf("ÍâÓï") > -1){
+		}else if(name.indexOf("å¤–è¯­") > -1){
 			return 3L;
-		}else if(name.indexOf("ÎïÀí") > -1){
+		}else if(name.indexOf("ç‰©ç†") > -1){
 			return 4L;
-		}else if(name.indexOf("»¯Ñ§") > -1){
+		}else if(name.indexOf("åŒ–å­¦") > -1){
 			return 5L;
-		}else if(name.indexOf("ÉúÎï") > -1){
+		}else if(name.indexOf("ç”Ÿç‰©") > -1){
 			return 6L;
-		}else if(name.indexOf("ÕşÖÎ") > -1){
+		}else if(name.indexOf("æ”¿æ²»") > -1){
 			return 7L;
-		}else if(name.indexOf("ÀúÊ·") > -1){
+		}else if(name.indexOf("å†å²") > -1){
 			return 8L;
-		}else if(name.indexOf("µØÀí") > -1){
+		}else if(name.indexOf("åœ°ç†") > -1){
 			return 9L;
-		}else if(name.indexOf("¼¼Êõ") > -1){
+		}else if(name.indexOf("æŠ€æœ¯") > -1){
 			return 19L;
-		}else if(name.indexOf("ÌåÓı") > -1){
+		}else if(name.indexOf("ä½“è‚²") > -1){
 			return 29L;
 		}else{
 			return -1L;
@@ -222,23 +222,23 @@ class Teacher {
 
 
 class Klass {
-	// °à¼¶ID
+	// ç­çº§ID
 	private Long classId;
-	// °à¼¶Ãû³Æ
+	// ç­çº§åç§°
 	private String className;
-	// °à¼¶ÀàĞÍ
+	// ç­çº§ç±»å‹
 	private Integer type;
-	// ¹ØÁªID
+	// å…³è”ID
 	private Long relationId;
-	// Äê¼¶ID
+	// å¹´çº§ID
 	private Long gradeId;
-	// Äê¼¶Ãû³Æ
+	// å¹´çº§åç§°
 	private String gradeName;
-	// Ñ§¶ÎID
+	// å­¦æ®µID
 	private Long schoolStageId;
-	// Ñ§Ğ£ID
+	// å­¦æ ¡ID
 	private Long schoolId;
-	// °à¼¶ÈËÊı
+	// ç­çº§äººæ•°
 	private Integer headCount;
 	
 	private Integer teamId;
@@ -337,28 +337,28 @@ enum DBConstants {
 }
 
 class TeachPlan {
-	//Äê¼¶
+	//å¹´çº§
 	private Long gradeId;
 	private String gradeName;
-	//°à¼¶
+	//ç­çº§
 	private Long classId;
 	private String className;
-	//³¡µØ
+	//åœºåœ°
 	private Long areaId;
 	private String areaName;
-	//¿ÆÄ¿
+	//ç§‘ç›®
 	private Long subId;
 	private String subName;
-	//ÀÏÊ¦
+	//è€å¸ˆ
 	private Long teacherId;
 	private String teacherName;
-	//ÖÜ¿ÎÊ±Êı
+	//å‘¨è¯¾æ—¶æ•°
 	private int weekCnt;
-	//Á¬ÌÃÊı
+	//è¿å ‚æ•°
 	private int seriesCnt;
-	//³£¹æ1£¬µ¥ÖÜ2£¬Ë«ÖÜ3
+	//å¸¸è§„1ï¼Œå•å‘¨2ï¼ŒåŒå‘¨3
 	private int weekType;
-	//ÓÃ»§ÁĞ±í
+	//ç”¨æˆ·åˆ—è¡¨
 	private int teamId;
 	
 	public int getTeamId() {

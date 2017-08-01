@@ -16,9 +16,9 @@ public class WriteXml {
 	private Document document;
 	
 	/**
-	 * ¸ü»»½ÚµãÃû³Æ
-	 * @param tagName		±êÇ©Ãû³Æ
-	 * @param newNodeName	ĞÂµÄ½ÚµãÃû³Æ
+	 * æ›´æ¢èŠ‚ç‚¹åç§°
+	 * @param tagName		æ ‡ç­¾åç§°
+	 * @param newNodeName	æ–°çš„èŠ‚ç‚¹åç§°
 	 */
 	public void editNode(String tagName,String newName){
 		XMLWriter xw = null;
@@ -42,12 +42,12 @@ public class WriteXml {
 //			List<Element> flow = e.elements("flow");
 //			flow = flow.get(0).elements("task");
 //			flow.get(0).setName("task1");
-			format.setEncoding("UTF-8");//´Ë´¦¸ÄÎªGBK  ÎŞÂÒÂë¡£
+			format.setEncoding("UTF-8");//æ­¤å¤„æ”¹ä¸ºGBK  æ— ä¹±ç ã€‚
 			File file = new File(this.getClass().getResource(xmlName).toURI());
 			xw = new XMLWriter(new FileOutputStream(file),format);
 			xw.write(document);
 			xw.close();
-			System.out.println("½Úµã"+tagName+" ÓÉ  "+oldName+" ĞŞ¸ÄÎª "+newName);
+			System.out.println("èŠ‚ç‚¹"+tagName+" ç”±  "+oldName+" ä¿®æ”¹ä¸º "+newName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,9 +55,9 @@ public class WriteXml {
 	}
 	
 	/**
-	 * ¸ü»»½ÚµãÃû³Æ
-	 * @param tagName		±êÇ©Ãû³Æ
-	 * @param newNodeName	ĞÂµÄ½ÚµãÃû³Æ
+	 * æ›´æ¢èŠ‚ç‚¹åç§°
+	 * @param tagName		æ ‡ç­¾åç§°
+	 * @param newNodeName	æ–°çš„èŠ‚ç‚¹åç§°
 	 */
 	public void editText(String name,String newText){
 		XMLWriter xw = null;
@@ -72,17 +72,17 @@ public class WriteXml {
 			List<Element> list = e.elements();
 			Element e2 = list.get(2);
 			System.out.println(e2.getText());
-			e2.setText("ËûºÃÎÒÒ²ºÃ");
+			e2.setText("ä»–å¥½æˆ‘ä¹Ÿå¥½");
 			System.out.println(e2.getText());
 //			List<Element> flow = e.elements("flow");
 //			flow = flow.get(0).elements("task");
 //			flow.get(0).setName("task1");
-			format.setEncoding("UTF-8");//´Ë´¦¸ÄÎªGBK  ÎŞÂÒÂë¡£
+			format.setEncoding("UTF-8");//æ­¤å¤„æ”¹ä¸ºGBK  æ— ä¹±ç ã€‚
 			File file = new File(this.getClass().getResource(xmlName).toURI());
 			xw = new XMLWriter(new FileOutputStream(file),format);
 			xw.write(document);
 			xw.close();
-			System.out.println("½Úµã"+name+" ÖĞ  ÄÚÈİ±»"+oldName+" ĞŞ¸ÄÎª "+newText);
+			System.out.println("èŠ‚ç‚¹"+name+" ä¸­  å†…å®¹è¢«"+oldName+" ä¿®æ”¹ä¸º "+newText);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

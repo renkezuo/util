@@ -1,9 +1,9 @@
 package com.renke.lesson.pojo;
 
 /***
- * ¿ÆÄ¿ĞÅÏ¢
- * ÀÏÊ¦ÁĞ±í
- * ÓÅÏÈ¼¶
+ * ç§‘ç›®ä¿¡æ¯
+ * è€å¸ˆåˆ—è¡¨
+ * ä¼˜å…ˆçº§
  * @author Z.R.K
  * @time 2017-04-07 14:29:01
  */
@@ -25,7 +25,7 @@ public class Course extends Base{
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	//»ñÈ¡¿ÆÄ¿ÀÏÊ¦[¹«Æ½·ÖÅä]
+	//è·å–ç§‘ç›®è€å¸ˆ[å…¬å¹³åˆ†é…]
 	public TeacherBak getTeacher(){
 		if(teachers != null)
 			for(int i=0;i<teachers.length;i++){

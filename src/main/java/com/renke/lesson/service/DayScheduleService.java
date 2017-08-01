@@ -12,7 +12,7 @@ import com.renke.lesson.pojo.TeacherBak;
 import com.renke.lesson.tools.RandomTool;
 
 /***
- * FIXME Èç¹ûÏß³ÌÖĞ¶Ï£¬ÔõÃ´´¦Àí£¿
+ * FIXME å¦‚æœçº¿ç¨‹ä¸­æ–­ï¼Œæ€ä¹ˆå¤„ç†ï¼Ÿ
  * 
  * @author Z.R.K
  * @time 2017-04-11 09:13:05
@@ -23,9 +23,9 @@ public class DayScheduleService implements Runnable{
 	
 	private static AtomicInteger count = new AtomicInteger(0);
 	
-	//²Ù×÷¶ÔÏó
+	//æ“ä½œå¯¹è±¡
 	private Klass3 klass ;
-	//Ö÷Ïß³Ì
+	//ä¸»çº¿ç¨‹
 	private Thread mainThread;
 
 	public DayScheduleService(Klass3 klass){
@@ -35,20 +35,20 @@ public class DayScheduleService implements Runnable{
 	@Override
 	public void run() {
 		logger.debug("thread-{} run",Thread.currentThread().getId());
-		//»ñÈ¡°à¼¶¿ÆÄ¿
+		//è·å–ç­çº§ç§‘ç›®
 		Course[] courses = klass.getCourses();
 		
 		int[] courseIndexs = new int[courses.length];
 		
-		//µ±ÈÕ¿ÎÊ±×ÜÊıÑ­»·
+		//å½“æ—¥è¯¾æ—¶æ€»æ•°å¾ªç¯
 		for(int i=0;i<klass.getLessonCount();i++){
 			RandomTool courseRandom = new RandomTool(courseIndexs);
-			//È¡µÃ¿ÆÄ¿ÎªÖ¹
+			//å–å¾—ç§‘ç›®ä¸ºæ­¢
 			while(true){
 				int courseIndex = courseRandom.nextIndex();
 				TeacherBak teacher = klass.getTeachers()[courseIndex];
-				//ÅĞ¶ÏÊÇ·ñµ½´ïµ±ÈÕÀÏÊ¦ÉÏÏŞ£¬µ½ÁË¾Íbreak£¬ÖØĞÂÈ¡¿ÆÄ¿
-				//¼ÆËãÍê±Ïºó£¬ÔÚÈÎÎñµ÷¶È´¦£¬¼ÆËãÊÇ·ñ·ûºÏµ±ÈÕÊı¾İ[Ê£Óà¿ÆÄ¿ÀÏÊ¦¿ÎÊ±×ÜÊı<¿ÆÄ¿ÀÏÊ¦*6*ÌìÊı£¬È«²¿Í¨¹ı£¬¼´¿É£¬µÚÎåÌìÔò²»ÓÃ¼ÆËã]
+				//åˆ¤æ–­æ˜¯å¦åˆ°è¾¾å½“æ—¥è€å¸ˆä¸Šé™ï¼Œåˆ°äº†å°±breakï¼Œé‡æ–°å–ç§‘ç›®
+				//è®¡ç®—å®Œæ¯•åï¼Œåœ¨ä»»åŠ¡è°ƒåº¦å¤„ï¼Œè®¡ç®—æ˜¯å¦ç¬¦åˆå½“æ—¥æ•°æ®[å‰©ä½™ç§‘ç›®è€å¸ˆè¯¾æ—¶æ€»æ•°<ç§‘ç›®è€å¸ˆ*6*å¤©æ•°ï¼Œå…¨éƒ¨é€šè¿‡ï¼Œå³å¯ï¼Œç¬¬äº”å¤©åˆ™ä¸ç”¨è®¡ç®—]
 				
 				if(!teacher.useMinLesson()){
 					int courseSurplusCount = klass.getCourseSurplusCounts()[courseIndex];
@@ -60,7 +60,7 @@ public class DayScheduleService implements Runnable{
 						}
 					}
 				}else{
-					//ÅĞ¶ÏÆäËûÀÏÊ¦ÊÇ·ñÒÑ¾­Æ½ºâ£¬·ñÔò¼ÌĞø
+					//åˆ¤æ–­å…¶ä»–è€å¸ˆæ˜¯å¦å·²ç»å¹³è¡¡ï¼Œå¦åˆ™ç»§ç»­
 					if(checkTeacher(courses)){
 						int courseSurplusCount = klass.getCourseSurplusCounts()[courseIndex];
 						if(courseSurplusCount > 0){
@@ -78,7 +78,7 @@ public class DayScheduleService implements Runnable{
 		logger.debug("thread-{} end",Thread.currentThread().getId());
 		System.out.println(klass.getName() +"--"+ count.incrementAndGet()+"--" + getDayTeacher());
 		MyTest.printCourse(klass);
-		//Ö´ĞĞÍê±Ïºó£¬»½ĞÑÖ÷Ïß³Ì
+		//æ‰§è¡Œå®Œæ¯•åï¼Œå”¤é†’ä¸»çº¿ç¨‹
 		klass.setDone(true);
 		LockSupport.unpark(mainThread);
 	}

@@ -3,34 +3,34 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 public class EBook {
-	public final static int LESSON_LINE = 100;				//Ã¿¶Î×Ö½Ú´óĞ¡
-	public final static int NEXT_LESSON = 1;				//ÏÂÒ»¶Î
-	public final static int PREV_LESSON = 2;				//ÉÏÒ»¶Î
-	public final static String CHINA_CN = "[^\\x00-xff]";	//Ë«×Ö½Ú×Ö·û
-	public final static String CHINA_EN = "[\\x00-xff]";	//µ¥×Ö½Ú×Ö·û
-	public final static String DOU_CHAR = "XX";				//Ë«×Ö½ÚÌæ»»×Ö·û
-	public final static String DOU_SINGLE_CHAR = "X";		//Ë«×Ö½ÚÖĞÂäµ¥×Ö½ÚÌæ»»×Ö·û
-	public final static String DOU_NULL_CHAR = "";			//Ë«×Ö½ÚÖĞÂäµ¥×Ö½ÚÌæ»»×Ö·û			
-	public final static String SINGLE_CHAR = "A";			//µ¥×Ö½ÚÌæ»»×Ö·û
-	private int fileLine = 0;		//ÎÄ¼ş×Ü´óĞ¡
-	private int thisLine = 0;		//ÎÄ¼şµ±Ç°¶ÎµÄĞĞÊıË÷Òı
-	private int prevLine = 0;		//ÎÄ¼şÇ°Ò»¶ÎµÄĞĞÊıË÷Òı
-	private int nowLine = 0;		//ÎÄ¼şµ±Ç°ËùÔÚµÄĞĞÊıË÷Òı
-	private File file;				//txtÎÄ¼ş
+	public final static int LESSON_LINE = 100;				//æ¯æ®µå­—èŠ‚å¤§å°
+	public final static int NEXT_LESSON = 1;				//ä¸‹ä¸€æ®µ
+	public final static int PREV_LESSON = 2;				//ä¸Šä¸€æ®µ
+	public final static String CHINA_CN = "[^\\x00-xff]";	//åŒå­—èŠ‚å­—ç¬¦
+	public final static String CHINA_EN = "[\\x00-xff]";	//å•å­—èŠ‚å­—ç¬¦
+	public final static String DOU_CHAR = "XX";				//åŒå­—èŠ‚æ›¿æ¢å­—ç¬¦
+	public final static String DOU_SINGLE_CHAR = "X";		//åŒå­—èŠ‚ä¸­è½å•å­—èŠ‚æ›¿æ¢å­—ç¬¦
+	public final static String DOU_NULL_CHAR = "";			//åŒå­—èŠ‚ä¸­è½å•å­—èŠ‚æ›¿æ¢å­—ç¬¦			
+	public final static String SINGLE_CHAR = "A";			//å•å­—èŠ‚æ›¿æ¢å­—ç¬¦
+	private int fileLine = 0;		//æ–‡ä»¶æ€»å¤§å°
+	private int thisLine = 0;		//æ–‡ä»¶å½“å‰æ®µçš„è¡Œæ•°ç´¢å¼•
+	private int prevLine = 0;		//æ–‡ä»¶å‰ä¸€æ®µçš„è¡Œæ•°ç´¢å¼•
+	private int nowLine = 0;		//æ–‡ä»¶å½“å‰æ‰€åœ¨çš„è¡Œæ•°ç´¢å¼•
+	private File file;				//txtæ–‡ä»¶
 	public EBook(File file){
 		setFile(file);
 		setFileLine(getFileLine(file));
 	}
 	
 	/**
-	 * È¡ÎÄ¼ş×ÜĞĞÊı
+	 * å–æ–‡ä»¶æ€»è¡Œæ•°
 	 * @param file
 	 * @return
 	 */
 	public int getFileLine(File file){
 		int i = 0;
 		try {
-			//¶ÁÈ¡ÎÄ¼ş
+			//è¯»å–æ–‡ä»¶
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while(br.readLine()!=null){
 				i++;

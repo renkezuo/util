@@ -16,26 +16,26 @@ public class SplitTool {
 	}
 	
 	public static Map<String,String[][]> assemble(){
-		//È¡µÃ£¬Ñ§Ğ£gradeName£¬Äê¼¶
+		//å–å¾—ï¼Œå­¦æ ¡gradeNameï¼Œå¹´çº§
 		//select * from ls_choice_exam_task where task_id=''
 		
 		//select * from ls_limit_condition;
 		//splitCnt , level1 ,level2 ,level3,level4,subName
 		
-		//Ñ¡¿ÎÑ§ÉúÊı choiceCnt
+		//é€‰è¯¾å­¦ç”Ÿæ•° choiceCnt
 		// select count(*) from ls_choice_exam_task_student where choiceSubs  like '%,x,%' and taskId=''
 		
-		//Äê¼¶Ñ§ÉúIDs list
+		//å¹´çº§å­¦ç”ŸIDs list
 		// select distinct userId from ls_klass a join ls_klass_student b on a.classId=b.classId
 		//  where a.gradeId='12' and a.type='1' and a.schoolId = ''
 		
-		//Ñ§Éú×ÜÊıallCnt
+		//å­¦ç”Ÿæ€»æ•°allCnt
 		//allCnt = list.size();
 		
-		//Ñ§¿¼Ñ§ÉúÊıbaseCnt
+		//å­¦è€ƒå­¦ç”Ÿæ•°baseCnt
 		//baseCnt = allCnt - choiceCnt;
 		
-		//²éÑ¯Ñ§ÉúĞÅÏ¢£¬µ¼³öÑ§Éú»ù´¡ĞÅÏ¢
+		//æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯ï¼Œå¯¼å‡ºå­¦ç”ŸåŸºç¡€ä¿¡æ¯
 		//userBaseContext.findUserBaseByUserId(list.toArray(new Long[list.size()]));
 		int baseCnt = 208;
 		int splitCnt = 50;
@@ -43,14 +43,14 @@ public class SplitTool {
 		int level2 = 90;
 		int level3 = 90;
 		int level4 = 32;
-		String gradeName = "¸ßÒ»";
-		String subName = "ÎïÀí";
+		String gradeName = "é«˜ä¸€";
+		String subName = "ç‰©ç†";
 		Map<String,String[][]> map = new HashMap<>();
-		map.put("level1",splitClass(level1,splitCnt,gradeName,subName,"Ñ¡¿¼"));
-		map.put("level2",splitClass(level2,splitCnt,gradeName,subName,"Ñ¡¿¼"));
-		map.put("level3",splitClass(level3,splitCnt,gradeName,subName,"Ñ¡¿¼"));
-		map.put("level4",splitClass(level4,splitCnt,gradeName,subName,"Ñ¡¿¼"));
-		map.put("level5",splitClass(baseCnt,splitCnt,gradeName,subName,"Ñ§¿¼"));
+		map.put("level1",splitClass(level1,splitCnt,gradeName,subName,"é€‰è€ƒ"));
+		map.put("level2",splitClass(level2,splitCnt,gradeName,subName,"é€‰è€ƒ"));
+		map.put("level3",splitClass(level3,splitCnt,gradeName,subName,"é€‰è€ƒ"));
+		map.put("level4",splitClass(level4,splitCnt,gradeName,subName,"é€‰è€ƒ"));
+		map.put("level5",splitClass(baseCnt,splitCnt,gradeName,subName,"å­¦è€ƒ"));
 		return map;
 	}
 	
@@ -59,7 +59,7 @@ public class SplitTool {
 			int last = levelCnt % splitCnt > 0 ? 1 : 0;
 			String[][] classes = new String[levelCnt/splitCnt + last][2];
 			for(int i = 0;i<classes.length;i++){
-				classes[i][0] = pre_fix + gradeName + subName + (i+1) +"°à";
+				classes[i][0] = pre_fix + gradeName + subName + (i+1) +"ç­";
 				int surplus = levelCnt - splitCnt * i ;
 				classes[i][1] = ""+(surplus > splitCnt ? splitCnt : surplus);
 			}
@@ -74,7 +74,7 @@ public class SplitTool {
 			String key = it.next();
 			String[][] classes = map.get(key);
 			for(int i=0;i<classes.length;i++){
-				System.out.println(key+"{"+"°à¼¶Ãû³Æ:"+classes[i][0]+",Ñ§ÉúÈËÊı:"+classes[i][1]+"}");
+				System.out.println(key+"{"+"ç­çº§åç§°:"+classes[i][0]+",å­¦ç”Ÿäººæ•°:"+classes[i][1]+"}");
 			}
 		}
 	}

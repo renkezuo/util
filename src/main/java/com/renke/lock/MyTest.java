@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class MyTest {
 	final ReadWriteLock rwl = new ReentrantReadWriteLock();
-	//²âÊÔ3¸ö¶ÁËøÖ®ºó£¬Ìí¼ÓÒ»¸öĞ´Ëø£¬Ğ´ËøÌí¼ÓÖ®ºó£¬Í¬Ò»Ê±¼äÌí¼Ó5¸ö¶ÁËø
+	//æµ‹è¯•3ä¸ªè¯»é”ä¹‹åï¼Œæ·»åŠ ä¸€ä¸ªå†™é”ï¼Œå†™é”æ·»åŠ ä¹‹åï¼ŒåŒä¸€æ—¶é—´æ·»åŠ 5ä¸ªè¯»é”
 	class Reader implements Runnable{
 		@Override
 		public void run() {
@@ -112,8 +112,8 @@ public class MyTest {
 		System.out.println(b);
 		System.out.println(1>>>16);
 //		Thread thread = Thread.currentThread();
-//		LockSupport.unpark(thread);// ÊÍ·ÅĞí¿É
-//		LockSupport.park();// »ñÈ¡Ğí¿É
+//		LockSupport.unpark(thread);// é‡Šæ”¾è®¸å¯
+//		LockSupport.park();// è·å–è®¸å¯
 //		System.out.println("b");
 	}
 

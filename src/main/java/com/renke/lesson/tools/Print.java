@@ -22,7 +22,7 @@ public class Print {
 			Course[] courses = klass.getCourses();
 			for(int index=0;index < courses.length;index ++){
 				TeacherBak teacher =  klass.getTeachers()[index];
-				logger.info("°à¼¶:{},¿ÆÄ¿:{},ÀÏÊ¦:{},Ê£Óà¿ÎÊ±:{}",klass.getName(),courses[index].getName()
+				logger.info("ç­çº§:{},ç§‘ç›®:{},è€å¸ˆ:{},å‰©ä½™è¯¾æ—¶:{}",klass.getName(),courses[index].getName()
 						,teacher.getName(),klass.getCourseSurplusCounts()[index]);
 			}
 		}
@@ -33,7 +33,7 @@ public class Print {
 		for(long i = 1;i< courses.length+1;i++){
 			TeacherBak[] teachers = courseTeachers.get(i);
 			for(TeacherBak teacher: teachers){
-				logger.info("ÈÕÆÚ:{},ÀÏÊ¦:{},¿ÆÄ¿:{},¿É°ó¶¨°à¼¶:{},µ±ÈÕÒÑ·ÖÅä¿Î³ÌÊı:{}"
+				logger.info("æ—¥æœŸ:{},è€å¸ˆ:{},ç§‘ç›®:{},å¯ç»‘å®šç­çº§:{},å½“æ—¥å·²åˆ†é…è¯¾ç¨‹æ•°:{}"
 						,teacher.getDay(),teacher.getName(),teacher.getCourse().getName()
 						,teacher.getSurplusClass(),teacher.getUseLesson());
 			}

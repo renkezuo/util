@@ -31,7 +31,7 @@ public class MathHelper {
 			System.out.println(goodList.size());
 			goodList.remove(i);
 			System.out.println(goodList.size());
-			System.out.println("removeÁËÂğ£¿");
+			System.out.println("removeäº†å—ï¼Ÿ");
 		}
 //		goodList.remove(9);
 //		goodList.remove(8);
@@ -43,7 +43,7 @@ public class MathHelper {
 //		goodList.remove(2);
 //		goodList.remove(0);
 		
-		System.out.println("goodListµÄ´óĞ¡ Îª"+goodList.size());
+		System.out.println("goodListçš„å¤§å° ä¸º"+goodList.size());
 
 
 	}

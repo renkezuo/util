@@ -9,10 +9,10 @@ import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * 
- * ¹¦ÄÜ¸ÅÒª£º EndPointÀàĞÍµÄ¶ÓÁĞ
+ * åŠŸèƒ½æ¦‚è¦ï¼š EndPointç±»å‹çš„é˜Ÿåˆ—
  * 
  * @author linbingwen
- * @since 2016Äê1ÔÂ11ÈÕ
+ * @since 2016å¹´1æœˆ11æ—¥
  */
 public abstract class EndPoint {
 
@@ -44,7 +44,7 @@ public abstract class EndPoint {
 	}
 
 	/**
-	 * ¹Ø±ÕchannelºÍconnection¡£²¢·Ç±ØĞë£¬ÒòÎªÒşº¬ÊÇ×Ô¶¯µ÷ÓÃµÄ¡£
+	 * å…³é—­channelå’Œconnectionã€‚å¹¶éå¿…é¡»ï¼Œå› ä¸ºéšå«æ˜¯è‡ªåŠ¨è°ƒç”¨çš„ã€‚
 	 * 
 	 * @throws IOException
 	 * @throws TimeoutException 

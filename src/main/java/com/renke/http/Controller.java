@@ -31,7 +31,7 @@ public class Controller {
 	}
 	
 	/***
-	 * ¸ù¾İURL½âÎöhost,ip,port,uri£¬Í¬Ê±½«msg·â×°µ½HTTPHeaderÖĞ
+	 * æ ¹æ®URLè§£æhost,ip,port,uriï¼ŒåŒæ—¶å°†msgå°è£…åˆ°HTTPHeaderä¸­
 	 * 
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
@@ -86,9 +86,9 @@ public class Controller {
 	public HTTP readData(String url,String msg) throws Exception{
 		HTTP http = getHTTP(url, msg);
 		logger.info("{}  start at {}",url,new Date());
-		//·¢ËÍHTTPÇëÇó
+		//å‘é€HTTPè¯·æ±‚
 		ParseHTTPChannel.sendGetMessage(socketChannel, http);
-		//½âÎöÏìÓ¦£¬·µ»Ø½á¹û±£´æµ½HTTP¶ÔÏó
+		//è§£æå“åº”ï¼Œè¿”å›ç»“æœä¿å­˜åˆ°HTTPå¯¹è±¡
 		ParseHTTPChannel.parseResponse(socketChannel,  http);
 		logger.info("{}  end at {}",url,new Date());
 		return http;
@@ -104,7 +104,7 @@ public class Controller {
 		}
 	}
 	
-	//²âÊÔÎÄ¼şÉÏ´«ºÍÏÂÔØ£¬ÔÚ¶Ï¿ªservletµÄÇé¿öÏÂ£¬»á³öÏÖÊ²Ã´ÎÊÌâ¡£
+	//æµ‹è¯•æ–‡ä»¶ä¸Šä¼ å’Œä¸‹è½½ï¼Œåœ¨æ–­å¼€servletçš„æƒ…å†µä¸‹ï¼Œä¼šå‡ºç°ä»€ä¹ˆé—®é¢˜ã€‚
 	public static void main(String[] args) throws Exception {
 		String request = "GET /mytest/myTest.htm HTTP/1.1\r\n"
 				+ "Host: 127.0.0.1:9090\r\n"

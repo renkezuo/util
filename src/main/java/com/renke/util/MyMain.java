@@ -18,7 +18,7 @@ public class MyMain {
 		
 		Calendar c = Calendar.getInstance();
 		c.set(2017, 2, 12);
-		//ÖÜÈÕËã×öÒ»ÖÜµÚÒ»Ìì
+		//å‘¨æ—¥ç®—åšä¸€å‘¨ç¬¬ä¸€å¤©
 //		c.add(Calendar.DAY_OF_MONTH, -1);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 		System.out.println(c.getTime());

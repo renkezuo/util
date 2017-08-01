@@ -15,11 +15,11 @@ public class StreamTest {
 			double d = Math.random() * 1000;
 			list.add(d + "");
 		}
-		long start = System.nanoTime();// »ñÈ¡ÏµÍ³¿ªÊ¼ÅÅĞòµÄÊ±¼äµã
+		long start = System.nanoTime();// è·å–ç³»ç»Ÿå¼€å§‹æ’åºçš„æ—¶é—´ç‚¹
 		int count = (int) ((Stream<String>) list.stream().parallel()).sorted().count();
 		System.out.println(count);
-		long end = System.nanoTime();// »ñÈ¡ÏµÍ³½áÊøÅÅĞòµÄÊ±¼äµã
-		long ms = TimeUnit.NANOSECONDS.toMillis(end - start);// µÃµ½²¢ĞĞÅÅĞòËùÓÃµÄÊ±¼ä
+		long end = System.nanoTime();// è·å–ç³»ç»Ÿç»“æŸæ’åºçš„æ—¶é—´ç‚¹
+		long ms = TimeUnit.NANOSECONDS.toMillis(end - start);// å¾—åˆ°å¹¶è¡Œæ’åºæ‰€ç”¨çš„æ—¶é—´
 		System.out.println(ms + "ms");
 	}
 
@@ -29,11 +29,11 @@ public class StreamTest {
 			double d = Math.random() * 1000;
 			list.add(d + "");
 		}
-		long start = System.nanoTime();// »ñÈ¡ÏµÍ³¿ªÊ¼ÅÅĞòµÄÊ±¼äµã
+		long start = System.nanoTime();// è·å–ç³»ç»Ÿå¼€å§‹æ’åºçš„æ—¶é—´ç‚¹
 		int count = (int) ((Stream<String>) list.stream().sequential()).sorted().count();
 		System.out.println(count);
-		long end = System.nanoTime();// »ñÈ¡ÏµÍ³½áÊøÅÅĞòµÄÊ±¼äµã
-		long ms = TimeUnit.NANOSECONDS.toMillis(end - start);// µÃµ½´®ĞĞÅÅĞòËùÓÃµÄÊ±¼ä
+		long end = System.nanoTime();// è·å–ç³»ç»Ÿç»“æŸæ’åºçš„æ—¶é—´ç‚¹
+		long ms = TimeUnit.NANOSECONDS.toMillis(end - start);// å¾—åˆ°ä¸²è¡Œæ’åºæ‰€ç”¨çš„æ—¶é—´
 		System.out.println(ms + "ms");
 	}
 	
@@ -58,7 +58,7 @@ public class StreamTest {
 			MyCard mycard = new MyCard(""+i,"card"+d);
 			list.add(mycard);
 		}
-		//²»»áĞŞ¸Älist¶ÔÏóµÄÊı¾İ£¬ÎªÊ²Ã´£¿
+		//ä¸ä¼šä¿®æ”¹listå¯¹è±¡çš„æ•°æ®ï¼Œä¸ºä»€ä¹ˆï¼Ÿ
 		list.stream().map(v -> {
 			v.cardName = "mychange";
 			return v;

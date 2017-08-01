@@ -24,7 +24,7 @@ public class Controller {
 	final static Logger logger = LoggerFactory.getLogger(Controller.class);
 	
 	/**
-	 * ¶ÁÈ¡urlÊı¾İ£¬Ğ´Èëµ½Ò»¸öÎÄ¼ş
+	 * è¯»å–urlæ•°æ®ï¼Œå†™å…¥åˆ°ä¸€ä¸ªæ–‡ä»¶
 	 * @param url
 	 * @param filePath
 	 */
@@ -42,7 +42,7 @@ public class Controller {
 	}
 	
 	/**
-	 * ²âÊÔ¶ÁÈ¡Ä¿Â¼¹¦ÄÜ
+	 * æµ‹è¯•è¯»å–ç›®å½•åŠŸèƒ½
 	 * @param http
 	 * @param ws
 	 * @throws UnknownHostException 
@@ -66,11 +66,11 @@ public class Controller {
 	}
 	
 	/**
-	 * TODO:¼ÓÈëºÏ²¢ÕÂ½ÚµÄ·½·¨
-	 * TODO:ÊÇ·ñ¿ÉÒÔ½«²éÑ¯¹¦ÄÜ·Å½øÀ´
-	 * TODO:ÓÅ»¯[¿ÉÒÔ²»×ö]
+	 * TODO:åŠ å…¥åˆå¹¶ç« èŠ‚çš„æ–¹æ³•
+	 * TODO:æ˜¯å¦å¯ä»¥å°†æŸ¥è¯¢åŠŸèƒ½æ”¾è¿›æ¥
+	 * TODO:ä¼˜åŒ–[å¯ä»¥ä¸åš]
 	 * 
-	 * Ê¹ÓÃ¶àÏß³Ì×¥È¡Ğ¡Ëµ
+	 * ä½¿ç”¨å¤šçº¿ç¨‹æŠ“å–å°è¯´
 	 * 
 	 * @author renke.zuo@foxmail.com
 	 * @time 2016-09-13 10:11:58
@@ -111,7 +111,7 @@ public class Controller {
 	}
 	
 	/**
-	 * ºÏ²¢ÕÂ½Ú£¬×é×°ÎªÈ«Êé
+	 * åˆå¹¶ç« èŠ‚ï¼Œç»„è£…ä¸ºå…¨ä¹¦
 	 * @param ws
 	 * @param dir
 	 * @throws IOException
@@ -135,7 +135,7 @@ public class Controller {
 	}
 	
 	/**
-	 * ºÏ²¢Ä¿Â¼ÖĞµÄÎÄ¼ş£¬×é×°µ½savePathÎÄ¼şÖĞ
+	 * åˆå¹¶ç›®å½•ä¸­çš„æ–‡ä»¶ï¼Œç»„è£…åˆ°savePathæ–‡ä»¶ä¸­
 	 * @param ws
 	 * @param dir
 	 * @throws IOException
@@ -163,7 +163,7 @@ public class Controller {
 	}
 	
 	/**
-	 * ½«×Ö½ÚĞ´ÈëÎÄ¼ş
+	 * å°†å­—èŠ‚å†™å…¥æ–‡ä»¶
 	 * @param bytes
 	 * @param filePath
 	 * @throws IOException
@@ -178,7 +178,7 @@ public class Controller {
 	public static void main(String[] args) {
 		String url = "http://www.xs.la/32_32229/";
 		Map<String,String> siteProperties = new HashMap<String,String>();
-		siteProperties.put("bookName", "··×ï");
+		siteProperties.put("bookName", "è´©ç½ª");
 		siteProperties.put("catalogUrl", url);
 		siteProperties.put("basePath", "F:/ebook/");
 		WebSiteFactory.setQu(siteProperties);

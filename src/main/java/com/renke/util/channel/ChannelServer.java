@@ -16,7 +16,7 @@ public class ChannelServer{
 		channel.bind(new InetSocketAddress(8080));
 		
 		Selector selector = Selector.open();
-		//ÊÇ·ñ×èÈû
+		//æ˜¯å¦é˜»å¡
 		channel.configureBlocking(false);
 		channel.register(selector, (SelectionKey.OP_READ | SelectionKey.OP_WRITE));
 		

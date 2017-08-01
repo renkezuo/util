@@ -10,8 +10,8 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 public class PICHelper {
-    // ±ğÈË¸øµÄÁ÷£¬Ö»²Ù×÷£¬²»¹ÜÀí
-	// ´ò¿ªÁ÷ºÍ¹Ø±ÕÁ÷£¬Çëµ÷ÓÃ·½´¦Àí£¬·½·¨²»´¦Àí
+    // åˆ«äººç»™çš„æµï¼Œåªæ“ä½œï¼Œä¸ç®¡ç†
+	// æ‰“å¼€æµå’Œå…³é—­æµï¼Œè¯·è°ƒç”¨æ–¹å¤„ç†ï¼Œæ–¹æ³•ä¸å¤„ç†
 	public static void resizeImage(InputStream is, OutputStream os, double percent, String format) throws IOException {
 		BufferedImage prevImage = ImageIO.read(is);
 		double width = prevImage.getWidth();
@@ -19,7 +19,7 @@ public class PICHelper {
 		int newWidth = (int) (width * (percent / 100));
 		int newHeight = (int) (height * (percent / 100));
 		BufferedImage image = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_BGR);
-		// Í¼Æ¬ÉÏÏÂÎÄ£¬Àí½âÎª»­²¼
+		// å›¾ç‰‡ä¸Šä¸‹æ–‡ï¼Œç†è§£ä¸ºç”»å¸ƒ
 		Graphics graphics = image.createGraphics();
 		graphics.drawImage(prevImage, 0, 0, newWidth, newHeight, null);
 		ImageIO.write(image, format, os);
@@ -32,7 +32,7 @@ public class PICHelper {
 //		int newWidth = (int) (width * (percent / 100));
 //		int newHeight = (int) (height * (percent / 100));
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
-		// Í¼Æ¬ÉÏÏÂÎÄ£¬Àí½âÎª»­²¼
+		// å›¾ç‰‡ä¸Šä¸‹æ–‡ï¼Œç†è§£ä¸ºç”»å¸ƒ
 		Graphics graphics = image.createGraphics();
 		graphics.drawImage(prevImage, 0, 0, width, height, null);
 		ImageIO.write(image, format, os);

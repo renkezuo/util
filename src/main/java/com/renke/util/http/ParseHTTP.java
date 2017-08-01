@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 import com.renke.exception.ParseHTTPException;
 import com.renke.util.StringHex;
 /**
- * ¸ºÔğ¸ù¾İURL²úÉúrequest±¨ÎÄ
- * ¸ù¾İ·µ»ØÊı×é²úÉúresponse±¨ÎÄ
+ * è´Ÿè´£æ ¹æ®URLäº§ç”ŸrequestæŠ¥æ–‡
+ * æ ¹æ®è¿”å›æ•°ç»„äº§ç”ŸresponseæŠ¥æ–‡
  * @author renke.zuo@foxmail.com
  * @time 2016-08-15 10:07:27
  */
@@ -68,7 +68,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ¸ù¾İurl×é×°request±¨ÎÄ
+	 * æ ¹æ®urlç»„è£…requestæŠ¥æ–‡
 	 * @param url
 	 * @return
 	 * @throws ParseHTTPException
@@ -97,7 +97,7 @@ public class ParseHTTP {
 	
 	
 	/**
-	 * ½âÎöÏìÓ¦Í·
+	 * è§£æå“åº”å¤´
 	 * @param sc
 	 * @param response
 	 * @param defaultBuf
@@ -119,9 +119,9 @@ public class ParseHTTP {
 		byte[] surplus = null;
 		while((len = sc.read(defaultBuf)) > 0 ){
 			defaultBuf.flip();
-			//»ñÈ¡requestÍ·²¿Êı¾İ£¬½«½âÎöÊ£ÏÂµÄÊı¾İ·µ»Ø
+			//è·å–requestå¤´éƒ¨æ•°æ®ï¼Œå°†è§£æå‰©ä¸‹çš„æ•°æ®è¿”å›
 			for(int i=0;i< len;i = i+1){
-				//¿ÕĞĞÖ®Ç°£¬httpÇëÇóµÄÍ·ĞÅÏ¢
+				//ç©ºè¡Œä¹‹å‰ï¼Œhttpè¯·æ±‚çš„å¤´ä¿¡æ¯
 				if(i < len - 1 && buf[i]=='\r' && buf[i+1]=='\n' && !hasSpace){
 					int tmpLen = i- beginIndex;
 					if(tmpLen == 0){
@@ -143,13 +143,13 @@ public class ParseHTTP {
 					}
 					i = i + 1;
 					beginIndex = i+1;
-					//³öÏÖ¿ÕĞĞ
+					//å‡ºç°ç©ºè¡Œ
 					if(i < len - 2 && buf[i+1] =='\r' && buf[i+2]=='\n'){
 						hasSpace = true;
 						i = i+2;
 						beginIndex = i+1;
 						setResponse(response);
-						//Ê£ÓàÊı¾İ£¬ĞèÒª½»¸øÏÂÒ»»·½Ú´¦Àí
+						//å‰©ä½™æ•°æ®ï¼Œéœ€è¦äº¤ç»™ä¸‹ä¸€ç¯èŠ‚å¤„ç†
 						if(beginIndex < len){
 							surplus = new byte[len-beginIndex];
 							System.arraycopy(buf, beginIndex, surplus, 0, surplus.length);
@@ -165,7 +165,7 @@ public class ParseHTTP {
 	
 	
 	/***
-	 * ½âÎöÏìÓ¦ÄÚÈİ£¬´òÓ¡
+	 * è§£æå“åº”å†…å®¹ï¼Œæ‰“å°
 	 * @param sc
 	 * @param surplus
 	 * @param response
@@ -186,9 +186,9 @@ public class ParseHTTP {
 		while(sc.read(defaultBuf) > 0 ){
 			defaultBuf.flip();
 			if(response.isChunked()){
-				//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-				//Êı¾İÈ¡³öÀ´£¬¸ù¾İ±àÂë½âÂë
-				//´æÔÚÊ£ÓàÄÚÈİ
+				//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+				//æ•°æ®å–å‡ºæ¥ï¼Œæ ¹æ®ç¼–ç è§£ç 
+				//å­˜åœ¨å‰©ä½™å†…å®¹
 				if(surplus != null && length == 0){
 					int i = 1;
 					beginIndex = 0;
@@ -198,13 +198,13 @@ public class ParseHTTP {
 							length = StringHex.toInt(new String(surplus,beginIndex,i-1), StringHex.TYPE_HEX);
 							beginIndex = i + 1;
 							if(length == 0){
-								//·Ö¶ÎÊı×éÎª0£¬±íÊ¾½áÊø
+								//åˆ†æ®µæ•°ç»„ä¸º0ï¼Œè¡¨ç¤ºç»“æŸ
 								isEnd = true;
 								break;
 							}
 							i = i + 1;
 							if(surplus.length - i >= length){
-								//´Ë´¦Íê³ÉÒ»¸ö¶Î
+								//æ­¤å¤„å®Œæˆä¸€ä¸ªæ®µ
 								baos.write(surplus,i,length);
 								writeData(baos, response.isGzip(),response.getCharset());
 								baos.reset();
@@ -217,12 +217,12 @@ public class ParseHTTP {
 									break;
 								}
 								beginIndex = i;
-								//¼ÌĞø¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+								//ç»§ç»­è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 								continue;
 							}else{
 								baos.write(surplus,i,surplus.length-i);
 								length = length - (surplus.length-i);
-								//Í£Ö¹¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+								//åœæ­¢è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 								surplus = null;
 								break;
 							}
@@ -238,7 +238,7 @@ public class ParseHTTP {
 					if(length > chunkData.length){
 						length = length - chunkData.length;
 						baos.write(chunkData);
-						//ÖØĞÂ»ñÈ¡ÍøÂçÊı¾İ
+						//é‡æ–°è·å–ç½‘ç»œæ•°æ®
 						continue;
 					}else if (length <= chunkData.length && length >= chunkData.length - 2){
 						baos.write(chunkData,0,length);
@@ -261,7 +261,7 @@ public class ParseHTTP {
 						beginIndex = i;
 						length = 0;
 						while(i<chunkData.length){
-							//·Ö¶ÎÊı¾İ£¬ÊÇÊ²Ã´¸ñÊ½£¿
+							//åˆ†æ®µæ•°æ®ï¼Œæ˜¯ä»€ä¹ˆæ ¼å¼ï¼Ÿ
 							if(prev=='\r' && chunkData[i] == '\n'){
 								prev = chunkData[i];
 								length = StringHex.toInt(new String(chunkData,beginIndex,i-beginIndex-1), StringHex.TYPE_HEX);
@@ -272,7 +272,7 @@ public class ParseHTTP {
 								i = i + 1;
 								beginIndex = i;
 								if(chunkData.length - beginIndex > length){
-									//´Ë´¦Íê³ÉÒ»¸ö¶Î
+									//æ­¤å¤„å®Œæˆä¸€ä¸ªæ®µ
 									baos.write(chunkData,beginIndex,length);
 									writeData(baos, response.isGzip(),response.getCharset());
 									baos.reset();
@@ -297,10 +297,10 @@ public class ParseHTTP {
 						}
 					}
 				}
-			//·Ç·Ö¶Î´¦Àí
+			//éåˆ†æ®µå¤„ç†
 			}else{
-				//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-				//Êı¾İÈ¡³öÀ´£¬½âÂë
+				//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+				//æ•°æ®å–å‡ºæ¥ï¼Œè§£ç 
 				if(length == 0){
 					length = response.getLength();
 				}
@@ -325,7 +325,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ½«response.headerÄÚÈİ£¬Ò»Ò»ÉèÖÃµ½response¶ÔÓ¦µÄ³ÉÔ±ÉÏ
+	 * å°†response.headerå†…å®¹ï¼Œä¸€ä¸€è®¾ç½®åˆ°responseå¯¹åº”çš„æˆå‘˜ä¸Š
 	 * @param response
 	 * @author renke.zuo@foxmail.com
 	 * @time 2016-08-22 17:01:31
@@ -334,12 +334,12 @@ public class ParseHTTP {
 		
 		response.setHttpStatus(response.getHeader().get("HTTP-Status"));
 		
-		//½âÎö³öĞèÒªµÄ±¨ÎÄĞÅÏ¢
-		//ÊÇ·ñ·Ö¶Î
+		//è§£æå‡ºéœ€è¦çš„æŠ¥æ–‡ä¿¡æ¯
+		//æ˜¯å¦åˆ†æ®µ
 		if(response.getHeader().get("Transfer-Encoding") != null){
 			response.setChunked("chunked".equals(response.getHeader().get("Transfer-Encoding")));
 		}
-		//»ñÈ¡´«Êä±àÂë¸ñÊ½
+		//è·å–ä¼ è¾“ç¼–ç æ ¼å¼
 		String contentType = response.getHeader().get("Content-Type");
 		String[] tmps = contentType.split("; ");
 		for(int c = 1;c<tmps.length;c++){
@@ -349,11 +349,11 @@ public class ParseHTTP {
 				break;
 			}
 		}
-		//ÓÃÓÚÅĞ¶ÏÊÇ·ñÊÇgzip¸ñÊ½´«Êä
+		//ç”¨äºåˆ¤æ–­æ˜¯å¦æ˜¯gzipæ ¼å¼ä¼ è¾“
 		response.setEncoding(response.getHeader().get("Content-Encoding"));
 		response.setGzip("gzip".equals(response.getEncoding()));
 		
-		//·Ö¶Î´«ÊäÊ±£¬ÎŞ³¤¶È
+		//åˆ†æ®µä¼ è¾“æ—¶ï¼Œæ— é•¿åº¦
 		if(response.getHeader().get("Content-Length")!=null){
 			response.setLength(Integer.parseInt(response.getHeader().get("Content-Length").trim()));
 		}

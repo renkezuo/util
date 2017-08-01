@@ -1,7 +1,7 @@
 package com.renke.lesson.pojo;
 
 public class Teacher2 extends Base{
-	//³£Á¿
+	//å¸¸é‡
 	private int maxLessonUnit;
 	private Course2 course;
 	private volatile int useLessonUnit;

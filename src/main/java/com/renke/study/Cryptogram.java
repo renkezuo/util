@@ -120,9 +120,9 @@ public class Cryptogram {
 	//	int n=(int)(s.charAt(1))+(int)(s.charAt(0));
 		String e = encrypt("abcsdf  asdf");
 		// System.out.println((int)(s.charAt(0)));
-		System.out.println("¼ÓÃÜ£º"+e);
+		System.out.println("åŠ å¯†ï¼š"+e);
 		String d = decrypt(e);
-		System.out.println("½âÃÜ£º"+d);
+		System.out.println("è§£å¯†ï¼š"+d);
 		// System.out.println(Integer.toHexString(n));
 	}
 

@@ -7,8 +7,8 @@ public class StringHex {
 	public final static int TYPE_OCTAL = 8;
 	public final static int TYPE_BINARY = 2;
 	/***
-	 * ½«×Ö·û´®±àÂëÎª16½øÖÆÊı
-	 * È¡Ã¿¸ö×Ö·û£¬
+	 * å°†å­—ç¬¦ä¸²ç¼–ç ä¸º16è¿›åˆ¶æ•°
+	 * å–æ¯ä¸ªå­—ç¬¦ï¼Œ
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-08 13:48:27
@@ -16,15 +16,15 @@ public class StringHex {
 	 * @return
 	 */
 	public static String encode(String str) {
-		// ¸ù¾İÄ¬ÈÏ±àÂë»ñÈ¡×Ö½ÚÊı×é
+		// æ ¹æ®é»˜è®¤ç¼–ç è·å–å­—èŠ‚æ•°ç»„
 		byte[] bytes = str.getBytes();
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
-		// ½«×Ö½ÚÊı×éÖĞÃ¿¸ö×Ö½Ú²ğ½â³É2Î»16½øÖÆÕûÊı
+		// å°†å­—èŠ‚æ•°ç»„ä¸­æ¯ä¸ªå­—èŠ‚æ‹†è§£æˆ2ä½16è¿›åˆ¶æ•´æ•°
 		for (int i = 0; i < bytes.length; i++) {
-			//11110000  >> 4   1111  ¸ßËÄÎ»×öÓëÔËËã£¬½«½á¹ûÒÆ¶¯ÖÁµÚËÄÎ»
-			//00001111    µÍËÄÎ»×öÓëÔËËã
-			//Ò»¸ö×Ö½Ú²ğ³ÉÁËÁ½¸ö16½øÖÆÊı
-			//charAt(x)ÆğÂë±ÈtoHexString(x);¿ì4±¶¡£
+			//11110000  >> 4   1111  é«˜å››ä½åšä¸è¿ç®—ï¼Œå°†ç»“æœç§»åŠ¨è‡³ç¬¬å››ä½
+			//00001111    ä½å››ä½åšä¸è¿ç®—
+			//ä¸€ä¸ªå­—èŠ‚æ‹†æˆäº†ä¸¤ä¸ª16è¿›åˆ¶æ•°
+			//charAt(x)èµ·ç æ¯”toHexString(x);å¿«4å€ã€‚
 			sb.append(hexString.charAt((bytes[i] & 0xf0) >> 4));
 			sb.append(hexString.charAt(bytes[i] & 0x0f));
 		}
@@ -32,7 +32,7 @@ public class StringHex {
 	}
 	
 	/**
-	 * ½«16½øÖÆ×Ö·û´®£¬½âÎöÎª×Ö·û´®
+	 * å°†16è¿›åˆ¶å­—ç¬¦ä¸²ï¼Œè§£æä¸ºå­—ç¬¦ä¸²
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-08 13:57:54
@@ -43,7 +43,7 @@ public class StringHex {
 		bytes = bytes.toUpperCase();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(
 				bytes.length() / 2);
-		// ½«Ã¿2Î»16½øÖÆÕûÊı×é×°³ÉÒ»¸ö×Ö½Ú
+		// å°†æ¯2ä½16è¿›åˆ¶æ•´æ•°ç»„è£…æˆä¸€ä¸ªå­—èŠ‚
 		for (int i = 0; i < bytes.length(); i += 2){
 			baos.write(
 					(hexString.indexOf(bytes.charAt(i)) << 4 | hexString.indexOf(bytes.charAt(i + 1)))
@@ -53,12 +53,12 @@ public class StringHex {
 	}
 	
 	/**
-	 * ½«×Ö·û´®×ª»»ÎªÊ®½øÖÆ
+	 * å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºåè¿›åˆ¶
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-08 15:06:03
 	 * @param hexString
-	 * @param type[×Ö·û´®´ú±íµÄÀàĞÍ(¶ş½øÖÆ¡¢°Ë½øÖÆ¡¢Ê®Áù½øÖÆ)]
+	 * @param type[å­—ç¬¦ä¸²ä»£è¡¨çš„ç±»å‹(äºŒè¿›åˆ¶ã€å…«è¿›åˆ¶ã€åå…­è¿›åˆ¶)]
 	 * @return
 	 */
 	public static int toInt(String hexString,int type){
@@ -66,7 +66,7 @@ public class StringHex {
 	}
 	
 	/**
-	 * ½«value×ª»»Îª¶ÔÓ¦ÀàĞÍµÄ×Ö·û´®
+	 * å°†valueè½¬æ¢ä¸ºå¯¹åº”ç±»å‹çš„å­—ç¬¦ä¸²
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-08 15:09:15

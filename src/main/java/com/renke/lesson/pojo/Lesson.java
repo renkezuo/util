@@ -1,7 +1,7 @@
 package com.renke.lesson.pojo;
 
 /**
- * ÈÕË÷Òý[µÚ¼¸Ìì]£¬½ÚË÷Òý[µÚ¼¸½Ú]£¬¿ÆÄ¿£¬ÀÏÊ¦£¬°à¼¶
+ * æ—¥ç´¢å¼•[ç¬¬å‡ å¤©]ï¼ŒèŠ‚ç´¢å¼•[ç¬¬å‡ èŠ‚]ï¼Œç§‘ç›®ï¼Œè€å¸ˆï¼Œç­çº§
  * 
  * @author Z.R.K
  * @time 2017-04-07 14:03:25

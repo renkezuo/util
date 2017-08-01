@@ -2,45 +2,45 @@ package com.renke.study;
 
 import java.io.IOException;
 
-//¶àÏß³Ì±à³Ì
+//å¤šçº¿ç¨‹ç¼–ç¨‹
 public class MultiThread {
 	public static void main(String args[]) {
-		System.out.println("ÎÒÊÇÖ÷Ïß³Ì!");
-		// ÏÂÃæ´´½¨Ïß³ÌÊµÀıthread1
+		System.out.println("æˆ‘æ˜¯ä¸»çº¿ç¨‹!");
+		// ä¸‹é¢åˆ›å»ºçº¿ç¨‹å®ä¾‹thread1
 		ThreadUseExtends thread1 = new ThreadUseExtends();
-		// ´´½¨thread2Ê±ÒÔÊµÏÖÁËRunnable½Ó¿ÚµÄTHhreadUseRunnableÀàÊµÀıÎª²ÎÊı
+		// åˆ›å»ºthread2æ—¶ä»¥å®ç°äº†Runnableæ¥å£çš„THhreadUseRunnableç±»å®ä¾‹ä¸ºå‚æ•°
 		Thread thread2 = new Thread(new ThreadUseRunnable(), "SecondThread");
-		thread1.start();// Æô¶¯Ïß³Ìthread1Ê¹Ö®´¦ÓÚ¾ÍĞ÷×´Ì¬
-		// thread1.setPriority(6);//ÉèÖÃthread1µÄÓÅÏÈ¼¶Îª6
-		// ÓÅÏÈ¼¶½«¾ö¶¨cpu¿Õ³öÊ±£¬´¦ÓÚ¾ÍĞ÷×´Ì¬µÄÏß³ÌË­ÏÈÕ¼Áìcpu¿ªÊ¼ÔËĞĞ
-		// ÓÅÏÈ¼¶·¶Î§1µ½10,MIN_PRIORITY,MAX_PRIORITY,NORM_PAIORITY
-		// ĞÂÏß³Ì¼Ì³Ğ´´½¨ËıµÄ¸¸Ïß³ÌÓÅÏÈ¼¶,¸¸Ïß³ÌÍ¨³£ÓĞÆÕÍ¨ÓÅÏÈ¼¶¼´5NORM_PRIORITY
-		System.out.println("Ö÷Ïß³Ì½«¹ÒÆğ7Ãë!");
+		thread1.start();// å¯åŠ¨çº¿ç¨‹thread1ä½¿ä¹‹å¤„äºå°±ç»ªçŠ¶æ€
+		// thread1.setPriority(6);//è®¾ç½®thread1çš„ä¼˜å…ˆçº§ä¸º6
+		// ä¼˜å…ˆçº§å°†å†³å®šcpuç©ºå‡ºæ—¶ï¼Œå¤„äºå°±ç»ªçŠ¶æ€çš„çº¿ç¨‹è°å…ˆå é¢†cpuå¼€å§‹è¿è¡Œ
+		// ä¼˜å…ˆçº§èŒƒå›´1åˆ°10,MIN_PRIORITY,MAX_PRIORITY,NORM_PAIORITY
+		// æ–°çº¿ç¨‹ç»§æ‰¿åˆ›å»ºå¥¹çš„çˆ¶çº¿ç¨‹ä¼˜å…ˆçº§,çˆ¶çº¿ç¨‹é€šå¸¸æœ‰æ™®é€šä¼˜å…ˆçº§å³5NORM_PRIORITY
+		System.out.println("ä¸»çº¿ç¨‹å°†æŒ‚èµ·7ç§’!");
 		try {
-			Thread.sleep(7000);// Ö÷Ïß³Ì¹ÒÆğ7Ãë
+			Thread.sleep(7000);// ä¸»çº¿ç¨‹æŒ‚èµ·7ç§’
 		} catch (InterruptedException e) {
 			return;
 		}
-		System.out.println("ÓÖ»Øµ½ÁËÖ÷Ïß³Ì!");
+		System.out.println("åˆå›åˆ°äº†ä¸»çº¿ç¨‹!");
 		if (thread1.isAlive()) {
-			thread1.stop();// Èç¹ûthread1»¹´æÔÚÔòÉ±µôËû
-			System.out.println("thread1ĞİÃß¹ı³¤,Ö÷Ïß³ÌÉ±µôÁËthread1!");
+			thread1.stop();// å¦‚æœthread1è¿˜å­˜åœ¨åˆ™æ€æ‰ä»–
+			System.out.println("thread1ä¼‘çœ è¿‡é•¿,ä¸»çº¿ç¨‹æ€æ‰äº†thread1!");
 		} else
-			System.out.println("Ö÷Ïß³ÌÃ»·¢ÏÖthread1,thread1ÒÑĞÑË³ĞòÖ´ĞĞ½áÊøÁË!");
-		thread2.start();// Æô¶¯thread2
-		System.out.println("Ö÷Ïß³ÌÓÖ½«¹ÒÆğ7Ãë!");
+			System.out.println("ä¸»çº¿ç¨‹æ²¡å‘ç°thread1,thread1å·²é†’é¡ºåºæ‰§è¡Œç»“æŸäº†!");
+		thread2.start();// å¯åŠ¨thread2
+		System.out.println("ä¸»çº¿ç¨‹åˆå°†æŒ‚èµ·7ç§’!");
 		try {
-			Thread.sleep(7000);// Ö÷Ïß³Ì¹ÒÆğ7Ãë
+			Thread.sleep(7000);// ä¸»çº¿ç¨‹æŒ‚èµ·7ç§’
 		} catch (InterruptedException e) {
 			return;
 		}
-		System.out.println("ÓÖ»Øµ½ÁËÖ÷Ïß³Ì!");
+		System.out.println("åˆå›åˆ°äº†ä¸»çº¿ç¨‹!");
 		if (thread2.isAlive()) {
-			thread2.stop();// Èç¹ûthread2»¹´æÔÚÔòÉ±µôËû
-			System.out.println("thread2ĞİÃß¹ı³¤£¬Ö÷Ïß³ÌÉ±µôÁËthread2!");
+			thread2.stop();// å¦‚æœthread2è¿˜å­˜åœ¨åˆ™æ€æ‰ä»–
+			System.out.println("thread2ä¼‘çœ è¿‡é•¿ï¼Œä¸»çº¿ç¨‹æ€æ‰äº†thread2!");
 		} else
-			System.out.println("Ö÷Ïß³ÌÃ»·¢ÏÖthread2,thread2ÒÑĞÑË³ĞòÖ´ĞĞ½áÊøÁË!");
-		System.out.println("³ÌĞò½áÊø°´ÈÎÒâ¼ü¼ÌĞø!");
+			System.out.println("ä¸»çº¿ç¨‹æ²¡å‘ç°thread2,thread2å·²é†’é¡ºåºæ‰§è¡Œç»“æŸäº†!");
+		System.out.println("ç¨‹åºç»“æŸæŒ‰ä»»æ„é”®ç»§ç»­!");
 		try {
 			System.in.read();
 		} catch (IOException e) {
@@ -51,44 +51,44 @@ public class MultiThread {
 }// MultiThread
 
 class ThreadUseExtends extends Thread{
-// Í¨¹ı¼Ì³ĞThreadÀà,²¢ÊµÏÖËüµÄ³éÏó·½·¨run()
-// ÊÊµ±Ê±ºò´´½¨ÕâÒ»Thread×ÓÀàµÄÊµÀıÀ´ÊµÏÖ¶àÏß³Ì»úÖÆ
-// Ò»¸öÏß³ÌÆô¶¯ºó£¨Ò²¼´½øÈë¾ÍĞ÷×´Ì¬£©Ò»µ©»ñµÃCPU½«×Ô¶¯µ÷ÓÃËüµÄrun()·½·¨
-	ThreadUseExtends() {}// ¹¹Ôìº¯Êı
+// é€šè¿‡ç»§æ‰¿Threadç±»,å¹¶å®ç°å®ƒçš„æŠ½è±¡æ–¹æ³•run()
+// é€‚å½“æ—¶å€™åˆ›å»ºè¿™ä¸€Threadå­ç±»çš„å®ä¾‹æ¥å®ç°å¤šçº¿ç¨‹æœºåˆ¶
+// ä¸€ä¸ªçº¿ç¨‹å¯åŠ¨åï¼ˆä¹Ÿå³è¿›å…¥å°±ç»ªçŠ¶æ€ï¼‰ä¸€æ—¦è·å¾—CPUå°†è‡ªåŠ¨è°ƒç”¨å®ƒçš„run()æ–¹æ³•
+	ThreadUseExtends() {}// æ„é€ å‡½æ•°
 
 	public void run() {
-		System.out.println("ÎÒÊÇThread×ÓÀàµÄÏß³ÌÊµÀı!");
-		System.out.println("ÎÒ½«¹ÒÆğ10Ãë!");
-		System.out.println("»Øµ½Ö÷Ïß³Ì,ÇëÉÔµÈ,¸Õ²ÅÖ÷Ïß³Ì¹ÒÆğ¿ÉÄÜ»¹Ã»ĞÑ¹ıÀ´£¡");
+		System.out.println("æˆ‘æ˜¯Threadå­ç±»çš„çº¿ç¨‹å®ä¾‹!");
+		System.out.println("æˆ‘å°†æŒ‚èµ·10ç§’!");
+		System.out.println("å›åˆ°ä¸»çº¿ç¨‹,è¯·ç¨ç­‰,åˆšæ‰ä¸»çº¿ç¨‹æŒ‚èµ·å¯èƒ½è¿˜æ²¡é†’è¿‡æ¥ï¼");
 		try {
-			sleep(10000);// ¹ÒÆğ5Ãë
+			sleep(10000);// æŒ‚èµ·5ç§’
 		} catch (InterruptedException e) {
 			return;
 		}
-		// Èç¹û¸Ãrun()·½·¨Ë³ĞòÖ´ĞĞÍêÁË,Ïß³Ì½«×Ô¶¯½áÊø,¶ø²»»á±»Ö÷Ïß³ÌÉ±µô
-		// µ«Èç¹ûĞİÃßÊ±¼ä¹ı³¤,ÔòÏß³Ì»¹´æ»î,¿ÉÄÜ±»stop()É±µô
+		// å¦‚æœè¯¥run()æ–¹æ³•é¡ºåºæ‰§è¡Œå®Œäº†,çº¿ç¨‹å°†è‡ªåŠ¨ç»“æŸ,è€Œä¸ä¼šè¢«ä¸»çº¿ç¨‹æ€æ‰
+		// ä½†å¦‚æœä¼‘çœ æ—¶é—´è¿‡é•¿,åˆ™çº¿ç¨‹è¿˜å­˜æ´»,å¯èƒ½è¢«stop()æ€æ‰
 	}
 
 }
 
 class ThreadUseRunnable implements Runnable{
-// Í¨¹ıÊµÏÖRunnable½Ó¿ÚÖĞµÄrun()·½·¨,ÔÙÒÔÕâ¸öÊµÏÖÁËrun()·½·¨µÄÀà
-// Îª²ÎÊı´´½¨ThreadµÄÏß³ÌÊµÀı
+// é€šè¿‡å®ç°Runnableæ¥å£ä¸­çš„run()æ–¹æ³•,å†ä»¥è¿™ä¸ªå®ç°äº†run()æ–¹æ³•çš„ç±»
+// ä¸ºå‚æ•°åˆ›å»ºThreadçš„çº¿ç¨‹å®ä¾‹
 	// Thread thread2=new Thread(this);
-	// ÒÔÕâ¸öÊµÏÖÁËRunnable½Ó¿ÚÖĞrun()·½·¨µÄÀàÎª²ÎÊı´´½¨ThreadÀàµÄÏß³ÌÊµÀı
-	ThreadUseRunnable() {}// ¹¹Ôìº¯Êı
+	// ä»¥è¿™ä¸ªå®ç°äº†Runnableæ¥å£ä¸­run()æ–¹æ³•çš„ç±»ä¸ºå‚æ•°åˆ›å»ºThreadç±»çš„çº¿ç¨‹å®ä¾‹
+	ThreadUseRunnable() {}// æ„é€ å‡½æ•°
 
 	public void run() {
-		System.out.println("ÎÒÊÇThreadÀàµÄÏß³ÌÊµÀı²¢ÒÔÊµÏÖÁËRunnable½Ó¿ÚµÄÀàÎª²ÎÊı!");
-		System.out.println("ÎÒ½«¹ÒÆğ1Ãë!");
-		System.out.println("»Øµ½Ö÷Ïß³Ì,ÇëÉÔµÈ,¸Õ²ÅÖ÷Ïß³Ì¹ÒÆğ¿ÉÄÜ»¹Ã»ĞÑ¹ıÀ´£¡");
+		System.out.println("æˆ‘æ˜¯Threadç±»çš„çº¿ç¨‹å®ä¾‹å¹¶ä»¥å®ç°äº†Runnableæ¥å£çš„ç±»ä¸ºå‚æ•°!");
+		System.out.println("æˆ‘å°†æŒ‚èµ·1ç§’!");
+		System.out.println("å›åˆ°ä¸»çº¿ç¨‹,è¯·ç¨ç­‰,åˆšæ‰ä¸»çº¿ç¨‹æŒ‚èµ·å¯èƒ½è¿˜æ²¡é†’è¿‡æ¥ï¼");
 		try {
-			Thread.sleep(1000);// ¹ÒÆğ5Ãë
+			Thread.sleep(1000);// æŒ‚èµ·5ç§’
 		} catch (InterruptedException e) {
 			return;
 		}
-		// Èç¹û¸Ãrun()·½·¨Ë³ĞòÖ´ĞĞÍêÁË,Ïß³Ì½«×Ô¶¯½áÊø,¶ø²»»á±»Ö÷Ïß³ÌÉ±µô
-		// µ«Èç¹ûĞİÃßÊ±¼ä¹ı³¤,ÔòÏß³Ì»¹´æ»î,¿ÉÄÜ±»stop()É±µô
+		// å¦‚æœè¯¥run()æ–¹æ³•é¡ºåºæ‰§è¡Œå®Œäº†,çº¿ç¨‹å°†è‡ªåŠ¨ç»“æŸ,è€Œä¸ä¼šè¢«ä¸»çº¿ç¨‹æ€æ‰
+		// ä½†å¦‚æœä¼‘çœ æ—¶é—´è¿‡é•¿,åˆ™çº¿ç¨‹è¿˜å­˜æ´»,å¯èƒ½è¢«stop()æ€æ‰
 	}
 
 }

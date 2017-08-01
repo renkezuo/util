@@ -1,23 +1,23 @@
 package com.renke.lesson.pojo;
 
 public class Klass {
-	// 班级ID
+	// 鐝骇ID
 	private Long classId;
-	// 班级名称
+	// 鐝骇鍚嶇О
 	private String className;
-	// 班级类型
+	// 鐝骇绫诲瀷
 	private Integer type;
-	// 关联ID
+	// 鍏宠仈ID
 	private Long relationId;
-	// 年级ID
+	// 骞寸骇ID
 	private Long gradeId;
-	// 年级名称
+	// 骞寸骇鍚嶇О
 	private String gradeName;
-	// 学段ID
+	// 瀛︽ID
 	private Long schoolStageId;
-	// 学校ID
+	// 瀛︽牎ID
 	private Long schoolId;
-	// 班级人数
+	// 鐝骇浜烘暟
 	private Integer headCount;
 	
 	private Integer teamId;

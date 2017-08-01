@@ -1,6 +1,8 @@
 package com.renke.study;
 
-public class Î»ÔËËã {
+import java.util.Calendar;
+
+public class ä½è¿ç®— {
 	public static void main(String[] args) {
 		long begin = System.currentTimeMillis();
 //		int i = 2<<3;
@@ -13,5 +15,17 @@ public class Î»ÔËËã {
 		int page = 10;
 		String sql ="select top 8 letterid from letterreceiverinfo where letterreceiver='' and receiverinfoid not in(select top "+(page-1)*8+" receiverinfoid from letterreceiverinfo ) and isread=1";
 		System.out.println(sql);
+		
+		Calendar c = Calendar.getInstance();
+		System.out.println(c.getTimeInMillis());
+		System.out.println(System.currentTimeMillis());
+		System.out.println(c.getTime());
+		c.set(2017,7,1,0,58,0);
+		
+		if(System.currentTimeMillis() > c.getTimeInMillis()){
+			System.out.println("over");
+		}else{
+		}
+		
 	}
 }

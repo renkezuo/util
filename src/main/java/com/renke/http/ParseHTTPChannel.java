@@ -58,36 +58,36 @@ public class ParseHTTPChannel {
 		http.setResponse(response);
 		byte[] tmp = new byte[4096];
 		ByteBuffer lenByte = ByteBuffer.allocate(4096);
-		//×Ü³¤¶È
+		//æ€»é•¿åº¦
 		int length = -1;
-		//¶ÁÈ¡³¤¶È
+		//è¯»å–é•¿åº¦
 		int readLength = 0;
-		//ĞĞÍ·Ë÷Òı
+		//è¡Œå¤´ç´¢å¼•
 		int beginIndex = 0;
-		//¶ÁÈ¡Êı¾İ³¤¶È
+		//è¯»å–æ•°æ®é•¿åº¦
 		int len = 0;
-		//¿ÕĞĞÊÇ·ñ³öÏÖ
+		//ç©ºè¡Œæ˜¯å¦å‡ºç°
 		boolean hasSpace = false;
-		//Í·Êı¾İÊÇ·ñ×é×°Íê±Ï
+		//å¤´æ•°æ®æ˜¯å¦ç»„è£…å®Œæ¯•
 		boolean resolveHead = false;
-		//ÁÙÊ±´æ·ÅÊı¾İ¶ÓÁĞ
+		//ä¸´æ—¶å­˜æ”¾æ•°æ®é˜Ÿåˆ—
 //		List<byte[]> tmpList = new ArrayList<byte[]>();
 		byte[] tmpByte = null;
 		Map<String,String> result = new HashMap<String,String>();
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		//½«ËùÓĞÊı¾İ×°Èëµ½ByteBufferÖĞ
+		//å°†æ‰€æœ‰æ•°æ®è£…å…¥åˆ°ByteBufferä¸­
 		while((len = socketChannel.read(responseBuf)) > 0){
 			System.out.println(new String(responseBuf.array(),0,len));
 			responseBuf.clear();
 			System.arraycopy(responseBuf.array(),0, tmp,beginIndex,len);
-			//Ê£Óà×Ü³¤¶È
+			//å‰©ä½™æ€»é•¿åº¦
 			int countLen = beginIndex + len;
 			beginIndex = 0;
 			if(!hasSpace){
-				//readLine·½·¨£¬¿ÕĞĞÊ±£¬±ê¼Ç¿ÕĞĞË÷Òı
+				//readLineæ–¹æ³•ï¼Œç©ºè¡Œæ—¶ï¼Œæ ‡è®°ç©ºè¡Œç´¢å¼•
 				for(int i=0;i<countLen;i++){
-					//¿ÕĞĞÖ®Ç°£¬httpÇëÇóµÄÍ·ĞÅÏ¢
+					//ç©ºè¡Œä¹‹å‰ï¼Œhttpè¯·æ±‚çš„å¤´ä¿¡æ¯
 					if(i < countLen - 1 && tmp[i]=='\r' && tmp[i+1]=='\n'){
 						tmpByte = new byte[i-beginIndex];
 						if(tmpByte.length == 0){
@@ -111,8 +111,8 @@ public class ParseHTTPChannel {
 					}
 				}
 			}
-			//Í·ĞÅÏ¢°´ĞĞ´æ´¢
-			//Ê£ÓàÊı¾İ±£Áôµ½Êı×éÍ·²¿
+			//å¤´ä¿¡æ¯æŒ‰è¡Œå­˜å‚¨
+			//å‰©ä½™æ•°æ®ä¿ç•™åˆ°æ•°ç»„å¤´éƒ¨
 			if(beginIndex < countLen && !hasSpace) {
 				System.arraycopy(tmp, beginIndex, tmp,0,countLen-beginIndex);
 			}

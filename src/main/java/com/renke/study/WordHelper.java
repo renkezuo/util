@@ -10,17 +10,17 @@ import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 public class WordHelper {
 	public static void main(String[] args) throws IOException {
-		File file = new File("C:\\²âÊÔ.doc");
+		File file = new File("C:\\æµ‹è¯•.doc");
 		if(!file.exists()){
 			file.createNewFile();
 		}
 		FileOutputStream fos = new FileOutputStream(file);
-		byte[] a=new String("¿´¼ûÁË£¡").getBytes();
+		byte[] a=new String("çœ‹è§äº†ï¼").getBytes();
 		ByteArrayInputStream bs = new ByteArrayInputStream(a);
 		POIFSFileSystem fs = new POIFSFileSystem();
 		DirectoryEntry directory = fs.getRoot();
 		DocumentEntry de = directory.createDocument("WordDocument", bs);
-		//ÒÔÉÏÁ½¾ä´úÂë²»ÄÜÊ¡ÂÔ£¬·ñÔòÊä³öµÄÊÇÂÒÂë
+		//ä»¥ä¸Šä¸¤å¥ä»£ç ä¸èƒ½çœç•¥ï¼Œå¦åˆ™è¾“å‡ºçš„æ˜¯ä¹±ç 
 		fs.writeFilesystem(fos);
 		bs.close();
 		fos.flush();

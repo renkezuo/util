@@ -9,13 +9,13 @@ import com.renke.exception.ParseHTTPException;
 
 /***
  * 
- * ä¯ÀÀÆ÷ĞèÒªÓĞurl
- * 	¹¦ÄÜ²ğ·Ö£º´ÓurlÖÁrequest±¨ÎÄ×ª»»Îª×Ö½ÚÊı×é
- * ·µ»ØHTML
- *  ¹¦ÄÜ²ğ·Ö£º´Ó·µ»ØµÄ×Ö½ÚÊı×éÖĞ£¬½âÎöresponseÍ·±¨ÎÄºÍbodyÊı×é£¬½«bodyÊı×é×ª»»ÎªÎÄ±¾
- * ´ËÀàÎªÈë¿Ú
+ * æµè§ˆå™¨éœ€è¦æœ‰url
+ * 	åŠŸèƒ½æ‹†åˆ†ï¼šä»urlè‡³requestæŠ¥æ–‡è½¬æ¢ä¸ºå­—èŠ‚æ•°ç»„
+ * è¿”å›HTML
+ *  åŠŸèƒ½æ‹†åˆ†ï¼šä»è¿”å›çš„å­—èŠ‚æ•°ç»„ä¸­ï¼Œè§£æresponseå¤´æŠ¥æ–‡å’Œbodyæ•°ç»„ï¼Œå°†bodyæ•°ç»„è½¬æ¢ä¸ºæ–‡æœ¬
+ * æ­¤ç±»ä¸ºå…¥å£
  * 
- * ¸øÒ»¸öURL¸øä¯ÀÀÆ÷£¬ä¯ÀÀÆ÷È¥Íê³ÉÇëÇó£¬²¢·µ»Ø£¬±£³ÖÁ¬½ÓN secs£¬Èç¹ûÃ»ÓĞºóĞøÇëÇó£¬Ôò¹Ø±ÕÁ¬½Ó
+ * ç»™ä¸€ä¸ªURLç»™æµè§ˆå™¨ï¼Œæµè§ˆå™¨å»å®Œæˆè¯·æ±‚ï¼Œå¹¶è¿”å›ï¼Œä¿æŒè¿æ¥N secsï¼Œå¦‚æœæ²¡æœ‰åç»­è¯·æ±‚ï¼Œåˆ™å…³é—­è¿æ¥
  * 
  * 
  * 
@@ -25,9 +25,9 @@ import com.renke.exception.ParseHTTPException;
 public class BrowserBackup {
 //	private static final Logger logger = LoggerFactory.getLogger(Browser.class);
 	
-	long responseTime;//µ¥Î»ms
-	long keepAlive = 0;//±£³ÖÁ¬½ÓÊ±¼ä£¬<0£¬²»±£³Ö£¬µ¥Î»ms
-	int status = 0;//0³õÊ¼×´Ì¬£¬1£¬ÇëÇóÔİÊ±½áÊø
+	long responseTime;//å•ä½ms
+	long keepAlive = 0;//ä¿æŒè¿æ¥æ—¶é—´ï¼Œ<0ï¼Œä¸ä¿æŒï¼Œå•ä½ms
+	int status = 0;//0åˆå§‹çŠ¶æ€ï¼Œ1ï¼Œè¯·æ±‚æš‚æ—¶ç»“æŸ
 	public static void main(String[] args) {
 		String url = "www.sina.com.cn";
 		try {
@@ -40,13 +40,13 @@ public class BrowserBackup {
 //			sc.shutdownInput();
 //			sc.shutdownOutput();
 			requestBuffer = null;
-			//½á¹û·µ»Øºó£¬ÉèÖÃÒ»¸öÊ±¼ä£¬Í¬Ê±ÉèÖÃÒ»¸ö×´Ì¬£¬
+			//ç»“æœè¿”å›åï¼Œè®¾ç½®ä¸€ä¸ªæ—¶é—´ï¼ŒåŒæ—¶è®¾ç½®ä¸€ä¸ªçŠ¶æ€ï¼Œ
 			ByteBuffer responseBuffer = ByteBuffer.wrap(new byte[2048]);
-			//ĞĞÍ·Ë÷Òı
+			//è¡Œå¤´ç´¢å¼•
 //			int beginIndex = 0;
-			//¶ÁÈ¡Êı¾İ³¤¶È
+			//è¯»å–æ•°æ®é•¿åº¦
 //			int len = 0;
-			//¿ÕĞĞÊÇ·ñ³öÏÖ
+			//ç©ºè¡Œæ˜¯å¦å‡ºç°
 //			boolean hasSpace = false;
 //			boolean isEnd = false;
 //			int length = 0;
@@ -54,36 +54,36 @@ public class BrowserBackup {
 //			Map<String,String> header = null;
 //			byte[] surplus = null;
 //			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			//¶ÁÈ¡responseÊı¾İ
-			//Ê×ÏÈÅĞ¶Ï1ÊÇ·ñÒÑ¾­½âÎöHeaderÊı¾İ£¬Ê¹ÓÃhasSpaceÅĞ¶Ï
-			//  1·ñ£ºÈ¡headerÊı¾İ
-					//¾ßÌåÂß¼­£º
-					//	µÚÒ»ĞĞÎªhttp×´Ì¬ĞÅÏ¢£¬
-					//	½ÓÏÂÀ´Ã¿ĞĞÒÔÃ°ºÅ·Ö¸îÎªkeyºÍvalue
-					//	Óöµ½µÚÒ»¸ö¿ÕĞĞÊ±£¬·ÖÎökeyºÍvalue£¬½âÎö³öĞèÒªÓÃµ½µÄÍ·ĞÅÏ¢£¬½»¸øresponse
-					//	½áÊøheader´ÓÎö£¬½«Ê£ÓàÊı¾İ[²»°üº¬¿ÕĞĞ]£¬±£Áô¡£
-			//  1ÊÇ£ºÅĞ¶Ï2ÊÇ·ñ·Ö¶ÎÈ¡Êı
-			//		2ÊÇ£ºÅĞ¶Ï3Ê£ÓàÊı¾İÊÇ·ñ´æÔÚ£¬Íê±Ïºó£¬¼ÌĞøÅĞ¶Ï4Ê£ÓàÊı¾İÊÇ·ñ´¦ÀíÍê±Ï
-			//			3ÊÇ£ºÈ¡³¤¶È£¬µ±Ê£ÓàÊı¾İ²»¹»Ê±£¬½«Ê£ÓàÊı¾İÈ«²¿È¡³ö£¬Í¬Ê±ÔÙ´ÎÈ¥ÇëÇóÊı¾İ[¼ÇÂ¼ÏàÓ¦µÄÊı¾İ×´Ì¬]£¬ÆäÊµÊı¾İ×´Ì¬²ÅÊÇÖ÷ÒªµÄ
-			//			4ÊÇ£º
-			//		2·ñ£ºÖ±½ÓÈ¡³¤¶È£¬µ±È¡Íêdata[³¤¶È]ºó£¬break;
-			//beginIndex£¬¿ªÊ¼Ë÷Òı
-			//len£¬Ã¿´ÎreadµÄÍøÂçÊı¾İ³¤¶È
-			//length£¬·¢ËÍÊı¾İÔ¼¶¨µÄ³¤¶È[·Ö¶Î»ò²»·Ö¶Î]
-			//hasSpace£¬ÅĞ¶ÏÊÇ·ñ¶ÁÈ¡ÍêheaderĞÅÏ¢
-			//isEnd£¬ÅĞ¶ÏÊı¾İÊÇ·ñÈ«²¿¶ÁÈ¡Íê±Ï
-			//prev£¬±íÊ¾ÉÏÒ»¸ö×Ö½Ú£¬Ò»°ãÓÃÀ´ÅĞ¶Ï»»ĞĞÊ±Ê¹ÓÃ
+			//è¯»å–responseæ•°æ®
+			//é¦–å…ˆåˆ¤æ–­1æ˜¯å¦å·²ç»è§£æHeaderæ•°æ®ï¼Œä½¿ç”¨hasSpaceåˆ¤æ–­
+			//  1å¦ï¼šå–headeræ•°æ®
+					//å…·ä½“é€»è¾‘ï¼š
+					//	ç¬¬ä¸€è¡Œä¸ºhttpçŠ¶æ€ä¿¡æ¯ï¼Œ
+					//	æ¥ä¸‹æ¥æ¯è¡Œä»¥å†’å·åˆ†å‰²ä¸ºkeyå’Œvalue
+					//	é‡åˆ°ç¬¬ä¸€ä¸ªç©ºè¡Œæ—¶ï¼Œåˆ†ækeyå’Œvalueï¼Œè§£æå‡ºéœ€è¦ç”¨åˆ°çš„å¤´ä¿¡æ¯ï¼Œäº¤ç»™response
+					//	ç»“æŸheaderä»æï¼Œå°†å‰©ä½™æ•°æ®[ä¸åŒ…å«ç©ºè¡Œ]ï¼Œä¿ç•™ã€‚
+			//  1æ˜¯ï¼šåˆ¤æ–­2æ˜¯å¦åˆ†æ®µå–æ•°
+			//		2æ˜¯ï¼šåˆ¤æ–­3å‰©ä½™æ•°æ®æ˜¯å¦å­˜åœ¨ï¼Œå®Œæ¯•åï¼Œç»§ç»­åˆ¤æ–­4å‰©ä½™æ•°æ®æ˜¯å¦å¤„ç†å®Œæ¯•
+			//			3æ˜¯ï¼šå–é•¿åº¦ï¼Œå½“å‰©ä½™æ•°æ®ä¸å¤Ÿæ—¶ï¼Œå°†å‰©ä½™æ•°æ®å…¨éƒ¨å–å‡ºï¼ŒåŒæ—¶å†æ¬¡å»è¯·æ±‚æ•°æ®[è®°å½•ç›¸åº”çš„æ•°æ®çŠ¶æ€]ï¼Œå…¶å®æ•°æ®çŠ¶æ€æ‰æ˜¯ä¸»è¦çš„
+			//			4æ˜¯ï¼š
+			//		2å¦ï¼šç›´æ¥å–é•¿åº¦ï¼Œå½“å–å®Œdata[é•¿åº¦]åï¼Œbreak;
+			//beginIndexï¼Œå¼€å§‹ç´¢å¼•
+			//lenï¼Œæ¯æ¬¡readçš„ç½‘ç»œæ•°æ®é•¿åº¦
+			//lengthï¼Œå‘é€æ•°æ®çº¦å®šçš„é•¿åº¦[åˆ†æ®µæˆ–ä¸åˆ†æ®µ]
+			//hasSpaceï¼Œåˆ¤æ–­æ˜¯å¦è¯»å–å®Œheaderä¿¡æ¯
+			//isEndï¼Œåˆ¤æ–­æ•°æ®æ˜¯å¦å…¨éƒ¨è¯»å–å®Œæ¯•
+			//prevï¼Œè¡¨ç¤ºä¸Šä¸€ä¸ªå­—èŠ‚ï¼Œä¸€èˆ¬ç”¨æ¥åˆ¤æ–­æ¢è¡Œæ—¶ä½¿ç”¨
 			
-			//½âÎöresponse HeaderĞÅÏ¢£¬·µ»ØÊ£ÓàÊı¾İÊı×é
+			//è§£æresponse Headerä¿¡æ¯ï¼Œè¿”å›å‰©ä½™æ•°æ®æ•°ç»„
 			byte[] surplus = ParseHTTP.parseResponseHeader(sc,response,responseBuffer);
 			ParseHTTP.parseResponseData(sc, surplus, response, responseBuffer);
-//			//´¦ÀíÊ£ÓàÊı¾İ
+//			//å¤„ç†å‰©ä½™æ•°æ®
 //			while((dp.len = sc.read(responseBuffer)) > 0 ){
 //				responseBuffer.flip();
 //				if(response.isChunked()){
-//					//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-//					//Êı¾İÈ¡³öÀ´£¬¸ù¾İ±àÂë½âÂë
-//					//´æÔÚÊ£ÓàÄÚÈİ
+//					//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+//					//æ•°æ®å–å‡ºæ¥ï¼Œæ ¹æ®ç¼–ç è§£ç 
+//					//å­˜åœ¨å‰©ä½™å†…å®¹
 //					if(surplus != null && dp.length == 0){
 //						int i = 1;
 //						dp.beginIndex = 0;
@@ -94,7 +94,7 @@ public class BrowserBackup {
 //								logger.info("dp.length:{}",dp.length);
 //								dp.beginIndex = i + 1;
 //								if(dp.length == 0){
-//									//·Ö¶ÎÊı×éÎª0£¬±íÊ¾½áÊø
+//									//åˆ†æ®µæ•°ç»„ä¸º0ï¼Œè¡¨ç¤ºç»“æŸ
 //									dp.isEnd = true;
 //									break;
 //								}
@@ -109,12 +109,12 @@ public class BrowserBackup {
 //										break;
 //									}
 //									dp.beginIndex = i;
-//									//¼ÌĞø¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+//									//ç»§ç»­è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 //									continue;
 //								}else{
 //									baos.write(surplus,i,surplus.length-i);
 //									dp.length = dp.length - (surplus.length-i);
-//									//Í£Ö¹¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+//									//åœæ­¢è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 //									surplus = null;
 //									break;
 //								}
@@ -130,7 +130,7 @@ public class BrowserBackup {
 //						if(dp.length > chunkData.length){
 //							dp.length = dp.length - chunkData.length;
 //							baos.write(chunkData);
-//							//ÖØĞÂ»ñÈ¡ÍøÂçÊı¾İ
+//							//é‡æ–°è·å–ç½‘ç»œæ•°æ®
 //							continue;
 //						}else{
 //							baos.write(chunkData,0,dp.length);
@@ -144,7 +144,7 @@ public class BrowserBackup {
 //							dp.beginIndex = i;
 //							dp.length = 0;
 //							while(i<chunkData.length){
-//								//·Ö¶ÎÊı¾İ£¬ÊÇÊ²Ã´¸ñÊ½£¿
+//								//åˆ†æ®µæ•°æ®ï¼Œæ˜¯ä»€ä¹ˆæ ¼å¼ï¼Ÿ
 //								if(dp.prev=='\r' && chunkData[i] == '\n'){
 //									dp.prev = chunkData[i];
 //									dp.length = StringHex.toInt(new String(chunkData,dp.beginIndex,i-dp.beginIndex-1), StringHex.TYPE_HEX);
@@ -177,10 +177,10 @@ public class BrowserBackup {
 //							}
 //						}
 //					}
-//				//·Ç·Ö¶Î´¦Àí
+//				//éåˆ†æ®µå¤„ç†
 //				}else{
-//					//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-//					//Êı¾İÈ¡³öÀ´£¬½âÂë
+//					//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+//					//æ•°æ®å–å‡ºæ¥ï¼Œè§£ç 
 //					if(dp.length == 0){
 //						dp.length = response.getLength();
 //					}
@@ -204,12 +204,12 @@ public class BrowserBackup {
 //			while((dp.len = sc.read(responseBuffer)) > 0 ){
 //				responseBuffer.flip();
 //				if(dp.hasSpace){
-//					//´¦ÀíÊı¾İ
-//					//·Ö¶Î´¦Àí
+//					//å¤„ç†æ•°æ®
+//					//åˆ†æ®µå¤„ç†
 //					if(response.isChunked()){
-//						//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-//						//Êı¾İÈ¡³öÀ´£¬¸ù¾İ±àÂë½âÂë
-//						//´æÔÚÊ£ÓàÄÚÈİ
+//						//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+//						//æ•°æ®å–å‡ºæ¥ï¼Œæ ¹æ®ç¼–ç è§£ç 
+//						//å­˜åœ¨å‰©ä½™å†…å®¹
 //						if(surplus != null && dp.length == 0){
 //							int i = 1;
 //							dp.beginIndex = 0;
@@ -219,7 +219,7 @@ public class BrowserBackup {
 //									dp.length = StringHex.toInt(new String(surplus,dp.beginIndex,i-1), StringHex.TYPE_HEX);
 //									dp.beginIndex = i + 1;
 //									if(dp.length == 0){
-//										//·Ö¶ÎÊı×éÎª0£¬±íÊ¾½áÊø
+//										//åˆ†æ®µæ•°ç»„ä¸º0ï¼Œè¡¨ç¤ºç»“æŸ
 //										dp.isEnd = true;
 //										break;
 //									}
@@ -234,12 +234,12 @@ public class BrowserBackup {
 //											break;
 //										}
 //										dp.beginIndex = i;
-//										//¼ÌĞø¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+//										//ç»§ç»­è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 //										continue;
 //									}else{
 //										baos.write(surplus,i,surplus.length-i);
 //										dp.length = dp.length - (surplus.length-i);
-//										//Í£Ö¹¶ÁÈ¡Ê£ÓàÊı×éÊı¾İ
+//										//åœæ­¢è¯»å–å‰©ä½™æ•°ç»„æ•°æ®
 //										surplus = null;
 //										break;
 //									}
@@ -255,7 +255,7 @@ public class BrowserBackup {
 //							if(dp.length > chunkData.length){
 //								dp.length = dp.length - chunkData.length;
 //								baos.write(chunkData);
-//								//ÖØĞÂ»ñÈ¡ÍøÂçÊı¾İ
+//								//é‡æ–°è·å–ç½‘ç»œæ•°æ®
 //								continue;
 //							}else{
 //								baos.write(chunkData,0,dp.length);
@@ -269,7 +269,7 @@ public class BrowserBackup {
 //								dp.beginIndex = i;
 //								dp.length = 0;
 //								while(i<chunkData.length){
-//									//·Ö¶ÎÊı¾İ£¬ÊÇÊ²Ã´¸ñÊ½£¿
+//									//åˆ†æ®µæ•°æ®ï¼Œæ˜¯ä»€ä¹ˆæ ¼å¼ï¼Ÿ
 //									if(dp.prev=='\r' && chunkData[i] == '\n'){
 //										dp.prev = chunkData[i];
 //										dp.length = StringHex.toInt(new String(chunkData,dp.beginIndex,i-dp.beginIndex-1), StringHex.TYPE_HEX);
@@ -302,10 +302,10 @@ public class BrowserBackup {
 //								}
 //							}
 //						}
-//					//·Ç·Ö¶Î´¦Àí
+//					//éåˆ†æ®µå¤„ç†
 //					}else{
-//						//È¡³¤¶È£¬¸ù¾İ³¤¶ÈÈ¡Êı¾İ
-//						//Êı¾İÈ¡³öÀ´£¬½âÂë
+//						//å–é•¿åº¦ï¼Œæ ¹æ®é•¿åº¦å–æ•°æ®
+//						//æ•°æ®å–å‡ºæ¥ï¼Œè§£ç 
 //						if(dp.length == 0){
 //							dp.length = response.getLength();
 //						}
@@ -324,9 +324,9 @@ public class BrowserBackup {
 //					}
 //				}
 //				
-//				//»ñÈ¡requestÍ·²¿Êı¾İ£¬½«½âÎöÊ£ÏÂµÄÊı¾İ·µ»Ø
+//				//è·å–requestå¤´éƒ¨æ•°æ®ï¼Œå°†è§£æå‰©ä¸‹çš„æ•°æ®è¿”å›
 //				for(int i=0;i<dp.len;i = i+1){
-//					//¿ÕĞĞÖ®Ç°£¬httpÇëÇóµÄÍ·ĞÅÏ¢
+//					//ç©ºè¡Œä¹‹å‰ï¼Œhttpè¯·æ±‚çš„å¤´ä¿¡æ¯
 //					if(i < dp.len - 1 && buf[i]=='\r' && buf[i+1]=='\n' && !dp.hasSpace){
 //						int tmpLen = i-dp.beginIndex;
 //						if(tmpLen == 0){
@@ -350,18 +350,18 @@ public class BrowserBackup {
 //						}
 //						i = i + 1;
 //						dp.beginIndex = i+1;
-//						//³öÏÖ¿ÕĞĞ
+//						//å‡ºç°ç©ºè¡Œ
 //						if(i < dp.len - 2 && buf[i+1] =='\r' && buf[i+2]=='\n'){
 //							dp.hasSpace = true;
 //							i = i+2;
 //							dp.prev = buf[i];
 //							dp.beginIndex = i+1;
-//							//½âÎö³öĞèÒªµÄ±¨ÎÄĞÅÏ¢
-//							//ÊÇ·ñ·Ö¶Î
+//							//è§£æå‡ºéœ€è¦çš„æŠ¥æ–‡ä¿¡æ¯
+//							//æ˜¯å¦åˆ†æ®µ
 //							if(header.get("Transfer-Encoding") != null){
 //								response.setChunked("chunked".equals(header.get("Transfer-Encoding")));
 //							}
-//							//»ñÈ¡´«Êä±àÂë¸ñÊ½
+//							//è·å–ä¼ è¾“ç¼–ç æ ¼å¼
 //							String contentType = header.get("Content-Type");
 //							String[] tmps = contentType.split("; ");
 //							for(int c = 1;c<tmps.length;c++){
@@ -371,15 +371,15 @@ public class BrowserBackup {
 //									break;
 //								}
 //							}
-//							//ÓÃÓÚÅĞ¶ÏÊÇ·ñÊÇgzip¸ñÊ½´«Êä
+//							//ç”¨äºåˆ¤æ–­æ˜¯å¦æ˜¯gzipæ ¼å¼ä¼ è¾“
 //							response.setEncoding(header.get("Content-Encoding"));
-//							//·Ö¶Î´«ÊäÊ±£¬ÎŞ³¤¶È
+//							//åˆ†æ®µä¼ è¾“æ—¶ï¼Œæ— é•¿åº¦
 //							if(header.get("Content-Length")!=null){
 //								response.setLength(Integer.parseInt(header.get("Content-Length").trim()));
 //							}
 //							response.setHeader(header);
 //							
-//							//Ê£ÓàÊı¾İ£¬ĞèÒª½»¸øÏÂÒ»»·½Ú´¦Àí
+//							//å‰©ä½™æ•°æ®ï¼Œéœ€è¦äº¤ç»™ä¸‹ä¸€ç¯èŠ‚å¤„ç†
 //							if(dp.beginIndex < dp.len){
 //								surplus = new byte[dp.len-dp.beginIndex];
 //								System.arraycopy(buf, dp.beginIndex, surplus, 0, surplus.length);
@@ -398,7 +398,7 @@ public class BrowserBackup {
 //				logger.info("output:{}",new String(bufs,0,len,"UTF-8"));
 //			}
 			
-			//Ò»¸öä¯ÀÀÆ÷Ò»¸öÊ±¼ä£¬Ò»¸ö×´Ì¬
+			//ä¸€ä¸ªæµè§ˆå™¨ä¸€ä¸ªæ—¶é—´ï¼Œä¸€ä¸ªçŠ¶æ€
 			sc.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

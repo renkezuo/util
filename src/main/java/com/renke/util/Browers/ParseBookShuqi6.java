@@ -17,23 +17,23 @@ import java.util.Map;
 public class ParseBookShuqi6 implements ParseBook{
 	
 	
-	public String BOOKNAME = "°ÂÊõÉñ×ù";
+	public String BOOKNAME = "å¥¥æœ¯ç¥åº§";
 	public String CATALOG_PATH = "http://www.shuqi6.com/2486/";
 	
 	public String SAVEPATH = "F:\\ebook\\";
-	public String CATALOG_START = BOOKNAME+"ÎŞµ¯´°×îĞÂÕÂ½ÚÁĞ±í";
-	public String CATALOG_END = "ÊéÆìĞ¡ËµÍ¬ÀàÎŞµ¯´°ÔÄ¶ÁÍÆ¼ö";
-	public String CONTENT_START = BOOKNAME + "È«ÎÄÔÄ¶Á";
-	public String CONTENT_END = BOOKNAME + "ÊÖ»úÔÄ¶Á";
+	public String CATALOG_START = BOOKNAME+"æ— å¼¹çª—æœ€æ–°ç« èŠ‚åˆ—è¡¨";
+	public String CATALOG_END = "ä¹¦æ——å°è¯´åŒç±»æ— å¼¹çª—é˜…è¯»æ¨è";
+	public String CONTENT_START = BOOKNAME + "å…¨æ–‡é˜…è¯»";
+	public String CONTENT_END = BOOKNAME + "æ‰‹æœºé˜…è¯»";
 	
 	
 	public ParseBookShuqi6(String bookName,String catalog_path){
 		BOOKNAME = bookName;
 		CATALOG_PATH = catalog_path;
 		SAVEPATH = SAVEPATH+BOOKNAME;
-		CATALOG_START = BOOKNAME+"ÎŞµ¯´°×îĞÂÕÂ½ÚÁĞ±í";
-		CONTENT_START = BOOKNAME + "È«ÎÄÔÄ¶Á";
-		CONTENT_END = BOOKNAME + "ÊÖ»úÔÄ¶Á";
+		CATALOG_START = BOOKNAME+"æ— å¼¹çª—æœ€æ–°ç« èŠ‚åˆ—è¡¨";
+		CONTENT_START = BOOKNAME + "å…¨æ–‡é˜…è¯»";
+		CONTENT_END = BOOKNAME + "æ‰‹æœºé˜…è¯»";
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class ParseBookShuqi6 implements ParseBook{
 		String html = new String(bytes,SOURCE_ENCODING);
 		File f = new File(SAVEPATH);
 		if(!f.isDirectory()) f.mkdirs();
-		//ÉèÖÃ×¥È¡Í·£¬ºÍ×¥È¡Î²[±ÜÃâ×¥È¡´íÎóµÄa±êÇ©]
+		//è®¾ç½®æŠ“å–å¤´ï¼Œå’ŒæŠ“å–å°¾[é¿å…æŠ“å–é”™è¯¯çš„aæ ‡ç­¾]
 		char[] chars = html.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		boolean isBegin = false;

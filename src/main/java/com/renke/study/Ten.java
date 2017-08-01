@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Ten {
 	public static void main(String[] args) {
-		//1,2,5ºÍÎª10
+		//1,2,5å’Œä¸º10
 //		double i = 6222858109901063696.0;
 //		double j = 6222858109901063700.0;
 //		System.out.println(i);

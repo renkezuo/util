@@ -8,10 +8,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /***
- * ²âÊÔÇ¿ÒıÓÃ£¬ÈíÒıÓÃ£¬ÈõÒıÓÃ£¬ĞéÒıÓÃ
- * ²âÊÔ½á¹û£º
- * 1¡¢µ±4ÖÖÒıÓÃÍ¬Ê±GCÊ±£¬phantom±»GCÖ®ºóweak±»GC£¬hard¿ÉÄÜÔÚÈÎºÎÊ±ºò±»gc£¬soft×îºó±»GC£¬Ò²¿ÉÄÜ²»±»GC
- * 2¡¢
+ * æµ‹è¯•å¼ºå¼•ç”¨ï¼Œè½¯å¼•ç”¨ï¼Œå¼±å¼•ç”¨ï¼Œè™šå¼•ç”¨
+ * æµ‹è¯•ç»“æœï¼š
+ * 1ã€å½“4ç§å¼•ç”¨åŒæ—¶GCæ—¶ï¼Œphantomè¢«GCä¹‹åweakè¢«GCï¼Œhardå¯èƒ½åœ¨ä»»ä½•æ—¶å€™è¢«gcï¼Œsoftæœ€åè¢«GCï¼Œä¹Ÿå¯èƒ½ä¸è¢«GC
+ * 2ã€
  * @author renke.zuo@foxmail.com
  * @time 2017-03-19 16:07:46
  */
@@ -31,14 +31,14 @@ public class Reference {
 		PhantomReference<Million> PhantomRef = new PhantomReference<Million>(p,pQueue);
 		w = null;
 		s = null;
-		//±ØĞëºÍÒıÓÃ¶ÓÁĞÒ»ÆğÊ¹ÓÃ
+		//å¿…é¡»å’Œå¼•ç”¨é˜Ÿåˆ—ä¸€èµ·ä½¿ç”¨
 		p = null;
 		h = null;
 		
 		System.out.println(" gc  ready ...");
 		System.out.println("my_gc_before");
 //		System.gc();
-		//×î´ó³Ì¶ÈÊ¹ÓÃÄÚ´æ£¬Ê¹Æä´¥·¢GC
+		//æœ€å¤§ç¨‹åº¦ä½¿ç”¨å†…å­˜ï¼Œä½¿å…¶è§¦å‘GC
 		maxUseMemory();
 		
 		circlePrint(wQueue);
@@ -62,7 +62,7 @@ public class Reference {
 		}
 	}
 	/**
-	 * ²»¼ä¶ÏµÄ´´½¨¶ÔÏó£¬´ÙÊ¹ÄÚ´æ²»¹»
+	 * ä¸é—´æ–­çš„åˆ›å»ºå¯¹è±¡ï¼Œä¿ƒä½¿å†…å­˜ä¸å¤Ÿ
 	 * @author renke.zuo@foxmail.com
 	 * @time 2017-03-19 16:49:04
 	 */
@@ -74,7 +74,7 @@ public class Reference {
 	}
 	
 	/**
-	 * while trueĞÎÊ½´òÓ¡ÒıÓÃ¶ÓÁĞ
+	 * while trueå½¢å¼æ‰“å°å¼•ç”¨é˜Ÿåˆ—
 	 * @author renke.zuo@foxmail.com
 	 * @time 2017-03-19 16:50:48
 	 * @param queue
@@ -103,7 +103,7 @@ class MaxUseMemory implements Runnable{
 			Million hh = new Million("hard"+i,3);
 			hh = null;
 			try {
-				//±ÜÃâGC¸ú²»ÉÏnewµÄËÙ¶È
+				//é¿å…GCè·Ÿä¸ä¸Šnewçš„é€Ÿåº¦
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

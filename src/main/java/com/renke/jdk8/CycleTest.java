@@ -18,11 +18,11 @@ public class CycleTest {
 	}
 	
 	public static void modifyItem(){
-		//forEach可以操作元素
+		//forEach鍙互鎿嶄綔鍏冪礌
 		List<Item> list = Arrays.asList(new Item(),new Item(),new Item());
 		list.forEach(item -> item.setId(1));
 		list.forEach(item -> System.out.println("list1--->" + item.getId()));
-		//流中不可操作元素
+		//娴佷腑涓嶅彲鎿嶄綔鍏冪礌
 		list = Arrays.asList(new Item(),new Item(),new Item());
 		list.stream().filter(item -> {item.setId(1);return false;});
 		list.forEach(item -> System.out.println("list2--->" + item.getId()));

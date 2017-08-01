@@ -46,10 +46,10 @@ public class TestBrowers{
 	}
 	
 	/**
-	 * TODO:¼ÓÈëºÏ²¢ÕÂ½ÚµÄ·½·¨
-	 * TODO:ÊÇ·ñ¿ÉÒÔ½«²éÑ¯¹¦ÄÜ·Å½øÀ´
-	 * TODO:ÆäËüÍøÕ¾¶ÁÈ¡www.23wx.com www.biquge.com  www.booktxt.com
-	 * TODO:ÓÅ»¯[¿ÉÒÔ²»×ö]
+	 * TODO:åŠ å…¥åˆå¹¶ç« èŠ‚çš„æ–¹æ³•
+	 * TODO:æ˜¯å¦å¯ä»¥å°†æŸ¥è¯¢åŠŸèƒ½æ”¾è¿›æ¥
+	 * TODO:å…¶å®ƒç½‘ç«™è¯»å–www.23wx.com www.biquge.com  www.booktxt.com
+	 * TODO:ä¼˜åŒ–[å¯ä»¥ä¸åš]
 	 * 
 	 * @author renke.zuo@foxmail.com
 	 * @time 2016-09-13 10:11:58
@@ -94,8 +94,8 @@ public class TestBrowers{
 		TestBrowers tb = new TestBrowers();
 		
 //		tb.readUrlData(url);
-//		tb.readCatalogToList(url,"²üÀõÊÀ½ç","dhzw");
-		tb.readUrlByThread(url,"¾ªã¤ÀÖÔ°","qu");
+//		tb.readCatalogToList(url,"é¢¤æ —ä¸–ç•Œ","dhzw");
+		tb.readUrlByThread(url,"æƒŠæ‚šä¹å›­","qu");
 	}
 	
 }

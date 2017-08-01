@@ -18,20 +18,20 @@ public class ReadXml {
 		this.document = document;
 	}
 	/**
-	 * ¶ÁÈ¡ÅäÖÃÎÄ¼ş£¬³õÊ¼»¯Á÷³Ì²Ù×÷Àà
+	 * è¯»å–é…ç½®æ–‡ä»¶ï¼Œåˆå§‹åŒ–æµç¨‹æ“ä½œç±»
 	 * @throws Exception
 	 */
 	public void initWorkFlow() throws Exception {
 		SAXReader reader = new SAXReader();
-		//°ÑxmlÎÄ¼ş¶ÁÈëµ½document¶ÔÏóÖĞ£¬×¢²âÊÔxmlºÍclassÎÄ¼şÍ¬¼¶
+		//æŠŠxmlæ–‡ä»¶è¯»å…¥åˆ°documentå¯¹è±¡ä¸­ï¼Œæ³¨æµ‹è¯•xmlå’Œclassæ–‡ä»¶åŒçº§
 		reader.read(this.getClass().getResource("") + "test.xml");
 		setDocument(reader.read(this.getClass().getResource("") +"test.xml"));
-		//È¡¸ù½Úµã
+		//å–æ ¹èŠ‚ç‚¹
 		Element root = document.getRootElement();
-		//±éÀú½Úµã£¬Êä³ö
+		//éå†èŠ‚ç‚¹ï¼Œè¾“å‡º
 		printE(root);
 	}
-	//È¡ËùÓĞ½Úµã
+	//å–æ‰€æœ‰èŠ‚ç‚¹
 	public void printE(Element e){
 		List<Element> list = e.elements();
 		if(list!=null&&list.size()>0){

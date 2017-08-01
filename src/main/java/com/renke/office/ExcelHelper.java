@@ -14,7 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 public class ExcelHelper {
 	public static void exportExcel(){
 		HSSFWorkbook workbook = new HSSFWorkbook();
-		HSSFSheet sheet = workbook.createSheet("¿Î±í");
+		HSSFSheet sheet = workbook.createSheet("è¯¾è¡¨");
 		HSSFRow row1 = sheet.createRow(0);
 		HSSFRow row2 = sheet.createRow(1);
 		

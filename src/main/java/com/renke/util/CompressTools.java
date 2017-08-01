@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class CompressTools {
 	/***
-	 * ¶ÁÈ¡ÎÄ¼şµÄÃ¿Ò»ĞĞ£¬trim()
-	 * ½«ËùÓĞ',|;|:|=|+|-|*|/|%|(|)|{|}|[|]'Ö®ºóÖ®Ç°µÄ¿Õ°××Ö·ûÈ¥µô
-	 * È¡<>Ö®¼äÄÚÈİ£¬¶à¸ö¿Õ°××Ö·ûÌæ»»ÎªÒ»¸ö
-	 * ½«ÒıºÅ""''ÄÚµÄÄÚÈİtrim()
-	 * È¡><Ö®¼äÄÚÈİ£¬trim();
-	 * ÒÔÉÏÓ¦¸ÃÂú×ã´ó²¿·ÖÇé¿öÁË£¬Èç¹û²»¹»£¬ºóĞøÔÙ¼Ó
+	 * è¯»å–æ–‡ä»¶çš„æ¯ä¸€è¡Œï¼Œtrim()
+	 * å°†æ‰€æœ‰',|;|:|=|+|-|*|/|%|(|)|{|}|[|]'ä¹‹åä¹‹å‰çš„ç©ºç™½å­—ç¬¦å»æ‰
+	 * å–<>ä¹‹é—´å†…å®¹ï¼Œå¤šä¸ªç©ºç™½å­—ç¬¦æ›¿æ¢ä¸ºä¸€ä¸ª
+	 * å°†å¼•å·""''å†…çš„å†…å®¹trim()
+	 * å–><ä¹‹é—´å†…å®¹ï¼Œtrim();
+	 * ä»¥ä¸Šåº”è¯¥æ»¡è¶³å¤§éƒ¨åˆ†æƒ…å†µäº†ï¼Œå¦‚æœä¸å¤Ÿï¼Œåç»­å†åŠ 
 	 * 
 	 * @param html
 	 * @return
@@ -47,7 +47,7 @@ public class CompressTools {
 	}
 	
 	public static void main(String[] args) {
-		File file = new File("F:\\work\\model\\¼òµ¥ºóÌ¨\\compress.html");
+		File file = new File("F:\\work\\model\\ç®€å•åå°\\compress.html");
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			StringBuilder html = new StringBuilder();

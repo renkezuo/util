@@ -3,22 +3,22 @@ package com.renke.lesson.pojo;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * ÀÏÊ¦
- * ×î´ó¿ÎÊ±Êı/ÈÕ
- * Ê£Óà¿ÎÊ±Êı/ÈÕ
- * ×î¶à°à¼¶Êı/Ñ§Äê
- * Ê£Óà°à¼¶Êı/Ñ§Äê
+ * è€å¸ˆ
+ * æœ€å¤§è¯¾æ—¶æ•°/æ—¥
+ * å‰©ä½™è¯¾æ—¶æ•°/æ—¥
+ * æœ€å¤šç­çº§æ•°/å­¦å¹´
+ * å‰©ä½™ç­çº§æ•°/å­¦å¹´
  * @author Z.R.K
  * @time 2017-04-07 11:45:15
  */
 public class TeacherBak extends Base{
-	//³£Á¿
+	//å¸¸é‡
 	private int maxLesson;
 	private int minLesson;
 	private int maxClass;
 	private Course course;
 	
-	//Ìõ¼ş±äÁ¿
+	//æ¡ä»¶å˜é‡
 	private AtomicInteger surplusClass;
 	private AtomicInteger useLesson;
 	private int day;

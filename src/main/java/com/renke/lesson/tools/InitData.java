@@ -31,37 +31,37 @@ public class InitData {
 			course.setTeachers(teachers);
 			switch (i) {
 				case 0:
-					course.setName("ÓïÎÄ");
+					course.setName("è¯­æ–‡");
 					break;
 				case 1:
-					course.setName("ÊıÑ§");
+					course.setName("æ•°å­¦");
 					break;
 				case 2:
-					course.setName("ÍâÓï");
+					course.setName("å¤–è¯­");
 					break;
 				case 3:
-					course.setName("ÎïÀí");
+					course.setName("ç‰©ç†");
 					break;
 				case 4:
-					course.setName("»¯Ñ§");
+					course.setName("åŒ–å­¦");
 					break;
 				case 5:
-					course.setName("ÉúÎï");
+					course.setName("ç”Ÿç‰©");
 					break;
 				case 6:
-					course.setName("ÕşÖÎ");
+					course.setName("æ”¿æ²»");
 					break;
 				case 7:
-					course.setName("ÀúÊ·");
+					course.setName("å†å²");
 					break;
 				case 8:
-					course.setName("µØÀí");
+					course.setName("åœ°ç†");
 					break;
 				case 9:
-					course.setName("ÌåÓı");
+					course.setName("ä½“è‚²");
 					break;
 				default:
-					course.setName("¼¼Êõ");
+					course.setName("æŠ€æœ¯");
 					break;
 			}
 			courses[i] = course;
@@ -71,8 +71,8 @@ public class InitData {
 	
 	public static Map<Long, TeacherBak[]> teachers() {
 		Map<Long,TeacherBak[]> courseTeachers = new HashMap<>();
-		//ÓïÊıÍâÀÏÊ¦¸÷2Î»£º6
-		//Àí»¯Éú£¬ÕşÊ·µØ£¬Ìå¼¼¸÷1Î»£º8
+		//è¯­æ•°å¤–è€å¸ˆå„2ä½ï¼š6
+		//ç†åŒ–ç”Ÿï¼Œæ”¿å²åœ°ï¼Œä½“æŠ€å„1ä½ï¼š8
 		for(int i = 0 ; i< 14 ; i++){
 			TeacherBak teacher = new TeacherBak();
 			Long courseId = i%11+1L;
@@ -110,7 +110,7 @@ public class InitData {
 	public static Klass3[] klasses(Course[] courses) {
 		Klass3[] klasses = new Klass3[7];
 		for(int i=0;i<7;i++){
-			//°à¼¶¿ÆÄ¿¿ÎÊ±Êı
+			//ç­çº§ç§‘ç›®è¯¾æ—¶æ•°
 			int[] courseCounts = new int[11];
 			for(int c=0;c<11;c++){
 				if(c<3){
@@ -134,12 +134,12 @@ public class InitData {
 			klass.setWeekNeedCourseLessons(new int[courses.length]);
 			klass.setTeachers(new TeacherBak[courses.length]);
 			for(int index=0;index<courses.length;index++){
-				//ÓïÊıÍâ
+				//è¯­æ•°å¤–
 				if(index < 3){
 					klass.getCourseMaxDays()[index] = 5;
 					klass.getDayMaxCourseLessons()[index] = 3;
 					klass.getWeekNeedCourseLessons()[index] = 6;
-				//ÕşÊ·µØ£¬Àí»¯Éú	
+				//æ”¿å²åœ°ï¼Œç†åŒ–ç”Ÿ	
 				}else if (index < 9){
 					klass.getCourseMaxDays()[index] = 5;
 					klass.getDayMaxCourseLessons()[index] = 1;
@@ -205,8 +205,8 @@ public class InitData {
 
 	public static Map<Long, Teacher2[]> teachers2() {
 		Map<Long,Teacher2[]> courseTeachers = new HashMap<>();
-		//ÓïÊıÍâÀÏÊ¦¸÷2Î»£º6
-		//Àí»¯Éú£¬ÕşÊ·µØ£¬Ìå¼¼¸÷1Î»£º8
+		//è¯­æ•°å¤–è€å¸ˆå„2ä½ï¼š6
+		//ç†åŒ–ç”Ÿï¼Œæ”¿å²åœ°ï¼Œä½“æŠ€å„1ä½ï¼š8
 		for(int i = 0 ; i< 14 ; i++){
 			Teacher2 teacher2 = new Teacher2();
 			Long courseKey = i%11+1L;
@@ -243,47 +243,47 @@ public class InitData {
 			course.setTeachers(teachers);
 			switch (i) {
 				case 0:
-					course.setName("ÓïÎÄ");
+					course.setName("è¯­æ–‡");
 					course.setLevel(2);
 					break;
 				case 1:
-					course.setName("ÊıÑ§");
+					course.setName("æ•°å­¦");
 					course.setLevel(2);
 					break;
 				case 2:
-					course.setName("ÍâÓï");
+					course.setName("å¤–è¯­");
 					course.setLevel(2);
 					break;
 				case 3:
-					course.setName("ÎïÀí");
+					course.setName("ç‰©ç†");
 					course.setLevel(1);
 					break;
 				case 4:
-					course.setName("»¯Ñ§");
+					course.setName("åŒ–å­¦");
 					course.setLevel(1);
 					break;
 				case 5:
-					course.setName("ÉúÎï");
+					course.setName("ç”Ÿç‰©");
 					course.setLevel(1);
 					break;
 				case 6:
-					course.setName("ÕşÖÎ");
+					course.setName("æ”¿æ²»");
 					course.setLevel(1);
 					break;
 				case 7:
-					course.setName("ÀúÊ·");
+					course.setName("å†å²");
 					course.setLevel(1);
 					break;
 				case 8:
-					course.setName("µØÀí");
+					course.setName("åœ°ç†");
 					course.setLevel(1);
 					break;
 				case 9:
-					course.setName("ÌåÓı");
+					course.setName("ä½“è‚²");
 					course.setLevel(0);
 					break;
 				default:
-					course.setName("¼¼Êõ");
+					course.setName("æŠ€æœ¯");
 					course.setLevel(1);
 					break;
 			}
@@ -296,7 +296,7 @@ public class InitData {
 	public static Klass2[] klasses2(Course2[] courses) {
 		Klass2[] klasses = new Klass2[7];
 		for(int i=0;i<7;i++){
-			//°à¼¶¿ÆÄ¿¿ÎÊ±Êı
+			//ç­çº§ç§‘ç›®è¯¾æ—¶æ•°
 			int[] courseCounts = new int[11];
 			for(int c=0;c<11;c++){
 				if(c<3){
@@ -315,11 +315,11 @@ public class InitData {
 //			klass.setDayMaxCourseLessonUnitCount(new int[courses.length]);
 //			klass.setTeachers(new ArrayList<Teacher2[]>());
 			for(int index=0;index<courses.length;index++){
-				//ÓïÊıÍâ
+				//è¯­æ•°å¤–
 				if(index < 3){
 //					klass.getDayMaxCourseLessonUnitCount()[index] = 3;
 //					klass.getWeekCourseLessonUnitCount()[index] = 6;
-				//ÕşÊ·µØ£¬Àí»¯Éú	
+				//æ”¿å²åœ°ï¼Œç†åŒ–ç”Ÿ	
 				}else if (index < 9){
 //					klass.getDayMaxCourseLessonUnitCount()[index] = 1;
 //					klass.getWeekCourseLessonUnitCount()[index] = 3;

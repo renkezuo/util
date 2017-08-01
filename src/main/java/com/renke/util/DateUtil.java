@@ -8,7 +8,7 @@ import java.util.Date;
 public class DateUtil {
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÈÕÆÚÔö¼ÓoffsetÌìÊıÖ®ºóµÄÄÇÒ»ÖÜÆğÖ¹ÈÕÆÚ
+	 * è·å–å½“å‰æ—¥æœŸå¢åŠ offsetå¤©æ•°ä¹‹åçš„é‚£ä¸€å‘¨èµ·æ­¢æ—¥æœŸ
 	 * @author renke.zuo@foxmail.com
 	 * @time 2017-03-14 10:02:25
 	 * @param offset
@@ -21,15 +21,15 @@ public class DateUtil {
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
-		//ÈÕÀú¼ÆËã£¬ÖÜÈÕÎªÃ¿ÖÜµÚÒ»Ìì
+		//æ—¥å†è®¡ç®—ï¼Œå‘¨æ—¥ä¸ºæ¯å‘¨ç¬¬ä¸€å¤©
 		c.add(Calendar.DAY_OF_MONTH, -1);
-		//ÉèÖÃµ±Ç°ÈÕÆÚÎªÖÜÒ»
+		//è®¾ç½®å½“å‰æ—¥æœŸä¸ºå‘¨ä¸€
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		
 		dates[0] = c.getTime();
 
 		
-		//ÒòÎªÖÜÈÕÎªÒ»ÖÜµÚÒ»Ìì£¬¹Ê£¬È¡ÏÂÖÜÖÜÈÕ
+		//å› ä¸ºå‘¨æ—¥ä¸ºä¸€å‘¨ç¬¬ä¸€å¤©ï¼Œæ•…ï¼Œå–ä¸‹å‘¨å‘¨æ—¥
 		c.add(Calendar.DAY_OF_MONTH, 7);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 		c.set(Calendar.HOUR_OF_DAY, 23);
@@ -42,11 +42,11 @@ public class DateUtil {
 	}
 	
 	/**
-	 * ¼ÆËã´Óµ±ÈÕÆğÇ°dayCountÌìÊ±¼ä
+	 * è®¡ç®—ä»å½“æ—¥èµ·å‰dayCountå¤©æ—¶é—´
 	 * @author gjx
-	 * @date 2017Äê3ÔÂ20ÈÕ
+	 * @date 2017å¹´3æœˆ20æ—¥
 	 * @param dayCount
-	 * @param init true³õÊ¼»¯µ½Áãµã£¬falseÊ±·ÖÃë²»±ä
+	 * @param init trueåˆå§‹åŒ–åˆ°é›¶ç‚¹ï¼Œfalseæ—¶åˆ†ç§’ä¸å˜
 	 * @return
 	 */
 	public static Date calStartDate(int dayCount,Boolean init){
@@ -70,8 +70,8 @@ public class DateUtil {
 		}
 		return startTime;
 	}
-	//System.currentTimeMillis() = UTCµ±Ç°Ê±¼äºÁÃëÊı - 0 [UTC 1970-01-01 00:00:00ºÁÃëÊı]
-	//ËùÎ½µÄÊ±Çø£¬¶¼ÊÇÔÚUTC»ù´¡ÉÏ£¬×ö¼Ó¼õ·¨
+	//System.currentTimeMillis() = UTCå½“å‰æ—¶é—´æ¯«ç§’æ•° - 0 [UTC 1970-01-01 00:00:00æ¯«ç§’æ•°]
+	//æ‰€è°“çš„æ—¶åŒºï¼Œéƒ½æ˜¯åœ¨UTCåŸºç¡€ä¸Šï¼ŒåšåŠ å‡æ³•
 	public static void main(String[] args) {
 		Date dates[] = getWeekDate(18);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -10,7 +10,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Ä¬ÈÏµÄ¶ÓÁĞ ¼ÓÈë ÌáÈ¡ ²é¿´ ±éÀú ·µ»Ø´óĞ¡
+ * é»˜è®¤çš„é˜Ÿåˆ— åŠ å…¥ æå– æŸ¥çœ‹ éå† è¿”å›å¤§å°
  * 
  * @author renke.zuo@foxmail.com
  * @version V1.0
@@ -24,13 +24,13 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 	private Object[] queue;
 
 	public DefaultQueue() {
-		//¹«Æ½Ëø
+		//å…¬å¹³é”
 		lock = new ReentrantLock(false);
 		queue = new Object[16];
 	}
 
 	public DefaultQueue(int initSize) {
-		//¹«Æ½Ëø 
+		//å…¬å¹³é” 
 		lock = new ReentrantLock(false);
 		queue = new Object[initSize];
 	}
@@ -38,14 +38,14 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 	@Override
 	public boolean offer(T e) {
 		lock.lock();
-		// Èç¹ûÂúÁË£¬¾ÍÀ©Õ¹¶ÓÁĞ£¬Ò»´ÎÀ©Õ¹16Î»
+		// å¦‚æœæ»¡äº†ï¼Œå°±æ‰©å±•é˜Ÿåˆ—ï¼Œä¸€æ¬¡æ‰©å±•16ä½
 		if(size == queue.length){
 			queue = Arrays.copyOf(queue, queue.length + 16);
 		}
-		// ÕÒµ½¶ÓÁĞÖĞ¿ÕµÄÎ»ÖÃ£¬²åÈë½øÈ¥
+		// æ‰¾åˆ°é˜Ÿåˆ—ä¸­ç©ºçš„ä½ç½®ï¼Œæ’å…¥è¿›å»
 		queue[size++] = e; 
 		lock.unlock();
-		// ²åÈë½øÈ¥£¬Ôòsize+1
+		// æ’å…¥è¿›å»ï¼Œåˆ™size+1
 		return true;
 	}
 
@@ -56,12 +56,12 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 			return null;
 		}
 		lock.lock();
-		// È¡³ö¶ÓÁĞÖĞµÄµÚÒ»¸ö
+		// å–å‡ºé˜Ÿåˆ—ä¸­çš„ç¬¬ä¸€ä¸ª
 		T t = (T)queue[0];
-		// ½«¶ÓÁĞÕûÌåÇ°ÒÆÒ»Î»
+		// å°†é˜Ÿåˆ—æ•´ä½“å‰ç§»ä¸€ä½
 		System.arraycopy(queue, 1, queue, 0, queue.length-1);
 		queue[size--] = null;
-		// ´Ë´¦ĞèÒªlock
+		// æ­¤å¤„éœ€è¦lock
 		lock.unlock();
 		// TODO Auto-generated method stub
 		return t;
@@ -70,7 +70,7 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public T peek() {
-		// »ñÈ¡¶ÓÁĞµÚÒ»¸ö
+		// è·å–é˜Ÿåˆ—ç¬¬ä¸€ä¸ª
 		return (T) queue[0];
 	}
 
@@ -105,10 +105,10 @@ public class DefaultQueue<T> extends AbstractQueue<T> implements Serializable {
 		}
 
 		public void remove() {
-			//Èç¹ûÊÇÁ´±í£¬Ö±½ÓÕÒµ½ÄÇ¸ö½Úµã£¬È»ºó½«ËûµÄÉÏÏÂ¼¶¹´´îÆğÀ´¾Í¿ÉÒÔÁË
-			//Èç¹ûÊÇÊı×é£¬ĞèÒª½«Êı×é×ø±ê¼ÇÂ¼£¬È»ºó½«Ç°Ò»¶ÎÊı¾İºÍºóÒ»¶ÎÊı¾İ×é×°µ½Ò»¸öĞÂÊı×éÀïÃæ
-			//cursor²»±ä£¬size±äĞ¡
-			//É¾³ıµÄÊ±ºòÒªÉÏËø
+			//å¦‚æœæ˜¯é“¾è¡¨ï¼Œç›´æ¥æ‰¾åˆ°é‚£ä¸ªèŠ‚ç‚¹ï¼Œç„¶åå°†ä»–çš„ä¸Šä¸‹çº§å‹¾æ­èµ·æ¥å°±å¯ä»¥äº†
+			//å¦‚æœæ˜¯æ•°ç»„ï¼Œéœ€è¦å°†æ•°ç»„åæ ‡è®°å½•ï¼Œç„¶åå°†å‰ä¸€æ®µæ•°æ®å’Œåä¸€æ®µæ•°æ®ç»„è£…åˆ°ä¸€ä¸ªæ–°æ•°ç»„é‡Œé¢
+			//cursorä¸å˜ï¼Œsizeå˜å°
+			//åˆ é™¤çš„æ—¶å€™è¦ä¸Šé”
 		}
 	}
 	

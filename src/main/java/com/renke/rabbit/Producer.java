@@ -8,10 +8,10 @@ import org.apache.commons.lang3.SerializationUtils;
 
 /**
  * 
- * ¹¦ÄÜ¸ÅÒª£ºÏûÏ¢Éú²úÕß
+ * åŠŸèƒ½æ¦‚è¦ï¼šæ¶ˆæ¯ç”Ÿäº§è€…
  * 
  * @author linbingwen
- * @since 2016Äê1ÔÂ11ÈÕ
+ * @since 2016å¹´1æœˆ11æ—¥
  */
 public class Producer extends EndPoint {
 

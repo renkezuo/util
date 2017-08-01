@@ -17,7 +17,7 @@ import com.renke.ebook.pojo.WebSite;
 
 public class BookParser {
 	/**
-	 * ¶ÁÈ¡Ä¿Â¼£¬·â×°µ½list
+	 * è¯»å–ç›®å½•ï¼Œå°è£…åˆ°list
 	 * @param bytes
 	 * @return
 	 * @throws IOException
@@ -27,7 +27,7 @@ public class BookParser {
 		String html = new String(bytes,ws.sourceEncoding);
 		File f = new File(ws.savePath);
 		if(!f.isDirectory()) f.mkdirs();
-		//ÉèÖÃ×¥È¡Í·£¬ºÍ×¥È¡Î²[±ÜÃâ×¥È¡´íÎóµÄa±êÇ©]
+		//è®¾ç½®æŠ“å–å¤´ï¼Œå’ŒæŠ“å–å°¾[é¿å…æŠ“å–é”™è¯¯çš„aæ ‡ç­¾]
 		char[] chars = html.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		boolean isBegin = false;
@@ -82,7 +82,7 @@ public class BookParser {
 	}
 	
 	/**
-	 * ½«×¥È¡µÄÊı¾İĞ´Èëµ½¶ÔÓ¦ÎÄ¼ş
+	 * å°†æŠ“å–çš„æ•°æ®å†™å…¥åˆ°å¯¹åº”æ–‡ä»¶
 	 * @param bytes
 	 * @param s
 	 * @param ws

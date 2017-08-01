@@ -4,27 +4,27 @@ public class WaitTest {
 
 	public static void main(String[] args) {
 		ThreadA ta = new ThreadA("ta");
-		synchronized (ta) { // Í¨¹ısynchronized(ta)»ñÈ¡¡°¶ÔÏótaµÄÍ¬²½Ëø¡±
+		synchronized (ta) { // é€šè¿‡synchronized(ta)è·å–â€œå¯¹è±¡taçš„åŒæ­¥é”â€
 			try {
-				System.out.println("¿ªÊ¼");
+				System.out.println("å¼€å§‹");
 				ta.start();
 				Thread.sleep(1000);
-				System.out.println("MAINÏß³Ì½øÈëµÈ´ı...");
-				// Ö÷Ïß³ÌµÈ´ı
+				System.out.println("MAINçº¿ç¨‹è¿›å…¥ç­‰å¾…...");
+				// ä¸»çº¿ç¨‹ç­‰å¾…
 				ta.wait();
-				System.out.println("MAINÏß³Ì±»½ĞĞÑ£¬×¼±¸½ĞĞÑÒ»¸öÏß³Ì");
+				System.out.println("MAINçº¿ç¨‹è¢«å«é†’ï¼Œå‡†å¤‡å«é†’ä¸€ä¸ªçº¿ç¨‹");
 				Thread.sleep(5000);
-				System.out.println("MAINÏß³Ì½ĞĞÑÒ»¸öÏß³Ì£¬µ«ÊÇËü»¹ÒªµÈ´ıÎÒÊÍ·ÅËø");
+				System.out.println("MAINçº¿ç¨‹å«é†’ä¸€ä¸ªçº¿ç¨‹ï¼Œä½†æ˜¯å®ƒè¿˜è¦ç­‰å¾…æˆ‘é‡Šæ”¾é”");
 				Thread.sleep(1000);
 				ta.notify();
-				System.out.println("3sºó£¬MAINÏß³ÌÊÍ·ÅTAÏß³ÌËø");
+				System.out.println("3såï¼ŒMAINçº¿ç¨‹é‡Šæ”¾TAçº¿ç¨‹é”");
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("MAINÏß³ÌÊÍ·ÅTAÏß³ÌËø");
+			System.out.println("MAINçº¿ç¨‹é‡Šæ”¾TAçº¿ç¨‹é”");
 		}
-		System.out.println("Ö÷Ïß³Ì½áÊø");
+		System.out.println("ä¸»çº¿ç¨‹ç»“æŸ");
 	}
 
 	static class ThreadA extends Thread {
@@ -32,16 +32,16 @@ public class WaitTest {
 			super(name);
 		}
 		public void run() {
-			synchronized (this) { // Í¨¹ısynchronized(this)»ñÈ¡¡°µ±Ç°¶ÔÏóµÄÍ¬²½Ëø¡±
+			synchronized (this) { // é€šè¿‡synchronized(this)è·å–â€œå½“å‰å¯¹è±¡çš„åŒæ­¥é”â€
 				try {
-					System.out.println("TAÏß³Ì¿ªÊ¼Ö´ĞĞ£¬5sºó½ĞĞÑÒ»¸öÏß³Ì");
+					System.out.println("TAçº¿ç¨‹å¼€å§‹æ‰§è¡Œï¼Œ5såå«é†’ä¸€ä¸ªçº¿ç¨‹");
 					sleep(5000);
-					System.out.println("TA½ĞĞÑÒ»¸öÏß³Ì");
+					System.out.println("TAå«é†’ä¸€ä¸ªçº¿ç¨‹");
 					notify();
 					Thread.sleep(1000);
-					System.out.println("TAÏß³Ì×¼±¸µÈ´ı");
+					System.out.println("TAçº¿ç¨‹å‡†å¤‡ç­‰å¾…");
 					sleep(5000);
-					System.out.println("TAµÈ´ı£¬ÊÍ·ÅËø");
+					System.out.println("TAç­‰å¾…ï¼Œé‡Šæ”¾é”");
 					wait();
 				} catch (Exception e1) {
 					try {
@@ -50,9 +50,9 @@ public class WaitTest {
 						e.printStackTrace();
 					}
 				}
-				System.out.println("TA×ÓÏß³Ì±»½ĞĞÑ");
+				System.out.println("TAå­çº¿ç¨‹è¢«å«é†’");
 			}
-			System.out.println("TA×ÓÏß³Ì½áÊø");
+			System.out.println("TAå­çº¿ç¨‹ç»“æŸ");
 		}
 	}
 }

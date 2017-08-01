@@ -25,7 +25,7 @@ public class ConnectAcc {
 //		try{
 //			Class.forName("com.ibm.db2.jcc.DB2Driver");
 //		}catch(ClassNotFoundException e){
-//			System.out.println("Î´·¢ÏÖÇı¶¯°ü£¡");
+//			System.out.println("æœªå‘ç°é©±åŠ¨åŒ…ï¼");
 //		}
 //		try{
 //			con = DriverManager.getConnection("jdbc:db2://158.222.31.243:50000/acms","acms","acms1234");
@@ -67,9 +67,9 @@ public class ConnectAcc {
 //		}
 		
 		
-		String url = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=E://²âÊÔ//DataBase//db.mdb";
+		String url = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=E://æµ‹è¯•//DataBase//db.mdb";
 		try {
-			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");// ¼ÓÔØJDBC-ODBCÇı¶¯
+			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");// åŠ è½½JDBC-ODBCé©±åŠ¨
 		}catch (ClassNotFoundException e) {
 			System.out.println("Error connected!");
 		}
@@ -95,7 +95,7 @@ public class ConnectAcc {
 			}
 //			for(int i=0;i<list.size();i++){
 //				Map map2 = (Map)list.get(i);
-//				System.out.println("ID£º"+map2.get("ID"));
+//				System.out.println("IDï¼š"+map2.get("ID"));
 //			}
 			con.commit();
 		} catch (SQLException e) {

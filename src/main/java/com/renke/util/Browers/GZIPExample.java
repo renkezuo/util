@@ -23,7 +23,7 @@ public class GZIPExample {
     }
     
     public static void byteExample() throws IOException{
-    	String str = "ÄãºÃ£¬ÊÀ½ç(Hello world)";
+    	String str = "ä½ å¥½ï¼Œä¸–ç•Œ(Hello world)";
     	GZIPOutputStream gout = new GZIPOutputStream(new FileOutputStream(new File("mytest")));
     	gout.write(str.getBytes());
     	gout.flush();
@@ -50,7 +50,7 @@ public class GZIPExample {
     }
     
     private static void decompressGzipFile(String gzipFile, String newFile) {
-    	//Í¨¹ıgzip¶ÁÈ¡Á÷ÎÄ¼ş£¬¶ÁÈ¡Ê±£¬×Ô¶¯½«Êı¾İ×ª»»ÎªÕı³£Êı¾İ
+    	//é€šè¿‡gzipè¯»å–æµæ–‡ä»¶ï¼Œè¯»å–æ—¶ï¼Œè‡ªåŠ¨å°†æ•°æ®è½¬æ¢ä¸ºæ­£å¸¸æ•°æ®
         try {
             FileInputStream fis = new FileInputStream(gzipFile);
             GZIPInputStream gis = new GZIPInputStream(fis);
@@ -73,7 +73,7 @@ public class GZIPExample {
     private static void compressGzipFile(String file, String gzipFile) {
         try {
         	
-        	//¶ÁÈ¡Õı³£ÎÄ¼ş£¬½«ÎÄ¼ş¾­¹ıgzipÁ÷Êä³ö
+        	//è¯»å–æ­£å¸¸æ–‡ä»¶ï¼Œå°†æ–‡ä»¶ç»è¿‡gzipæµè¾“å‡º
         	BufferedReader br = new BufferedReader(new FileReader(file));
             FileOutputStream fos = new FileOutputStream(gzipFile);
             GZIPOutputStream gzipOS = new GZIPOutputStream(fos);

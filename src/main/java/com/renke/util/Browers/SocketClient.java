@@ -37,7 +37,7 @@ public class SocketClient {
 	}
 
 	/***
-	 * ¸ù¾İURL½âÎöhost,ip,port,uri£¬Í¬Ê±½«msg·â×°µ½HTTPHeaderÖĞ
+	 * æ ¹æ®URLè§£æhost,ip,port,uriï¼ŒåŒæ—¶å°†msgå°è£…åˆ°HTTPHeaderä¸­
 	 * 
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
@@ -91,7 +91,7 @@ public class SocketClient {
 		}
 	}
 	/**
-	 * ¶ÁÈ¡Ä¿Â¼£¬¸ù¾İÄ¿Â¼¶ÁÈ¡Êı¾İ
+	 * è¯»å–ç›®å½•ï¼Œæ ¹æ®ç›®å½•è¯»å–æ•°æ®
 	 * @param pb
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
@@ -109,7 +109,7 @@ public class SocketClient {
 	}
 	
 	/**
-	 * ÖÜÒ»£¬°Ñlog4jºÍ¶àÏß³Ì¼Ó½øÀ´
+	 * å‘¨ä¸€ï¼ŒæŠŠlog4jå’Œå¤šçº¿ç¨‹åŠ è¿›æ¥
 	 * @param list
 	 * @param pb
 	 */
@@ -146,10 +146,10 @@ public class SocketClient {
 	
 	public void readData(String url,String msg) throws Exception{
 		initHTTP(url, msg);
-		//·¢ËÍHTTPÇëÇó
+		//å‘é€HTTPè¯·æ±‚
 		System.out.println(url + " start at " + new Date());
 		ParseHTTP.sendGetMessage(socket.getOutputStream(), http);
-		//½âÎöÏìÓ¦£¬·µ»Ø½á¹û±£´æµ½HTTP¶ÔÏó
+		//è§£æå“åº”ï¼Œè¿”å›ç»“æœä¿å­˜åˆ°HTTPå¯¹è±¡
 		ParseHTTP.parseResponse(socket.getInputStream(),  http);
 		System.out.println(url + " end at " + new Date());
 	}
@@ -171,26 +171,26 @@ public class SocketClient {
 
 //		String searchUrl = "http://zhannei.baidu.com/cse/search?s=1243419093590560530&q=";
 		
-		String bookName = "°ÂÊõÉñ×ù";
+		String bookName = "å¥¥æœ¯ç¥åº§";
 		// url = "http://xdmadmin.alpha.joinclub.cn/xdm-admin/admin/login";
 		String msg = "";
 		ParseBook pb = new ParseBookShuqi6(bookName,url);
 		try {
 			long b = System.currentTimeMillis();
-			//»ñÈ¡Á¬½Ó
+			//è·å–è¿æ¥
 			SocketClient sc = new SocketClient(url, msg);
 			System.out.println("connect time : " + (System.currentTimeMillis() - b) + "ms");
-			//·¢ËÍHTTPÇëÇó
+			//å‘é€HTTPè¯·æ±‚
 			b = System.currentTimeMillis();//1849917//1856892
 			sc.readData(url, msg);
 			sc.showResponse(url, msg);
 			ParseHTTP.printAll(new ByteArrayInputStream(sc.getHttp().getBytes()));
 			sc.writeControl(pb);
 //			ParseHTTP.sendGetMessage(sc.getSocket().getOutputStream(), sc.getHttp());
-//			//½âÎöÏìÓ¦£¬·µ»Ø½á¹û±£´æµ½HTTP¶ÔÏó
+//			//è§£æå“åº”ï¼Œè¿”å›ç»“æœä¿å­˜åˆ°HTTPå¯¹è±¡
 //			ParseHTTP.parseResponse(sc.getSocket().getInputStream(),  sc.getHttp());
 			System.out.println("parse time : " + (System.currentTimeMillis() - b) + "ms");
-			//Ê¹ÓÃReader¶ÁÈ¡×Ö½ÚÊı¾İ£¬²¢×ö¹æÔòÆ¥Åä£¬É¸Ñ¡³öÓĞĞ§Êı¾İ
+			//ä½¿ç”¨Readerè¯»å–å­—èŠ‚æ•°æ®ï¼Œå¹¶åšè§„åˆ™åŒ¹é…ï¼Œç­›é€‰å‡ºæœ‰æ•ˆæ•°æ®
 //			String html = new String(sc.getHttp().getBytes()
 //					, sc.getHttp().getResponse().get(ParseHTTP.ENCODING_KEY));
 //			System.out.println(html);

@@ -10,14 +10,14 @@ public class EBookHelper {
 	}
 	
 	/**
-	 * »ñÈ¡È«²¿ÎÄ±¾ÄÚÈİ
+	 * è·å–å…¨éƒ¨æ–‡æœ¬å†…å®¹
 	 * @return
 	 */
 	public String getAllText(){
 		StringBuffer allText = new StringBuffer();
 		String lineText = "";
 		try {
-			//¶ÁÈ¡ÎÄ¼ş
+			//è¯»å–æ–‡ä»¶
 			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));
 			while((lineText=br.readLine())!=null){
 				allText.append(lineText).append("\r\n");
@@ -30,23 +30,23 @@ public class EBookHelper {
 	}
 	
 	/**
-	 * Ã¿LESSON_LINEÎªÒ»¶Î
-	 * ×¢£ºÔÚµ±Ç°Ò³Îªµ±Ç°¶Î×îºóÒ»Ò³Ê±´¥·¢
+	 * æ¯LESSON_LINEä¸ºä¸€æ®µ
+	 * æ³¨ï¼šåœ¨å½“å‰é¡µä¸ºå½“å‰æ®µæœ€åä¸€é¡µæ—¶è§¦å‘
 	 * @return
 	 */
 	public String getNextLessonByLine(){
-		//ÏÂÒ»¶ÎÄÚÈİ
+		//ä¸‹ä¸€æ®µå†…å®¹
 		StringBuffer nextLesson = new StringBuffer();
-		//µ±Ç°¶ÎĞĞÊıË÷Òı´óÓÚÎÄ¼ş×ÜĞĞÊıÊ±
+		//å½“å‰æ®µè¡Œæ•°ç´¢å¼•å¤§äºæ–‡ä»¶æ€»è¡Œæ•°æ—¶
 		if(ebook.getThisLine()>=ebook.getFileLine()) return null;
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//¶ÁÈ¡ÎÄ¼ş
-			int count = 0;				//´Ó¿ªÊ¼¶Áµ½µ±Ç°ĞĞĞĞÊı
-			int next_line = 0;			//ÏÂÒ»Ò³µÄ¶ÎÄÚÈİµÄĞĞÊı
-			String lineText = "";		//Ã¿ĞĞÄÚÈİ
+			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//è¯»å–æ–‡ä»¶
+			int count = 0;				//ä»å¼€å§‹è¯»åˆ°å½“å‰è¡Œè¡Œæ•°
+			int next_line = 0;			//ä¸‹ä¸€é¡µçš„æ®µå†…å®¹çš„è¡Œæ•°
+			String lineText = "";		//æ¯è¡Œå†…å®¹
 			while((lineText=br.readLine())!=null){
 				count ++;
-				//µ±Ç°ĞĞÊıĞ¡ÓÚµ±Ç°¶ÎµÄĞĞÊıË÷ÒıÊ±
+				//å½“å‰è¡Œæ•°å°äºå½“å‰æ®µçš„è¡Œæ•°ç´¢å¼•æ—¶
 				if(ebook.getThisLine()<count){
 					next_line++;
 					nextLesson.append(lineText).append("\r\n");
@@ -66,18 +66,18 @@ public class EBookHelper {
 	
 	
 	/**
-	 * Ã¿LESSON_LINEÎªÒ»¶Î
-	 * ×¢£º´Ë·½·¨Ö»ÔÚµ±Ç°Ò³Îªµ±Ç°¶ÎµÄµÚÒ»Ò³Ê±´¥·¢
+	 * æ¯LESSON_LINEä¸ºä¸€æ®µ
+	 * æ³¨ï¼šæ­¤æ–¹æ³•åªåœ¨å½“å‰é¡µä¸ºå½“å‰æ®µçš„ç¬¬ä¸€é¡µæ—¶è§¦å‘
 	 */
 	public String getPreviousLessonByLine(){
 		StringBuffer preLesson = new StringBuffer();
 		if(ebook.getThisLine()<ebook.LESSON_LINE*2) return null;
 		try {
 			ebook.setThisLine(ebook.getPrevLine());
-			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//¶ÁÈ¡ÎÄ¼ş
-			int count = 0;				//´Ó¿ªÊ¼¶Áµ½µ±Ç°ĞĞĞĞÊı
-			int prev_line = 0;			//ÉÏÒ»Ò³µÄ¶ÎÄÚÈİµÄĞĞÊı
-			String lineText = "";		//Ã¿ĞĞÄÚÈİ
+			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//è¯»å–æ–‡ä»¶
+			int count = 0;				//ä»å¼€å§‹è¯»åˆ°å½“å‰è¡Œè¡Œæ•°
+			int prev_line = 0;			//ä¸Šä¸€é¡µçš„æ®µå†…å®¹çš„è¡Œæ•°
+			String lineText = "";		//æ¯è¡Œå†…å®¹
 			while((lineText=br.readLine())!=null){
 				count ++;
 				if(count<ebook.getThisLine()){
@@ -110,10 +110,10 @@ public class EBookHelper {
 		ebook.setNowLine((ebook.getFileLine()*rate)/100);
 		StringBuffer rateLesson = new StringBuffer();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//¶ÁÈ¡ÎÄ¼ş
-			int count = 0;				//´Ó¿ªÊ¼¶Áµ½µ±Ç°ĞĞĞĞÊı
-			int line = 0;				//ËùÔÚĞĞÊıË÷ÒıµÄ¶ÎĞĞÊı
-			String lineText = "";		//Ã¿ĞĞÄÚÈİ
+			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));//è¯»å–æ–‡ä»¶
+			int count = 0;				//ä»å¼€å§‹è¯»åˆ°å½“å‰è¡Œè¡Œæ•°
+			int line = 0;				//æ‰€åœ¨è¡Œæ•°ç´¢å¼•çš„æ®µè¡Œæ•°
+			String lineText = "";		//æ¯è¡Œå†…å®¹
 			while((lineText=br.readLine())!=null){
 				count ++;
 				line ++;
@@ -144,17 +144,17 @@ public class EBookHelper {
 //		StringBuffer nextLesson = new StringBuffer();
 //		if(ebook.getThisByte()>=ebook.getFileByte()) return null;
 //		try {
-//			//¶ÁÈ¡ÎÄ¼ş
+//			//è¯»å–æ–‡ä»¶
 //			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));
-//			//È«²¿ÄÚÈİ
+//			//å…¨éƒ¨å†…å®¹
 //			StringBuffer txt = new StringBuffer();
-//			//Ã¿ĞĞÄÚÈİ
+//			//æ¯è¡Œå†…å®¹
 //			String lineText = "";
-//			//µ±Ç°¶ÎµÄ³¤¶È
+//			//å½“å‰æ®µçš„é•¿åº¦
 //			int lesson_size = 0;
 //			while((lineText=br.readLine())!=null){
 //				txt.append("\r\n").append(lineText);
-//				//µ±Ç°Î»ÖÃµÄÈ«²¿ÄÚÈİ²»Ğ¡ÓÚÒÔÇ°¶Á¹ıµÄ¶ÎÂä×Ö½ÚÊıÊ±£¬½«ÎÄ¼şÄÚÈİĞ´Èëµ½ÏÂÒ»¶ÎÄÚÈİÖĞ
+//				//å½“å‰ä½ç½®çš„å…¨éƒ¨å†…å®¹ä¸å°äºä»¥å‰è¯»è¿‡çš„æ®µè½å­—èŠ‚æ•°æ—¶ï¼Œå°†æ–‡ä»¶å†…å®¹å†™å…¥åˆ°ä¸‹ä¸€æ®µå†…å®¹ä¸­
 //				if(txt.toString().getBytes().length>ebook.getThisByte()+ebook.LESSON_SIZE){
 //					nextLesson.append(subStringByByte(txt.toString(),ebook.getThisByte(),ebook.getThisByte()+ebook.LESSON_SIZE));
 //					if(nextLesson.toString().endsWith("\r"))nextLesson.append("\n");
@@ -179,17 +179,17 @@ public class EBookHelper {
 //		if(ebook.getThisByte()>ebook.LESSON_SIZE*2) ebook.setThisByte(ebook.getThisByte()-ebook.LESSON_SIZE*2);
 //		else return null;
 //		try {
-//			//¶ÁÈ¡ÎÄ¼ş
+//			//è¯»å–æ–‡ä»¶
 //			BufferedReader br = new BufferedReader(new FileReader(ebook.getFile()));
-//			//È«²¿ÄÚÈİ
+//			//å…¨éƒ¨å†…å®¹
 //			StringBuffer txt = new StringBuffer();
-//			//Ã¿ĞĞÄÚÈİ
+//			//æ¯è¡Œå†…å®¹
 //			String lineText = "";
-//			//µ±Ç°¶ÎµÄ³¤¶È
+//			//å½“å‰æ®µçš„é•¿åº¦
 //			int lesson_size = 0;
 //			while((lineText=br.readLine())!=null){
 //				txt.append("\r\n").append(lineText);
-//				//µ±Ç°Î»ÖÃµÄÈ«²¿ÄÚÈİ²»Ğ¡ÓÚÒÔÇ°¶Á¹ıµÄ¶ÎÂä×Ö½ÚÊıÊ±£¬½«ÎÄ¼şÄÚÈİĞ´Èëµ½ÏÂÒ»¶ÎÄÚÈİÖĞ
+//				//å½“å‰ä½ç½®çš„å…¨éƒ¨å†…å®¹ä¸å°äºä»¥å‰è¯»è¿‡çš„æ®µè½å­—èŠ‚æ•°æ—¶ï¼Œå°†æ–‡ä»¶å†…å®¹å†™å…¥åˆ°ä¸‹ä¸€æ®µå†…å®¹ä¸­
 //				if(txt.toString().getBytes().length>ebook.getThisByte()+ebook.LESSON_SIZE){
 //					preLesson.append(subStringByByte(txt.toString(),ebook.getThisByte(),ebook.getThisByte()+ebook.LESSON_SIZE));
 //					if(preLesson.toString().endsWith("\r"))preLesson.append("\n");
@@ -206,13 +206,13 @@ public class EBookHelper {
 	
 	
 	/***
-	 * È¡bytes´óĞ¡µÄ×Ö·û´®
-	 * ÖĞÎÄËõ½ø
-	 * ×ó±ß½ØÈ¡µãµÄ×Ö·ûÎªÖĞÎÄÇÒ±»½ØÈ¡Ò»°ëÊ±£¬½á¹û°üº¬´ËÖĞÎÄ×Ö·û
-	 * ÓÒ±ß½ØÈ¡µãµÄ×Ö·ûÎªÖĞÎÄÇÒ±»½ØÈ¡Ò»°ëÊ±£¬½á¹ûºöÂÔ´ËÖĞÎÄ×Ö·û
+	 * å–byteså¤§å°çš„å­—ç¬¦ä¸²
+	 * ä¸­æ–‡ç¼©è¿›
+	 * å·¦è¾¹æˆªå–ç‚¹çš„å­—ç¬¦ä¸ºä¸­æ–‡ä¸”è¢«æˆªå–ä¸€åŠæ—¶ï¼Œç»“æœåŒ…å«æ­¤ä¸­æ–‡å­—ç¬¦
+	 * å³è¾¹æˆªå–ç‚¹çš„å­—ç¬¦ä¸ºä¸­æ–‡ä¸”è¢«æˆªå–ä¸€åŠæ—¶ï¼Œç»“æœå¿½ç•¥æ­¤ä¸­æ–‡å­—ç¬¦
 	 * @param str
-	 * @param begin_bytes			ÔØÈ¡µÄ¿ªÊ¼×Ö½ÚÊı
-	 * @param end_bytes				ÔØÈ¡µÄ½áÊø×Ö½ÚÊı
+	 * @param begin_bytes			è½½å–çš„å¼€å§‹å­—èŠ‚æ•°
+	 * @param end_bytes				è½½å–çš„ç»“æŸå­—èŠ‚æ•°
 	 * @return
 	 */
 	public String subStringByByte(String str,int begin_bytes,int end_bytes){
@@ -235,30 +235,30 @@ public class EBookHelper {
 	}
 	
 	public static void main(String[] args) {
-		File file = new File("C:\\²âÊÔ.txt");
+		File file = new File("C:\\æµ‹è¯•.txt");
 		EBook ebook = new EBook(file);
 		EBookHelper ebh = new EBookHelper(ebook);
 		System.out.println(ebh.getAllText().getBytes().length);
 //		System.out.println(ebh.findLessonByRate(97));
 //		ebh.getNextLessonByLine();
 //		System.out.println(ebh.getPreviousLessonByLine());
-//		System.out.println("===================ÎÒ¸î=======================ÎÒÊÇ»ªÀöµÄ·Ö¸îÏß==========================ÎÒ¸î=======================");
+//		System.out.println("===================æˆ‘å‰²=======================æˆ‘æ˜¯åä¸½çš„åˆ†å‰²çº¿==========================æˆ‘å‰²=======================");
 //		ebh.getNextLessonByLine();
 //		ebh.getNextLessonByLine();
 //		ebh.getNextLessonByLine();
 //		ebh.getNextLessonByLine();
 //		System.out.println(ebh.getNextLessonByLine());
 //		ebh.getNextLessonByLine();
-//		System.out.println("===================ÎÒ¸î=======================ÎÒÊÇ»ªÀöµÄ·Ö¸îÏß==========================ÎÒ¸î=======================");
+//		System.out.println("===================æˆ‘å‰²=======================æˆ‘æ˜¯åä¸½çš„åˆ†å‰²çº¿==========================æˆ‘å‰²=======================");
 //		System.out.println(ebh.getPreviousLessonByLine());
 //		ebh.getPreviousLessonByLine();
 //		ebh.getPreviousLessonByLine();
 //		ebh.getPreviousLessonByLine();
 //		ebh.getPreviousLessonByLine();
-//		System.out.println("===================ÎÒ¸î=======================ÎÒÊÇ»ªÀöµÄ·Ö¸îÏß==========================ÎÒ¸î=======================");
+//		System.out.println("===================æˆ‘å‰²=======================æˆ‘æ˜¯åä¸½çš„åˆ†å‰²çº¿==========================æˆ‘å‰²=======================");
 //		System.out.println(ebh.getPreviousLessonByLine());
-//		System.out.println("===================ÎÒ¸î=======================ÎÒÊÇ»ªÀöµÄ·Ö¸îÏß==========================ÎÒ¸î=======================");
-//		String str = "??ÖĞ¹úÈË-Ò»¸ö¼Ó¼¸¸ö£¿£¿??";
+//		System.out.println("===================æˆ‘å‰²=======================æˆ‘æ˜¯åä¸½çš„åˆ†å‰²çº¿==========================æˆ‘å‰²=======================");
+//		String str = "??ä¸­å›½äºº-ä¸€ä¸ªåŠ å‡ ä¸ªï¼Ÿï¼Ÿ??";
 //		Double d = 123.9;
 //		System.out.println(d.intValue());
 	}

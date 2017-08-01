@@ -11,15 +11,15 @@ public class ParkHandler implements Runnable{
 	@Override
 	public void run() {
 		try {
-			System.out.println(Thread.currentThread().getName()+" : ×¼±¸¾ÍĞ÷£¬ÓĞbugÇëºô½ĞÎÒ@"+wakeupThread.getName());
+			System.out.println(Thread.currentThread().getName()+" : å‡†å¤‡å°±ç»ªï¼Œæœ‰bugè¯·å‘¼å«æˆ‘@"+wakeupThread.getName());
 			while(true){
 				LockSupport.park();
-				System.out.println(Thread.currentThread().getName()+" : ÊÕµ½£¬ÇëÉÔµÈ...");
+				System.out.println(Thread.currentThread().getName()+" : æ”¶åˆ°ï¼Œè¯·ç¨ç­‰...");
 				Random random = new Random();
 				int sleep = 3000 + random.nextInt(7000);
 				Thread.sleep(sleep);
 				System.out.println(Thread.currentThread().getName()
-						+" : bugÒÑ¾­½â¾ö£¬ÓÃÊ±"+sleep/1000+"s£¬ÔÙÓĞbugÇëºô½ĞÎÒ@"+wakeupThread.getName());
+						+" : bugå·²ç»è§£å†³ï¼Œç”¨æ—¶"+sleep/1000+"sï¼Œå†æœ‰bugè¯·å‘¼å«æˆ‘@"+wakeupThread.getName());
 				LockSupport.unpark(wakeupThread);
 			}
 		} catch (InterruptedException e) {

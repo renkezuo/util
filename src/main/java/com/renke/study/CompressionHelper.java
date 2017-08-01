@@ -15,23 +15,23 @@ import java.util.zip.ZipOutputStream;
 
 public class CompressionHelper {
 	/**
-	 * Ñ¹ËõÎÄ¼ş
+	 * å‹ç¼©æ–‡ä»¶
 	 * 
 	 * @param srcfile
-	 *            File[] ĞèÒªÑ¹ËõµÄÎÄ¼şÁĞ±í
+	 *            File[] éœ€è¦å‹ç¼©çš„æ–‡ä»¶åˆ—è¡¨
 	 * @param zipfile
-	 *            File Ñ¹ËõºóµÄÎÄ¼ş
+	 *            File å‹ç¼©åçš„æ–‡ä»¶
 	 */
 	public static void ZipFiles(File[] srcfile, File zipfile) {
 		byte[] buf = new byte[1024];
 		try {
-			//Êä³öÁ÷£¨½«Á÷ĞÅÏ¢Êä³ö µ½zipfileÖĞ£©
+			//è¾“å‡ºæµï¼ˆå°†æµä¿¡æ¯è¾“å‡º åˆ°zipfileä¸­ï¼‰
 			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
-			//Ñ­»·srcfileÊı¾İ
+			//å¾ªç¯srcfileæ•°æ®
 			for (int i = 0; i < srcfile.length; i++) {
-				//¶ÁÈ¡µ¥¸öÎÄ¼ş
+				//è¯»å–å•ä¸ªæ–‡ä»¶
 				FileInputStream in = new FileInputStream(srcfile[i]);
-				//´æ·Åµ¥¸öÎÄ¼ş
+				//å­˜æ”¾å•ä¸ªæ–‡ä»¶
 				out.putNextEntry(new ZipEntry(srcfile[i].getName()));
 				// Transfer bytes from the file to the ZIP file
 				int len;
@@ -43,19 +43,19 @@ public class CompressionHelper {
 				in.close();
 			}
 			out.close();
-			System.out.println("Ñ¹ËõÍê³É.");
+			System.out.println("å‹ç¼©å®Œæˆ.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * ½âÑ¹Ëõ
+	 * è§£å‹ç¼©
 	 * 
 	 * @param zipfile
-	 *            File ĞèÒª½âÑ¹ËõµÄÎÄ¼ş
+	 *            File éœ€è¦è§£å‹ç¼©çš„æ–‡ä»¶
 	 * @param descDir
-	 *            String ½âÑ¹ºóµÄÄ¿±êÄ¿Â¼
+	 *            String è§£å‹åçš„ç›®æ ‡ç›®å½•
 	 */
 	public static void UnZipFiles(File zipfile, String descDir) {
 		try {
@@ -76,7 +76,7 @@ public class CompressionHelper {
 				// Close the file and stream
 				in.close();
 				out.close();
-				System.out.println("½âÑ¹ËõÍê³É.");
+				System.out.println("è§£å‹ç¼©å®Œæˆ.");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

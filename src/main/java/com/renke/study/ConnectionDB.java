@@ -18,7 +18,7 @@ public class ConnectionDB {
 	}
 
 	/**
-	 * »ñÈ¡Êı¾İ¿âÂ·¾¶
+	 * è·å–æ•°æ®åº“è·¯å¾„
 	 */
 	private ConnectionDB(){
 		String classPath = "";
@@ -29,12 +29,12 @@ public class ConnectionDB {
 			dbUrl = "E:/db.mdb";
 			setDbUrl(dbUrl);
 		} catch (Exception e) {
-			System.out.println("»ñÈ¡Êı¾İ¿âÂ·¾¶Ê§°Ü");
+			System.out.println("è·å–æ•°æ®åº“è·¯å¾„å¤±è´¥");
 		}
 	}
 	
 	/**
-	 * µ¥ÀıÄ£Ê½
+	 * å•ä¾‹æ¨¡å¼
 	 * @return
 	 */
 	public static ConnectionDB getConnectionDB(){
@@ -45,9 +45,9 @@ public class ConnectionDB {
 	}
 	
 	/**
-	 * »ñÈ¡Êı¾İ¿âÁ¬½Ó
-	 * @param db	ÓĞÁ½¸öÊı¾İ¿â£¬¸ù¾İÊı¾İ¿âÃû³Æ²»Í¬£¬»ñÈ¡²»Í¬Á´½Ó
-	 * access ºÍ DB2
+	 * è·å–æ•°æ®åº“è¿æ¥
+	 * @param db	æœ‰ä¸¤ä¸ªæ•°æ®åº“ï¼Œæ ¹æ®æ•°æ®åº“åç§°ä¸åŒï¼Œè·å–ä¸åŒé“¾æ¥
+	 * access å’Œ DB2
 	 * @return
 	 */
 	public Connection getConnection(String db){
@@ -58,7 +58,7 @@ public class ConnectionDB {
 				Class.forName("com.ibm.db2.jcc.DB2Driver");
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("ÎŞ·¨Á¬½ÓDB2Êı¾İ¿â(Çı¶¯ÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥DB2æ•°æ®åº“(é©±åŠ¨é—®é¢˜)!");
 			}
 			try {
 //				con = DriverManager.getConnection("jdbc:db2://154.233.15.51:50000/acms","acms","acms1234");
@@ -66,14 +66,14 @@ public class ConnectionDB {
 				con.setAutoCommit(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("ÎŞ·¨Á¬½ÓDB2Êı¾İ¿â(Êı¾İ¿âÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥DB2æ•°æ®åº“(æ•°æ®åº“é—®é¢˜)!");
 			}
 		}else if(db.equals("MYSQL")){
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("ÎŞ·¨Á¬½ÓMYSQLÊı¾İ¿â(Çı¶¯ÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥MYSQLæ•°æ®åº“(é©±åŠ¨é—®é¢˜)!");
 			}
 			try {
 //				con = DriverManager.getConnection("jdbc:db2://154.233.15.51:50000/acms","acms","acms1234");
@@ -81,20 +81,20 @@ public class ConnectionDB {
 				con.setAutoCommit(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("ÎŞ·¨Á¬½ÓMYSQLÊı¾İ¿â(Êı¾İ¿âÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥MYSQLæ•°æ®åº“(æ•°æ®åº“é—®é¢˜)!");
 			}
 		}else{
 			try {
 				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 			} catch (ClassNotFoundException e) {
-				System.out.println("ÎŞ·¨Á¬½ÓAccessÊı¾İ¿â(Çı¶¯ÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥Accessæ•°æ®åº“(é©±åŠ¨é—®é¢˜)!");
 			}
 			try {
 				String url = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ="+dbUrl;
 				con = DriverManager.getConnection(url, "db", "acms_123");
 				con.setAutoCommit(false);
 			} catch (SQLException e) {
-				System.out.println("ÎŞ·¨Á¬½ÓAccessÊı¾İ¿â(Êı¾İ¿âÎÊÌâ)!");
+				System.out.println("æ— æ³•è¿æ¥Accessæ•°æ®åº“(æ•°æ®åº“é—®é¢˜)!");
 			}
 		}
 		return con;

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 解析书籍数据
+ * 瑙ｆ瀽涔︾睄鏁版嵁
  * @author renke
  */
 public interface IParseBook {
@@ -23,14 +23,14 @@ public interface IParseBook {
 	public String SOURCE_ENCODING = "GBK";
 	public String SAVE_ENCODING = "UTF-8";
 	/**
-	 * 获取目录
+	 * 鑾峰彇鐩綍
 	 * @param html
 	 * @return
 	 * @throws IOException
 	 */
 	public List<Map<String,String>> readCatalog(byte[] bytes) throws IOException;
 	/***
-	 * 将文章信息写入savePath
+	 * 灏嗘枃绔犱俊鎭啓鍏avePath
 	 * @param html
 	 * @param title
 	 * @param savePath
@@ -39,7 +39,7 @@ public interface IParseBook {
 	 */
 	public int writeBookByBytes(byte[] bytes,String title,String index) throws IOException;
 	/***
-	 * 将文章信息写入savePath
+	 * 灏嗘枃绔犱俊鎭啓鍏avePath
 	 * @param html
 	 * @param title
 	 * @param savePath

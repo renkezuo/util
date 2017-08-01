@@ -36,7 +36,7 @@ final static Logger logger = LoggerFactory.getLogger(ConnectManager.class);
 	}
 	
 	/***
-	 * ¸ù¾İURL½âÎöhost,ip,port,uri£¬Í¬Ê±½«msg·â×°µ½HTTPHeaderÖĞ
+	 * æ ¹æ®URLè§£æhost,ip,port,uriï¼ŒåŒæ—¶å°†msgå°è£…åˆ°HTTPHeaderä¸­
 	 * 
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
@@ -109,9 +109,9 @@ final static Logger logger = LoggerFactory.getLogger(ConnectManager.class);
 	public void readData(HTTP http) throws Exception{
 		Long begin = System.currentTimeMillis();
 		logger.info("start {} {}",http,new Date());
-		//·¢ËÍHTTPÇëÇó
+		//å‘é€HTTPè¯·æ±‚
 		HTTPParser.sendGetMessage(socketChannel, http);
-		//½âÎöÏìÓ¦£¬·µ»Ø½á¹û±£´æµ½HTTP¶ÔÏó
+		//è§£æå“åº”ï¼Œè¿”å›ç»“æœä¿å­˜åˆ°HTTPå¯¹è±¡
 		HTTPParser.parseResponse(socketChannel,  http);
 		logger.info("end {} ms ",System.currentTimeMillis()-begin,http);
 	}

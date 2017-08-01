@@ -29,28 +29,28 @@ public class MyTest {
 		logger.info("start");
 		Long begin = System.currentTimeMillis();
 		
-		//��ʼ������ʦ[�༶������ʱ������Ŀ]����Ŀ[��ʦ�б�]���༶[��Ŀ�б�]
-		//7���࣬14����ʦ��11����Ŀ
-		//ÿ��8��ʱ��ÿλ��ʦ���6��ʱ--->ÿ��40��ʱ
-		//�����⣺6��ʱ/ÿ�ܣ���ʷ�أ���������3��ʱ/�ܣ��弼��2��ʱ/ÿ��--->�ϼ�18+18+4=40
-		//ÿ��Ŀ������Ҫ����λ��ʦ��	�����⣺	42��ʱ/ÿ�ܣ�	��ʷ�أ���������	21��ʱ/�ܣ�	�弼��	14��ʱ/��
-		//�����⣺	42��ʱ/ÿ�ܣ�9��ʱ/�գ�ÿλ��ʦ���6��ʱ����Ҫ2λ��ʦ��ÿ�칤��������4��ʱ��������6
-		//��ʷ�أ���������21��ʱ/�ܣ�5��ʱ/�գ�ÿλ��ʦ���6��ʱ����Ҫ1λ��ʦ��ÿ�칤��������4��ʱ��������6
-		//�弼��14��ʱ/�ܣ�3��ʱ/�գ�ÿλ��ʦ���6��ʱ����Ҫ1λ��ʦ��ÿ�칤��������3��ʱ
+		//初始化，老师[班级数，课时数，科目]，科目[老师列表]，班级[科目列表]
+		//7个班，14个老师，11个科目
+		//每天8课时，每位老师最多6课时--->每周40课时
+		//语数外：6课时/每周；政史地，理化生：3课时/周；体技：2课时/每周--->合计18+18+4=40
+		//每科目最少需要多少位老师？	语数外：	42课时/每周；	政史地，理化生：	21课时/周；	体技：	14课时/周
+		//语数外：	42课时/每周，9课时/日；每位老师最多6课时，需要2位老师，每天工作不少于4课时，不大于6
+		//政史地，理化生：21课时/周；5课时/日；每位老师最多6课时，需要1位老师，每天工作不少于4课时，不大于6
+		//体技：14课时/周；3课时/日；每位老师最多6课时，需要1位老师，每天工作不少于3课时
 		
-		//ʵ�ַ�ʽ
-		//A���������а༶��Ŀ�Ŀ��ֲܷ�����ϣ������ϣ����α�
-		//B��ÿ�������ȡ�α������գ��ж�[ʣ����ʦ��Ŀ����<�տ�ʱ����*����]�����һ�첻��Ҫ�ſ�
-		//ÿ��8*7��ʱ��56��ʱ�������ʦ--->(4|5) * 12 + 3 * 2
-		//����minʱ�����������ȡ����鿴������ʦ�Ƿ�ﵽmin���������ȡ������Ŀ������ǣ������ȡ����ߵ�max
-		//���ÿ������4�������ȡ��������
-		//���֣�1����٣�2�����
-		//���㵥��Ŀ���ܵķֲ�ģʽ
-		//ÿ�������ٿ�ʱ�����������
-		//ÿ��һ����ʦ����̬�޸ĺ�����ʦÿ��������Ҫ�����Ŀ�ʱ��
-		//��Ҫ��������ȡ����Щ��ʦʱ����Щ��ʦ�Ͳ�����ȡ��
-		//���ԣ��α�Ӧ�����Ȼ�ȡ��ʦ��ʱ��������ʦ
-		//ÿλ��ʦ����ÿ����Ҫ�������ٿ�ʱ��
+		//实现方式
+		//A、计算所有班级科目的可能分布，组合，组合完毕，即课表
+		//B、每天随机获取课表，日终，判断[剩余老师科目总数<日课时上限*天数]，最后一天不需要排课
+		//每天8*7课时，56课时，组合老师--->(4|5) * 12 + 3 * 2
+		//满足min时，如果继续获取，则查看其他老师是否达到min，如果否，则取其他科目，如果是，则随机取。最高到max
+		//完成每日任务4，随机抽取补充任务
+		//两种，1：穷举，2：随机
+		//计算单科目可能的分布模式
+		//每天最多多少课时，间隔，天数
+		//每多一个老师，动态修改后面老师每天至少需要工作的课时数
+		//需要处理，当取到哪些老师时，哪些老师就不给获取了
+		//所以，课表应该优先获取老师课时不达标的老师
+		//每位老师至少每天需要工作多少课时？
 		
 		
 		//
@@ -58,11 +58,11 @@ public class MyTest {
 		
 		
 		
-		//��Ŀ��Ӧ��ʦ�б�
+		//科目对应老师列表
 		Map<Long, TeacherBak[]> courseTeachers = InitData.teachers();
-		//�༶��Ŀ�б�
+		//班级科目列表
 		Course[] courses = InitData.courses(courseTeachers);
-		//�༶�б�
+		//班级列表
 		Klass3[] klasses = InitData.klasses(courses);
 		
 		Monitor monitor = new Monitor();
@@ -73,7 +73,7 @@ public class MyTest {
 		Map<String,TeacherBak[]> schedule = new HashMap<>();
 				
 		for(int i = 0;i<5;i++){
-			//ÿ���̴߳���һ���༶
+			//每个线程处理一个班级
 			for(Klass3 klass : klasses){
 				DayScheduleService task = new DayScheduleService(klass);
 				task.setMainThread(Thread.currentThread());
@@ -87,7 +87,7 @@ public class MyTest {
 			logger.debug("cache Schedule");
 			cacheSchedule(klasses, schedule, i+1);
 //			printScheduleDay(schedule,klasses,i+1);
-			//��ʼ��[��ʦÿ�տ�ʱ���༶��ʱ��]
+			//初始化[老师每日课时，班级课时数]
 			logger.debug("reset Teacher and class");
 			resetTeacher(courseTeachers,i+2);
 			resetClass(klasses);
@@ -143,12 +143,12 @@ public class MyTest {
 	
 	
 	/**
-	 * ��ӡ�α�
+	 * 打印课表
 	 * @param schedule
 	 * @param klasses
 	 */
 	public static void printSchedule(Map<String,TeacherBak[]> schedule,Klass3[] klasses){
-		System.out.println("�༶\t\t����һ\t\t���ڶ�\t\t������\t\t������\t\t������");
+		System.out.println("班级\t\t星期一\t\t星期二\t\t星期三\t\t星期四\t\t星期五");
 		for(Klass3 klass : klasses){
 			System.out.println("class:"+klass.getId());
 			for(int i = 0 ; i< 8 ; i++){
@@ -157,7 +157,7 @@ public class MyTest {
 				TeacherBak teacher3 = schedule.get(klass.getName()+3)[i];
 				TeacherBak teacher4 = schedule.get(klass.getName()+4)[i];
 				TeacherBak teacher5 = schedule.get(klass.getName()+5)[i];
-				System.out.println("��"+(i+1)+"�ڣ�\t"
+				System.out.println("第"+(i+1)+"节：\t"
 					+ (teacher1 != null ? teacher1.getName()+teacher1.getCourse().getName(): null)
 					+"\t"+(teacher2 != null ? teacher2.getName()+teacher2.getCourse().getName(): null)
 					+"\t"+(teacher3 != null ? teacher3.getName()+teacher3.getCourse().getName(): null)
@@ -170,9 +170,9 @@ public class MyTest {
 	
 	/**
 	 * 
-	 * �����γ̱�
-	 * ��ʦÿ���Ͽο�ʱ����
-	 * �༶��Ŀ�ܿ�ʱ��
+	 * 分析课程表
+	 * 老师每天上课课时总数
+	 * 班级科目总课时数
 	 * 
 	 */
 	public static void analyseSchedule(Map<String,TeacherBak[]> schedule,Klass3[] klasses){
@@ -206,12 +206,12 @@ public class MyTest {
 	
 	
 	public static void printScheduleDay(Map<String,TeacherBak[]> schedule,Klass3[] klasses,int day){
-		System.out.println("�༶\t\t");
+		System.out.println("班级\t\t");
 		for(Klass3 klass : klasses){
 			System.out.println("class:"+klass.getId());
 			for(int i = 0 ; i< 8 ; i++){
 				TeacherBak teacher = schedule.get(klass.getName()+day)[i];
-				System.out.println("��"+(i+1)+"�ڣ�\t"
+				System.out.println("第"+(i+1)+"节：\t"
 					+ (teacher != null ? teacher.getName(): null));
 			}
 
@@ -246,62 +246,62 @@ public class MyTest {
 			System.out.println(key+":"+map.get(key));
 		}
 	}
-	//�Ŵ��㷨
-	//���ģ�ѡ�񣬽��棬����
-	//  ���ֱ�׼�ƶ���ѡ��������
-	//  ���棬ȡ��Ƭ���з�����ߣ��������
-	//  ���죺
+	//遗传算法
+	//核心：选择，交叉，变异
+	//  评分标准制定，选择分数最高
+	//  交叉，取出片段中分数最高，尝试组合
+	//  变异：
 	
-	//  ��ʦ[��Ŀ]	��ʱ��
-	//  ÿ����ܿ�ʱ��	
-	//  �༶��
+	//  老师[科目]	课时数
+	//  每天的总课时数	
+	//  班级数
 	
 	
 	/**
-	 * ������ 
-	 * ÿ���ʱ��8���༶��7����ʱ����56
-	 * һ��5�죬��40��ʱ��ȫ�꼶280��ʱ
-	 * 11��Ŀ�������⣬��ʷ�أ����������弼
-	 * 		�ֲ��������⣺6��ʱ/��Ŀ����18��ʱ
-	 * 			��ʷ����������3��ʱ/��Ŀ����18��ʱ
-	 * 			�弼��2��ʱ/��Ŀ����4��ʱ
-	 * ��ô��ʦ��Ҫ���ٸ��أ�[ͨ�������ڿ�Ŀ��ʱ�����ɼ���������ʦ�����������ٵ�����ʦ��]
-	 * ÿ����ʦһ�����6��ʱ��2��������ʦ��2����ѧ��ʦ��2��Ӣ�1��������Ŀ��ʦ
-	 * ÿ�ܣ���ʦ��Ŀ�أ���ʱ��
+	 * 背景： 
+	 * 每天课时数8，班级数7，课时数：56
+	 * 一周5天，合40课时，全年级280课时
+	 * 11科目：语数外，政史地，理化生，体技
+	 * 		分布：语数外：6课时/科目，合18课时
+	 * 			政史地理化生：3课时/科目，合18课时
+	 * 			体技：2课时/科目，合4课时
+	 * 那么老师需要多少个呢？[通过，周期科目课时数，可计算最少老师数，计算最少单科老师数]
+	 * 每个老师一天最多6课时，2个语文老师，2个数学老师，2个英语，1个其他科目老师
+	 * 每周，老师科目池，课时数
 	 */
 	
 	/**
-	 * ʵ�֣�
-	 * ���ݽṹ��
-	 * ���ó���
-	 * ��ʦ��������ʱ��������Ϳ�ʱ�������༶��
-	 * �༶��ÿ�տ�ʱ������ʦ
-	 * ��ʱ��������[�ڼ���]��������[�ڼ���]����Ŀ����ʦ���༶
-	 * �ܿα����ɿ�ʱ���
+	 * 实现：
+	 * 数据结构：
+	 * 配置常量
+	 * 老师：日最多课时数，日最低课时数，最多班级数
+	 * 班级：每日课时数，老师
+	 * 课时：日索引[第几天]，节索引[第几节]，科目，老师，班级
+	 * 总课表：由课时组成
 	 * 
 	 * id:name:priority:count
 	 * 
-	 * ��ʦ��[teacherPool]��[{id,name,lessonCount},{id,name,lessonCount}]
-	 * ��Ŀ��[coursePool]	��[{id,cid,name,tId,priority},{id,cid,name,tId,priority}]
-	 * �༶��[classPool]	��[{id,name,courses}]  --->courseid��ͬ��cid������ͬ
+	 * 老师池[teacherPool]：[{id,name,lessonCount},{id,name,lessonCount}]
+	 * 科目池[coursePool]	：[{id,cid,name,tId,priority},{id,cid,name,tId,priority}]
+	 * 班级池[classPool]	：[{id,name,courses}]  --->courseid不同，cid不可相同
 	 * 
 	 * 
-	 * ������
-	 * 		ÿ��༶��Ŀ
+	 * 变量：
+	 * 		每天班级科目
 	 * 
-	 * ���ȡÿ���Ŀ�����ȡ��Ŀ�أ�
+	 * 随机取每天科目，随机取科目池，
 	 * 
 	 */
 	
 	
 	/***
-	 * ÿ��ı�������ʦ��ʱ��/�༶��Ŀ��ʱ������
-	 * ÿ��ĳ������༶��������ʱ�����༶����ʱ��
+	 * 每天的变量：老师课时数/班级科目课时数上限
+	 * 每天的常量：班级当日最大课时数，班级最大课时数
 	 * 
-	 * ÿ�ܱ������༶��Ŀ��ʱ��
-	 * ÿ�ܳ������༶��Ŀ��Ӧ��ʦ
+	 * 每周变量：班级科目课时数
+	 * 每周常量：班级科目对应老师
 	 * 
-	 * ѧ��������༶��Ŀ����ÿ�տ�ʱ��
+	 * 学年变量：班级科目数，每日课时数
 	 * 
 	 */
 	
@@ -309,29 +309,29 @@ public class MyTest {
 	
 	
 	
-	//�ɿؿα�
-	//��������
-	//��ȡ�༶����ȡ[ѧ��+��ʦ]˳��Ϊ�����⣬�����أ�������������
-	//ѭ������
+	//可控课表
+	//加载数据
+	//提取班级，提取[学科+教师]顺序为语数外，政历地，理化生，技。
+	//循环日期
 	
-	//���գ�ѧ��+�༶��Ϸ��������ؿ����б�
-	//������
-	//1��ѧ�Ƶ��ղ�����N��ѧʱ
-	//2��ѧ�Ʊ��ܿ���ѧʱ����
-	//3��ѧ�Ʊ��ܿ�������[���������һ��ʱ������ȫ��ѧʱ��������ֳ�ͻ�����Ƿ����쳣]
-	//�༶����[�ɿأ����ɿ�]
-	//---�ɿأ��ȼ���λ��������
-	//ÿ���ȼ�һ���̣߳�������ʦ�ȼ�������
+	//单日，学科+班级组合方法，返回可能列表
+	//条件，
+	//1、学科当日不超过N个学时
+	//2、学科本周可用学时数，
+	//3、学科本周可用天数[当天数最后一天时，分配全部学时，如果出现冲突，则标记分配异常]
+	//班级处理[可控，不可控]
+	//---可控：等级单位处理数据
+	//每个等级一个线程，根据老师等级，均分
 	
 	
-	//---���ɿأ��༶�������̣߳�ÿ������ͬ�ȼ���ʦ��Դ
+	//---不可控：班级数量的线程，每天争抢同等级教师资源
 //	@Test
 	public void testRandom(){
 		Random random = new Random();
 		for(int i=0;i<100;i++)
 			System.out.println(random.nextInt(10));
 		
-		System.out.println("����һ\t\t���ڶ�");
+		System.out.println("星期一\t\t星期二");
 	}
 	
 //	@Test

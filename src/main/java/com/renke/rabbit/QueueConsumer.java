@@ -14,10 +14,10 @@ import com.rabbitmq.client.ShutdownSignalException;
 
 /**
  * 
- * ¹¦ÄÜ¸ÅÒª£º¶ÁÈ¡¶ÓÁĞµÄ³ÌĞò¶Ë£¬ÊµÏÖÁËRunnable½Ó¿Ú
+ * åŠŸèƒ½æ¦‚è¦ï¼šè¯»å–é˜Ÿåˆ—çš„ç¨‹åºç«¯ï¼Œå®ç°äº†Runnableæ¥å£
  * 
  * @author linbingwen
- * @since 2016Äê1ÔÂ11ÈÕ
+ * @since 2016å¹´1æœˆ11æ—¥
  */
 public class QueueConsumer extends EndPoint implements Runnable, Consumer {
 

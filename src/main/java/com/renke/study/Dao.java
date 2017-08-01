@@ -9,7 +9,7 @@ public class Dao{
 	}
 	
 	/**
-	 * È¥ÖØ¸´
+	 * åŽ»é‡å¤
 	 * @param strs1
 	 * @return
 	 */
@@ -104,25 +104,25 @@ public class Dao{
 //		System.out.println("E:\test"+"E:\test".length());
 //		System.out.println("xxxx\r\n yyyy");
 //		System.out.println("123123123123".replaceFirst("2", ""));
-		String string = "¡¶ÄãºÃÃ´£¿£¿£¿£¿£¿¡¶sdfsdf¡·¡·123123¡¶12321lkjlsdkafjlakfjd¡·";
-		System.out.println(string.substring(string.indexOf("¡¶")+1));
-		int begin_index = string.indexOf("¡¶");
+		String string = "ã€Šä½ å¥½ä¹ˆï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿã€Šsdfsdfã€‹ã€‹123123ã€Š12321lkjlsdkafjlakfjdã€‹";
+		System.out.println(string.substring(string.indexOf("ã€Š")+1));
+		int begin_index = string.indexOf("ã€Š");
 		string = string.substring(begin_index+1);
 		
-		System.out.println(string.indexOf("¡¶"));
+		System.out.println(string.indexOf("ã€Š"));
 //		for(String str:strs){
 //			Map map = new HashMap();
-//			if(str.indexOf("¡·")>-1){
-//				if(str.indexOf("¡·")==str.lastIndexOf("¡·")){
-//					map.put("fileName", str.substring(0,str.indexOf("¡·")));
+//			if(str.indexOf("ã€‹")>-1){
+//				if(str.indexOf("ã€‹")==str.lastIndexOf("ã€‹")){
+//					map.put("fileName", str.substring(0,str.indexOf("ã€‹")));
 //				}else{
 //					
 //				}
 //			}
 //		}
 		
-		System.out.println("¡¶ÄãºÃÃ´£¿£¿£¿£¿£¿¡¶sdfsdf¡·¡·123123¡¶12321lkjlsdkafjlakfjd¡·");
-//				.replaceAll("¡¶", "¡¶<a href='#' onclick='downFile(this);'>").replaceAll("¡·", "</a>¡·"));
+		System.out.println("ã€Šä½ å¥½ä¹ˆï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿã€Šsdfsdfã€‹ã€‹123123ã€Š12321lkjlsdkafjlakfjdã€‹");
+//				.replaceAll("ã€Š", "ã€Š<a href='#' onclick='downFile(this);'>").replaceAll("ã€‹", "</a>ã€‹"));
 		System.out.println("99900020110065029990029990005_99900300001_0001_999".length());
 //		System.out.println(",123,12322,".indexOf(",123,"));
 	}

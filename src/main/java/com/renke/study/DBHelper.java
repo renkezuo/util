@@ -14,7 +14,7 @@ import java.util.Map;
 public class DBHelper {
 	private ConnectionDB cdb = ConnectionDB.getConnectionDB();
 	/**
-	 * Access²éÑ¯ÁĞ±í£¬×Ö¶Î´óĞ´
+	 * AccessæŸ¥è¯¢åˆ—è¡¨ï¼Œå­—æ®µå¤§å†™
 	 * @param sql
 	 * @return
 	 * @throws SQLException
@@ -48,7 +48,7 @@ public class DBHelper {
 			if(con!=null){
 				con.rollback();
 			}
-			System.out.println("²éÑ¯Êı¾İ¿âÊ§°Ü£¡´íÎósql£º"+sql);
+			System.out.println("æŸ¥è¯¢æ•°æ®åº“å¤±è´¥ï¼é”™è¯¯sqlï¼š"+sql);
 			return new ArrayList();
 		}finally{
 			closeAll(con,rs,stmt);
@@ -56,7 +56,7 @@ public class DBHelper {
 	}
 	
 	/**
-	 * ·µ»ØµÚÒ»ĞĞ¼ÍÂ¼µÄµÚÒ»¸öÕûÊıÖµ
+	 * è¿”å›ç¬¬ä¸€è¡Œçºªå½•çš„ç¬¬ä¸€ä¸ªæ•´æ•°å€¼
 	 * @param sql
 	 * @param dbName
 	 * @return
@@ -92,7 +92,7 @@ public class DBHelper {
 			if(con!=null){
 				con.rollback();
 			}
-			System.out.println("²éÑ¯Êı¾İ¿âÊ§°Ü£¡´íÎósql£º"+sql);
+			System.out.println("æŸ¥è¯¢æ•°æ®åº“å¤±è´¥ï¼é”™è¯¯sqlï¼š"+sql);
 			return -1;
 		}finally{
 			closeAll(con,rs,stmt);
@@ -112,7 +112,7 @@ public class DBHelper {
 			if(con!=null){
 				con.rollback();
 			}
-			System.out.println("²éÑ¯Êı¾İ¿âÊ§°Ü£¡´íÎósql£º"+sql);
+			System.out.println("æŸ¥è¯¢æ•°æ®åº“å¤±è´¥ï¼é”™è¯¯sqlï¼š"+sql);
 		}finally{
 			closeAll(con,rs,stmt);
 		}
@@ -152,7 +152,7 @@ public class DBHelper {
 //			System.out.println(sql);
 //		}
 		DBHelper db = new DBHelper();
-		String[] sqls = {"insert into t_zrk_user values('2013073102','ÄãºÃ111','44')","insert into t_zrk_user values('2013073103','ÄãºÃ111','dºÃf0')"};
+		String[] sqls = {"insert into t_zrk_user values('2013073102','ä½ å¥½111','44')","insert into t_zrk_user values('2013073103','ä½ å¥½111','då¥½f0')"};
 		db.updateBatch(sqls, "");
 //		List<Map<String,String>> list = db.queryForList("select * from t_ck_plan a where a.plan_no='89600020120001'", "DB2");
 //		String modify_t = list.get(0).get("MODIFY_T");
@@ -171,7 +171,7 @@ public class DBHelper {
 		
 	}
 	/**
-	 * ¹Ø±Õ×ÊÔ´
+	 * å…³é—­èµ„æº
 	 * @throws SQLException
 	 */
 	public static void closeAll(Connection con,ResultSet rs,Statement stmt){
@@ -179,21 +179,21 @@ public class DBHelper {
 			try{
 				stmt.close();
 			}catch(SQLException e){
-				System.out.println("stmt×ÊÔ´ÒÑ¾­¹Ø±Õ£¡");
+				System.out.println("stmtèµ„æºå·²ç»å…³é—­ï¼");
 			}
 		}
 		if(rs!=null){
 			try{
 				rs.close();
 			}catch(SQLException e){
-				System.out.println("rs×ÊÔ´ÒÑ¾­¹Ø±Õ£¡");
+				System.out.println("rsèµ„æºå·²ç»å…³é—­ï¼");
 			}
 		}
 		if(con!=null){
 			try{
 				con.close();
 			}catch(SQLException e){
-				System.out.println("con×ÊÔ´ÒÑ¾­¹Ø±Õ£¡");
+				System.out.println("conèµ„æºå·²ç»å…³é—­ï¼");
 			}
 		}
 	}

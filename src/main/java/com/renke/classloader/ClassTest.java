@@ -4,11 +4,11 @@ public class ClassTest {
 	public static int i=123;
 	public static void main(String[] args) {
 		try {
-			//¼ÓÔØ--ÑéÖ¤--×¼±¸--½âÎö--³õÊ¼»¯--Ê¹ÓÃ--Ğ¶ÔØ
-			//¼ÓÔØ»á²úÉúclass
-			//ÑéÖ¤
-			ClassLoader.getSystemClassLoader().loadClass("com.renke.classloader.StaticSegment");//½ö¼ÓÔØµ½ĞéÄâ»ú
-//			Class.forName("com.renke.classloader.StaticSegment");//»áÖ´ĞĞ¾²Ì¬·½·¨¿é[³õÊ¼»¯]
+			//åŠ è½½--éªŒè¯--å‡†å¤‡--è§£æ--åˆå§‹åŒ–--ä½¿ç”¨--å¸è½½
+			//åŠ è½½ä¼šäº§ç”Ÿclass
+			//éªŒè¯
+			ClassLoader.getSystemClassLoader().loadClass("com.renke.classloader.StaticSegment");//ä»…åŠ è½½åˆ°è™šæ‹Ÿæœº
+//			Class.forName("com.renke.classloader.StaticSegment");//ä¼šæ‰§è¡Œé™æ€æ–¹æ³•å—[åˆå§‹åŒ–]
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -19,16 +19,16 @@ import com.renke.lesson.pojo.User;
 import com.renke.util.db.DBConstants;
 
 /**
- * ²»¿É¶àÏß³ÌÖ´ĞĞ
+ * ä¸å¯å¤šçº¿ç¨‹æ‰§è¡Œ
  * @author Z.R.K
  * @time 2017-05-03 16:00:35
  */
 public class RandomData {
-	//³õÊ¼»¯²ÎÓëÑ¡¿¼¿ÆÄ¿
+	//åˆå§‹åŒ–å‚ä¸é€‰è€ƒç§‘ç›®
 	public final static List<Long> subIds = new ArrayList<>(7);
-	//³õÊ¼»¯ËùÓĞ¿ÆÄ¿
+	//åˆå§‹åŒ–æ‰€æœ‰ç§‘ç›®
 	public final static Long[] subs = new Long[12];
-	//Ñ¡¿¼¿ÆÄ¿¶ÔÓ¦Ñ¡¿¼Ñ§Éú
+	//é€‰è€ƒç§‘ç›®å¯¹åº”é€‰è€ƒå­¦ç”Ÿ
 	public static List<List<User>> subList = new ArrayList<>(7);
 	public static DBHelper lessonDB = null;
 	public static DBHelper tutorDB = null;
@@ -62,7 +62,7 @@ public class RandomData {
 				,"exschool2012");
 	}
 
-	//³õÊ¼»¯Ñ§Éú
+	//åˆå§‹åŒ–å­¦ç”Ÿ
 	public static List<User> getRandomUser(int count,String userName){
 		//4QrcOUm6Wau+VuBX8g+IPg==
 		String sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,"
@@ -85,7 +85,7 @@ public class RandomData {
 		return list;
 	}
 	
-	//³õÊ¼»¯ÀÏÊ¦[Ã¿¿ÆÄ¿4ÀÏÊ¦]
+	//åˆå§‹åŒ–è€å¸ˆ[æ¯ç§‘ç›®4è€å¸ˆ]
 	public static List<User> getRandomTeacher(String teacherName){
 		//4QrcOUm6Wau+VuBX8g+IPg==
 		String teacher_sql = "insert into tutor_user(userName,nick,loginName,oldLoginName,isEmailEnabled, isEnabled, isFrozen,password,isDeleted) values ";
@@ -106,7 +106,7 @@ public class RandomData {
 		return list;
 	}
 	
-	//»ñÈ¡³õÊ¼»¯Ñ§Éú
+	//è·å–åˆå§‹åŒ–å­¦ç”Ÿ
 	public static List<User> getUser(String userName,Long minUserId,Long maxUserId){
 		String sql = "select userId,userName from tutor_user where isDeleted=0 and userName like '%"+userName
 					+ "%' and userId >= "+minUserId + " and userId <=" + maxUserId;
@@ -122,7 +122,7 @@ public class RandomData {
 		return users;
 	}
 	
-	//»ñÈ¡³õÊ¼»¯ÀÏÊ¦
+	//è·å–åˆå§‹åŒ–è€å¸ˆ
 	public static List<User> getTeacher(String teacherName,Long minUserId){
 		String sql = "select userId,userName from tutor_user where isDeleted=0 and userName like '%"+
 				teacherName+"%'  and userId > "+minUserId;
@@ -149,7 +149,7 @@ public class RandomData {
 	}
 	
 	/**
-	 * »ñÈ¡ĞĞÕş°à
+	 * è·å–è¡Œæ”¿ç­
 	 * @return
 	 */
 	public static List<Klass> getNomalKlass(Long minRelationId , Long maxRelationId){
@@ -165,9 +165,9 @@ public class RandomData {
 		return klasses;
 	}
 	
-	//²úÉú10¸öĞĞÕş°à[struct] ÊÖ¶¯ÔÚÒ³ÃæÌí¼Ó
-	//½«Ñ§Éú¼ÓÈë10¸öĞĞÕş°àÖĞ[user_struct] 
-	//ÉèÖÃÑ§ÉúµÄÈ¨ÏŞ
+	//äº§ç”Ÿ10ä¸ªè¡Œæ”¿ç­[struct] æ‰‹åŠ¨åœ¨é¡µé¢æ·»åŠ 
+	//å°†å­¦ç”ŸåŠ å…¥10ä¸ªè¡Œæ”¿ç­ä¸­[user_struct] 
+	//è®¾ç½®å­¦ç”Ÿçš„æƒé™
 	public static void setUserStructAndRole(List<User> users,Long roleId,Long schoolId, Long depId){
 		String struct_sql = "insert into tutor_user_struct (userId,depId,isDeleted,roleId,userName) values(?,?,0,"+roleId+",?)";
 		String role_sql = "insert into tutor_user_role_school(userId,roleId,schoolId,isDeleted) values(?,"+roleId+","+schoolId+",0)";
@@ -194,9 +194,9 @@ public class RandomData {
 		tutorDB.updateBatch(role_sql, roleTypes, roles);
 	}
 	
-	//·Ö°à£¬Í¬Ê±Ğ´ÈëÑ§Éú
+	//åˆ†ç­ï¼ŒåŒæ—¶å†™å…¥å­¦ç”Ÿ
 	public static void splitClass(List<User> users,List<KlassExt> klasses){
-		//²åÈë°à¼¶Êı¾İ
+		//æ’å…¥ç­çº§æ•°æ®
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = sdf.format(System.currentTimeMillis());
 		String sql = "insert into ls_klass(className,type,gradeId,gradeName,schoolStageId,schoolId,headCount,isDeleted,createdBy,createdOn,modifiedBy,modifiedOn)"
@@ -206,15 +206,15 @@ public class RandomData {
 //			Object[] objs = new Object[2];
 //			DBConstants[] types = new DBConstants[2];
 		for(int i=0;i<klasses.size();i++){
-			sql += "(?,3,11,'¸ß¶ş',62,476,0,0,'888','"+now+"','888','"+now+"'),";
-			//²úÉú°à¼¶
+			sql += "(?,3,11,'é«˜äºŒ',62,476,0,0,'888','"+now+"','888','"+now+"'),";
+			//äº§ç”Ÿç­çº§
 			KlassExt ext = klasses.get(i);
 			objs[i] = ext.getKlass().getClassName();
 			types[i] = DBConstants.SET_STRING;
 		}
 		sql = sql.substring(0, sql.length() -1);
 		Long[] ids = lessonDB.updateReturnIds(sql,types,objs,klasses.size());
-		//²åÈë°à¼¶Ñ§ÉúÊı¾İ
+		//æ’å…¥ç­çº§å­¦ç”Ÿæ•°æ®
 		sql = "insert into ls_klass_student(classId,userId,userName,schoolId,isDeleted) values(?,?,?,476,5)";
 		DBConstants[] studentTypes = new DBConstants[3];
 		studentTypes[0] = DBConstants.SET_LONG;
@@ -232,13 +232,13 @@ public class RandomData {
 			}
 			lessonDB.updateBatch(sql, studentTypes, students);
 		}
-		//¸üĞÂ°à¼¶Ñ§ÉúÊı¾İ
+		//æ›´æ–°ç­çº§å­¦ç”Ÿæ•°æ®
 		sql = "update ls_klass a set headCount=(select count(1) from ls_klass_student b where a.classId=b.classId) where isDeleted=5";
 		lessonDB.update(sql, null, null);
 	}
 	
 
-	//»ñÈ¡·Ö²ã°à
+	//è·å–åˆ†å±‚ç­
 	public static List<Klass> getSplitKlass(Long schoolId,Long taskId){
 		String sql = "select a.classId,className,b.teamId,c.subjectId,c.subjectName "
 					+ " from ls_klass a ,ls_choice_exam_klass b,ls_klass_subject c"
@@ -258,8 +258,8 @@ public class RandomData {
 		return klasses;
 	}
 	
-	//Ëæ»úÑ§ÉúÑ¡Ôñ¿ÆÄ¿
-	//Ëæ»úÑ§ÉúµÄ¿ÆÄ¿³É¼¨
+	//éšæœºå­¦ç”Ÿé€‰æ‹©ç§‘ç›®
+	//éšæœºå­¦ç”Ÿçš„ç§‘ç›®æˆç»©
 	public static void setRandomSubInfo(List<User> users,Long taskId){
 		Object[][] objs = new Object[users.size()][9];
 		DBConstants[] types = new DBConstants[9];
@@ -301,7 +301,7 @@ public class RandomData {
 		lessonDB.updateBatch(sql, types, objs);
 	}
 	
-	//ÉèÖÃĞĞÕş°àÑ§Éú
+	//è®¾ç½®è¡Œæ”¿ç­å­¦ç”Ÿ
 	public static void setUserClass(List<User> users,Long schoolId,Long minRelationId,Long maxRelationId){
 		String user_sql = "insert into ls_klass_student (classId,userId,userName,schoolId,isDeleted) values(?,?,?,"+schoolId+",0)";
 		String class_sql = "update ls_klass a set headCount=(select count(1) from ls_klass_student b where a.classId = b.classId) where classId =?";
@@ -336,13 +336,13 @@ public class RandomData {
 	
 
 	
-	//¸üĞÂ°à¼¶¶ÔÓ¦¿ÆÄ¿
+	//æ›´æ–°ç­çº§å¯¹åº”ç§‘ç›®
 	public static void updateClassSub(Long minRelationId,Long maxRelationId,Long schoolId){
 		List<Klass> klasses = getNomalKlass(minRelationId,maxRelationId);
 		
-		//²åÈë°à¼¶¿ÆÄ¿ĞÅÏ¢
+		//æ’å…¥ç­çº§ç§‘ç›®ä¿¡æ¯
 		String add_sql = "insert into ls_klass_subject(classId,subjectId,subjectName,total,plan,finish,schoolId,isDeleted)"
-					+" values(?,1,'ÓïÎÄ',0,0,0,"+schoolId+",0)";
+					+" values(?,1,'è¯­æ–‡',0,0,0,"+schoolId+",0)";
 //		String del_sql = "delete from ls_klass_subject where isDeleted=5";
 		DBConstants[] types = new DBConstants[1];
 		types[0] = DBConstants.SET_LONG;
@@ -352,15 +352,15 @@ public class RandomData {
 		}
 //		lessonDB.update(del_sql, null, null);
 		lessonDB.updateBatch(add_sql, types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","2,'ÊıÑ§'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","3,'ÍâÓï'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","4,'ÎïÀí'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","5,'»¯Ñ§'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","6,'ÉúÎï'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","7,'ÕşÖÎ'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","8,'ÀúÊ·'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","9,'µØÀí'"), types, objs);
-		lessonDB.updateBatch(add_sql.replaceAll("1,'ÓïÎÄ'","29,'ÌåÓı'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","2,'æ•°å­¦'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","3,'å¤–è¯­'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","4,'ç‰©ç†'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","5,'åŒ–å­¦'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","6,'ç”Ÿç‰©'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","7,'æ”¿æ²»'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","8,'å†å²'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","9,'åœ°ç†'"), types, objs);
+		lessonDB.updateBatch(add_sql.replaceAll("1,'è¯­æ–‡'","29,'ä½“è‚²'"), types, objs);
 		
 //		klasses = getSplitKlass();
 //		add_sql = "insert into ls_klass_subject(classId,subjectId,subjectName,total,plan,finish,schoolId,isDeleted)"
@@ -378,7 +378,7 @@ public class RandomData {
 //		lessonDB.updateBatch(add_sql, types, objs);
 	}
 	
-	//ÉèÖÃÀÏÊ¦¿ÆÄ¿
+	//è®¾ç½®è€å¸ˆç§‘ç›®
 	public static void setTeacherSub(List<User> teachers, Long schoolId){
 		//4QrcOUm6Wau+VuBX8g+IPg==
 		String sql = "insert into tutor_user_teacher_subject_grade(teacherId,gradeId,subjectId,roleId,schoolId,schoolStageId,isDeleted)"
@@ -393,7 +393,7 @@ public class RandomData {
 		}
 		tutorDB.updateBatch(sql, subTypes, subjects);
 	}
-	//½ÌÑ§³¡µØ
+	//æ•™å­¦åœºåœ°
 	public static void initArea( Long schoolId){
 		String sql = "insert into ls_teach_area(areaName,building,stuCnt,classCnt,schoolId,isDeleted)"
 				+" values(?,?,50,1,"+schoolId+",0)";
@@ -402,13 +402,13 @@ public class RandomData {
 		types[1] = DBConstants.SET_STRING;
 		Object[][] objs = new Object[20][2];
 		for(int i=1 ;i <= 20 ; i++){
-			objs[i-1][0] = 200+ i + "ÊÒ";
-			objs[i-1][1] = "1ºÅÂ¥";
+			objs[i-1][0] = 200+ i + "å®¤";
+			objs[i-1][1] = "1å·æ¥¼";
 		}
 		lessonDB.updateBatch(sql, types, objs);
 	}
 	
-	//ÉèÖÃ·Ö°àÌõ¼ş
+	//è®¾ç½®åˆ†ç­æ¡ä»¶
 	public static void initLimitCondition(Long taskId){
 		String sql = "INSERT INTO ls_limit_condition "
 				+ "(taskId, subId, subName, personCnt, isSplit, splitCnt , level1, level2, level3, level4, isDeleted)"
@@ -428,7 +428,7 @@ public class RandomData {
 		for(int t=0;t<7;t++){
 			if(t == 0){
 				objs[t][0] = 4L;
-				objs[t][1] = "ÎïÀí";
+				objs[t][1] = "ç‰©ç†";
 				objs[t][2] = 55;
 				objs[t][3] = 0;
 				objs[t][4] = 0;
@@ -438,7 +438,7 @@ public class RandomData {
 				objs[t][8] = 0;
 			}else if(t==1){
 				objs[t][0] = 5L;
-				objs[t][1] = "»¯Ñ§";
+				objs[t][1] = "åŒ–å­¦";
 				objs[t][2] = 55;
 				objs[t][3] = 0;
 				objs[t][4] = 0;
@@ -448,7 +448,7 @@ public class RandomData {
 				objs[t][8] = 0;
 			}else if(t==5){
 				objs[t][0] = 9L;
-				objs[t][1] = "µØÀí";
+				objs[t][1] = "åœ°ç†";
 				objs[t][2] = 55;
 				objs[t][3] = 3;
 				objs[t][4] = 30;
@@ -458,7 +458,7 @@ public class RandomData {
 				objs[t][8] = 0;
 			}else if(t==6){
 				objs[t][0] = 19L;
-				objs[t][1] = "¼¼Êõ";
+				objs[t][1] = "æŠ€æœ¯";
 				objs[t][2] = 55;
 				objs[t][3] = 0;
 				objs[t][4] = 0;
@@ -482,14 +482,14 @@ public class RandomData {
 		lessonDB.updateBatch(sql, types, objs);
 	}
 	
-	//ÊÚ¿Î¼Æ»®
-	//ÓïÊıÍâ---5¿ÎÊ±
-	//Àí»¯Éú£¬ÕşÊ·µØ£¬¼¼£¬Ñ¡¿¼4£¬Ñ§¿¼2
-	//1Ìå£¬3ÆäËû
+	//æˆè¯¾è®¡åˆ’
+	//è¯­æ•°å¤–---5è¯¾æ—¶
+	//ç†åŒ–ç”Ÿï¼Œæ”¿å²åœ°ï¼ŒæŠ€ï¼Œé€‰è€ƒ4ï¼Œå­¦è€ƒ2
+	//1ä½“ï¼Œ3å…¶ä»–
 	public static void initTeachPlanAndArea(Long paikeTaskId,Long schoolId,Long minRelationId, Long maxRelationId){
 		String planSql = "insert into ls_paike_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,classType"
 				+ ",areaId,areaName,weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt,isDeleted)"
-				+" values("+paikeTaskId+",11,'¸ß¶ş',?,?,1,?,?,1,?,?,?,?,?,?,0)";
+				+" values("+paikeTaskId+",11,'é«˜äºŒ',?,?,1,?,?,1,?,?,?,?,?,?,0)";
 		String areaSql = "insert into ls_paike_task_area(paikeTaskId,areaId,isDeleted)"
 				+ " select "+paikeTaskId+",areaId,0 from ls_teach_area where isDeleted=0 and schoolId="+schoolId;
 		
@@ -505,17 +505,17 @@ public class RandomData {
 		types[8] = DBConstants.SET_INT;
 		types[9] = DBConstants.SET_INT;
 		
-		//»ñÈ¡°à¼¶
+		//è·å–ç­çº§
 		List<Klass> nomalKlasses = getNomalKlass(minRelationId,maxRelationId);
-		//»ñÈ¡¿ÆÄ¿
+		//è·å–ç§‘ç›®
 		List<Subject> subjects = getSubjects();
-		//»ñÈ¡ÀÏÊ¦
+		//è·å–è€å¸ˆ
 		Map<Long,List<Teacher>> subTeachers = getSubTeachers(schoolId);
-		//»ñÈ¡³¡µØ
+		//è·å–åœºåœ°
 		List<Area> areas = getAreas(schoolId);
 		List<TeachPlan> teachPlans = new ArrayList<>();
-		//ĞĞÕş°à -- ¿ÆÄ¿-- ½ÌÊÒ[¹Ì¶¨] -- ÀÏÊ¦-- ¿ÎÊ±-- Á¬ÌÃ
-		//»ñÈ¡ĞĞÕş°à£¬»ñÈ¡¿ÆÄ¿£¬»ñÈ¡¿ÆÄ¿¶ÔÓ¦ÀÏÊ¦£¬·ÖÅäÀÏÊ¦£¬³¡µØ
+		//è¡Œæ”¿ç­ -- ç§‘ç›®-- æ•™å®¤[å›ºå®š] -- è€å¸ˆ-- è¯¾æ—¶-- è¿å ‚
+		//è·å–è¡Œæ”¿ç­ï¼Œè·å–ç§‘ç›®ï¼Œè·å–ç§‘ç›®å¯¹åº”è€å¸ˆï¼Œåˆ†é…è€å¸ˆï¼Œåœºåœ°
 		for(int k=0;k<nomalKlasses.size();k++){
 			Klass klass = nomalKlasses.get(k);
 			Area area = areas.get(k);
@@ -533,7 +533,7 @@ public class RandomData {
 					tp.setTeacherId(teacher.getTeacherId());
 					tp.setTeacherName(teacher.getTeacherName());
 				}
-				//ÌåÓı
+				//ä½“è‚²
 				if(subject.getSubjectId() == 29L){
 					tp.setWeekCnt(1);
 					tp.setSeriesCnt(0);
@@ -574,7 +574,7 @@ public class RandomData {
 	public static void initSplitTeachPlan(Long paikeTaskId,Long schoolId,Long taskId){
 		String planSql = "insert into ls_paike_teach_plan(paikeTaskId,gradeId,gradeName,classId,className,classType,teamId"
 				+ ",weekType,subId,subName,teacherId,teacherName,weekCnt,seriesCnt,isDeleted)"
-				+ " values("+paikeTaskId+",11,'¸ß¶ş',?,?,3,?,1,?,?,?,?,?,?,0)";
+				+ " values("+paikeTaskId+",11,'é«˜äºŒ',?,?,3,?,1,?,?,?,?,?,?,0)";
 
 		DBConstants[] types = new DBConstants[9];
 		types[0] = DBConstants.SET_LONG;
@@ -587,15 +587,15 @@ public class RandomData {
 		types[7] = DBConstants.SET_INT;
 		types[8] = DBConstants.SET_INT;
 
-		// »ñÈ¡°à¼¶
+		// è·å–ç­çº§
 		List<Klass> splitKlasses = getSplitKlass(schoolId,taskId);
-		// »ñÈ¡ÀÏÊ¦
+		// è·å–è€å¸ˆ
 		Map<Long, List<Teacher>> subTeachers = getSubTeachers(schoolId);
-		// »ñÈ¡³¡µØ
+		// è·å–åœºåœ°
 //		List<Area> areas = getAreas();
 		List<TeachPlan> teachPlans = new ArrayList<>();
-		// ĞĞÕş°à -- ¿ÆÄ¿-- ½ÌÊÒ[¹Ì¶¨] -- ÀÏÊ¦-- ¿ÎÊ±-- Á¬ÌÃ
-		// »ñÈ¡ĞĞÕş°à£¬»ñÈ¡¿ÆÄ¿£¬»ñÈ¡¿ÆÄ¿¶ÔÓ¦ÀÏÊ¦£¬·ÖÅäÀÏÊ¦£¬³¡µØ
+		// è¡Œæ”¿ç­ -- ç§‘ç›®-- æ•™å®¤[å›ºå®š] -- è€å¸ˆ-- è¯¾æ—¶-- è¿å ‚
+		// è·å–è¡Œæ”¿ç­ï¼Œè·å–ç§‘ç›®ï¼Œè·å–ç§‘ç›®å¯¹åº”è€å¸ˆï¼Œåˆ†é…è€å¸ˆï¼Œåœºåœ°
 		int teamId = 1;
 		for (int k = 0; k < splitKlasses.size(); k++) {
 			Klass klass = splitKlasses.get(k);
@@ -640,7 +640,7 @@ public class RandomData {
 	}
 	
 	/**
-	 * Ëæ»úÑ§ÉúÑ¡ÔñµÄ¿ÆÄ¿
+	 * éšæœºå­¦ç”Ÿé€‰æ‹©çš„ç§‘ç›®
 	 * @param user
 	 */
 	public static void setUserSub(User user){
@@ -668,16 +668,16 @@ public class RandomData {
 		user.setCheckSubs(list);
 	}
 
-	//¸ù¾İÑ¡Ôñ¿ÆÄ¿ÖĞÑ§ÉúÊı·Ö²ã[50ÈËÃ¿°à£¬50ÈËµÚÒ»²ã£¬100ÈËµÚ¶ş²ã£¬Ê£ÓàµÚÈı²ã£¬ÆäËûÑ§ÉúÎªÑ§¿¼]
-	//²úÉú°à¼¶ÁĞ±í£¬Í¬Ê±£¬Ñ§ÉúÊôÓÚÄ³¸ö°à¼¶
+	//æ ¹æ®é€‰æ‹©ç§‘ç›®ä¸­å­¦ç”Ÿæ•°åˆ†å±‚[50äººæ¯ç­ï¼Œ50äººç¬¬ä¸€å±‚ï¼Œ100äººç¬¬äºŒå±‚ï¼Œå‰©ä½™ç¬¬ä¸‰å±‚ï¼Œå…¶ä»–å­¦ç”Ÿä¸ºå­¦è€ƒ]
+	//äº§ç”Ÿç­çº§åˆ—è¡¨ï¼ŒåŒæ—¶ï¼Œå­¦ç”Ÿå±äºæŸä¸ªç­çº§
 	public static List<KlassExt> assemble(List<User> users,List<Long> subIds){
 		List<KlassExt> klasses = new ArrayList<>();
-		//FIXME »ñÈ¡¿ÆÄ¿¶ÔÓ¦µÄ·Ö°à¹æÔò
+		//FIXME è·å–ç§‘ç›®å¯¹åº”çš„åˆ†ç­è§„åˆ™
 		
 		for(Long subId : subIds){
-			//FIXME Ê¹ÓÃ»ñÈ¡µÄ¿ÆÄ¿¶ÔÓ¦·Ö°à¹æÔò·Ö°à£¬´Ë´¦²âÊÔ£¬Ê¹ÓÃlevel1 = 50 level2 = 100 level3 = last level4±íÊ¾Ñ§¿¼
-			//·Ö°àÇ°£¬Í³¼ÆÈ«²¿·Ö²ã°àÖĞ£¬Ñ§ÉúĞ¡ÍÅÌå
-			//»ñÈ¡Ñ¡ÖĞ¸Ã¿ÆÄ¿µÄÓÃ»§ÁĞ±í
+			//FIXME ä½¿ç”¨è·å–çš„ç§‘ç›®å¯¹åº”åˆ†ç­è§„åˆ™åˆ†ç­ï¼Œæ­¤å¤„æµ‹è¯•ï¼Œä½¿ç”¨level1 = 50 level2 = 100 level3 = last level4è¡¨ç¤ºå­¦è€ƒ
+			//åˆ†ç­å‰ï¼Œç»Ÿè®¡å…¨éƒ¨åˆ†å±‚ç­ä¸­ï¼Œå­¦ç”Ÿå°å›¢ä½“
+			//è·å–é€‰ä¸­è¯¥ç§‘ç›®çš„ç”¨æˆ·åˆ—è¡¨
 			List<User> checkedUser = new ArrayList<>();
 			List<User> uncheckedUser = new ArrayList<>();
 			for(User user : users){
@@ -687,23 +687,23 @@ public class RandomData {
 					uncheckedUser.add(user);
 				}
 			}
-			//¸ù¾İÑ§Éú¿ÆÄ¿³É¼¨µ¹Ğò
+			//æ ¹æ®å­¦ç”Ÿç§‘ç›®æˆç»©å€’åº
 			checkedUser.sort(new SortUser(subId));
 //			if(subId == 19L)
 //			for(User user : checkedUser){
 //				System.out.println(user);
 //			}
 			
-			//²úÉú·Ö°àÊı¾İ
+			//äº§ç”Ÿåˆ†ç­æ•°æ®
 			int userCnt = checkedUser.size();
-			int personCnt = 50;//°à¼¶ÈËÊı
+			int personCnt = 50;//ç­çº§äººæ•°
 			int level1 = 50;  //
 			int level2 = 100; //
 			int level3 = userCnt - level2 - level1;
 			int level4 = users.size() - checkedUser.size();
 //			int level5 = 0;
-			String baseName = "¸ß¶şÑ¡¿¼"+getSubName(subId)+"levelindex°à";
-			String otherName = "¸ß¶şÑ§¿¼"+getSubName(subId)+"levelindex°à";
+			String baseName = "é«˜äºŒé€‰è€ƒ"+getSubName(subId)+"levelindexç­";
+			String otherName = "é«˜äºŒå­¦è€ƒ"+getSubName(subId)+"levelindexç­";
 
 			split(klasses, checkedUser, baseName, subId, personCnt, level1,0,1);
 			
@@ -720,11 +720,11 @@ public class RandomData {
 
 	public static void split(List<KlassExt> klasses, List<User> users,String baseName
 				, Long subId, int personCnt, int count,int begin,int level) {
-		//¿É·Ö°à¼¶Êı 63  50  2
+		//å¯åˆ†ç­çº§æ•° 63  50  2
 		int classCnt = (count % personCnt>0? 1:0) + count / personCnt;
-		//·Ö°à
+		//åˆ†ç­
 		List<KlassExt> splitClass = splitClass(subId,classCnt, level, baseName);
-		//°à¼¶ÈËÊı  63 / 2 31 1
+		//ç­çº§äººæ•°  63 / 2 31 1
 		//32
 		personCnt = count % classCnt > 0 ? 1 : 0+ count/classCnt ;
 		
@@ -734,14 +734,14 @@ public class RandomData {
 		klasses.addAll(splitClass);
 	}
 
-	//Ä¬ÈÏ°à¼¶ÈËÊı£¬¸ÃµÈ¼¶×ÜÈËÊı£¬°à¼¶Êı£¬¿ªÊ¼Ë÷Òı
+	//é»˜è®¤ç­çº§äººæ•°ï¼Œè¯¥ç­‰çº§æ€»äººæ•°ï¼Œç­çº§æ•°ï¼Œå¼€å§‹ç´¢å¼•
 	public static void setSplitKlassUser(List<User> users,
 			List<KlassExt> splitClass, int personCnt, int count, int classCnt,int begin) {
-		//»ñÈ¡ËùÓĞ·Ö°à°à¼¶
+		//è·å–æ‰€æœ‰åˆ†ç­ç­çº§
 		for(int i=0;i<classCnt;i++){
-			//°à¼¶Ñ§Éú
+			//ç­çº§å­¦ç”Ÿ
 			List<User> klassUsers = new ArrayList<>();
-//			//×îºóÒ»¸ö°à¼¶ÈËÊı
+//			//æœ€åä¸€ä¸ªç­çº§äººæ•°
 //			if(i+1 == classCnt){
 //				personCnt = count - (personCnt * i);
 //			}
@@ -754,7 +754,7 @@ public class RandomData {
 	}
 	
 	public static void splitClass(int classCnt, int subCnt){
-		//¸ù¾İÑ¡¿¼ÈËÊı×î¶àµÄÁ½¸ö¿ÆÄ¿³É¼¨ÅÅĞò·Ö°à£¬·Ö°àÈËÊı²Î¿¼Éè¶¨ÈËÊı
+		//æ ¹æ®é€‰è€ƒäººæ•°æœ€å¤šçš„ä¸¤ä¸ªç§‘ç›®æˆç»©æ’åºåˆ†ç­ï¼Œåˆ†ç­äººæ•°å‚è€ƒè®¾å®šäººæ•°
 		int[] num = new int[subCnt];
 		int avg = classCnt / subCnt ;
 		int remainder = classCnt % subCnt;
@@ -774,7 +774,7 @@ public class RandomData {
 			}
 			System.out.println("");
 		}
-		//Éè¶¨Í¬Ê±ÉÏ¿ÎÁĞ±í
+		//è®¾å®šåŒæ—¶ä¸Šè¯¾åˆ—è¡¨
 		
 		
 	}
@@ -783,11 +783,11 @@ public class RandomData {
 		List<KlassExt> klasses = new ArrayList<>();
 		if(classCnt <= 0 ) return klasses;
 		if(level == 1){
-			baseName = baseName.replaceAll("level", "×¨Òµ");
+			baseName = baseName.replaceAll("level", "ä¸“ä¸š");
 		}else if (level == 2){
-			baseName = baseName.replaceAll("level", "Ìá¸ß");
+			baseName = baseName.replaceAll("level", "æé«˜");
 		}else if (level == 3){
-			baseName = baseName.replaceAll("level", "»ù´¡");
+			baseName = baseName.replaceAll("level", "åŸºç¡€");
 		}else{
 			baseName = baseName.replaceAll("level", "");
 		}
@@ -803,7 +803,7 @@ public class RandomData {
 		return klasses;
 	}
 
-	//ÉèÖÃÑ§Éú·ÖÊı
+	//è®¾ç½®å­¦ç”Ÿåˆ†æ•°
 	public static void setUserScore(User user){
 		user.setScore1(getRandomScore(-1));
 		user.setScore2(getRandomScore(user.getScore1()));
@@ -820,7 +820,7 @@ public class RandomData {
 			String key = it.next();
 			String[][] classes = map.get(key);
 			for(int i=0;i<classes.length;i++){
-				System.out.println(key+"{"+"°à¼¶Ãû³Æ:"+classes[i][0]+",Ñ§ÉúÈËÊı:"+classes[i][1]+"}");
+				System.out.println(key+"{"+"ç­çº§åç§°:"+classes[i][0]+",å­¦ç”Ÿäººæ•°:"+classes[i][1]+"}");
 			}
 		}
 	}
@@ -858,16 +858,16 @@ public class RandomData {
 		types[8] = DBConstants.SET_INT;
 		
 		Object[][] objs = new Object[7][9];
-		//½ûÖ¹ÅÅ¿Î10Í¨ÓÃ
+		//ç¦æ­¢æ’è¯¾10é€šç”¨
 		for(int i=0;i<4;i++){
 			objs[i][0] = 10;
 			objs[i][1] = 5;
 			objs[i][2] = 2;
 			objs[i][3] = i+1;
 		}
-		//Ô¤ÅÅ¿Î£¬ÌåÓıÀÏÊ¦
-		//ÖÜÒ»ÖÜ¶şÖÜÈı
-		//µÚËÄ¿ÎÊ±
+		//é¢„æ’è¯¾ï¼Œä½“è‚²è€å¸ˆ
+		//å‘¨ä¸€å‘¨äºŒå‘¨ä¸‰
+		//ç¬¬å››è¯¾æ—¶
 		for(int i=0;i<3;i++){
 			objs[i+4][0] = 20;
 			objs[i+4][1] = 1 + i;
@@ -890,9 +890,9 @@ public class RandomData {
 		types[0] = DBConstants.SET_LONG;
 		types[1] = DBConstants.SET_LONG;
 		types[2] = DBConstants.SET_LONG;
-		//ºÏ°à£¬ÌåÓı
-		//ÌåÓıÀÏÊ¦ºÏ°à
-		//147|258|369°à·Ö±ğºÏ°à/10°à×Ô¼ºÍæ
+		//åˆç­ï¼Œä½“è‚²
+		//ä½“è‚²è€å¸ˆåˆç­
+		//147|258|369ç­åˆ†åˆ«åˆç­/10ç­è‡ªå·±ç©
 		obj[0] = 3736L;//3742 //3738
 		obj[1] = 37496L;//3740 //3737 //3744
 //		obj[2] = 3736L;//3735 //3741 //3739
@@ -949,7 +949,7 @@ public class RandomData {
 	}
 	
 	/**
-	 * »ñÈ¡³¡µØÁĞ±í
+	 * è·å–åœºåœ°åˆ—è¡¨
 	 * @return
 	 */
 	public static List<Area> getAreas(Long schoolId){
@@ -968,7 +968,7 @@ public class RandomData {
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞÊÚ¿Î¼Æ»®ÖĞµÄ·Ö²ã°à£¬ÌŞ³ıÑ¡ĞŞ°à¡£
+	 * è·å–æ‰€æœ‰æˆè¯¾è®¡åˆ’ä¸­çš„åˆ†å±‚ç­ï¼Œå‰”é™¤é€‰ä¿®ç­ã€‚
 	 * @return
 	 */
 	public static List<Klass> getTeachPlanClass(){
@@ -988,8 +988,8 @@ public class RandomData {
 	}
 	
 	/**
-	 * ËùÓĞ°à¼¶µÄÑ§ÉúÁĞ±í
-	 * ÒÔÑ§ÉúÅÅĞò£¬Ôò¿ÉÒÔ»ñÈ¡³åÍ»½ÌÊÒÁĞ±í
+	 * æ‰€æœ‰ç­çº§çš„å­¦ç”Ÿåˆ—è¡¨
+	 * ä»¥å­¦ç”Ÿæ’åºï¼Œåˆ™å¯ä»¥è·å–å†²çªæ•™å®¤åˆ—è¡¨
 	 * @return
 	 */
 	public static Map<Long,List<Long>> getUsersByClasses(List<Long> classIds){
@@ -1026,97 +1026,97 @@ public class RandomData {
 		List<Subject> subjects = new ArrayList<Subject>();
 		Subject subject = new Subject();
 		subject.setSubjectId(1L);
-		subject.setSubjectName("ÓïÎÄ");
+		subject.setSubjectName("è¯­æ–‡");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(2L);
-		subject.setSubjectName("ÊıÑ§");
+		subject.setSubjectName("æ•°å­¦");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(3L);
-		subject.setSubjectName("ÍâÓï");
+		subject.setSubjectName("å¤–è¯­");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(29L);
-		subject.setSubjectName("ÌåÓı");
+		subject.setSubjectName("ä½“è‚²");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(4L);
-		subject.setSubjectName("ÎïÀí");
+		subject.setSubjectName("ç‰©ç†");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(5L);
-		subject.setSubjectName("»¯Ñ§");
+		subject.setSubjectName("åŒ–å­¦");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(6L);
-		subject.setSubjectName("ÉúÎï");
+		subject.setSubjectName("ç”Ÿç‰©");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(7L);
-		subject.setSubjectName("ÕşÖÎ");
+		subject.setSubjectName("æ”¿æ²»");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(8L);
-		subject.setSubjectName("ÀúÊ·");
+		subject.setSubjectName("å†å²");
 		subjects.add(subject);
 		subject = new Subject();
 		subject.setSubjectId(9L);
-		subject.setSubjectName("µØÀí");
+		subject.setSubjectName("åœ°ç†");
 		subjects.add(subject);
 		return subjects;
 	}
 	
 	public static String getSubName(Long subNo){
 		if(subNo == 1){
-			return "ÓïÎÄ";
+			return "è¯­æ–‡";
 		}else if(subNo == 2){
-			return "ÊıÑ§";
+			return "æ•°å­¦";
 		}else if(subNo == 3){
-			return "ÍâÓï";
+			return "å¤–è¯­";
 		}else if(subNo == 4){
-			return "ÎïÀí";
+			return "ç‰©ç†";
 		}else if(subNo == 5){
-			return "»¯Ñ§";
+			return "åŒ–å­¦";
 		}else if(subNo == 6){
-			return "ÉúÎï";
+			return "ç”Ÿç‰©";
 		}else if(subNo == 7){
-			return "ÕşÖÎ";
+			return "æ”¿æ²»";
 		}else if(subNo == 8){
-			return "ÀúÊ·";
+			return "å†å²";
 		}else if(subNo == 9){
-			return "µØÀí";
+			return "åœ°ç†";
 		}else if(subNo == 19){
-			return "¼¼Êõ";
+			return "æŠ€æœ¯";
 		}else if(subNo == 29){
-			return "ÌåÓı";
+			return "ä½“è‚²";
 		}else{
-			return "ÆäËû";
+			return "å…¶ä»–";
 		}
 	}
 	
 	public static Long getSubNo(String name){
-		if(name.indexOf("ÓïÎÄ") > -1){
+		if(name.indexOf("è¯­æ–‡") > -1){
 			return 1L;
-		}else if(name.indexOf("ÊıÑ§") > -1){
+		}else if(name.indexOf("æ•°å­¦") > -1){
 			return 2L;
-		}else if(name.indexOf("ÍâÓï") > -1){
+		}else if(name.indexOf("å¤–è¯­") > -1){
 			return 3L;
-		}else if(name.indexOf("ÎïÀí") > -1){
+		}else if(name.indexOf("ç‰©ç†") > -1){
 			return 4L;
-		}else if(name.indexOf("»¯Ñ§") > -1){
+		}else if(name.indexOf("åŒ–å­¦") > -1){
 			return 5L;
-		}else if(name.indexOf("ÉúÎï") > -1){
+		}else if(name.indexOf("ç”Ÿç‰©") > -1){
 			return 6L;
-		}else if(name.indexOf("ÕşÖÎ") > -1){
+		}else if(name.indexOf("æ”¿æ²»") > -1){
 			return 7L;
-		}else if(name.indexOf("ÀúÊ·") > -1){
+		}else if(name.indexOf("å†å²") > -1){
 			return 8L;
-		}else if(name.indexOf("µØÀí") > -1){
+		}else if(name.indexOf("åœ°ç†") > -1){
 			return 9L;
-		}else if(name.indexOf("¼¼Êõ") > -1){
+		}else if(name.indexOf("æŠ€æœ¯") > -1){
 			return 19L;
-		}else if(name.indexOf("ÌåÓı") > -1){
+		}else if(name.indexOf("ä½“è‚²") > -1){
 			return 29L;
 		}else{
 			return -1L;
@@ -1151,7 +1151,7 @@ public class RandomData {
 		}
 	}
 	
-	//ÖØÖÃ
+	//é‡ç½®
 	public static void reset(){
 //		String sql = "delete from ls_klass where isDeleted=5";
 //		lessonDB.update(sql, null, null);
@@ -1186,45 +1186,45 @@ public class RandomData {
 	
 	//FIXME
 	public static void main(String[] args) {
-		//»ñÈ¡·Ö×é
-		//¸üĞÂuser±í
-//		List<User> users = getRandomUser(489,"Ñ§Éúf");
-//		List<User> teachers = getRandomTeacher("ÀÏÊ¦xy");
+		//è·å–åˆ†ç»„
+		//æ›´æ–°userè¡¨
+//		List<User> users = getRandomUser(489,"å­¦ç”Ÿf");
+//		List<User> teachers = getRandomTeacher("è€å¸ˆxy");
 		
-//		List<User> users = getUser("Ñ§Éú",36921L,37407L);
-//		List<User> teachers = getTeacher("ÀÏÊ¦z",42142L);
+//		List<User> users = getUser("å­¦ç”Ÿ",36921L,37407L);
+//		List<User> teachers = getTeacher("è€å¸ˆz",42142L);
 //		System.out.println(getKlassKeyMap().get(4492L));
-		//¸üĞÂstructºÍrole_school
+		//æ›´æ–°structå’Œrole_school
 //		setUserStructAndRole(users,100L,492L,4562L);
 //		setUserStructAndRole(teachers,101L,492L,4562L);
 //		setUserClass(users,492L,4562L,4571L);
 		
-		//ÉèÖÃtutor_user_teacher_subject_grade
+		//è®¾ç½®tutor_user_teacher_subject_grade
 //		setTeacherSub(teachers, 492L);
-		//¸üĞÂls_choice_exam_task_student±í
+		//æ›´æ–°ls_choice_exam_task_studentè¡¨
 //		setRandomSubInfo(users, 1012L);
-		//³õÊ¼»¯³¡µØ
+		//åˆå§‹åŒ–åœºåœ°
 //		initArea(492L);
 		
-		//ÉèÖÃ°à¼¶
+		//è®¾ç½®ç­çº§
 //		List<KlassExt> klasses = assemble(users, subIds);
 //		splitClass(users,klasses);
 //		updateClassSub(4530L,4538L,492L);
 		
-		//ÉèÖÃ·Ö°àÌõ¼ş[ĞèÒªÊÖ¶¯µ÷Õû]
+		//è®¾ç½®åˆ†ç­æ¡ä»¶[éœ€è¦æ‰‹åŠ¨è°ƒæ•´]
 //		initLimitCondition(1012L);
-		//·Ö°à
+		//åˆ†ç­
 //		auth/provost/paike/choiceExam/savePrepareClass.htm?taskId=150
 		
 //		initTeachPlanAndArea(1038L, 492L, 4530L, 4538L);
 		
 //		initSplitTeachPlan(1066L,476L,1012L);
 		
-		//ÉèÖÃ·Ö²ã°àÅÅ¿Î
+		//è®¾ç½®åˆ†å±‚ç­æ’è¯¾
 		
 		
 		
-		//ÉèÖÃÔ¤ÅÅ¿Î£¬½ûÅÅ¿Î£¬ÉèÖÃºÏ°à
+		//è®¾ç½®é¢„æ’è¯¾ï¼Œç¦æ’è¯¾ï¼Œè®¾ç½®åˆç­
 //		setRule();
 		
 //		long begin = System.currentTimeMillis();
@@ -1247,7 +1247,7 @@ public class RandomData {
 //			subList.get(i).sort(new SortUser(i+1L));
 //			subList.get(i).forEach(System.out::println);
 //			System.out.println("subcheck [sub:"+getSubName(i+1L)+", cnt:"+subList.get(i).size()+"]");
-//			printClass(assemble("¸ß¶ş",i+1L,getSubName(i+1L),users.size(),subList.get(i).size()));
+//			printClass(assemble("é«˜äºŒ",i+1L,getSubName(i+1L),users.size(),subList.get(i).size()));
 //		}
 //		splitClass(11, 3);
 	}

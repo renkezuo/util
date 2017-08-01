@@ -16,7 +16,7 @@ import org.jboss.netty.handler.codec.string.StringEncoder;
 public class SimpleServer {
 	public static void main(String[] args) {
 		ServerBootstrap server = new ServerBootstrap();
-		//Á½¸öÏß³Ì£¬bossÏß³ÌºÍ¹¤×÷Ïß³Ì
+		//ä¸¤ä¸ªçº¿ç¨‹ï¼Œbossçº¿ç¨‹å’Œå·¥ä½œçº¿ç¨‹
 		ExecutorService boss = Executors.newCachedThreadPool(new HaveNameThreadFactory("boss"));
 		ExecutorService worker = Executors.newCachedThreadPool(new HaveNameThreadFactory("worker"));
 		ChannelFactory factory = new NioServerSocketChannelFactory(boss,worker);
@@ -25,8 +25,8 @@ public class SimpleServer {
 			@Override
 			public ChannelPipeline getPipeline() throws Exception {
 				ChannelPipeline pipeline = Channels.pipeline();
-				//´Ë´¦´òÓ¡bossÏß³ÌÃû³Æ£¬handlerÖĞ´òÓ¡workerÏß³ÌÃû³Æ
-				//Ïß³ÌÃû³ÆÓÉNioWorker×¢²áÊ±ÃüÃû
+				//æ­¤å¤„æ‰“å°bossçº¿ç¨‹åç§°ï¼Œhandlerä¸­æ‰“å°workerçº¿ç¨‹åç§°
+				//çº¿ç¨‹åç§°ç”±NioWorkeræ³¨å†Œæ—¶å‘½å
 				System.out.println(Thread.currentThread().getName());
 				pipeline.addLast("decoder", new StringDecoder());
 				pipeline.addLast("encoder", new StringEncoder());
@@ -36,9 +36,9 @@ public class SimpleServer {
 		});
 		server.bind(new InetSocketAddress(8080));
 		//question
-		//Ã¿¸öÁ¬½Ó¶¼»á¿ªÒ»¸öÁ´½Ó¡£Õâ¸ö¸úNIOµÄsocketÒ»ÑùÂğ£¿
-		//´´½¨Í¨µÀ¹¤³§Ê±¿ÉÉèÖÃ¹¤×÷Ïß³ÌµÄÊıÁ¿
-		//Ä¬ÈÏÊıÁ¿ÎªÄÚºËÊı*2
+		//æ¯ä¸ªè¿æ¥éƒ½ä¼šå¼€ä¸€ä¸ªé“¾æ¥ã€‚è¿™ä¸ªè·ŸNIOçš„socketä¸€æ ·å—ï¼Ÿ
+		//åˆ›å»ºé€šé“å·¥å‚æ—¶å¯è®¾ç½®å·¥ä½œçº¿ç¨‹çš„æ•°é‡
+		//é»˜è®¤æ•°é‡ä¸ºå†…æ ¸æ•°*2
 		
 		
 	}

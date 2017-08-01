@@ -36,36 +36,36 @@ public class MyNioSocketServer {
 	
 	public static void main(String[] args) {
 		try {
-			//´´½¨·şÎñÍ¨µÀ
+			//åˆ›å»ºæœåŠ¡é€šé“
 			ServerSocketChannel ssc = ServerSocketChannel.open();
 			
-			//ÎªtrueÊ±±¨´í
+			//ä¸ºtrueæ—¶æŠ¥é”™
 			ssc.configureBlocking(false);
 
-			//°ó¶¨·şÎñÍ¨µÀÌ×½Ó×Ö¼àÌıµÄip:port
+			//ç»‘å®šæœåŠ¡é€šé“å¥—æ¥å­—ç›‘å¬çš„ip:port
 			InetSocketAddress sa = new InetSocketAddress("127.0.0.1",8080);
-			//Ì×½Ó×Ö°ó¶¨IP:port
+			//å¥—æ¥å­—ç»‘å®šIP:port
 			ssc.socket().bind(sa);
 			
-			//´ò¿ªÒ»¸öÑ¡ÔñÆ÷selector
+			//æ‰“å¼€ä¸€ä¸ªé€‰æ‹©å™¨selector
 			Selector selector = Selector.open();
 			
-			//×¢²á¼àÌıÇëÇóÊÂ¼ş
+			//æ³¨å†Œç›‘å¬è¯·æ±‚äº‹ä»¶
 			ssc.register(selector,SelectionKey.OP_ACCEPT);
 			
 			System.out.println("server start!!!");
 			while(true){
 				selector.select();
-				//¼àÌıµ½ÊÂ¼ş£¬»ñÈ¡keyÁĞ±í£¬È¡³ökey£¬É¾³ıÁĞ±íÖĞkey
+				//ç›‘å¬åˆ°äº‹ä»¶ï¼Œè·å–keyåˆ—è¡¨ï¼Œå–å‡ºkeyï¼Œåˆ é™¤åˆ—è¡¨ä¸­key
 				Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
 				while(keys.hasNext()){
 					SelectionKey key = keys.next();
 					keys.remove();
-					//Èç¹ûÊÇÁ¬½Ó²Ù×÷£¬Ôò½«¿Í»§¶ËÍ¨µÀ°ó¶¨µ½selectorÖĞ
+					//å¦‚æœæ˜¯è¿æ¥æ“ä½œï¼Œåˆ™å°†å®¢æˆ·ç«¯é€šé“ç»‘å®šåˆ°selectorä¸­
 					if(key.isAcceptable()){
 						handler(key,selector);
 					}
-					//Èç¹ûÊÇ¶Á²Ù×÷£¬¶ÔÓ¦¿Í»§¶ËÎªĞ´Èë£¬ÔòÖ´ĞĞÆäËû´¦ÀíÆ÷
+					//å¦‚æœæ˜¯è¯»æ“ä½œï¼Œå¯¹åº”å®¢æˆ·ç«¯ä¸ºå†™å…¥ï¼Œåˆ™æ‰§è¡Œå…¶ä»–å¤„ç†å™¨
 					if(key.isReadable()){
 						read(key);
 					}

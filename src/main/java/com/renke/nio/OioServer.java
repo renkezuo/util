@@ -4,27 +4,27 @@ import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 /**
- * ´«Í³socket·şÎñ¶Ë
- * Á½´Î×èÈûserver.accept()+read()
+ * ä¼ ç»ŸsocketæœåŠ¡ç«¯
+ * ä¸¤æ¬¡é˜»å¡server.accept()+read()
  *
  */
 public class OioServer {
 
 	public static void main(String[] args) throws Exception {
 
-		//´´½¨socket·şÎñ,¼àÌı10101¶Ë¿Ú
+		//åˆ›å»ºsocketæœåŠ¡,ç›‘å¬10101ç«¯å£
 		@SuppressWarnings("resource")
 		ServerSocket server = new ServerSocket(10101);
-		System.out.println("·şÎñÆ÷Æô¶¯£¡");
+		System.out.println("æœåŠ¡å™¨å¯åŠ¨ï¼");
 		while(true){
-			//»ñÈ¡Ò»¸öÌ×½Ó×Ö£¨×èÈû£©
+			//è·å–ä¸€ä¸ªå¥—æ¥å­—ï¼ˆé˜»å¡ï¼‰
 			final Socket socket = server.accept();
-			System.out.println("À´¸öÒ»¸öĞÂ¿Í»§¶Ë£¡");
+			System.out.println("æ¥ä¸ªä¸€ä¸ªæ–°å®¢æˆ·ç«¯ï¼");
 			handler(socket);
 //			Executors.newCachedThreadPool().execute(new Runnable() {
 //				@Override
 //				public void run() {
-//					//ÒµÎñ´¦Àí
+//					//ä¸šåŠ¡å¤„ç†
 //					handler(socket);
 //				}
 //			});
@@ -33,7 +33,7 @@ public class OioServer {
 	}
 	
 	/**
-	 * ¶ÁÈ¡Êı¾İ
+	 * è¯»å–æ•°æ®
 	 * @param socket
 	 * @throws Exception
 	 */
@@ -43,7 +43,7 @@ public class OioServer {
 			InputStream inputStream = socket.getInputStream();
 			
 			while(true){
-				//¶ÁÈ¡Êı¾İ£¨×èÈû£©
+				//è¯»å–æ•°æ®ï¼ˆé˜»å¡ï¼‰
 				int read = inputStream.read(bytes);
 				if(read != -1){
 					System.out.println(new String(bytes, 0, read));
@@ -55,7 +55,7 @@ public class OioServer {
 			e.printStackTrace();
 		}finally{
 			try {
-				System.out.println("socket¹Ø±Õ");
+				System.out.println("socketå…³é—­");
 				socket.close();
 			} catch (IOException e) {
 				e.printStackTrace();

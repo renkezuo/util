@@ -8,15 +8,15 @@ public class ParkTest {
 		ThreadA ta = new ThreadA("ta");
 		ta.mainThread = Thread.currentThread();
 		try {
-			System.out.println("¿ªÊ¼");
+			System.out.println("å¼€å§‹");
 			ta.start();
-			System.out.println("MAINÏß³Ì½øÈëµÈ´ı...");
+			System.out.println("MAINçº¿ç¨‹è¿›å…¥ç­‰å¾…...");
 			Thread.sleep(1000);
-			// Ö÷Ïß³ÌµÈ´ı
+			// ä¸»çº¿ç¨‹ç­‰å¾…
 			LockSupport.park();
-			System.out.println("MAINÏß³Ì±»½ĞĞÑ£¬×¼±¸½ĞĞÑTA");
+			System.out.println("MAINçº¿ç¨‹è¢«å«é†’ï¼Œå‡†å¤‡å«é†’TA");
 			Thread.sleep(5000);
-			System.out.println("MAINÏß³Ì½ĞĞÑTAÏß³Ì");
+			System.out.println("MAINçº¿ç¨‹å«é†’TAçº¿ç¨‹");
 			Thread.sleep(1000);
 			LockSupport.unpark(ta);
 		} catch (InterruptedException e) {
@@ -24,7 +24,7 @@ public class ParkTest {
 		} finally{
 			LockSupport.unpark(ta);
 		}
-		System.out.println("Ö÷Ïß³Ì½áÊø");
+		System.out.println("ä¸»çº¿ç¨‹ç»“æŸ");
 	}
 
 	static class ThreadA extends Thread {
@@ -37,18 +37,18 @@ public class ParkTest {
 
 		public void run() {
 			try {
-				System.out.println("TAÏß³Ì¿ªÊ¼Ö´ĞĞ£¬5sºó½ĞĞÑMAINÏß³Ì");
+				System.out.println("TAçº¿ç¨‹å¼€å§‹æ‰§è¡Œï¼Œ5såå«é†’MAINçº¿ç¨‹");
 				sleep(5000);
-				System.out.println("TA½ĞĞÑMAINÏß³Ì");
+				System.out.println("TAå«é†’MAINçº¿ç¨‹");
 				LockSupport.unpark(mainThread);
 				Thread.sleep(1000);
-				System.out.println("5sºó£¬TAÏß³ÌµÈ´ı");
+				System.out.println("5såï¼ŒTAçº¿ç¨‹ç­‰å¾…");
 				sleep(5000);
 				LockSupport.park();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			System.out.println("TAÏß³Ì±»½ĞĞÑ£¬½áÊø");
+			System.out.println("TAçº¿ç¨‹è¢«å«é†’ï¼Œç»“æŸ");
 		}
 	}
 }

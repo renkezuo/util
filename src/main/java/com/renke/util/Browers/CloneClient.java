@@ -73,7 +73,7 @@ public class CloneClient {
 	}
 	
 	/**
-	 * TODO:组装Post报文
+	 * TODO:缁勮Post鎶ユ枃
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-07 11:07:58
@@ -142,8 +142,8 @@ public class CloneClient {
 //	        GZIPInputStream gis = new GZIPInputStream(new );
 //	        getGZIPBytesByInputStream(is);
 	        /***
-	         * 此处如何将inputStream转换为GzipInputStream
-	         * 将数据全部拿下来，然后解开
+	         * 姝ゅ濡備綍灏唅nputStream杞崲涓篏zipInputStream
+	         * 灏嗘暟鎹叏閮ㄦ嬁涓嬫潵锛岀劧鍚庤В寮�
 	         */
 //	        while((line = br.readLine()) != null){
 //	        	

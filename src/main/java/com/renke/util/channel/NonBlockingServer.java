@@ -43,18 +43,18 @@ public class NonBlockingServer
     public void initializeOperations() throws IOException,UnknownHostException
     {
 		System.out.println("Inside initialization");
-		//´ò¿ªÒ»¸öÍ¨µÀÑ¡ÔñÆ÷
+		//æ‰“å¼€ä¸€ä¸ªé€šé“é€‰æ‹©å™¨
 		sel = Selector.open();
 		
 		
-		//´ò¿ªÒ»¸öÍ¨µÀ
+		//æ‰“å¼€ä¸€ä¸ªé€šé“
 		server = ServerSocketChannel.open();
-		//ÉèÖÃÍ¨µÀÎª·Ç×èÈû
+		//è®¾ç½®é€šé“ä¸ºéžé˜»å¡ž
 		server.configureBlocking(false);
 		
 		InetAddress ia = InetAddress.getLocalHost();
 		InetSocketAddress isa = new InetSocketAddress(ia,port);
-		//Í¨µÀ°ó¶¨µØÖ·
+		//é€šé“ç»‘å®šåœ°å€
 		server.socket().bind(isa);
     }
     
@@ -64,7 +64,7 @@ public class NonBlockingServer
         initializeOperations();
 		System.out.println("Abt to block on select()");
 		
-		//°ÑÍ¨µÀ×¢²áµ½selectorÖÐ£¬Í¬Ê±·µ»Ø×¢²áµÄkey
+		//æŠŠé€šé“æ³¨å†Œåˆ°selectorä¸­ï¼ŒåŒæ—¶è¿”å›žæ³¨å†Œçš„key
 		SelectionKey acceptKey = server.register(sel, SelectionKey.OP_ACCEPT );	
 		while (sel.select() > 0 )
 		{	

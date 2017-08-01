@@ -16,34 +16,34 @@ import java.util.Calendar;
 import java.util.List;
 public class Mysql2Entity {
 
-	private String packageOutPath = "cn.strong.leke.paike.model";//Ö¸¶¨ÊµÌåÉú³ÉËùÔÚ°üµÄÂ·¾¶
-	private String authorName = "Z.R.K";//×÷ÕßÃû×Ö
-	private String tablename = "ls_paike_time";//±íÃû
-	private String[] colnames; // ÁĞÃûÊı×é
-	private String[] colTypes; //ÁĞÃûÀàĞÍÊı×é
-	private int[] colSizes; //ÁĞÃû´óĞ¡Êı×é
-	private boolean f_util = false; // ÊÇ·ñĞèÒªµ¼Èë°üjava.util.*
-	private boolean f_sql = false; // ÊÇ·ñĞèÒªµ¼Èë°üjava.sql.*
-    //Êı¾İ¿âÁ¬½Ó
+	private String packageOutPath = "cn.strong.leke.paike.model";//æŒ‡å®šå®ä½“ç”Ÿæˆæ‰€åœ¨åŒ…çš„è·¯å¾„
+	private String authorName = "Z.R.K";//ä½œè€…åå­—
+	private String tablename = "ls_paike_time";//è¡¨å
+	private String[] colnames; // åˆ—åæ•°ç»„
+	private String[] colTypes; //åˆ—åç±»å‹æ•°ç»„
+	private int[] colSizes; //åˆ—åå¤§å°æ•°ç»„
+	private boolean f_util = false; // æ˜¯å¦éœ€è¦å¯¼å…¥åŒ…java.util.*
+	private boolean f_sql = false; // æ˜¯å¦éœ€è¦å¯¼å…¥åŒ…java.sql.*
+    //æ•°æ®åº“è¿æ¥
 	private static final String URL ="jdbc:mysql://192.168.20.21:3306/lesson?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
 	private static final String NAME = "exschool_test";
 	private static final String PASSWORD = "exschool2012";
 	private static final String DRIVER ="com.mysql.jdbc.Driver";
 
 	/*
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 */
 	public Mysql2Entity(Connection con,String tableName){
 		this.tablename = tableName;
-    	//´´½¨Á¬½Ó
-		//²éÒªÉú³ÉÊµÌåÀàµÄ±í
+    	//åˆ›å»ºè¿æ¥
+		//æŸ¥è¦ç”Ÿæˆå®ä½“ç±»çš„è¡¨
     	String sql = "select * from " + tablename;
     	PreparedStatement pStemt = null;
     	try {
     		
 			pStemt = con.prepareStatement(sql);
 			ResultSetMetaData rsmd = pStemt.getMetaData();
-			int size = rsmd.getColumnCount();	//Í³¼ÆÁĞ
+			int size = rsmd.getColumnCount();	//ç»Ÿè®¡åˆ—
 			colnames = new String[size];
 			colTypes = new String[size];
 			colSizes = new int[size];
@@ -83,7 +83,7 @@ public class Mysql2Entity {
     }
 
 	/**
-	 * ¹¦ÄÜ£ºÉú³ÉÊµÌåÀàÖ÷Ìå´úÂë
+	 * åŠŸèƒ½ï¼šç”Ÿæˆå®ä½“ç±»ä¸»ä½“ä»£ç 
 	 * @param colnames
 	 * @param colTypes
 	 * @param colSizes
@@ -94,7 +94,7 @@ public class Mysql2Entity {
 		
 		sb.append("package " + this.packageOutPath + ";\r\n");
 		sb.append("\r\n");
-		//ÅĞ¶ÏÊÇ·ñµ¼Èë¹¤¾ß°ü
+		//åˆ¤æ–­æ˜¯å¦å¯¼å…¥å·¥å…·åŒ…
 		if(f_util){
 			sb.append("import java.util.Date;\r\n");
 		}
@@ -111,20 +111,20 @@ public class Mysql2Entity {
 //		sb.append("import javax.persistence.TemporalType;\r\n");
 //		sb.append("import org.springframework.format.annotation.DateTimeFormat;\r\n");
 		Calendar cld = Calendar.getInstance();
-		//×¢ÊÍ²¿·Ö
+		//æ³¨é‡Šéƒ¨åˆ†
 		sb.append("/**\r\n");
 		sb.append(" * "+tablename+" \r\n");
 		sb.append(" * @author "+this.authorName+"\r\n");
 		sb.append(" * @time "+cld.get(Calendar.YEAR)+"-"+cld.get(Calendar.MONTH)+"-"+cld.get(Calendar.DAY_OF_MONTH)+" "
 							+cld.get(Calendar.HOUR_OF_DAY)+":"+cld.get(Calendar.MINUTE)+":"+cld.get(Calendar.SECOND)+"\r\n");
 		sb.append(" */ \r\n");
-		//ÊµÌå²¿·Ö
+		//å®ä½“éƒ¨åˆ†
 //		sb.append("@Entity\r\n");
 //		sb.append("@Table(name = \""+tablename+"\")\r\n");
 		sb.append("public class " + parseName(tablename) + " extends BaseModel{\r\n");
 		sb.append("\tprivate static final long serialVersionUID = 1L;");
-		processAllAttrs(sb);//ÊôĞÔ
-		processAllMethod(sb);//get set·½·¨
+		processAllAttrs(sb);//å±æ€§
+		processAllMethod(sb);//get setæ–¹æ³•
 		sb.append("}\r\n");
 		
     	//System.out.println(sb.toString());
@@ -132,7 +132,7 @@ public class Mysql2Entity {
 	}
 	
 	/**
-	 * ¹¦ÄÜ£ºÉú³ÉËùÓĞÊôĞÔ
+	 * åŠŸèƒ½ï¼šç”Ÿæˆæ‰€æœ‰å±æ€§
 	 * @param sb
 	 */
 	private void processAllAttrs(StringBuffer sb) {
@@ -161,7 +161,7 @@ public class Mysql2Entity {
 	}
 
 	/**
-	 * ¹¦ÄÜ£ºÉú³Éget¡¢set·½·¨
+	 * åŠŸèƒ½ï¼šç”Ÿæˆgetã€setæ–¹æ³•
 	 * @param sb
 	 */
 	private void processAllMethod(StringBuffer sb) {
@@ -182,7 +182,7 @@ public class Mysql2Entity {
 	
 	
 	/**
-	 * ÃèÊö£ºµÚÒ»¸öÊ××ÖÄ¸²»´óĞ´£¬ºóÃæ´óĞ´
+	 * æè¿°ï¼šç¬¬ä¸€ä¸ªé¦–å­—æ¯ä¸å¤§å†™ï¼Œåé¢å¤§å†™
 	 * @param name
 	 * @return
 	 * String
@@ -204,7 +204,7 @@ public class Mysql2Entity {
 	}
 	
 	/**
-	 * ÃèÊö£ºÈ«²¿Ê××ÖÄ¸´óĞ´
+	 * æè¿°ï¼šå…¨éƒ¨é¦–å­—æ¯å¤§å†™
 	 * @param name
 	 * @return
 	 * String
@@ -223,7 +223,7 @@ public class Mysql2Entity {
 	}
 	
 	/**
-	 * ¹¦ÄÜ£º½«ÊäÈë×Ö·û´®µÄÊ××ÖÄ¸¸Ä³É´óĞ´£¨ĞŞ¸Ä³ÉÍÕ·å·¨£©
+	 * åŠŸèƒ½ï¼šå°†è¾“å…¥å­—ç¬¦ä¸²çš„é¦–å­—æ¯æ”¹æˆå¤§å†™ï¼ˆä¿®æ”¹æˆé©¼å³°æ³•ï¼‰
 	 * @param str
 	 * @return
 	 */
@@ -238,7 +238,7 @@ public class Mysql2Entity {
 	}
 
 	/**
-	 * ¹¦ÄÜ£º»ñµÃÁĞµÄÊı¾İÀàĞÍ
+	 * åŠŸèƒ½ï¼šè·å¾—åˆ—çš„æ•°æ®ç±»å‹
 	 * @param sqlType
 	 * @return
 	 */
@@ -274,7 +274,7 @@ public class Mysql2Entity {
 	}
 	
 	/**
-	 * ³ö¿Ú
+	 * å‡ºå£
 	 * TODO
 	 * @param args
 	 */
@@ -288,7 +288,7 @@ public class Mysql2Entity {
 			ResultSet rs  = dm.getTables(con.getCatalog(), "root", null, new String[]{"TABLE"});
 			while(rs.next()) {
 				tableList.add(rs.getString("TABLE_NAME"));
-			    System.out.println("µÃµ½±íÃû£º"+rs.getString("TABLE_NAME"));
+			    System.out.println("å¾—åˆ°è¡¨åï¼š"+rs.getString("TABLE_NAME"));
 			    new Mysql2Entity(con,rs.getString("TABLE_NAME"));
 			}
 			/*if (tableList!=null) {

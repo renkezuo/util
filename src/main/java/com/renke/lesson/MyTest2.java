@@ -18,26 +18,26 @@ import com.renke.lesson.tools.InitData;
 public class MyTest2 {
 
 	public static void main(String[] args) {
-		//[¿ÆÄ¿][ÀÏÊ¦]
-		//Ã÷È·ÀÏÊ¦°ó¶¨°à¼¶£¬°ó¶¨¿ÆÄ¿
-		//¿ÆÄ¿¶ÔÓ¦ÀÏÊ¦ÁĞ±í
+		//[ç§‘ç›®][è€å¸ˆ]
+		//æ˜ç¡®è€å¸ˆç»‘å®šç­çº§ï¼Œç»‘å®šç§‘ç›®
+		//ç§‘ç›®å¯¹åº”è€å¸ˆåˆ—è¡¨
 		Map<Long, Teacher2[]> courseTeachers = InitData.teachers2();
-		//°à¼¶¿ÆÄ¿ÁĞ±í
+		//ç­çº§ç§‘ç›®åˆ—è¡¨
 		Course2[] courses = InitData.courses2(courseTeachers);
-		//°à¼¶ÁĞ±í
+		//ç­çº§åˆ—è¡¨
 		Klass2[] klasses = InitData.klasses2(courses);
 		
 //		monitorTask(courseTeachers, courses, klasses);
 		
 		for(Klass2 klass : klasses){
-			//×éºÏ£¬
+			//ç»„åˆï¼Œ
 //			Course2[] klassCourses = klass.getCourses();
 			Day[] days = klass.getDays();
 			for(int index = 0 ;index < days.length; index ++){
 				Day day = days[index];
 				LessonUnit[] lessons = day.getLessonUnit();
 				for(LessonUnit lesson:lessons){
-					//¿ÎÊ±ÉèÖÃ¿ÆÄ¿
+					//è¯¾æ—¶è®¾ç½®ç§‘ç›®
 //					lesson.setCourse(klassCourses[0]);
 					
 					
@@ -46,16 +46,16 @@ public class MyTest2 {
 //				klass.getCourseCombi().add(possibleCourse(klass.getTeachers()[i].getMaxLesson(),klass.getDayMaxCourseLessons()[i],klass.getCourseMaxDays()[i]));
 			
 			
-			//È¡°à¼¶¿ÎÊ±Êı-periods
-			//Ò»¸ö°à£¬Ò»¸ö¿ÎÊ±
-			//×¢£º½Ì°¸Æ½ÆëºÍ¿ÆÄ¿ÖØÒª³Ì¶ÈÊÇ³åÍ»µÄ[ÓÅÏÈ½Ì°¸Æ½Æë]
+			//å–ç­çº§è¯¾æ—¶æ•°-periods
+			//ä¸€ä¸ªç­ï¼Œä¸€ä¸ªè¯¾æ—¶
+			//æ³¨ï¼šæ•™æ¡ˆå¹³é½å’Œç§‘ç›®é‡è¦ç¨‹åº¦æ˜¯å†²çªçš„[ä¼˜å…ˆæ•™æ¡ˆå¹³é½]
 			
-			//´Ó°à¼¶¿ªÊ¼»¹ÊÇ´ÓÀÏÊ¦¿ªÊ¼£¿
+			//ä»ç­çº§å¼€å§‹è¿˜æ˜¯ä»è€å¸ˆå¼€å§‹ï¼Ÿ
 			
 		}
 		
-		//ÇëÉè¼Æ£¬ÒÑÖª¿ÆÄ¿Êı£¬ÒÑÖª°à¼¶¿ÎÊ±Êı
-		//ÒÑÖª/Î´ÖªÀÏÊ¦ÊıÁ¿Ê±£¬¸÷°à¼¶ÀÏÊ¦×Ô¶¯°ó¶¨¹¦ÄÜ
+		//è¯·è®¾è®¡ï¼Œå·²çŸ¥ç§‘ç›®æ•°ï¼Œå·²çŸ¥ç­çº§è¯¾æ—¶æ•°
+		//å·²çŸ¥/æœªçŸ¥è€å¸ˆæ•°é‡æ—¶ï¼Œå„ç­çº§è€å¸ˆè‡ªåŠ¨ç»‘å®šåŠŸèƒ½
 //		int[][] courses = new int[11][2];
 //		int[] choose = new int[courses.length];
 //		for (int i = 0; i < courses.length; i++) {
@@ -64,7 +64,7 @@ public class MyTest2 {
 //				courses[i][1] = 1;
 //			}
 //		}
-//		// Çî¾Ù¿ÉÄÜĞÔ
+//		// ç©·ä¸¾å¯èƒ½æ€§
 //		possibleCell(0,courses,choose);
 //		List<int[]> list = possibleCourse(6,3,5);
 //		for(int[] vars : list){
@@ -82,7 +82,7 @@ public class MyTest2 {
 	}
 	
 	/***
-	 * ¼ÇÂ¼¿Î±í
+	 * è®°å½•è¯¾è¡¨
 	 * @param x
 	 * @param courses
 	 * @param choose
@@ -106,14 +106,14 @@ public class MyTest2 {
 	}
 
 	/***
-	 * ¼ÆËã¿ÆÄ¿Ã¿ÖÜ¿ÎÊ±·Ö²¼
-	 * °à¼¶Ã¿ÌìÏàÍ¬¿ÆÄ¿×î¶à4¿ÎÊ±
-	 * Ò»°ãÑ§Ğ£¿ÎÊ±Ê±³¤¶àÔÚ40-50·ÖÖÓ
-	 * ÉÏÏÂÎç¿ÎÊ±×ÜÊı£¬ÔÚ7-10¸ö
-	 * ËùÒÔ×î¶à4¿ÎÊ±¹»ÓÃÁË
-	 * @param weekMaxLesson	¿ÆÄ¿ÖÜ×î´ó¿ÎÊ±Êı
-	 * @param dayMaxLesson	¿ÆÄ¿µ¥ÈÕ×î´ó¿ÎÊ±Êı
-	 * @param maxDay		×î´óÌìÊı
+	 * è®¡ç®—ç§‘ç›®æ¯å‘¨è¯¾æ—¶åˆ†å¸ƒ
+	 * ç­çº§æ¯å¤©ç›¸åŒç§‘ç›®æœ€å¤š4è¯¾æ—¶
+	 * ä¸€èˆ¬å­¦æ ¡è¯¾æ—¶æ—¶é•¿å¤šåœ¨40-50åˆ†é’Ÿ
+	 * ä¸Šä¸‹åˆè¯¾æ—¶æ€»æ•°ï¼Œåœ¨7-10ä¸ª
+	 * æ‰€ä»¥æœ€å¤š4è¯¾æ—¶å¤Ÿç”¨äº†
+	 * @param weekMaxLesson	ç§‘ç›®å‘¨æœ€å¤§è¯¾æ—¶æ•°
+	 * @param dayMaxLesson	ç§‘ç›®å•æ—¥æœ€å¤§è¯¾æ—¶æ•°
+	 * @param maxDay		æœ€å¤§å¤©æ•°
 	 */
 	public static List<int[]> possibleCourse(int weekMaxLesson,int dayMaxLesson,int maxDay) {
 		List<int[]> list = new ArrayList<>();

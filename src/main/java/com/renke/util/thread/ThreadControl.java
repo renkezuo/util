@@ -6,10 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThreadControl {
 	
 	static class DefaultThreadFactory implements ThreadFactory{
-		//Ò»¸öÊÇ³ØµÄ±àºÅ
+		//ä¸€ä¸ªæ˜¯æ± çš„ç¼–å·
 		private static final AtomicInteger poolNumber = new AtomicInteger(1);
         private final ThreadGroup group;
-        //³ØÖĞÏß³ÌµÄ±àºÅ
+        //æ± ä¸­çº¿ç¨‹çš„ç¼–å·
         private final AtomicInteger threadNumber = new AtomicInteger(1);
         private final String namePrefix;
 

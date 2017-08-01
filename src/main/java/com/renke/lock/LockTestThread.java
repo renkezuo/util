@@ -11,14 +11,14 @@ public class LockTestThread implements Runnable {
 		System.out.println(threadName);
 		lock.lock();
 		try {
-			System.out.println(threadName+"ÎÒµÄµØÅÌ£¬¹ş¹ş¹ş£¡");
+			System.out.println(threadName+"æˆ‘çš„åœ°ç›˜ï¼Œå“ˆå“ˆå“ˆï¼");
 			lock.lockInterruptibly();
-			System.out.println(threadName+"ÎÒµÃÌıµ³µÄ");
+			System.out.println(threadName+"æˆ‘å¾—å¬å…šçš„");
 			Thread.sleep(100000000);
 		} catch (InterruptedException e) {
-			System.out.println(threadName+"µ³Òªµ÷×ßÎÒ£¡ÎÒ²»Ïë×ß£¡");
+			System.out.println(threadName+"å…šè¦è°ƒèµ°æˆ‘ï¼æˆ‘ä¸æƒ³èµ°ï¼");
 		} finally{
-			System.out.println("¾ÓÈ»°ÑÎÒÍÏ×ßÁË£¿");
+			System.out.println("å±…ç„¶æŠŠæˆ‘æ‹–èµ°äº†ï¼Ÿ");
 			lock.unlock();
 		}
 	}

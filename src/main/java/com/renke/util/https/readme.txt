@@ -1,8 +1,8 @@
-1¡¢¶ÁÈ¡Í·ÐÅÏ¢£¬·µ»ØÊ£Óà×Ö½ÚÊý×é
-2¡¢Èç¹ûContent-Length²»Îª¿Õ£¬È¡¸Ãlength³¤¶ÈµÄÊý¾Ý
-3¡¢Èç¹ûContent-LengthÎª¿Õ£¬²é¿´chunkedÊÇ·ñ´æÔÚ£¬²»´æÔÚ·µ»ØÒì³£
-4¡¢chunked¸ñÊ½              ³¤¶È£¬»»ÐÐ£¬¶ÔÓ¦³¤¶ÈÊý¾Ý£¬»»ÐÐ£»³¤¶È£¬»»ÐÐ£¬¶ÔÓ¦³¤¶ÈÊý¾Ý£¬»»ÐÐ£»...
+1ã€è¯»å–å¤´ä¿¡æ¯ï¼Œè¿”å›žå‰©ä½™å­—èŠ‚æ•°ç»„
+2ã€å¦‚æžœContent-Lengthä¸ä¸ºç©ºï¼Œå–è¯¥lengthé•¿åº¦çš„æ•°æ®
+3ã€å¦‚æžœContent-Lengthä¸ºç©ºï¼ŒæŸ¥çœ‹chunkedæ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨è¿”å›žå¼‚å¸¸
+4ã€chunkedæ ¼å¼              é•¿åº¦ï¼Œæ¢è¡Œï¼Œå¯¹åº”é•¿åº¦æ•°æ®ï¼Œæ¢è¡Œï¼›é•¿åº¦ï¼Œæ¢è¡Œï¼Œå¯¹åº”é•¿åº¦æ•°æ®ï¼Œæ¢è¡Œï¼›...
 
 
 
-#²âÊÔ     ·ÃÎÊhttps://10.10.3.164:18443/nexus/
+#æµ‹è¯•     è®¿é—®https://10.10.3.164:18443/nexus/

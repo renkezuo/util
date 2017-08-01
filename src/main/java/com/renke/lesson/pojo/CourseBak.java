@@ -1,17 +1,17 @@
 package com.renke.lesson.pojo;
 
 public class CourseBak {
-	//½ÌÊ¦
+	//æ•™å¸ˆ
 	private TeacherBak teacher;
-	//×ÜÌìÊı£¬Ä¬ÈÏÎŞ
+	//æ€»å¤©æ•°ï¼Œé»˜è®¤æ— 
 	private int allDays;
-	//ÒÑ¾­ÅÅ¿ÎÌìÊı
+	//å·²ç»æ’è¯¾å¤©æ•°
 	private int useDays;
-	//¿ÎÊ±Êı
+	//è¯¾æ—¶æ•°
 	private int allHours;
-	//Ê¹ÓÃ¿ÎÊ±Êı
+	//ä½¿ç”¨è¯¾æ—¶æ•°
 	private int useHours;
-	//¿Î³Ì¼¶±ğ
+	//è¯¾ç¨‹çº§åˆ«
 	private Level level;
 	
 	public TeacherBak getTeacher() {

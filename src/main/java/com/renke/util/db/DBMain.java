@@ -20,7 +20,7 @@ public class DBMain {
 		bo.setValue("val:"+i);
 		
 		/**
-		 * @TODO properties文件已经定义好，但是读取方法没写
+		 * @TODO properties鏂囦欢宸茬粡瀹氫箟濂斤紝浣嗘槸璇诲彇鏂规硶娌″啓
 		 */
 		DBHelper dbh = new DBHelper("com.mysql.jdbc.Driver"
 									,"jdbc:mysql://test4xdm.mysql.rds.aliyuncs.com:3356/xdm_dev?characterEncoding=utf8"

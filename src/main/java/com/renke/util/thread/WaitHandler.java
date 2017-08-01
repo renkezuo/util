@@ -12,21 +12,21 @@ public class WaitHandler implements Runnable{
 	@Override
 	public void run() {
 		try {
-			System.out.println(Thread.currentThread().getName()+" : ×¼±¸¾ÍĞ÷£¬ÓĞbugÇëºô½ĞÎÒ!");
+			System.out.println(Thread.currentThread().getName()+" : å‡†å¤‡å°±ç»ªï¼Œæœ‰bugè¯·å‘¼å«æˆ‘!");
 			while(true){
 				synchronized (handler) {
-					System.out.println("ÆäËûÈËÊÍ·ÅËø£¬ÎÒ¿ÉÒÔµÈ´ı£¡");
+					System.out.println("å…¶ä»–äººé‡Šæ”¾é”ï¼Œæˆ‘å¯ä»¥ç­‰å¾…ï¼");
 					handler.wait();
 				}
-				System.out.println(Thread.currentThread().getName()+" : ÊÕµ½£¬ÇëÉÔµÈ...");
+				System.out.println(Thread.currentThread().getName()+" : æ”¶åˆ°ï¼Œè¯·ç¨ç­‰...");
 				Random random = new Random();
 				int sleep = 3000 + random.nextInt(7000);
 				Thread.sleep(sleep);
 				System.out.println(Thread.currentThread().getName()
-						+" : bugÒÑ¾­½â¾ö£¬ÓÃÊ±"+sleep/1000+"s£¬ÔÙÓĞbugÇëºô½ĞÎÒ!");
+						+" : bugå·²ç»è§£å†³ï¼Œç”¨æ—¶"+sleep/1000+"sï¼Œå†æœ‰bugè¯·å‘¼å«æˆ‘!");
 				synchronized (controller) {
 					controller.notify();
-					//¿ÉÔÚ´Ë´¦Ìí¼Ósleep£¬²âÊÔnotify²»»áÊÍ·ÅËø
+					//å¯åœ¨æ­¤å¤„æ·»åŠ sleepï¼Œæµ‹è¯•notifyä¸ä¼šé‡Šæ”¾é”
 					//Thread.sleep(10000);
 				}
 			}

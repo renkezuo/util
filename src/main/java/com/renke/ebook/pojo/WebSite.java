@@ -33,8 +33,8 @@ public class WebSite {
 //			initQu();
 //	}
 //	public void init23WX(){
-//		catalog_start = bookName+"×÷Õß£º";
-//		catalog_end = bookName+"¸üĞÂÖØÒªÍ¨¸æ";
+//		catalog_start = bookName+"ä½œè€…ï¼š";
+//		catalog_end = bookName+"æ›´æ–°é‡è¦é€šå‘Š";
 //		content_start = "show_share";
 //		content_end = "show_htm2";
 //		href_start = "href";
@@ -44,10 +44,10 @@ public class WebSite {
 //	}
 //	
 //	public void initShuqi6(){
-//		catalog_start = bookName+"ÎŞµ¯´°×îĞÂÕÂ½ÚÁĞ±í";
-//		catalog_end = "ÊéÆìĞ¡ËµÍ¬ÀàÎŞµ¯´°ÔÄ¶ÁÍÆ¼ö";
-//		content_start = bookName + "È«ÎÄÔÄ¶Á";
-//		content_end = bookName + "ÊÖ»úÔÄ¶Á";
+//		catalog_start = bookName+"æ— å¼¹çª—æœ€æ–°ç« èŠ‚åˆ—è¡¨";
+//		catalog_end = "ä¹¦æ——å°è¯´åŒç±»æ— å¼¹çª—é˜…è¯»æ¨è";
+//		content_start = bookName + "å…¨æ–‡é˜…è¯»";
+//		content_end = bookName + "æ‰‹æœºé˜…è¯»";
 //		href_start = "href";
 //		href_end = "\"";
 //		title_start = "title=\"";

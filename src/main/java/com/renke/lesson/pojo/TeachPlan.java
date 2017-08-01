@@ -3,28 +3,28 @@ package com.renke.lesson.pojo;
 import java.util.List;
 
 public class TeachPlan {
-	//Äê¼¶
+	//å¹´çº§
 	private Long gradeId;
 	private String gradeName;
-	//°à¼¶
+	//ç­çº§
 	private Long classId;
 	private String className;
-	//³¡µØ
+	//åœºåœ°
 	private Long areaId;
 	private String areaName;
-	//¿ÆÄ¿
+	//ç§‘ç›®
 	private Long subId;
 	private String subName;
-	//ÀÏÊ¦
+	//è€å¸ˆ
 	private Long teacherId;
 	private String teacherName;
-	//ÖÜ¿ÎÊ±Êı
+	//å‘¨è¯¾æ—¶æ•°
 	private int weekCnt;
-	//Á¬ÌÃÊı
+	//è¿å ‚æ•°
 	private int seriesCnt;
-	//³£¹æ1£¬µ¥ÖÜ2£¬Ë«ÖÜ3
+	//å¸¸è§„1ï¼Œå•å‘¨2ï¼ŒåŒå‘¨3
 	private int weekType;
-	//ÓÃ»§ÁĞ±í
+	//ç”¨æˆ·åˆ—è¡¨
 	private List<User> user;
 	
 	private int teamId;

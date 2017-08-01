@@ -20,7 +20,7 @@ public class SortMap extends JFrame implements ActionListener {
 	JTextField textField1 = new JTextField(5);
 	JTextField textField2 = new JTextField(5);
 	JTextField textField3 = new JTextField(5);
-	JLabel label1 = new JLabel("ÇëÊäÈë: ");
+	JLabel label1 = new JLabel("è¯·è¾“å…¥: ");
 	JLabel label2 = new JLabel("+");
 
 	public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class SortMap extends JFrame implements ActionListener {
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setTitle("¼òµ¥¼ÆËã³ÌĞò");
+		this.setTitle("ç®€å•è®¡ç®—ç¨‹åº");
 		this.setLocation(400, 250);
 		JPanel jPanel = new JPanel();
 		jPanel.setBackground(Color.white);
@@ -52,7 +52,7 @@ public class SortMap extends JFrame implements ActionListener {
 			String string1 = textField1.getText();
 			String string2 = textField2.getText();
 			if (string1.trim().length() == 0 || string2.trim().length() == 0) {
-				JOptionPane.showMessageDialog(this, "ÇëÏÈÊäÈëÖµ!", "ÏµÍ³ÌáÊ¾",
+				JOptionPane.showMessageDialog(this, "è¯·å…ˆè¾“å…¥å€¼!", "ç³»ç»Ÿæç¤º",
 				JOptionPane.ERROR_MESSAGE);
 			} else {
 			int a, b, c;

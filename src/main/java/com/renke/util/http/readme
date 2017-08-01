@@ -1,14 +1,14 @@
-BrowserÎªÈë¿Ú£¬backupÊÇµÚÒ»¸ö°æ±¾µÄ´úÂë
-DataParamÊÇµÚÒ»¸ö°æ±¾Ê±£¬Ê¹ÓÃµÄ×´Ì¬¶ÔÏó
-ParseHTTP£¬Ö÷Òª¸ºÔğ²úÉúrequestºÍ½âÎöresponse[ÊÇ·ñ·Ö¶Î£¬ÊÇ·ñgzÑ¹Ëõ£¬±àÂë¸ñÊ½]
-RequestºÍResponse·Ö±ğÎªÇëÇóºÍÏìÓ¦µÄÊı¾İ£¬·â×°µ½Ò»¸ö¶ÔÏóÖĞ
+Browserä¸ºå…¥å£ï¼Œbackupæ˜¯ç¬¬ä¸€ä¸ªç‰ˆæœ¬çš„ä»£ç 
+DataParamæ˜¯ç¬¬ä¸€ä¸ªç‰ˆæœ¬æ—¶ï¼Œä½¿ç”¨çš„çŠ¶æ€å¯¹è±¡
+ParseHTTPï¼Œä¸»è¦è´Ÿè´£äº§ç”Ÿrequestå’Œè§£æresponse[æ˜¯å¦åˆ†æ®µï¼Œæ˜¯å¦gzå‹ç¼©ï¼Œç¼–ç æ ¼å¼]
+Requestå’ŒResponseåˆ†åˆ«ä¸ºè¯·æ±‚å’Œå“åº”çš„æ•°æ®ï¼Œå°è£…åˆ°ä¸€ä¸ªå¯¹è±¡ä¸­
 
-Á÷³Ì
-BrowserÖĞÊäÈëurl£¬Ö´ĞĞ
-Ê×ÏÈParseHTTP¸ù¾İurl²úÉúrequestÇëÇóĞÅÏ¢£¬·µ»Ø¸øä¯ÀÀÆ÷
-ä¯ÀÀÆ÷Á¬½ÓrequestÖĞµÄhost:portµØÖ·£¬·¢ËÍrequestĞÅÏ¢
-·şÎñÆ÷ÏìÓ¦ĞÅÏ¢£¬Í¨¹ısocketChannel·¢ËÍ¸øä¯ÀÀÆ÷
-ä¯ÀÀÆ÷½«sc¶ÔÏó½»¸øParseHTTP£¬parseHTTPÍ¨¹ı¸Ã¶ÔÏó·Ö±ğ½âÎö
-ResponseHeader¿é[°üº¬httpStatus,charset,isChunked,isGzip,Content-LengthµÈ]
-ResponseData¿é[¸ù¾İÍ·ĞÅÏ¢£¬½â¶ÁÊı¾İ]
-ParseHTTP×îºó½«Êı¾İ´òÓ¡µ½¿ØÖÆÌ¨[µ¥¶ÀµÄ·½·¨£¬¿ÉÖØĞ´]
+æµç¨‹
+Browserä¸­è¾“å…¥urlï¼Œæ‰§è¡Œ
+é¦–å…ˆParseHTTPæ ¹æ®urläº§ç”Ÿrequestè¯·æ±‚ä¿¡æ¯ï¼Œè¿”å›ç»™æµè§ˆå™¨
+æµè§ˆå™¨è¿æ¥requestä¸­çš„host:portåœ°å€ï¼Œå‘é€requestä¿¡æ¯
+æœåŠ¡å™¨å“åº”ä¿¡æ¯ï¼Œé€šè¿‡socketChannelå‘é€ç»™æµè§ˆå™¨
+æµè§ˆå™¨å°†scå¯¹è±¡äº¤ç»™ParseHTTPï¼ŒparseHTTPé€šè¿‡è¯¥å¯¹è±¡åˆ†åˆ«è§£æ
+ResponseHeaderå—[åŒ…å«httpStatus,charset,isChunked,isGzip,Content-Lengthç­‰]
+ResponseDataå—[æ ¹æ®å¤´ä¿¡æ¯ï¼Œè§£è¯»æ•°æ®]
+ParseHTTPæœ€åå°†æ•°æ®æ‰“å°åˆ°æ§åˆ¶å°[å•ç‹¬çš„æ–¹æ³•ï¼Œå¯é‡å†™]

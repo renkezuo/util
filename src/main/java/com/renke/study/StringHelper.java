@@ -7,12 +7,12 @@ import java.util.List;
 
 public class StringHelper {
 	/**
-	 * ½ØÈ¡strÖĞ		ÒÔbegin¿ªÍ·	end½áÊøµÄ	×Ö·û´®
-	 * ·µ»Ø×Ö·û´®ÁĞ±í
-	 * @param str			Ô­×Ö·û´®
-	 * @param begin			¿ªÊ¼×Ö·û
-	 * @param end			½áÊø×Ö·û
-	 * @return List<String>	·µ»Ø×Ö·û´®ÁĞ±í
+	 * æˆªå–strä¸­		ä»¥beginå¼€å¤´	endç»“æŸçš„	å­—ç¬¦ä¸²
+	 * è¿”å›å­—ç¬¦ä¸²åˆ—è¡¨
+	 * @param str			åŸå­—ç¬¦ä¸²
+	 * @param begin			å¼€å§‹å­—ç¬¦
+	 * @param end			ç»“æŸå­—ç¬¦
+	 * @return List<String>	è¿”å›å­—ç¬¦ä¸²åˆ—è¡¨
 	 */
 	public List<String> getStringListInDoubleChar(String str,char begin,char end){
 		List<String> list = new ArrayList();
@@ -53,9 +53,9 @@ public class StringHelper {
 	}
 	
 	/***
-	 * È¡bytes´óĞ¡µÄ×Ö·û´®
-	 * ÖĞÎÄËõ½ø
-	 * eg:subStringB("ÖĞ¹ú",3);return ÖĞ;
+	 * å–byteså¤§å°çš„å­—ç¬¦ä¸²
+	 * ä¸­æ–‡ç¼©è¿›
+	 * eg:subStringB("ä¸­å›½",3);return ä¸­;
 	 * @param str
 	 * @param bytes
 	 * @return
@@ -80,10 +80,10 @@ public class StringHelper {
 //		System.out.println(str.substring(str.lastIndexOf("/")));
 		
 //		long a = System.currentTimeMillis();
-//		String str = "OOOOO¡¶AAAAA¡¶BBBBB¡¶CCCCC¡·DD¡¶D¡·DD¡¶EEEEE¡·FFFFF¡·GGGGG¡·123123¡¶1232¡¶CCCC¡·afjlakfjd¡·FFFF";
-////		String str = "\r\n\tÖĞ¹úÈË-Ò»¸ö¼Ó¼¸¸ö£¿£¿??    ";
+//		String str = "OOOOOã€ŠAAAAAã€ŠBBBBBã€ŠCCCCCã€‹DDã€ŠDã€‹DDã€ŠEEEEEã€‹FFFFFã€‹GGGGGã€‹123123ã€Š1232ã€ŠCCCCã€‹afjlakfjdã€‹FFFF";
+////		String str = "\r\n\tä¸­å›½äºº-ä¸€ä¸ªåŠ å‡ ä¸ªï¼Ÿï¼Ÿ??    ";
 //		StringHelper sh = new StringHelper();
-//		List<String> list = sh.getStringListInDoubleChar(str,'¡¶', '¡·');
+//		List<String> list = sh.getStringListInDoubleChar(str,'ã€Š', 'ã€‹');
 //		for(String fileName:list){
 //			System.out.println(fileName);
 //		}

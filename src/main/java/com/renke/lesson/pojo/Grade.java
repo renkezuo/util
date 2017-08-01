@@ -1,19 +1,19 @@
 package com.renke.lesson.pojo;
 
 /***
- * Äê¼¶
- * °üº¬ÊôĞÔ£º¿ÎÊ±Êı£¬¿ÎÊ±Ê±³¤min£¬¿Î¼äĞİÏ¢£¬ÉÏ¿ÎÌìÊı
+ * å¹´çº§
+ * åŒ…å«å±æ€§ï¼šè¯¾æ—¶æ•°ï¼Œè¯¾æ—¶æ—¶é•¿minï¼Œè¯¾é—´ä¼‘æ¯ï¼Œä¸Šè¯¾å¤©æ•°
  * @author renke.zuo@foxmail.com
  * @time 2017-03-09 17:37:40
  */
 public class Grade {
-	//Ê±³¤
+	//æ—¶é•¿
 	private int mins;
-	//ÉÏ¿ÎÌìÊı
+	//ä¸Šè¯¾å¤©æ•°
 	private int workDays;
-	//Ã¿Ìì¿ÎÊ±Êı
+	//æ¯å¤©è¯¾æ—¶æ•°
 	private int dayHours;
-	//¿Î³ÌÊı
+	//è¯¾ç¨‹æ•°
 	private int courses;
 	
 	public int getMins() {

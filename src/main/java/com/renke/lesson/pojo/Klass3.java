@@ -3,7 +3,7 @@ package com.renke.lesson.pojo;
 import java.util.List;
 
 /***
- * °à¼¶
+ * ç­çº§
  * @author Z.R.K
  * @time 2017-04-07 11:55:13
  */
@@ -17,22 +17,22 @@ public class Klass3 extends Base{
 		this.userCount = userCount;
 	}
 
-	//¿ÆÄ¿ÁĞ±í
+	//ç§‘ç›®åˆ—è¡¨
 	private Course[] courses;
-	//ÖÜ¿ÆÄ¿¿ÎÊ±Êı
+	//å‘¨ç§‘ç›®è¯¾æ—¶æ•°
 	private int[] weekNeedCourseLessons;
-	//µ¥ÈÕ¿ÆÄ¿×î´ó¿ÎÊ±Êı
+	//å•æ—¥ç§‘ç›®æœ€å¤§è¯¾æ—¶æ•°
 	private int[] dayMaxCourseLessons;
-	//¿ÆÄ¿×î¶àÌìÊı
+	//ç§‘ç›®æœ€å¤šå¤©æ•°
 	private int[] courseMaxDays;
-	//¿ÆÄ¿¿ÉÄÜµÄ×éºÏ
-	//µÚÒ»ÖÖ£º1*[0]+2*[1]+3*[2]+4*[3]¼¯ºÏ 1*x+2*y+3*z+4*n
-	//µÚ¶şÖÖ£º[indexN]:[0-4] 0 2 3 1 0
+	//ç§‘ç›®å¯èƒ½çš„ç»„åˆ
+	//ç¬¬ä¸€ç§ï¼š1*[0]+2*[1]+3*[2]+4*[3]é›†åˆ 1*x+2*y+3*z+4*n
+	//ç¬¬äºŒç§ï¼š[indexN]:[0-4] 0 2 3 1 0
 	private List<List<int[]>> courseCombi;
-	//¿ÆÄ¿¶ÔÓ¦ÀÏÊ¦
+	//ç§‘ç›®å¯¹åº”è€å¸ˆ
 	private TeacherBak[] teachers;
 	private int maxWeekLessons;
-	//Ã¿Ìì£¬ÉÏÎç¿ÎÊ±ÊıºÍÏÂÎç¿ÎÊ±Êı
+	//æ¯å¤©ï¼Œä¸Šåˆè¯¾æ—¶æ•°å’Œä¸‹åˆè¯¾æ—¶æ•°
 	private int[] dayAMLessons;
 	private int[] dayPMLessons;
 	
@@ -49,12 +49,12 @@ public class Klass3 extends Base{
 		this.dayPMLessons = dayPMLessons;
 	}
 
-	//±äÁ¿
-	//ÊÇ·ñÍê³É¿Î±í
+	//å˜é‡
+	//æ˜¯å¦å®Œæˆè¯¾è¡¨
 	private volatile boolean isDone;
-	//µ±ÈÕÀÏÊ¦
+	//å½“æ—¥è€å¸ˆ
 	private TeacherBak[] dayTeachers;
-	//¿ÆÄ¿Ê£Óà×Ü¿ÎÊ±Êı
+	//ç§‘ç›®å‰©ä½™æ€»è¯¾æ—¶æ•°
 	private int[] courseSurplusCounts;
 	private List<List<Integer>> lessonsCoursesIndex;
 	

@@ -11,11 +11,11 @@ import com.google.gson.JsonSyntaxException;
 
 public class JsonTool {
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, FileNotFoundException, UnsupportedEncodingException {
-//		File file = new File("F:/work/model/json/嵌套.json");
+//		File file = new File("F:/work/model/json/宓屽.json");
 //		Element e = new Gson().fromJson(new FileReader(file),Element.class);
 //		System.out.println(e);
 		
-		File file = new File("F:/work/workspace_uml/用户组织权限图.mdj");
+		File file = new File("F:/work/workspace_uml/鐢ㄦ埛缁勭粐鏉冮檺鍥�.mdj");
 		StarUML uml = new Gson().fromJson(new FileReader(file),StarUML.class);
 		for(StarUML u : uml.ownedElements){
 			for(StarUML m : u.ownedElements){

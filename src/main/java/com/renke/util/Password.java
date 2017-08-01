@@ -18,14 +18,14 @@ public class Password {
 	private static final String DEFAULT_ENCODING = "UTF-8";
 
 	/**
-	 * Hex±àÂë.
+	 * Hexç¼–ç .
 	 */
 	public static String encodeHex(byte[] input) {
 		return Hex.encodeHexString(input);
 	}
 
 	/**
-	 * Hex½âÂë.
+	 * Hexè§£ç .
 	 */
 	public static byte[] decodeHex(String input) {
 		try {
@@ -47,7 +47,7 @@ public class Password {
 	}
 
 	/**
-	 * Base64±àÂë.
+	 * Base64ç¼–ç .
 	 */
 	public static String encodeBase64(byte[] input) {
 		return Base64.encodeBytes(input);
@@ -58,7 +58,7 @@ public class Password {
 	}
 
 	/**
-	 * Base64½âÂë.
+	 * Base64è§£ç .
 	 */
 	public static byte[] decodeBase64(String input) {
 		try {
@@ -77,7 +77,7 @@ public class Password {
 	}
 
 	/**
-	 * URL ±àÂë, EncodeÄ¬ÈÏÎªUTF-8. 
+	 * URL ç¼–ç , Encodeé»˜è®¤ä¸ºUTF-8. 
 	 */
 	public static String urlEncode(String part) {
 		try {
@@ -88,7 +88,7 @@ public class Password {
 	}
 
 	/**
-	 * URL ½âÂë, EncodeÄ¬ÈÏÎªUTF-8. 
+	 * URL è§£ç , Encodeé»˜è®¤ä¸ºUTF-8. 
 	 */
 	public static String urlDecode(String part) {
 
@@ -100,7 +100,7 @@ public class Password {
 	}
 
 	/**
-	 * ×ªÒåHTML
+	 * è½¬ä¹‰HTML
 	 * @param html
 	 * @return
 	 */
@@ -146,9 +146,9 @@ public class Password {
 			i++;
 		}
 		br.close();
-		System.out.println("Æ¥Åä´ÎÊı£º"+i);
+		System.out.println("åŒ¹é…æ¬¡æ•°ï¼š"+i);
 //		MessageDigest md = MessageDigest.getInstance("MD5");
-//		md.update("testappkeytestappsecret¶Ò°É".getBytes("UTF-8"));
+//		md.update("testappkeytestappsecretå…‘å§".getBytes("UTF-8"));
 //		System.out.println(new BigInteger(1, md.digest()).toString(16));;
 		
 	}

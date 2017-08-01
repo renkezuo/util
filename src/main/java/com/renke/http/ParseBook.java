@@ -50,8 +50,8 @@ public class ParseBook {
 	}
 	
 	public void init23WX(String bookName,String catalog_path){
-		CATALOG_START = BOOKNAME+"×÷Õß£º";
-		CATALOG_END = BOOKNAME+"¸üĞÂÖØÒªÍ¨¸æ";
+		CATALOG_START = BOOKNAME+"ä½œè€…ï¼š";
+		CATALOG_END = BOOKNAME+"æ›´æ–°é‡è¦é€šå‘Š";
 		CONTENT_START = "show_share";
 		CONTENT_END = "show_htm2";
 		HREF_START = "href";
@@ -61,10 +61,10 @@ public class ParseBook {
 	}
 	
 	public void initShuqi6(String bookName,String catalog_path){
-		CATALOG_START = BOOKNAME+"ÎŞµ¯´°×îĞÂÕÂ½ÚÁĞ±í";
-		CATALOG_END = "ÊéÆìĞ¡ËµÍ¬ÀàÎŞµ¯´°ÔÄ¶ÁÍÆ¼ö";
-		CONTENT_START = BOOKNAME + "È«ÎÄÔÄ¶Á";
-		CONTENT_END = BOOKNAME + "ÊÖ»úÔÄ¶Á";
+		CATALOG_START = BOOKNAME+"æ— å¼¹çª—æœ€æ–°ç« èŠ‚åˆ—è¡¨";
+		CATALOG_END = "ä¹¦æ——å°è¯´åŒç±»æ— å¼¹çª—é˜…è¯»æ¨è";
+		CONTENT_START = BOOKNAME + "å…¨æ–‡é˜…è¯»";
+		CONTENT_END = BOOKNAME + "æ‰‹æœºé˜…è¯»";
 		HREF_START = "href";
 		HREF_END = "\"";
 		TITLE_START = "title=\"";
@@ -72,8 +72,8 @@ public class ParseBook {
 	}
 	
 	public void initQuanShu(String bookName,String catalog_path){
-		CATALOG_START = BOOKNAME+"_ÕÂ ½ÚÄ¿Â¼";
-		CATALOG_END = "ÔÄ¶ÁÌáÊ¾£º";
+		CATALOG_START = BOOKNAME+"_ç«  èŠ‚ç›®å½•";
+		CATALOG_END = "é˜…è¯»æç¤ºï¼š";
 		CONTENT_START = "style4";
 		CONTENT_END = "style9";
 		HREF_START = "href";
@@ -109,7 +109,7 @@ public class ParseBook {
 		String html = new String(bytes,SOURCE_ENCODING);
 		File f = new File(SAVEPATH);
 		if(!f.isDirectory()) f.mkdirs();
-		//ÉèÖÃ×¥È¡Í·£¬ºÍ×¥È¡Î²[±ÜÃâ×¥È¡´íÎóµÄa±êÇ©]
+		//è®¾ç½®æŠ“å–å¤´ï¼Œå’ŒæŠ“å–å°¾[é¿å…æŠ“å–é”™è¯¯çš„aæ ‡ç­¾]
 		char[] chars = html.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		boolean isBegin = false;

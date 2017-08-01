@@ -21,7 +21,7 @@ public class ListTool {
 		list2.add(7L);
 		list2.add(8L);
 		list2.add(9L);
-		//建议list+map组合使用
+		//寤鸿list+map缁勫悎浣跨敤
 		System.out.println(list.removeAll(list2));
 		
 		list.forEach(System.out::println);

@@ -2,7 +2,7 @@ package com.renke.study;
 
 
 public class Lesson {
-		 // 10ÔªÇ®µÄ×é³É£¬1£¬2£¬5ÈÎÒâ×éºÏ
+		 // 10å…ƒé’±çš„ç»„æˆï¼Œ1ï¼Œ2ï¼Œ5ä»»æ„ç»„åˆ
 	public static int i = 1;
 	public static void fun(String log, int n) {
 		  // int num = n;

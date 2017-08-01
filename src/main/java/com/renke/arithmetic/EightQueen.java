@@ -4,24 +4,24 @@ public class EightQueen {
 	public static int cnt = 0;
 	public static int queens = 8;
 
-	// ¼ÇÂ¼ÀúÊ·
+	// è®°å½•å†å²
 	public static void way(int row, int[] oldboard) {
 		int chessboard[] = new int[queens];
 		System.arraycopy(oldboard, 0, chessboard, 0, queens);
 		for (int k = 1; k <= queens; k++) {
 			boolean bl = true;
 			for (int i = 1; i < row; i++) {
-				//²»Í¬ÁĞ
+				//ä¸åŒåˆ—
 				if(chessboard[row - 1 - i] == k){
 					bl = false;
 					break;
 				}
-				//ÓÒÉÏĞ±ÎŞÕÏ°­
+				//å³ä¸Šæ–œæ— éšœç¢
 				if (chessboard[row - 1 - i] == k - i) {
 					bl = false;
 					break;
 				}
-				//ÓÒÉÏĞ±ÎŞÕÏ°­
+				//å³ä¸Šæ–œæ— éšœç¢
 				if (chessboard[row - 1 - i] == k + i) {
 					bl = false;
 					break;
@@ -43,10 +43,10 @@ public class EightQueen {
 		}
 	}
 
-	// »ñÈ¡Ò»¸öµ¥Ôª¸ñ£¬ÅĞ¶Ïµ¥Ôª¸ñºÍ×İºáĞ±µÄµ¥Ôª¸ñÊÇ·ñ³åÍ»
-	// ²»³åÍ»£¬±£´æÎªÒ»¸ö½á¹û£¬
+	// è·å–ä¸€ä¸ªå•å…ƒæ ¼ï¼Œåˆ¤æ–­å•å…ƒæ ¼å’Œçºµæ¨ªæ–œçš„å•å…ƒæ ¼æ˜¯å¦å†²çª
+	// ä¸å†²çªï¼Œä¿å­˜ä¸ºä¸€ä¸ªç»“æœï¼Œ
 
-	// Êı×é£¬ĞĞÁĞ£¬Ğ±ĞĞ£¬ÎŞ×è°­
+	// æ•°ç»„ï¼Œè¡Œåˆ—ï¼Œæ–œè¡Œï¼Œæ— é˜»ç¢
 	public static void main(String[] args) {
 		way(1, new int[queens]);
 		System.out.println(cnt);

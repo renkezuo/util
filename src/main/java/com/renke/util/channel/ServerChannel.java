@@ -33,10 +33,10 @@ public class ServerChannel {
 		ByteBuffer bb = ByteBuffer.allocate(2048);
 		int len = 0;
 		while((len = sc.read(bb)) > 0){
-			//¶ÁÈ¡µ½byteBufferÖĞ£¬»á½«positionÉèÖÃÎªlen+1
-			//ËùÒÔ£¬Èç¹ûÏëÈ¡µ½Êı¾İĞèÒªÖØÖÃByteBufferÖĞµÄ¼¸¸ö±äÁ¿
-			//½«limitÉèÖÃÎªposition£¬½«positionÉèÖÃÎª0£¬½«markÉèÖÃÎª-1
-			//ÏÖÔÚ¶ÁÈ¡Êı×é¾ÍÊÇ£¬´Ó0¿ªÊ¼£¬¶ÁÈ¡limit¸öÊı¾İ
+			//è¯»å–åˆ°byteBufferä¸­ï¼Œä¼šå°†positionè®¾ç½®ä¸ºlen+1
+			//æ‰€ä»¥ï¼Œå¦‚æœæƒ³å–åˆ°æ•°æ®éœ€è¦é‡ç½®ByteBufferä¸­çš„å‡ ä¸ªå˜é‡
+			//å°†limitè®¾ç½®ä¸ºpositionï¼Œå°†positionè®¾ç½®ä¸º0ï¼Œå°†markè®¾ç½®ä¸º-1
+			//ç°åœ¨è¯»å–æ•°ç»„å°±æ˜¯ï¼Œä»0å¼€å§‹ï¼Œè¯»å–limitä¸ªæ•°æ®
 			bb.flip();
 			byte[] buf = bb.array();
 			String result = new String(buf,0,len);
@@ -57,10 +57,10 @@ public class ServerChannel {
 	
 	
 	public static void startSimpleServer()throws IOException, InterruptedException{
-		String msg = "hello world ! ÄãºÃ£¬ÊÀ½ç£¡I'm Simple";
+		String msg = "hello world ! ä½ å¥½ï¼Œä¸–ç•Œï¼I'm Simple";
 		String encode = "UTF-8";
 		ServerSocketChannel ssc = ServerSocketChannel.open();
-		//Èç¹û´Ë´¦²»×èÈû£¬while(true)»áÏûºÄCPU¡£
+		//å¦‚æœæ­¤å¤„ä¸é˜»å¡ï¼Œwhile(true)ä¼šæ¶ˆè€—CPUã€‚
 //		ssc.configureBlocking(false);
 		ssc.bind(new InetSocketAddress(8017));
 		while (true) {
@@ -70,7 +70,7 @@ public class ServerChannel {
 	}
 	
 	/***
-	 * ÖØ¸´£¬Ñ­»·
+	 * é‡å¤ï¼Œå¾ªç¯
 	 * accept/remove
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
@@ -79,21 +79,21 @@ public class ServerChannel {
 	 * @throws InterruptedException
 	 */
 	public static void startSelectorServer()throws IOException, InterruptedException{
-		String msg = "hello world ! ÄãºÃ£¬ÊÀ½ç£¡I'm Selector";
+		String msg = "hello world ! ä½ å¥½ï¼Œä¸–ç•Œï¼I'm Selector";
 		String encode = "UTF-8";
 		Selector sel = Selector.open();
 		for(int i=0;i<3;i++){
 			ServerSocketChannel ssc = ServerSocketChannel.open();
-			//×èÈû²Ù×÷½»¸öselectorÁË¡£
+			//é˜»å¡æ“ä½œäº¤ä¸ªselectoräº†ã€‚
 			ssc.configureBlocking(false);
 			ssc.bind(new InetSocketAddress(8018+i));
 			ssc.register(sel, SelectionKey.OP_ACCEPT);
 		}
-		//ÏÈ¸ãÃ÷°×selectorÊÇ¸ÉÂïµÄÔÙÓÃ°É
-		//µ½Ä¿Ç°ÎªÖ¹£¬SocketChannelºÍServerSocketChannelÖ®¼äµ½µ×ÊÇÊ²Ã´¹ØÏµ
-		//ServerSocketChannel¿ØÖÆÍ¨µÀSocketChannel
-		//Í¨µÀÖĞÓĞ³µBuffer
-		//³µÖĞÓĞÊı¾İByte[]
+		//å…ˆææ˜ç™½selectoræ˜¯å¹²å˜›çš„å†ç”¨å§
+		//åˆ°ç›®å‰ä¸ºæ­¢ï¼ŒSocketChannelå’ŒServerSocketChannelä¹‹é—´åˆ°åº•æ˜¯ä»€ä¹ˆå…³ç³»
+		//ServerSocketChannelæ§åˆ¶é€šé“SocketChannel
+		//é€šé“ä¸­æœ‰è½¦Buffer
+		//è½¦ä¸­æœ‰æ•°æ®Byte[]
 		while (true) {
 			logger.info("Selector:I'm  wating ? ");
 			int selected = sel.select();
@@ -111,19 +111,19 @@ public class ServerChannel {
 //					logger.info("client say : {}",new String (bf.array(),0,len));
 //					key.isReadable();
 //					logger.info("I'm {}",key);
-					//ÕâĞĞ´úÂëÈ¥µôÒÔºó£¬»áµ¼ÖÂsel.select²»×èÈû
-					//ÏÖÔÚÅöµ½Á½¸öÎÊÌâ
-					//1¡¢Èç¹ûÃ»ÓĞ96-102ĞĞ´úÂë£¬»áµ¼ÖÂÎŞÏŞÑ­»·
-					//2¡¢Èç¹ûit.remove()ÕâĞĞ´úÂëÉ¾³ıµô£¬Ò²»áµ¼ÖÂÎŞÏßÑ­»·
-					//Ê×ÏÈ£¬ÎÒ²Â²âÊÇÒòÎªreadµÄÔ­Òò¡£×¢ÊÍµôread£¬¿´¿´ÊÇ·ñ»áÑ­»·
-					//²Â²â´íÎó£¬ÄÇÃ´ÎÒÏòÉÏ×¢ÊÍ£¬µ½sc=serverChannel.accept();¸Ğ¾õ¾ÍÊÇËüÁË
-					//OK¿ªÊ¼ÎŞÏŞÑ­»·ÁË¡£
-					//ºÃÁË£¬È¡ÏûÉÏÃæµÄ×¢ÊÍ£¬×¢ÊÍµôit.remove()£¬¿´¿´Ö´ĞĞÁ½´Î»á·¢ÉúÊ²Ã´¡£
-					//1¡¢ÎŞÏŞÑ­»·£¬selected = 1£¬Ò»Ö±Ñ­»·£¬it.removeÎŞĞ§¡£Èç¹û²»µ÷ÓÃaccept·½·¨£¬Ëû»áÒ»Ö±Ö´ĞĞ¡£
-					//2¡¢Ò²ÊÇÎŞÏŞÑ­»·£¬selected = 0£¬²»µ÷ÓÃremove·½·¨£¬selectedÊÇ0£¬µ÷ÓÃremove·½·¨£¬·´¶øÊ¹Ëü²»Îª0ÁË¡£[ÕâÊÇÎªÊ²Ã´°¡£¿]
-					//selector ÖĞÎ¬»¤×ÅÒ»¸öselectedKeys
-					//µÚÒ»´Î½øÀ´£¬²éÕÒselectedKeysÖĞ²»´æÔÚµÄ¾ÍĞ÷ÈÎÎñ£¬ÕÒµ½ÁË£¬·µ»Ø1
-					//µÚ¶ş´Î½øÀ´£¬²éÕÒselectedKeysÖĞ²»´æÔÚµÄ¾ÍĞ÷ÈÎÎñ£¬Ã»ÕÒµ½£¬ÒòÎªÃ»ÓĞÊÍ·Å£¬·µ»Ø0£¬ÎªÊ²Ã´²»µÈ´ıÄØ£¿
+					//è¿™è¡Œä»£ç å»æ‰ä»¥åï¼Œä¼šå¯¼è‡´sel.selectä¸é˜»å¡
+					//ç°åœ¨ç¢°åˆ°ä¸¤ä¸ªé—®é¢˜
+					//1ã€å¦‚æœæ²¡æœ‰96-102è¡Œä»£ç ï¼Œä¼šå¯¼è‡´æ— é™å¾ªç¯
+					//2ã€å¦‚æœit.remove()è¿™è¡Œä»£ç åˆ é™¤æ‰ï¼Œä¹Ÿä¼šå¯¼è‡´æ— çº¿å¾ªç¯
+					//é¦–å…ˆï¼Œæˆ‘çŒœæµ‹æ˜¯å› ä¸ºreadçš„åŸå› ã€‚æ³¨é‡Šæ‰readï¼Œçœ‹çœ‹æ˜¯å¦ä¼šå¾ªç¯
+					//çŒœæµ‹é”™è¯¯ï¼Œé‚£ä¹ˆæˆ‘å‘ä¸Šæ³¨é‡Šï¼Œåˆ°sc=serverChannel.accept();æ„Ÿè§‰å°±æ˜¯å®ƒäº†
+					//OKå¼€å§‹æ— é™å¾ªç¯äº†ã€‚
+					//å¥½äº†ï¼Œå–æ¶ˆä¸Šé¢çš„æ³¨é‡Šï¼Œæ³¨é‡Šæ‰it.remove()ï¼Œçœ‹çœ‹æ‰§è¡Œä¸¤æ¬¡ä¼šå‘ç”Ÿä»€ä¹ˆã€‚
+					//1ã€æ— é™å¾ªç¯ï¼Œselected = 1ï¼Œä¸€ç›´å¾ªç¯ï¼Œit.removeæ— æ•ˆã€‚å¦‚æœä¸è°ƒç”¨acceptæ–¹æ³•ï¼Œä»–ä¼šä¸€ç›´æ‰§è¡Œã€‚
+					//2ã€ä¹Ÿæ˜¯æ— é™å¾ªç¯ï¼Œselected = 0ï¼Œä¸è°ƒç”¨removeæ–¹æ³•ï¼Œselectedæ˜¯0ï¼Œè°ƒç”¨removeæ–¹æ³•ï¼Œåè€Œä½¿å®ƒä¸ä¸º0äº†ã€‚[è¿™æ˜¯ä¸ºä»€ä¹ˆå•Šï¼Ÿ]
+					//selector ä¸­ç»´æŠ¤ç€ä¸€ä¸ªselectedKeys
+					//ç¬¬ä¸€æ¬¡è¿›æ¥ï¼ŒæŸ¥æ‰¾selectedKeysä¸­ä¸å­˜åœ¨çš„å°±ç»ªä»»åŠ¡ï¼Œæ‰¾åˆ°äº†ï¼Œè¿”å›1
+					//ç¬¬äºŒæ¬¡è¿›æ¥ï¼ŒæŸ¥æ‰¾selectedKeysä¸­ä¸å­˜åœ¨çš„å°±ç»ªä»»åŠ¡ï¼Œæ²¡æ‰¾åˆ°ï¼Œå› ä¸ºæ²¡æœ‰é‡Šæ”¾ï¼Œè¿”å›0ï¼Œä¸ºä»€ä¹ˆä¸ç­‰å¾…å‘¢ï¼Ÿ
 					it.remove();
 				}
 			}

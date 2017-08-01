@@ -13,10 +13,10 @@ public class RandomTest {
 			thread.start();
 		}
 		while(RandomThread.count.get() != 5){
-			//Ñ­»·µÄ´ÎÊıÔ½¶à£¬Ô½Æ½¾ù
-			//500000´Î£¬Æ½¾ù5000´Î
-			//×îÉÙÓĞ4700
-			//×î¶àÓĞ5177
+			//å¾ªç¯çš„æ¬¡æ•°è¶Šå¤šï¼Œè¶Šå¹³å‡
+			//500000æ¬¡ï¼Œå¹³å‡5000æ¬¡
+			//æœ€å°‘æœ‰4700
+			//æœ€å¤šæœ‰5177
 		}
 		for(int i=0;i<=100;i++){
 			System.out.println("key:"+i+" --> cnts:"+RandomThread.map.get(i));

@@ -2,25 +2,25 @@ package com.renke.lesson.pojo;
 
 
 public class LayeringStudent{
-	//ÓÃ»§Id
+	//ç”¨æˆ·Id
 	private Long userId;
 	
-	//ĞĞÕş°à
+	//è¡Œæ”¿ç­
 	private String className;
 	
-	//ÀÖºÅ
+	//ä¹å·
 	private String loginName;
 	
-	//ÓÃ»§Ãû
+	//ç”¨æˆ·å
 	private String userName;
 	
-	// °à¼¶Ñ§Éú¹ØÁªID
+	// ç­çº§å­¦ç”Ÿå…³è”ID
 	private Long classStuId;
 	
-	// °à¼¶ID
+	// ç­çº§ID
 	private Long classId;
 	
-	// Ñ§Ğ£ID
+	// å­¦æ ¡ID
 	private Long schoolId;
 	
 	private String message;

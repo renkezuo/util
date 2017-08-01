@@ -27,8 +27,8 @@ public class ParseHTTP {
 	public final static String FIRST_HTTP_LINE = "HTTP";
 	
 	/**
-	 * ½âÎöÊı¾İ
-	 * FIXME [¿ÉÒÔ¿¼ÂÇ£¬½«bytesÌæ»»³Ébaos]
+	 * è§£ææ•°æ®
+	 * FIXME [å¯ä»¥è€ƒè™‘ï¼Œå°†bytesæ›¿æ¢æˆbaos]
 	 * @param is
 	 * @param http
 	 * @throws IOException
@@ -37,10 +37,10 @@ public class ParseHTTP {
 	public static void parseResponse(InputStream is,HTTP http) throws Exception{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Map<String,String> responseMap = new HashMap<String,String>();
-		//Ê×ÏÈ¶ÁÈ¡Ğ­ÒéÍ·ĞÅÏ¢
-		//Ã¿´Î¶ÁÈ¡Ò»¸ö×Ö½Ú£¬ÅĞ¶Ï×Ö½Ú\r£¬ÇÒĞ­ÒéÍ·ÎÄ¼şÎ´½áÊø¡£
-		//Èç¹ûÁ¬ĞøÁ½¸ö×Ö½ÚÎª\r\n£¬Ôò±£´æµ½Í·mapÖĞ
-		//Èç¹ûºóÁ½¸ö×Ö½ÚÒÀÈ»ÊÇ\r\n£¬ÔòĞ­ÒéÍ·½áÊø
+		//é¦–å…ˆè¯»å–åè®®å¤´ä¿¡æ¯
+		//æ¯æ¬¡è¯»å–ä¸€ä¸ªå­—èŠ‚ï¼Œåˆ¤æ–­å­—èŠ‚\rï¼Œä¸”åè®®å¤´æ–‡ä»¶æœªç»“æŸã€‚
+		//å¦‚æœè¿ç»­ä¸¤ä¸ªå­—èŠ‚ä¸º\r\nï¼Œåˆ™ä¿å­˜åˆ°å¤´mapä¸­
+		//å¦‚æœåä¸¤ä¸ªå­—èŠ‚ä¾ç„¶æ˜¯\r\nï¼Œåˆ™åè®®å¤´ç»“æŸ
 		parseHeaderData(is,responseMap);
 		if(CHUNKED.equals(responseMap.get(CHUNKED_KEY))){
 			int size = parseChunkedData(is,baos);
@@ -51,14 +51,14 @@ public class ParseHTTP {
 			}
 		}else{
 			int size = Integer.parseInt(responseMap.get(CONTENT_LENGTH));
-			//¶ÁÈ¡isÁ÷ÖĞsize¸ö×Ö½Ú£¬Ğ´Èëµ½baosÖĞ
+			//è¯»å–isæµä¸­sizeä¸ªå­—èŠ‚ï¼Œå†™å…¥åˆ°baosä¸­
 			baos.write(readDataToBytes(size,is));
 		}
 		String zip_ = responseMap.get(CONTENT_ENCODING);
 		if (zip_ != null && zip_.toUpperCase().indexOf("GZIP") != -1) {
-			// Ê¹ÓÃGZIPÁ÷×°ÔØ×Ö½ÚÊı×é£¬´ËÊ±ÒÑ¾­½âÂë
-			// GZIPÖĞµÄ×Ö½ÚÊı×é³¤¶ÈºÍbytes×Ö½ÚÊı×é³¤¶È²»Í¬ÁË
-			// Êä³ö×Ö·û´®
+			// ä½¿ç”¨GZIPæµè£…è½½å­—èŠ‚æ•°ç»„ï¼Œæ­¤æ—¶å·²ç»è§£ç 
+			// GZIPä¸­çš„å­—èŠ‚æ•°ç»„é•¿åº¦å’Œbyteså­—èŠ‚æ•°ç»„é•¿åº¦ä¸åŒäº†
+			// è¾“å‡ºå­—ç¬¦ä¸²
 			GZIPInputStream gzip = new GZIPInputStream(
 					new ByteArrayInputStream(baos.toByteArray()));
 			http.setBytes(readDataToBytes(gzip));
@@ -73,7 +73,7 @@ public class ParseHTTP {
 	
 
 	/**
-	 * ½âÎö±àÂë¸ñÊ½
+	 * è§£æç¼–ç æ ¼å¼
 	 * @param http
 	 */
 	public static void parseEncoding(HTTP http){
@@ -93,7 +93,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ½âÎöHTTPÍ·ĞÅÏ¢
+	 * è§£æHTTPå¤´ä¿¡æ¯
 	 * @param is
 	 * @return
 	 * @throws IOException 
@@ -109,7 +109,7 @@ public class ParseHTTP {
 				b = is.read();
 				result[index++] = (byte)b;
 				if(b==10){
-					//ÏÔÊ¾HTTPÍ·ĞÅÏ¢
+					//æ˜¾ç¤ºHTTPå¤´ä¿¡æ¯
 //					System.out.println(new String(result,0,index-2));
 					b=is.read();
 					String header = new String(result,0,index-2);
@@ -123,7 +123,7 @@ public class ParseHTTP {
 					if(b==13){
 						b = is.read();
 						endHeader = true;
-						//ÏÔÊ¾MapĞÅÏ¢
+						//æ˜¾ç¤ºMapä¿¡æ¯
 //						System.out.println(PrintConsole.mapToString(responseMap));
 					}
 				}
@@ -133,7 +133,7 @@ public class ParseHTTP {
 	}
 	
 	/***
-	 * ½âÎö·Ö¶ÎÊı¾İ
+	 * è§£æåˆ†æ®µæ•°æ®
 	 * @param is
 	 * @param os
 	 * @return
@@ -154,7 +154,7 @@ public class ParseHTTP {
 	}
 	
 	/***
-	 * ¶ÁÈ¡InputStreamÖĞsize×Ö½ÚµÄÊı¾İ£¬·µ»Ø×Ö½ÚÊı×é
+	 * è¯»å–InputStreamä¸­sizeå­—èŠ‚çš„æ•°æ®ï¼Œè¿”å›å­—èŠ‚æ•°ç»„
 	 * @param size
 	 * @param is
 	 * @return byte[]
@@ -173,7 +173,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ·µ»Ø¶ÁÈ¡µ½µÄËùÓĞ×Ö½Ú
+	 * è¿”å›è¯»å–åˆ°çš„æ‰€æœ‰å­—èŠ‚
 	 * @param is
 	 * @return
 	 * @throws IOException 
@@ -193,7 +193,7 @@ public class ParseHTTP {
 	
 	
 	/***
-	 * ¶ÁÈ¡InputStreamÖĞsize×Ö½ÚµÄÊı¾İ£¬Ğ´ÈëOutputStreamÖĞ
+	 * è¯»å–InputStreamä¸­sizeå­—èŠ‚çš„æ•°æ®ï¼Œå†™å…¥OutputStreamä¸­
 	 * @param size
 	 * @param is
 	 * @throws IOException
@@ -212,7 +212,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ½«ËùÓĞ¶ÁÈ¡µ½µÄ×Ö½ÚĞ´ÈëOutputStreamÖĞ£¬²¢·µ»Ø
+	 * å°†æ‰€æœ‰è¯»å–åˆ°çš„å­—èŠ‚å†™å…¥OutputStreamä¸­ï¼Œå¹¶è¿”å›
 	 * @param is
 	 * @return
 	 * @throws IOException 
@@ -231,7 +231,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * ×é×°Ò»¸öGET±¨ÎÄ
+	 * ç»„è£…ä¸€ä¸ªGETæŠ¥æ–‡
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-07 15:17:58
@@ -272,35 +272,35 @@ public class ParseHTTP {
 		http.setResponse(response);
 		byte[] tmp = new byte[4096];
 		ByteBuffer lenByte = ByteBuffer.allocate(4096);
-		//×Ü³¤¶È
+		//æ€»é•¿åº¦
 		int length = -1;
-		//¶ÁÈ¡³¤¶È
+		//è¯»å–é•¿åº¦
 		int readLength = 0;
-		//ĞĞÍ·Ë÷Òı
+		//è¡Œå¤´ç´¢å¼•
 		int beginIndex = 0;
-		//¶ÁÈ¡Êı¾İ³¤¶È
+		//è¯»å–æ•°æ®é•¿åº¦
 		int len = 0;
-		//¿ÕĞĞÊÇ·ñ³öÏÖ
+		//ç©ºè¡Œæ˜¯å¦å‡ºç°
 		boolean hasSpace = false;
-		//Í·Êı¾İÊÇ·ñ×é×°Íê±Ï
+		//å¤´æ•°æ®æ˜¯å¦ç»„è£…å®Œæ¯•
 		boolean resolveHead = false;
-		//ÁÙÊ±´æ·ÅÊı¾İ¶ÓÁĞ
+		//ä¸´æ—¶å­˜æ”¾æ•°æ®é˜Ÿåˆ—
 //		List<byte[]> tmpList = new ArrayList<byte[]>();
 		byte[] tmpByte = null;
 		Map<String,String> result = new HashMap<String,String>();
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		//½«ËùÓĞÊı¾İ×°Èëµ½ByteBufferÖĞ
+		//å°†æ‰€æœ‰æ•°æ®è£…å…¥åˆ°ByteBufferä¸­
 		while((len = socketChannel.read(responseBuf)) > 0){
 			responseBuf.clear();
 			System.arraycopy(responseBuf.array(),0, tmp,beginIndex,len);
-			//Ê£Óà×Ü³¤¶È
+			//å‰©ä½™æ€»é•¿åº¦
 			int countLen = beginIndex + len;
 			beginIndex = 0;
 			if(!hasSpace){
-				//readLine·½·¨£¬¿ÕĞĞÊ±£¬±ê¼Ç¿ÕĞĞË÷Òı
+				//readLineæ–¹æ³•ï¼Œç©ºè¡Œæ—¶ï¼Œæ ‡è®°ç©ºè¡Œç´¢å¼•
 				for(int i=0;i<countLen;i++){
-					//¿ÕĞĞÖ®Ç°£¬httpÇëÇóµÄÍ·ĞÅÏ¢
+					//ç©ºè¡Œä¹‹å‰ï¼Œhttpè¯·æ±‚çš„å¤´ä¿¡æ¯
 					if(i < countLen - 1 && tmp[i]=='\r' && tmp[i+1]=='\n'){
 						tmpByte = new byte[i-beginIndex];
 						if(tmpByte.length == 0){
@@ -324,8 +324,8 @@ public class ParseHTTP {
 					}
 				}
 			}
-			//Í·ĞÅÏ¢°´ĞĞ´æ´¢
-			//Ê£ÓàÊı¾İ±£Áôµ½Êı×éÍ·²¿
+			//å¤´ä¿¡æ¯æŒ‰è¡Œå­˜å‚¨
+			//å‰©ä½™æ•°æ®ä¿ç•™åˆ°æ•°ç»„å¤´éƒ¨
 			if(beginIndex < countLen && !hasSpace) {
 				System.arraycopy(tmp, beginIndex, tmp,0,countLen-beginIndex);
 			}
@@ -474,7 +474,7 @@ public class ParseHTTP {
 	}
 	
 	/**
-	 * TODO:×é×°Post±¨ÎÄ
+	 * TODO:ç»„è£…PostæŠ¥æ–‡
 	 * @author renke.zuo@foxmail.com
 	 * @version V1.0
 	 * @time 2016-07-07 11:07:58

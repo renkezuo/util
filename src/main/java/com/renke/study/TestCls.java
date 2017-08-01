@@ -22,7 +22,7 @@ public class TestCls {
 	}
 	
 	public static void main(String[] args) {
-		/*String fileNames = "¡·";
+		/*String fileNames = "ã€‹";
 		String branch_no = "";
 		List<Map> list = new ArrayList();
 		Map map = new HashMap();
@@ -99,18 +99,18 @@ public class TestCls {
 			String fileName = file.get("fileName").toString().trim();
 			String branch = file.get("branch_no").toString().trim();
 			if(i==0){
-				fileNames += fileName+"¡·";
+				fileNames += fileName+"ã€‹";
 				branch_no = branch;
 				reList.add(file);
 			}else{
 				if(branch_no.equals(branch)){
-					if(fileNames.indexOf("¡·"+fileName+"¡·")<0){
-						fileNames += fileName+"¡·";
+					if(fileNames.indexOf("ã€‹"+fileName+"ã€‹")<0){
+						fileNames += fileName+"ã€‹";
 						reList.add(file);
 					}
 				}else{
 					branch_no = branch;
-					fileNames = "¡·" + fileName+"¡·";
+					fileNames = "ã€‹" + fileName+"ã€‹";
 					reList.add(file);
 				}
 			}

@@ -7,10 +7,10 @@ public class MainXml {
 		try {
 //			rx.getSourse();
 			long begin_time = System.currentTimeMillis();
-//			wx.editNode("project","ÒµÎñ¼à¿Ø2");
-			wx.editText("Ô¤¾¯¹¤µ¥·¢Æğ", "hello");
+//			wx.editNode("project","ä¸šåŠ¡ç›‘æ§2");
+			wx.editText("é¢„è­¦å·¥å•å‘èµ·", "hello");
 			long end_time = System.currentTimeMillis();
-			System.out.println("ºÄÊ±£º"+(end_time-begin_time));
+			System.out.println("è€—æ—¶ï¼š"+(end_time-begin_time));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -21,7 +21,7 @@ public class ChannelClient {
 				SocketChannel sc = SocketChannel.open();
 				sc.connect(new InetSocketAddress(port));
 				String msg = "I say : I'm not a bad guy ";
-//				Ê¹ÓÃsocket´¦Àí
+//				ä½¿ç”¨socketå¤„ç†
 				OutputStream os = sc.socket().getOutputStream();
 				os.write(msg.getBytes());
 				sc.socket().shutdownOutput();
@@ -51,7 +51,7 @@ public class ChannelClient {
 				String msg = "I'm not a bad guy " + port;
 				ByteBuffer buf = ByteBuffer.wrap(msg.getBytes());
 				Thread.sleep(3000);
-				//³¹µ×ÍÑÀësocket
+				//å½»åº•è„±ç¦»socket
 				sc.write(buf);
 				sc.shutdownOutput();
 				sc.close();

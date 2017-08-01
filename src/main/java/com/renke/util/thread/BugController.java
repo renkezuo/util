@@ -9,9 +9,9 @@ public class BugController {
 	static Lock lock = new ReentrantLock();
 	static int k = 0;
 	public static void main(String[] args)  throws InterruptedException {
-		//waitºÍnotify
+		//waitå’Œnotify
 //		waitController();
-		//parkºÍunpark
+		//parkå’Œunpark
 //		parkController();
 		for(int i=0;i<100;i++){
 			new Thread(new Runnable() {
@@ -51,7 +51,7 @@ public class BugController {
 	}
 	
 	public static void parkController() throws InterruptedException {
-		System.out.println("Ö÷Ïß³ÌÆô¶¯£º");
+		System.out.println("ä¸»çº¿ç¨‹å¯åŠ¨ï¼š");
 		Thread currentThread = Thread.currentThread();
 		currentThread.setName("controllerThread");
 		Thread thread1 = new Thread(new ParkHandler(currentThread), "parkThread1");
@@ -62,7 +62,7 @@ public class BugController {
 		thread3.start();
 		Thread.sleep(2000);
 		while(true){
-			System.out.println(currentThread.getName()+" : ·¢ÏÖbug£¬Çë½»¸ø×îºÃµÄ´¦ÀíÆ÷´¦Àí£¡");
+			System.out.println(currentThread.getName()+" : å‘çŽ°bugï¼Œè¯·äº¤ç»™æœ€å¥½çš„å¤„ç†å™¨å¤„ç†ï¼");
 			int best = selectBest();
 			if(best == 0){
 				LockSupport.unpark(thread1);
@@ -72,15 +72,15 @@ public class BugController {
 				LockSupport.unpark(thread3);
 			}
 			LockSupport.park();
-			System.out.println(currentThread.getName()+" : ÕýÔÚÑéÊÕ£¬ÇëÉÔºó...");
-			System.out.println(currentThread.getName()+" : ÑéÊÕÍ¨¹ý£¬OK");
+			System.out.println(currentThread.getName()+" : æ­£åœ¨éªŒæ”¶ï¼Œè¯·ç¨åŽ...");
+			System.out.println(currentThread.getName()+" : éªŒæ”¶é€šè¿‡ï¼ŒOK");
 			Thread.sleep(5000);
 			System.out.println("");
 		}
 	}
 	
 	public static void waitController() throws InterruptedException {
-		System.out.println("Ö÷Ïß³ÌÆô¶¯£º");
+		System.out.println("ä¸»çº¿ç¨‹å¯åŠ¨ï¼š");
 		Thread currentThread = Thread.currentThread();
 		currentThread.setName("controllerThread");
 		Object controller = new Object();
@@ -93,27 +93,27 @@ public class BugController {
 		thread3.start();
 		Thread.sleep(2000);
 		while(true){
-			System.out.println(currentThread.getName()+" : ·¢ÏÖbug£¬Çë´¦Àí£¡");
+			System.out.println(currentThread.getName()+" : å‘çŽ°bugï¼Œè¯·å¤„ç†ï¼");
 			doit(handler);
 			synchronized (controller) {
 				controller.wait();
 			}
-			System.out.println(currentThread.getName()+" : ÕýÔÚÑéÊÕ£¬ÇëÉÔºó...");
-			System.out.println(currentThread.getName()+" : ÑéÊÕÍ¨¹ý£¬OK");
+			System.out.println(currentThread.getName()+" : æ­£åœ¨éªŒæ”¶ï¼Œè¯·ç¨åŽ...");
+			System.out.println(currentThread.getName()+" : éªŒæ”¶é€šè¿‡ï¼ŒOK");
 			Thread.sleep(5000);
 			System.out.println("");
 		}
 	}
 	
 	public static void doit(Object handler){
-		System.out.println("Selector : Ëæ»úÑ¡Ôñ´¦ÀíÆ÷£¬ÇëÉÔµÈ£¡");
+		System.out.println("Selector : éšæœºé€‰æ‹©å¤„ç†å™¨ï¼Œè¯·ç¨ç­‰ï¼");
 		synchronized (handler) {
 			handler.notify();
 		}
 	}
 	
 	public static int selectBest(){
-		System.out.println("Selector : ÒÑ¾­ÎªÄúÑ¡Ôñ×îºÃ´¦ÀíÆ÷£¬ÇëÉÔµÈ£¡");
+		System.out.println("Selector : å·²ç»ä¸ºæ‚¨é€‰æ‹©æœ€å¥½å¤„ç†å™¨ï¼Œè¯·ç¨ç­‰ï¼");
 		Random random = new Random();
 		return random.nextInt(100) % 3;
 	}

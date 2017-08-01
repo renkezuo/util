@@ -2,7 +2,7 @@ package com.renke.jdk8;
 
 
 /**
- * ÓÐÇÒ½öÓÐÒ»¸öpublicµÄÎ´ÊµÏÖ·½·¨
+ * æœ‰ä¸”ä»…æœ‰ä¸€ä¸ªpublicçš„æœªå®žçŽ°æ–¹æ³•
  * 
  * @author renke.zuo@foxmail.com
  * @time 2017-03-07 18:14:58
@@ -11,7 +11,7 @@ package com.renke.jdk8;
 public interface FunInterface {
 	public void world(); //delete this method err : FunInterface is not FunctionalInterface
 //	public void zeze(); //err: FunInterface is not FunctionalInterface
-	//Ò²ÓÐinterface enhanceµÄÐÂÌØÐÔ
+	//ä¹Ÿæœ‰interface enhanceçš„æ–°ç‰¹æ€§
 	default void test(){System.out.println("test1");}
 	default void test2(){System.out.println("test2");}
 //	public static void xixi();//err :This method requires a body instead of a semicolon

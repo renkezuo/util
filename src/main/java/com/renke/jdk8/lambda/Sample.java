@@ -8,7 +8,7 @@ import java.util.Map;
 import com.renke.jdk8.Filter;
 
 public class Sample {
-	// ´òÓ¡¹ıÂËÖ®ºóµÄ³ÉÔ±
+	// æ‰“å°è¿‡æ»¤ä¹‹åçš„æˆå‘˜
 	public static void filterPrint(List<String> lists, Filter filter) {
 		lists.stream().filter((o) -> filter.filter(o)).forEach(System.out::println);
 	}
@@ -18,7 +18,7 @@ public class Sample {
 		filterPrint(lists, (str) -> str.equals("C"));
 		lists.sort(StringCompare :: compare);
 		filterPrint(lists, (str) -> true);
-		//²âÊÔ mapºÍfilterÒ»Æğ¶¨Òå£¬È»ºóforEach£¬¶ømapºÍfilterÔËĞĞlist.length´Î
+		//æµ‹è¯• mapå’Œfilterä¸€èµ·å®šä¹‰ï¼Œç„¶åforEachï¼Œè€Œmapå’Œfilterè¿è¡Œlist.lengthæ¬¡
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("hello", "world");
