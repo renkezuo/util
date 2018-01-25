@@ -192,7 +192,7 @@ public class ExcelHelper {
 			}
 			if(colIndexes[4] != -1){
 				if(getStringValue(row.getCell(colIndexes[4])).equals("男")){
-					user.man = true;
+					user.isMan = 1;
 				}
 			}
 			for (int k = 5; k < 12; k++) {
@@ -345,7 +345,7 @@ public class ExcelHelper {
 		for (int i = 1; i < rowLength; i++) {
 			Row row = sheet.getRow(i);
 			String result = getStringValue(row.getCell(3));
-			
+			System.out.println(result);
 		}
 
 		// Map<Integer, Integer> cntMapping1 =
