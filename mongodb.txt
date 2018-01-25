@@ -1,0 +1,39 @@
+/* 1 */
+{
+    "_id" : ObjectId("59ad22988007ebdf74bc7480"),
+    "_count" : 1.0,
+    "day" : 11.0,
+    "roleId" : 101.0
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("59ad22988007ebdf74bc7481"),
+    "_count" : 4.0,
+    "day" : 18.0,
+    "roleId" : 101.0
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("59ad22988007ebdf74bc7482"),
+    "_count" : 6.0,
+    "day" : 16.0,
+    "roleId" : 101.0
+}
+
+/* 4 */
+{
+    "_id" : ObjectId("59ad22988007ebdf74bc7483"),
+    "_count" : 16.0,
+    "day" : 15.0,
+    "roleId" : 101.0
+}
+
+/* 5 */
+{
+    "_id" : ObjectId("59ad22988007ebdf74bc7484"),
+    "_count" : 3.0,
+    "day" : 2.0,
+    "roleId" : 101.0
+}

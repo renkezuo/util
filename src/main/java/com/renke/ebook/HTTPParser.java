@@ -31,10 +31,11 @@ public class HTTPParser {
 	public final static String FIRST_HTTP_LINE = "HTTP";
 	
 	public static void sendGetMessage(SocketChannel socketChannel,HTTP http) throws IOException{
-		ByteBuffer bb = ByteBuffer.allocate(1024);
+		ByteBuffer bb = ByteBuffer.allocate(4096);
 		bb.put(("GET "+http.getUri()+" HTTP/1.1\r\n").getBytes());
 		bb.put(("Host: "+http.getHost()+":"+http.getPort()+"\r\n").getBytes());
 		bb.put(("Connection: keep-alive\r\n").getBytes());
+//		bb.put(("Cookie: UM_distinctid=15c5e879b7448e-047a3b7f2d0602-323f5c0f-1fa400-15c5e879b75bfa; bdshare_firstime=1496234564743; PPad_id_PP=6; bookid=32229%2C11170; chapterid=1745806%2C6229740; chaptername=%25u7B2C%25u4E94%25u7AE0%2520%25u521D%25u63A2%25u9057%25u8FF9%2C%25u7B2C%25u4E00%25u7AE0%2520%25u79E6%25u5148%25u7FBD; bcolor=; font=; size=; fontcolor=; width=; CNZZDATA1255414283=1157608163-1496233437-null%7C1506683263; Hm_lvt_edfe46767ffc69ab580905a1cc70ac7f=1506682950,1506682964; Hm_lpvt_edfe46767ffc69ab580905a1cc70ac7f=1506684010; Hm_lvt_3520c40cd08646ba527cb8debc0d5db7=1506682964; Hm_lpvt_3520c40cd08646ba527cb8debc0d5db7=1506684010").getBytes());
 		bb.put(("Cache-Control: max-age=0\r\n").getBytes());
 		bb.put(("Upgrade-Insecure-Requests: 1\r\n").getBytes());
 		bb.put(("User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\r\n").getBytes());

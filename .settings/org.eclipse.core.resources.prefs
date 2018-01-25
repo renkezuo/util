@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/renke/study/\u4F4D\u8FD0\u7B97.java=UTF-8
 encoding//src/main/java/com/renke/util/Browers/EBookDown.java=GBK
 encoding//src/main/java/com/renke/util/Browers/ParseBookBiquge.java=GBK
 encoding//src/main/java/com/renke/util/Browers/ParseHTTP.java=GBK
-encoding/<project>=GBK
+separateDerivedEncodings=true

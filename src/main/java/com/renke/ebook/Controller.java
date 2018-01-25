@@ -83,6 +83,7 @@ public class Controller {
 			HTTP http = manager.getHTTP();
 			manager.readData(http);
 			List<Section> urlList = BookParser.readCatalog(http.getBytes(),ws);
+//			System.out.println(urlList.size());
 			List<Section> limitList = new ArrayList<Section>();
 			int limit = urlList.size()/20;
 			for(int i=0;i<urlList.size();i = i+1){
@@ -176,17 +177,17 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		String url = "http://www.xs.la/32_32229/";
+		String url = "http://www.xs222.tw/html/2/2683/";
 		Map<String,String> siteProperties = new HashMap<String,String>();
-		siteProperties.put("bookName", "贩罪");
+		siteProperties.put("bookName", "游方道仙");
 		siteProperties.put("catalogUrl", url);
 		siteProperties.put("basePath", "F:/ebook/");
-		WebSiteFactory.setQu(siteProperties);
-//		WebSiteFactory.setXs222(siteProperties);
+//		WebSiteFactory.setQu(siteProperties);
+		WebSiteFactory.setXs222(siteProperties);
 		WebSite ws = WebSiteFactory.getWebSite(siteProperties);
 		Controller.grabEbookByThread(ws);
 //		readCatalogToList(ws);
-//		url = "http://www.qu.la:80/book/3730/";
+//		url = "http://www.xs.la/11_11170";
 //		readUrlData(url,"F:\\ebook\\test.txt");
 	}
 }

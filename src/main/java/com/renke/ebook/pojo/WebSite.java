@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebSite {
-	public String sourceEncoding = "UTF-8";
-	public String saveEncoding = "UTF-8";
+	public String sourceEncoding = "GBK";
+	public String saveEncoding = "GBK";
 	public String basePath = "G:\\ebook\\";
 	public String siteName ;
 	public String catalogUrl;

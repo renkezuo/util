@@ -66,11 +66,11 @@
 			<version>1.10</version>
 		</dependency>
 		
-<!-- 		<dependency> -->
-<!-- 			<groupId>io.netty</groupId> -->
-<!-- 			<artifactId>netty-all</artifactId> -->
-<!-- 			<version>5.0.0.Alpha2</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>5.0.0.Alpha2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.netty</groupId>
@@ -84,15 +84,15 @@
 			<version>2.0.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.textmining</groupId>
-			<artifactId>tm-extractors</artifactId>
-			<version>0.4</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.textmining</groupId> -->
+<!-- 			<artifactId>tm-extractors</artifactId> -->
+<!-- 			<version>0.4</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>22.0-rc1</version>
+			<version>23.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -103,6 +103,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-scratchpad</artifactId>
 			<version>3.15</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.15</version>
 		</dependency>
 	</dependencies>
 </project>

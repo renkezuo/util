@@ -16,12 +16,12 @@ public class EightQueen {
 					bl = false;
 					break;
 				}
-				//右上斜无障碍
+				// 右上斜无障碍
 				if (chessboard[row - 1 - i] == k - i) {
 					bl = false;
 					break;
 				}
-				//右上斜无障碍
+				// 右上斜无障碍
 				if (chessboard[row - 1 - i] == k + i) {
 					bl = false;
 					break;
