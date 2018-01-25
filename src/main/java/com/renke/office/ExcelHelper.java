@@ -25,8 +25,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Table;
-import com.renke.paike.DataUtil;
 import com.renke.paike.model.LayerUserInfo;
+import com.renke.paike.util.DataUtil;
 
 public class ExcelHelper {
 	@SuppressWarnings("resource")

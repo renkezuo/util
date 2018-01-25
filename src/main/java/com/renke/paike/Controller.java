@@ -23,7 +23,8 @@ public class Controller {
 		LayerData data = LayerUtil.getBaseData(workbook);
 		// 检查数据
 		LayerUtil.checkData(data);
-		List<SplitKlass> klasses = divideClass(data);
+//		List<SplitKlass> klasses = 
+		divideClass(data);
 //			if (data.layerType == 2) {
 //				// 混合分班
 //				LayerUtil.layerBlend(data);

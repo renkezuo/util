@@ -22,7 +22,9 @@ public class WordHelper {
 		DocumentEntry de = directory.createDocument("WordDocument", bs);
 		//以上两句代码不能省略，否则输出的是乱码
 		fs.writeFilesystem(fos);
+		fs.close();
 		bs.close();
+		de.delete();
 		fos.flush();
 		fos.close();
 //		FileInputStream fis = new FileInputStream(file);
