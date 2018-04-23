@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 public class Mongo {
 	public static void main(String[] args) throws IOException {
 		File in = new File("mongdb.txt");
@@ -16,7 +18,8 @@ public class Mongo {
 		String startCol = "_id";
 		int headLength = 4;
 		
-		
+		Gson gs = new Gson();
+		gs.fromJson("{  \"_id\" : {  \"aa\" : NumberLong(918739),  \"bb\" : NumberLong(20786) },  \"total1\" : 5,  \"total\" : 2,  \"total2\" : 2 }", Obj.class);
 		
 		BufferedReader br = new BufferedReader(new FileReader(in));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));

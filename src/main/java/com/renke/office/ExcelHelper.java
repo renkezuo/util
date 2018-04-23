@@ -266,6 +266,7 @@ public class ExcelHelper {
 			Row row = sheet.getRow(i);
 			String combKey = getStringValue(row.getCell(0));
 			String[] key = combKey.split(",");
+			System.out.println(combKey);
 			if(key[1].equals(subKey)){
 				sum1 += "B"+(i+1) + ",";
 				sum2 += "C"+(i+1) + ",";
@@ -609,8 +610,8 @@ public class ExcelHelper {
 			
 //			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/木斋中学/选课调查学生名单.xlsx");
 //			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/萧山9中分班结果 1022.xlsx");
-//			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/计算.xlsx");
-			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/1.xlsx");
+			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/计算.xlsx");
+//			Workbook workbook = getWorkbook("C:/Users/Administrator/Desktop/1.xlsx");
 			// 物，化，生，政，史，地
 //			int[] keys =  new int[]{3,4,5,6,7,8};
 			// 选考
@@ -653,7 +654,7 @@ public class ExcelHelper {
 			String[] keys = {"4","5","6","7","8","9"};
 			for(String str : keys){
 				System.out.println("---------"+str+"-------------");
-				printSum3(workbook, 0, 21, str);
+				printSum3(workbook, 10, 21, str);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
