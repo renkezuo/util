@@ -16,5 +16,10 @@ public class MsgReceiver extends DefaultConsumer{
 	public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)
 			throws IOException {
 		System.out.println(Thread.currentThread().getName() + " receive ===> " +new String(body));
+		try {
+			Thread.sleep(100000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
