@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
 import com.renke.mq.Sender;
 
 public class RabbitProducer implements Sender{
@@ -13,7 +12,7 @@ public class RabbitProducer implements Sender{
 	String routingKey = "";
 	
 	public RabbitProducer(String exchange, String routingKey){
-		channel = RabbitChannel.getInstance();
+		channel = RabbitChannel.getInstance(0);
 		this.exchange = exchange;
 		this.routingKey = routingKey;
 	}
@@ -32,14 +31,14 @@ public class RabbitProducer implements Sender{
 
 	@Override
 	public void close() {
-		Connection conn = channel.getConnection();
+//		Connection conn = channel.getConnection();
 		try{
 			if(channel != null) {
 				channel.close();
 			}
-			if(conn != null){
-				conn.close();
-			}
+//			if(conn != null){
+//				conn.close();
+//			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -13,7 +13,7 @@ public class RabbitConsumer implements Receiver{
 	String routingKey = "";
 	
 	public RabbitConsumer(String routingKey){
-		channel = RabbitChannel.getInstance();
+		channel = RabbitChannel.getInstance(1);
 		this.routingKey = routingKey;
 	}
 
