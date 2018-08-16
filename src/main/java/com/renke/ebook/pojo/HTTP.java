@@ -69,4 +69,9 @@ public class HTTP implements Serializable{
 	public String toString() {
 		return "http://"+host+":"+port+uri+";ip="+ip+";msg="+msg;
 	}
+	
+	public static void main(String[] args) {
+		Object str = null;
+		System.out.println("---------"+(String)str);
+	}
 }

@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class MyTest {
 	final ReadWriteLock rwl = new ReentrantReadWriteLock();
@@ -103,7 +103,7 @@ public class MyTest {
 		Thread.sleep(1000);
 	}
 
-	@Test
+//	@Test
 	public void testLockSupport() {
 		String a = "123";
 		String b = "456";

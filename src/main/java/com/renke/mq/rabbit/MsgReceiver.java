@@ -25,7 +25,14 @@ public class MsgReceiver extends DefaultConsumer{
 //		if(i % 2 > 0){
 //			multiple = true;
 //		}
-//		this.getChannel().basicAck(envelope.getDeliveryTag(), multiple);
+//		try{
+//			String msg = new String(body);
+//			Integer.parseInt(msg);
+			this.getChannel().basicAck(envelope.getDeliveryTag(), true);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			
+//		}
 //		System.out.println("return fail : " + multiple);
 		
 		try {

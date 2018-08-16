@@ -807,7 +807,7 @@ public class Base64 {
             boolean breakLines = (options & DO_BREAK_LINES) != 0;
 
             //int    len43   = len * 4 / 3;
-            //byte[] outBuff = new byte[   ( len43 )                      // Main 4:3
+            //byte[] outBuff = new byte[   ( len43 )                      // com.renke.message.Report 4:3
             //                           + ( (len % 3) > 0 ? 4 : 0 )      // Account for padding
             //                           + (breakLines ? ( len43 / MAX_LINE_LENGTH ) : 0) ]; // New lines
             // Try to determine more precisely how big the array needs to be.

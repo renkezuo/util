@@ -17,7 +17,7 @@ public class CreateSource {
 //			noRouteKey(connection);
 			
 			// 第二种，相同routeKey，不同exchange的情况
-			sameRouteKey(connection);
+//			sameRouteKey(connection);
 			
 			// 第三种，有routeKey的情况
 //			routeKey(connection);
@@ -35,7 +35,9 @@ public class CreateSource {
 			// 第七种，headers使用
 //			routeKey(connection);
 //			headers(connection);
+//			one(connection);
 			
+			fanout(connection);
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,10 +155,35 @@ public class CreateSource {
 		channel.close();
 	}
 	
+	public static void one(Connection connection) throws Exception {
+		Channel channel = connection.createChannel();
+
+		String fQueueName = "com.renke.queue";
+		channel.exchangeDeclare("com.renke.exchange", "fanout");
+		channel.queueDeclare(fQueueName, false, false, false, null);
+		channel.queueBind(fQueueName, "com.renke.exchange", "");
+		
+		// The queue is deleted after 10 seconds
+		Thread.sleep(10000);
+		channel.close();
+	}
+	
+	public static void fanout(Connection connection) throws Exception {
+		Channel channel = connection.createChannel();
+		channel.exchangeDeclare("com.renke.fanout", "fanout");
+		for (int i = 1; i <= 5; i++) {
+			String fQueueName = "com.renke.fanout" + i;
+			channel.queueDeclare(fQueueName, true, false, false, null);
+			channel.queueBind(fQueueName, "com.renke.fanout", "");
+		}
+		channel.close();
+	}
+	
 	public static void deleteQueue(Connection connection) throws Exception{
 		Channel channel = connection.createChannel();
 		for (int i = 1; i <= 5; i++) {
-			String fQueueName = "com.renke.q.fanout" + i;
+//			String fQueueName = "com.renke.q.fanout" + i;
+			String fQueueName = "com.renke.fanout" + i;
 			String tQueueName = "com.renke.q.topic" + i;
 			String hQueueName = "com.renke.q.headers" + i;
 			String dQueueName = "com.renke.q.direct" + i;

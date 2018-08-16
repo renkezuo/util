@@ -15,12 +15,15 @@ public class MyPublisher {
 		try {
 			Channel channel = conn.createChannel();
 			// 当routeKey为空时
-//			for(int i=0;i<10;i++){
-//				String msg = "message : " + i;
-//				channel.basicPublish("com.renke.e.topic", "", null, msg.getBytes("UTF-8"));
+			for(int i=0;i<10;i++){
+				String msg = "xxx"+i;
+				channel.basicPublish("com.renke.exchange", "", null, msg.getBytes("UTF-8"));
+//				channel.basicPublish("com.renke.e.topic", "com.renke.r.topic1", null, msg.getBytes("UTF-8"));
+//				msg = "xxx"+i;
+//				channel.basicPublish("com.renke.e.topic", "com.renke.r.topic1", null, msg.getBytes("UTF-8"));
 //				channel.basicPublish("com.renke.e.fanout", "", null, msg.getBytes("UTF-8"));
 //				channel.basicPublish("com.renke.e.direct", "", null, msg.getBytes("UTF-8"));
-//			}
+			}
 			// routeKey非空
 //			for (int i = 0; i < 10; i++) {
 //				String msg = "message : " + (i + 1);
@@ -33,15 +36,15 @@ public class MyPublisher {
 //				channel.basicPublish("com.renke.e.direct", dRouteKey, null, msg.getBytes("UTF-8"));
 //			}
 			// header
-			for (int i = 0; i < 10; i++) {
-				String msg = "message : " + (i + 1);
-				Builder properties = new BasicProperties.Builder();
-				Map<String, Object> headers = new HashMap<>();
-				headers.put("key1", "123");
-				headers.put("key2", "456");
-				properties.headers(headers);
-				channel.basicPublish("com.renke.e.headers", "", properties.build(), msg.getBytes("UTF-8"));
-			}
+//			for (int i = 0; i < 10; i++) {
+//				String msg = "message : " + (i + 1);
+//				Builder properties = new BasicProperties.Builder();
+//				Map<String, Object> headers = new HashMap<>();
+//				headers.put("key1", "123");
+//				headers.put("key2", "456");
+//				properties.headers(headers);
+//				channel.basicPublish("com.renke.e.headers", "", properties.build(), msg.getBytes("UTF-8"));
+//			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();

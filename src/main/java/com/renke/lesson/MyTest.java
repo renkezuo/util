@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.LockSupport;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -354,7 +353,7 @@ public class MyTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testSet(){
 		Set<String> set = new HashSet<String>();
 		set.add("a");
