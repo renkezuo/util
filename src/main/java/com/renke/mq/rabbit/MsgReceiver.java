@@ -19,7 +19,13 @@ public class MsgReceiver extends DefaultConsumer{
 	public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body)
 			throws IOException {
 		i ++;
+		String msg = new String(body);
 		System.out.println(Thread.currentThread().getName() + " receive ===> " +new String(body));
+		if(msg.indexOf("吴兴实验中学") > -1){
+			this.getChannel().basicAck(envelope.getDeliveryTag(), true);
+			return ;
+		}
+		
 		
 //		boolean multiple = false;
 //		if(i % 2 > 0){
@@ -28,17 +34,17 @@ public class MsgReceiver extends DefaultConsumer{
 //		try{
 //			String msg = new String(body);
 //			Integer.parseInt(msg);
-			this.getChannel().basicAck(envelope.getDeliveryTag(), true);
+			this.getChannel().basicAck(envelope.getDeliveryTag(), false);
 //		}catch(Exception e){
 //			e.printStackTrace();
 //			
 //		}
 //		System.out.println("return fail : " + multiple);
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
 }

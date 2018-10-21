@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Report {
-	public static final String LOGPATH = "/home/renke/scripts/logs/";
-	public static final String SCHOOLFILE = "/home/renke/scripts/conf/exceptSchool.lst";
+	public static final String LOGPATH = "/home/alpha/scripts/logs/";
+	public static final String SCHOOLFILE = "/home/alpha/scripts/conf/exceptSchool.lst";
 	public static final String FORMATDAY = "yyyyMMdd";
 	public static final String LESSON_PREFIX = "lesson";
 	public static final String MAX_ONLINE_KEY = "maxOnlineCnt";
@@ -156,6 +156,14 @@ public class Report {
 				timeMapping.put(MAX_ONLINE_KEY, lesson.time);
 			}
 		}
+		
+//		for(String name : schools){
+//			System.out.println(name);
+//		}
+//
+//		for(String lessonId : lessonIds){
+//			System.out.println(lessonId + ",");
+//		}
 
 		System.out.println("学校数： " + schools.size());
 		System.out.println("课堂数： " + needMapping.keySet().size());

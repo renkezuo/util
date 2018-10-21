@@ -34,10 +34,10 @@ class RabbitChannel{
 	static {
 		try{
 			ConnectionFactory factory = new ConnectionFactory();
-			factory.setHost("192.168.20.75");
+			factory.setHost("192.168.210.208");
 			factory.setPort(5672);
 			factory.setUsername("leke");
-			factory.setPassword("leke@@@");
+			factory.setPassword("leke@@!");
 			sendConnection = factory.newConnection();
 			receConnection = factory.newConnection();
 			managerConnection = factory.newConnection();
